@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="TapMonkeys" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5Q-9S-Pde" customClass="PopLabel" customModule="TapMonkeys" customModuleProvider="target">
+                                <rect key="frame" x="163" y="287" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="CsI-dY-vGN"/>
+                                    <constraint firstAttribute="height" constant="25" id="Jyg-0M-bIM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="P" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGX-uw-v0c" customClass="PopLabel" customModule="TapMonkeys" customModuleProvider="target">
+                                <rect key="frame" x="188" y="288" width="25" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="T" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54d-ku-UfF" customClass="PopLabel" customModule="TapMonkeys" customModuleProvider="target">
+                                <rect key="frame" x="138" y="288" width="25" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="s5Q-9S-Pde" firstAttribute="height" secondItem="mGX-uw-v0c" secondAttribute="height" id="3ES-0q-Yph"/>
+                            <constraint firstAttribute="centerY" secondItem="s5Q-9S-Pde" secondAttribute="centerY" id="O3n-C4-PA0"/>
+                            <constraint firstAttribute="centerY" secondItem="54d-ku-UfF" secondAttribute="centerY" id="WAq-o6-Sie"/>
+                            <constraint firstItem="s5Q-9S-Pde" firstAttribute="width" secondItem="mGX-uw-v0c" secondAttribute="width" id="X35-Nv-v7F"/>
+                            <constraint firstItem="s5Q-9S-Pde" firstAttribute="leading" secondItem="54d-ku-UfF" secondAttribute="trailing" id="ZtD-bT-LvU"/>
+                            <constraint firstItem="54d-ku-UfF" firstAttribute="width" secondItem="s5Q-9S-Pde" secondAttribute="width" id="fFn-4J-Kno"/>
+                            <constraint firstItem="54d-ku-UfF" firstAttribute="height" secondItem="s5Q-9S-Pde" secondAttribute="height" id="iqk-eW-Ss8"/>
+                            <constraint firstAttribute="centerX" secondItem="s5Q-9S-Pde" secondAttribute="centerX" id="jzw-ik-HEV"/>
+                            <constraint firstAttribute="centerY" secondItem="mGX-uw-v0c" secondAttribute="centerY" id="kRI-dN-qHl"/>
+                            <constraint firstItem="mGX-uw-v0c" firstAttribute="leading" secondItem="s5Q-9S-Pde" secondAttribute="trailing" id="xIl-qa-5yZ"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="350" height="600"/>
+                    <connections>
+                        <outlet property="startA" destination="s5Q-9S-Pde" id="FKh-vp-YA6"/>
+                        <outlet property="startP" destination="mGX-uw-v0c" id="Lpb-gN-Ve4"/>
+                        <outlet property="startT" destination="54d-ku-UfF" id="Va6-1g-4T4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
