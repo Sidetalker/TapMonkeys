@@ -21,7 +21,7 @@ public class TapStyle : NSObject {
         let context = UIGraphicsGetCurrentContext()
 
         //// Text 2 Drawing
-        let text2Rect = CGRectMake(0, 0, 25, 25)
+        let text2Rect = CGRectMake(0, -0, 28, 28)
         let text2Style = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
         text2Style.alignment = NSTextAlignment.Center
 

@@ -30,8 +30,13 @@ func randomIntBetweenNumbers(firstNum: Int, secondNum: Int) -> Int {
     return Int(random)
 }
 
+protocol PopLabelDelegate {
+    func finishedPopping(customEnd: Bool)
+}
+
 class PopLabel: UIView {
-    var character = "A"
+    var delegate: PopLabelDelegate?
+    var index = 0
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -41,6 +46,12 @@ class PopLabel: UIView {
         super.init(frame: frame)
     }
     
+    init(frame: CGRect, charIndex: Int) {
+        super.init(frame: frame)
+        
+        setCharIndex(charIndex)
+    }
+    
     init(frame: CGRect, character: String) {
         super.init(frame: frame)
         
@@ -48,17 +59,22 @@ class PopLabel: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-        TapStyle.drawMainLetter(character: self.character)
+        TapStyle.drawMainLetter(character: alphabet[index])
+    }
+    
+    func setCharIndex(charIndex: Int) {
+        index = charIndex
+        
+        setNeedsDisplay()
     }
     
     func setChar(character: String) {
-        self.character = character
-        self.setNeedsDisplay()
+        setCharIndex(find(alphabet, character)!)
     }
     
     var animator: UIDynamicAnimator?
     
-    func pop(success: Bool) {
+    func pop(remove: Bool = true, customEnd: Bool = false, customPoint: CGPoint = CGPointZero) {
         // Angular velocity max and min
         let minAngularVelocity: CGFloat = 0.2
         let maxAngularVelocity: CGFloat = 0.8
@@ -70,12 +86,12 @@ class PopLabel: UIView {
         let maxHeight: CGFloat = 450
         
         // Growth scale
-        let minScale: CGFloat = 2.0
-        let maxScale: CGFloat = 2.0
+        let minScale: CGFloat = 0.5
+        let maxScale: CGFloat = 0.5
         
         // Timing variables
         let fadeDelay = 0.0
-        let fadeTime = 0.8
+        let fadeTime = 0.4
         let gravityWeight: CGFloat = 0.5
         
         // Calculate animation variables
@@ -95,20 +111,32 @@ class PopLabel: UIView {
         // Set up the gravitronator
         let gravity = UIGravityBehavior(items: [self])
         let velocity = UIDynamicItemBehavior(items: [self])
+        let collision = UICollisionBehavior(items: [self])
         
         gravity.gravityDirection = CGVectorMake(0, gravityWeight)
+        collision.translatesReferenceBoundsIntoBoundary = true
         
         velocity.addAngularVelocity(curAngularity, forItem: self)
         velocity.addLinearVelocity(curLinearity, forItem: self)
         
-        animator = UIDynamicAnimator(referenceView:self.superview!);
-        animator?.addBehavior(gravity);
+        animator = UIDynamicAnimator(referenceView:self.superview!)
+        animator?.addBehavior(gravity)
         animator?.addBehavior(velocity)
+        animator?.addBehavior(collision)
         
-        // Scale and fade
-        UIView.animateWithDuration(fadeTime, delay: 0.0, options: nil, animations: {
-            self.transform = CGAffineTransformMakeScale(curScale, curScale)
-            self.alpha = 0.0
-            }, completion: nil)
+        delay(0.8, {
+            self.animator?.removeAllBehaviors()
+            
+            // Scale and fade
+            UIView.animateWithDuration(fadeTime, delay: 0.0, options: nil, animations: {
+                self.transform = CGAffineTransformMakeScale(curScale, curScale)
+                self.frame = CGRect(origin: customEnd ? customPoint : CGPoint(x: 5, y: self.superview!.frame.height - 20), size: CGSize(width: 28, height: 28))
+                self.alpha = customEnd ? 1.0 : 0.0
+                }, completion: { (Bool) -> Void in
+                    self.delegate?.finishedPopping(customEnd)
+                    if remove { self.removeFromSuperview() }
+            })
+        })
+        
     }
 }
