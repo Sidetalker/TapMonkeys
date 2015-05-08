@@ -10,12 +10,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MainViewController.swift"
-            timestampString = "452819315.293527"
+            timestampString = "452821712.783499"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "singleTapMain(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TapMonkeys/Helpers.swift"
+            timestampString = "452820985.203048"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "move(_:scale:alpha:duration:delay:remove:pulse:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

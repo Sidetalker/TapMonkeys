@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5Q-9S-Pde" customClass="PopLabel" customModule="TapMonkeys" customModuleProvider="target">
-                                <rect key="frame" x="163" y="287" width="25" height="25"/>
+                                <rect key="frame" x="163" y="59" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="CsI-dY-vGN"/>
                                     <constraint firstAttribute="height" constant="25" id="Jyg-0M-bIM"/>
@@ -28,13 +28,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="P" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGX-uw-v0c" customClass="PopLabel" customModule="TapMonkeys" customModuleProvider="target">
-                                <rect key="frame" x="188" y="288" width="25" height="25"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="T" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54d-ku-UfF" customClass="PopLabel" customModule="TapMonkeys" customModuleProvider="target">
-                                <rect key="frame" x="138" y="288" width="25" height="25"/>
+                                <rect key="frame" x="188" y="60" width="25" height="25"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -45,19 +39,25 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="T" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54d-ku-UfF" customClass="PopLabel" customModule="TapMonkeys" customModuleProvider="target">
+                                <rect key="frame" x="138" y="60" width="25" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="54d-ku-UfF" firstAttribute="top" secondItem="mGX-uw-v0c" secondAttribute="top" id="0of-63-gvi"/>
                             <constraint firstItem="s5Q-9S-Pde" firstAttribute="height" secondItem="mGX-uw-v0c" secondAttribute="height" id="3ES-0q-Yph"/>
+                            <constraint firstItem="54d-ku-UfF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="7FU-zq-hPw"/>
                             <constraint firstItem="6ZQ-ID-lzo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-8" id="ICs-mi-u2z"/>
-                            <constraint firstAttribute="centerY" secondItem="s5Q-9S-Pde" secondAttribute="centerY" id="O3n-C4-PA0"/>
-                            <constraint firstAttribute="centerY" secondItem="54d-ku-UfF" secondAttribute="centerY" id="WAq-o6-Sie"/>
                             <constraint firstItem="s5Q-9S-Pde" firstAttribute="width" secondItem="mGX-uw-v0c" secondAttribute="width" id="X35-Nv-v7F"/>
+                            <constraint firstItem="54d-ku-UfF" firstAttribute="top" secondItem="s5Q-9S-Pde" secondAttribute="top" constant="1" id="ZNb-Kc-2fq"/>
                             <constraint firstItem="s5Q-9S-Pde" firstAttribute="leading" secondItem="54d-ku-UfF" secondAttribute="trailing" id="ZtD-bT-LvU"/>
                             <constraint firstItem="54d-ku-UfF" firstAttribute="width" secondItem="s5Q-9S-Pde" secondAttribute="width" id="fFn-4J-Kno"/>
                             <constraint firstItem="54d-ku-UfF" firstAttribute="height" secondItem="s5Q-9S-Pde" secondAttribute="height" id="iqk-eW-Ss8"/>
                             <constraint firstAttribute="centerX" secondItem="s5Q-9S-Pde" secondAttribute="centerX" id="jzw-ik-HEV"/>
-                            <constraint firstAttribute="centerY" secondItem="mGX-uw-v0c" secondAttribute="centerY" id="kRI-dN-qHl"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6ZQ-ID-lzo" secondAttribute="bottom" constant="3" id="wzb-0y-6V6"/>
                             <constraint firstItem="mGX-uw-v0c" firstAttribute="leading" secondItem="s5Q-9S-Pde" secondAttribute="trailing" id="xIl-qa-5yZ"/>
                         </constraints>

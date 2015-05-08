@@ -36,6 +36,8 @@ protocol PopLabelDelegate {
 
 class PopLabel: UIView {
     var delegate: PopLabelDelegate?
+    var animator: UIDynamicAnimator?
+    
     var index = 0
     
     required init(coder aDecoder: NSCoder) {
@@ -58,10 +60,6 @@ class PopLabel: UIView {
         setChar(character)
     }
     
-    override func drawRect(rect: CGRect) {
-        TapStyle.drawMainLetter(character: alphabet[index])
-    }
-    
     func setCharIndex(charIndex: Int) {
         index = charIndex
         
@@ -72,7 +70,38 @@ class PopLabel: UIView {
         setCharIndex(find(alphabet, character)!)
     }
     
-    var animator: UIDynamicAnimator?
+    override func drawRect(rect: CGRect) {
+        TapStyle.drawMainLetter(character: alphabet[index])
+    }
+    
+    func move(location: CGPoint, scale: CGFloat, alpha: CGFloat, duration: NSTimeInterval, delay: NSTimeInterval, remove: Bool, pulse: Bool) {
+        if pulse {
+            UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+                self.transform = CGAffineTransformMakeScale(1.35, 1.35)
+                }, completion: { (Bool) -> Void in
+                    UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                        self.transform = CGAffineTransformIdentity
+                        }, completion: { (Bool) -> Void in
+                            UIView.animateWithDuration(duration, delay: delay, options: nil, animations: { () -> Void in
+                                self.frame = CGRect(origin: location, size: self.frame.size)
+                                self.alpha = alpha
+//                                self.transform = CGAffineTransformMakeScale(scale, scale)
+                                }, completion: { (Bool) -> Void in
+                                    if remove { self.removeFromSuperview() }
+                            })
+                    })
+            })
+        }
+        else {
+            UIView.animateWithDuration(duration, delay: delay, options: nil, animations: { () -> Void in
+                self.frame = CGRect(origin: location, size: self.frame.size)
+                self.alpha = alpha
+                self.transform = CGAffineTransformMakeScale(scale, scale)
+                }, completion: { (Bool) -> Void in
+                    if remove { self.removeFromSuperview() }
+            })
+        }
+    }
     
     func pop(remove: Bool = true, customEnd: Bool = false, customPoint: CGPoint = CGPointZero) {
         // Angular velocity max and min
