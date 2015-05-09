@@ -40,10 +40,10 @@ public class TapStyle : NSObject {
 
 
         //// Shadow Declarations
-        let shadow = NSShadow()
-        shadow.shadowColor = UIColor.blackColor()
-        shadow.shadowOffset = CGSizeMake(0.1, -0.1)
-        shadow.shadowBlurRadius = 3
+        let monkeyPicShadow = NSShadow()
+        monkeyPicShadow.shadowColor = UIColor.blackColor()
+        monkeyPicShadow.shadowOffset = CGSizeMake(0.1, -0.1)
+        monkeyPicShadow.shadowBlurRadius = 3
 
         //// Image Declarations
         let monkeyA = UIImage(named: "monkeyA.jpg")!
@@ -51,15 +51,38 @@ public class TapStyle : NSObject {
         //// Oval Drawing
         var ovalPath = UIBezierPath(ovalInRect: CGRectMake(5, 5, 90, 90))
         CGContextSaveGState(context)
-        CGContextSetPatternPhase(context, CGSizeMake(0, 5))
+        CGContextSetPatternPhase(context, CGSizeMake(4, 5))
         UIColor(patternImage: monkeyA).setFill()
         ovalPath.fill()
         CGContextRestoreGState(context)
         CGContextSaveGState(context)
-        CGContextSetShadowWithColor(context, shadow.shadowOffset, shadow.shadowBlurRadius, (shadow.shadowColor as! UIColor).CGColor)
+        CGContextSetShadowWithColor(context, monkeyPicShadow.shadowOffset, monkeyPicShadow.shadowBlurRadius, (monkeyPicShadow.shadowColor as! UIColor).CGColor)
         UIColor.blackColor().setStroke()
         ovalPath.lineWidth = 0.5
         ovalPath.stroke()
+        CGContextRestoreGState(context)
+    }
+
+    public class func drawBuy1(#frame: CGRect) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
+
+        //// Rectangle Drawing
+        let rectangleRect = CGRectMake(frame.minX + 5, frame.minY + 5, floor((frame.width - 5) * 0.97959 + 0.5), floor((frame.height - 5) * 0.88889 + 0.5))
+        let rectanglePath = UIBezierPath(roundedRect: rectangleRect, cornerRadius: 10)
+        UIColor.blackColor().setStroke()
+        rectanglePath.lineWidth = 1
+        rectanglePath.stroke()
+        var rectangleTextContent = NSString(string: "Buy 1")
+        let rectangleStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+        rectangleStyle.alignment = NSTextAlignment.Center
+
+        let rectangleFontAttributes = [NSFontAttributeName: UIFont(name: "Didot", size: UIFont.labelFontSize())!, NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: rectangleStyle]
+
+        let rectangleTextHeight: CGFloat = rectangleTextContent.boundingRectWithSize(CGSizeMake(rectangleRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: rectangleFontAttributes, context: nil).size.height
+        CGContextSaveGState(context)
+        CGContextClipToRect(context, rectangleRect);
+        rectangleTextContent.drawInRect(CGRectMake(rectangleRect.minX, rectangleRect.minY + (rectangleRect.height - rectangleTextHeight) / 2, rectangleRect.width, rectangleTextHeight), withAttributes: rectangleFontAttributes)
         CGContextRestoreGState(context)
     }
 

@@ -42,10 +42,10 @@
 		0A9B68D71AFDA5A5006628D1 /* settingsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68D41AFDA5A5006628D1 /* settingsTab.png */; };
 		0A9B68D81AFDA5A5006628D1 /* settingsTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68D51AFDA5A5006628D1 /* settingsTab@2x.png */; };
 		0A9B68D91AFDA5A5006628D1 /* settingsTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68D61AFDA5A5006628D1 /* settingsTab@3x.png */; };
-		0A9B68DB1AFDCBAD006628D1 /* MonkeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B68DA1AFDCBAD006628D1 /* MonkeyViewController.swift */; };
 		0A9B68E51AFDCD4A006628D1 /* monkeyA.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68E21AFDCD4A006628D1 /* monkeyA.jpg */; };
 		0A9B68E61AFDCD4A006628D1 /* monkeyA@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68E31AFDCD4A006628D1 /* monkeyA@2x.jpg */; };
 		0A9B68E71AFDCD4A006628D1 /* monkeyA@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68E41AFDCD4A006628D1 /* monkeyA@3x.jpg */; };
+		0A9B68EA1AFE58A5006628D1 /* MonkeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B68E91AFE58A5006628D1 /* MonkeyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,10 +98,10 @@
 		0A9B68D41AFDA5A5006628D1 /* settingsTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingsTab.png; path = Images/settingsTab.png; sourceTree = "<group>"; };
 		0A9B68D51AFDA5A5006628D1 /* settingsTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settingsTab@2x.png"; path = "Images/settingsTab@2x.png"; sourceTree = "<group>"; };
 		0A9B68D61AFDA5A5006628D1 /* settingsTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settingsTab@3x.png"; path = "Images/settingsTab@3x.png"; sourceTree = "<group>"; };
-		0A9B68DA1AFDCBAD006628D1 /* MonkeyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonkeyViewController.swift; path = ../MonkeyViewController.swift; sourceTree = "<group>"; };
 		0A9B68E21AFDCD4A006628D1 /* monkeyA.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = monkeyA.jpg; path = Images/monkeyA.jpg; sourceTree = "<group>"; };
 		0A9B68E31AFDCD4A006628D1 /* monkeyA@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "monkeyA@2x.jpg"; path = "Images/monkeyA@2x.jpg"; sourceTree = "<group>"; };
 		0A9B68E41AFDCD4A006628D1 /* monkeyA@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "monkeyA@3x.jpg"; path = "Images/monkeyA@3x.jpg"; sourceTree = "<group>"; };
+		0A9B68E91AFE58A5006628D1 /* MonkeyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkeyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +148,7 @@
 				0A9B687C1AFD3DE7006628D1 /* AppDelegate.swift */,
 				0A9B68AE1AFD90C3006628D1 /* TabBarController.swift */,
 				0A9B68811AFD3DE7006628D1 /* TapViewController.swift */,
-				0A9B68DA1AFDCBAD006628D1 /* MonkeyViewController.swift */,
+				0A9B68E91AFE58A5006628D1 /* MonkeyViewController.swift */,
 				0A9B68831AFD3DE7006628D1 /* Main.storyboard */,
 				0A9B68861AFD3DE7006628D1 /* Images.xcassets */,
 				0A9B68881AFD3DE7006628D1 /* LaunchScreen.xib */,
@@ -372,7 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A9B68821AFD3DE7006628D1 /* TapViewController.swift in Sources */,
-				0A9B68DB1AFDCBAD006628D1 /* MonkeyViewController.swift in Sources */,
+				0A9B68EA1AFE58A5006628D1 /* MonkeyViewController.swift in Sources */,
 				0A9B68801AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld in Sources */,
 				0A9B68A51AFD6038006628D1 /* TapStyle.swift in Sources */,
 				0A9B68AF1AFD90C3006628D1 /* TabBarController.swift in Sources */,

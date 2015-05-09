@@ -120,19 +120,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sWT-GO-Wpt" customClass="MonkeyPicture" customModule="TapMonkeys" customModuleProvider="target">
-                                <rect key="frame" x="250" y="250" width="100" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="Mk0-pD-E8x"/>
-                                    <constraint firstAttribute="width" constant="100" id="Nvi-5r-0hD"/>
-                                </constraints>
-                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4V2-L1-dRe">
+                                <rect key="frame" x="0.0" y="20" width="600" height="531"/>
+                                <connections>
+                                    <segue destination="oo1-WO-HrJ" kind="embed" id="8eu-59-jMw"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="sWT-GO-Wpt" secondAttribute="centerY" id="4YF-ww-q0m"/>
-                            <constraint firstAttribute="centerX" secondItem="sWT-GO-Wpt" secondAttribute="centerX" id="PtN-IT-rMa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4V2-L1-dRe" secondAttribute="trailing" constant="-16" id="QEd-Oc-04n"/>
+                            <constraint firstItem="yGX-Ag-f91" firstAttribute="top" secondItem="4V2-L1-dRe" secondAttribute="bottom" id="fC5-S4-H1l"/>
+                            <constraint firstItem="4V2-L1-dRe" firstAttribute="top" secondItem="qNn-4U-V5z" secondAttribute="bottom" id="mSE-uC-VLI"/>
+                            <constraint firstItem="4V2-L1-dRe" firstAttribute="leading" secondItem="eqp-GY-pZ4" secondAttribute="leadingMargin" constant="-16" id="yXM-kR-vkO"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Monkeys" image="monkeyTab.png" id="w8G-qj-RR5"/>
@@ -140,6 +140,101 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v1m-1A-BSs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="236" y="342"/>
+        </scene>
+        <!--Monkey Table View Controller-->
+        <scene sceneID="LrT-sR-pOg">
+            <objects>
+                <tableViewController id="oo1-WO-HrJ" customClass="MonkeyTableViewController" customModule="TapMonkeys" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="195" sectionHeaderHeight="22" sectionFooterHeight="22" id="ccU-Iv-eDI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="531"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="oQ7-sY-81V">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="258" id="pXD-bZ-SeI">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pXD-bZ-SeI" id="sXl-Qt-MnW">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sWT-GO-Wpt" customClass="MonkeyPicture" customModule="TapMonkeys" customModuleProvider="target">
+                                                    <rect key="frame" x="8" y="16" width="100" height="100"/>
+                                                    <color key="backgroundColor" red="0.98594826459999996" green="0.0" blue="0.026950567960000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="100" id="Mk0-pD-E8x"/>
+                                                        <constraint firstAttribute="width" constant="100" id="Nvi-5r-0hD"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finger Monkey" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Hnz-4f-FiB">
+                                                    <rect key="frame" x="128" y="16" width="169" height="31"/>
+                                                    <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="24"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Owned: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZI0-Ag-uh1">
+                                                    <rect key="frame" x="128" y="47" width="56" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Letters / sec: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="m5d-0h-TVN">
+                                                    <rect key="frame" x="128" y="64" width="85" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oae-IX-Nuc" customClass="MonkeyBuyButton" customModule="TapMonkeys" customModuleProvider="target">
+                                                    <rect key="frame" x="128" y="80" width="456" height="32"/>
+                                                    <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="3VT-IN-xaj"/>
+                                                    </constraints>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="128" y="80" width="840" height="32"/>
+                                                    </variation>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exn-gL-jdB">
+                                                    <rect key="frame" x="8" y="121" width="576" height="33"/>
+                                                    <string key="text">Hardly ever spotted in the wild, the Finger Monkey's hands are far too small to tap. Instead, the Finger Monkey commandeers the first human finger it comes across.</string>
+                                                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="124" width="960" height="49"/>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Hnz-4f-FiB" firstAttribute="top" secondItem="sWT-GO-Wpt" secondAttribute="top" id="1cQ-Yi-B0z"/>
+                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="bottom" secondItem="sWT-GO-Wpt" secondAttribute="bottom" constant="-4" id="1sn-Zb-yt1"/>
+                                                <constraint firstItem="Exn-gL-jdB" firstAttribute="top" secondItem="sWT-GO-Wpt" secondAttribute="bottom" constant="5" id="30x-26-Azh"/>
+                                                <constraint firstItem="ZI0-Ag-uh1" firstAttribute="leading" secondItem="m5d-0h-TVN" secondAttribute="leading" id="E1U-h9-hri"/>
+                                                <constraint firstItem="ZI0-Ag-uh1" firstAttribute="top" secondItem="Hnz-4f-FiB" secondAttribute="bottom" id="LeA-xm-erX"/>
+                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="leading" secondItem="Hnz-4f-FiB" secondAttribute="leading" id="LhV-ev-r7E"/>
+                                                <constraint firstItem="sWT-GO-Wpt" firstAttribute="leading" secondItem="sXl-Qt-MnW" secondAttribute="leadingMargin" id="M91-tJ-Df2"/>
+                                                <constraint firstItem="m5d-0h-TVN" firstAttribute="leading" secondItem="Hnz-4f-FiB" secondAttribute="leading" id="MkJ-TY-X0n"/>
+                                                <constraint firstItem="sWT-GO-Wpt" firstAttribute="leading" secondItem="Exn-gL-jdB" secondAttribute="leading" id="OLC-ds-Lng"/>
+                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="trailing" secondItem="Exn-gL-jdB" secondAttribute="trailing" id="QYF-t4-u06"/>
+                                                <constraint firstItem="sWT-GO-Wpt" firstAttribute="top" secondItem="sXl-Qt-MnW" secondAttribute="topMargin" constant="8" id="bfv-eH-mBI"/>
+                                                <constraint firstItem="Hnz-4f-FiB" firstAttribute="leading" secondItem="sWT-GO-Wpt" secondAttribute="trailing" constant="20" id="dCQ-N4-iSd"/>
+                                                <constraint firstItem="m5d-0h-TVN" firstAttribute="top" secondItem="ZI0-Ag-uh1" secondAttribute="bottom" id="ehv-TN-MYA"/>
+                                                <constraint firstItem="ZI0-Ag-uh1" firstAttribute="leading" secondItem="Hnz-4f-FiB" secondAttribute="leading" id="p74-yK-Xd0"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="oae-IX-Nuc" secondAttribute="trailing" constant="8" id="tTo-rf-djj"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="oo1-WO-HrJ" id="O6t-Mp-zFk"/>
+                            <outlet property="delegate" destination="oo1-WO-HrJ" id="6ia-eU-VBQ"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J6Y-yJ-SB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1006" y="341.5"/>
         </scene>
         <!--Achievements-->
         <scene sceneID="oh8-Hh-JRy">
