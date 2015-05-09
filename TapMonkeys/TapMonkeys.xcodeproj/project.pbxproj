@@ -17,6 +17,9 @@
 		0A9B68A01AFD3FE6006628D1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B689F1AFD3FE6006628D1 /* Helpers.swift */; };
 		0A9B68A21AFD4945006628D1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9B68A11AFD4945006628D1 /* QuartzCore.framework */; };
 		0A9B68A51AFD6038006628D1 /* TapStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B68A41AFD6038006628D1 /* TapStyle.swift */; };
+		0A9B68A91AFD8DBB006628D1 /* alphaTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68A61AFD8DBB006628D1 /* alphaTab.png */; };
+		0A9B68AA1AFD8DBB006628D1 /* alphaTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68A71AFD8DBB006628D1 /* alphaTab@3x.png */; };
+		0A9B68AB1AFD8DBB006628D1 /* alphaTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68A81AFD8DBB006628D1 /* alphaTab@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		0A9B689F1AFD3FE6006628D1 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		0A9B68A11AFD4945006628D1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0A9B68A41AFD6038006628D1 /* TapStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapStyle.swift; sourceTree = "<group>"; };
+		0A9B68A61AFD8DBB006628D1 /* alphaTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alphaTab.png; path = Images/alphaTab.png; sourceTree = "<group>"; };
+		0A9B68A71AFD8DBB006628D1 /* alphaTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alphaTab@3x.png"; path = "Images/alphaTab@3x.png"; sourceTree = "<group>"; };
+		0A9B68A81AFD8DBB006628D1 /* alphaTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alphaTab@2x.png"; path = "Images/alphaTab@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,7 @@
 		0A9B687A1AFD3DE7006628D1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A9B68AC1AFD8DC6006628D1 /* Images */,
 				0A9B68A41AFD6038006628D1 /* TapStyle.swift */,
 				0A9B687B1AFD3DE7006628D1 /* Info.plist */,
 			);
@@ -131,6 +138,24 @@
 				0A9B68A11AFD4945006628D1 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0A9B68AC1AFD8DC6006628D1 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0A9B68AD1AFD8DCF006628D1 /* Tab Bar */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		0A9B68AD1AFD8DCF006628D1 /* Tab Bar */ = {
+			isa = PBXGroup;
+			children = (
+				0A9B68A61AFD8DBB006628D1 /* alphaTab.png */,
+				0A9B68A81AFD8DBB006628D1 /* alphaTab@2x.png */,
+				0A9B68A71AFD8DBB006628D1 /* alphaTab@3x.png */,
+			);
+			name = "Tab Bar";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,9 +238,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A9B68A91AFD8DBB006628D1 /* alphaTab.png in Resources */,
 				0A9B68851AFD3DE7006628D1 /* Main.storyboard in Resources */,
 				0A9B688A1AFD3DE7006628D1 /* LaunchScreen.xib in Resources */,
 				0A9B68871AFD3DE7006628D1 /* Images.xcassets in Resources */,
+				0A9B68AA1AFD8DBB006628D1 /* alphaTab@3x.png in Resources */,
+				0A9B68AB1AFD8DBB006628D1 /* alphaTab@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

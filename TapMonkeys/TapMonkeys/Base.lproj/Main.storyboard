@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pe6-vN-GwS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -34,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ZQ-ID-lzo">
-                                <rect key="frame" x="8" y="573" width="11" height="24"/>
+                                <rect key="frame" x="8" y="524" width="11" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -62,6 +62,9 @@
                             <constraint firstItem="mGX-uw-v0c" firstAttribute="leading" secondItem="s5Q-9S-Pde" secondAttribute="trailing" id="xIl-qa-5yZ"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" image="alphaTab.png" id="h1D-0m-swr">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
+                    </tabBarItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="350" height="600"/>
                     <connections>
@@ -73,6 +76,68 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-24" y="-292"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="zKB-Lx-AKZ">
+            <objects>
+                <viewController id="Chv-lT-2hb" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5qf-fV-CvJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="ENU-VF-G4R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YsF-yu-THg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="hce-Em-cWT"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iwu-01-WoN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="584" y="645"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="0AG-eb-caP">
+            <objects>
+                <viewController id="ERN-06-7NL" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qNn-4U-V5z"/>
+                        <viewControllerLayoutGuide type="bottom" id="yGX-Ag-f91"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eqp-GY-pZ4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="w8G-qj-RR5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v1m-1A-BSs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="584" y="-17"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="BDQ-NK-LON">
+            <objects>
+                <tabBarController id="pe6-vN-GwS" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="IAX-9M-1ux">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ERN-06-7NL" kind="relationship" relationship="viewControllers" id="MRV-df-NRc"/>
+                        <segue destination="Chv-lT-2hb" kind="relationship" relationship="viewControllers" id="kv4-qy-6q7"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="EQT-tT-ut8"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MkK-hl-A1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-236" y="314"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="alphaTab.png" width="30" height="30"/>
+    </resources>
 </document>
