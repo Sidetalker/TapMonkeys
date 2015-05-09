@@ -55,11 +55,22 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     func initializeHeaders() {
         if allViews == nil { return }
         
+        let letters = defaults.integerForKey("letters")
+        let money = defaults.floatForKey("money")
+        let stage = defaults.integerForKey("stage")
+        
         for view in allViews! {
-            if let
-                tapView = view as? TapViewController
-            {
-                tapView.dataHeader.initialize(letters: defaults.integerForKey("letters"), money: defaults.floatForKey("money"), stage: defaults.integerForKey("stage"))
+            if let tapView = view as? TapViewController {
+                if stage >= 1 {
+                    self.setTabBarVisible(true, animated: true)
+                }
+                
+                tapView.dataHeader.initialize(letters: letters, money: money, stage: stage)
+            }
+            else if let monkeyView = view as? MonkeyViewController {
+                if stage == 1 {
+                    monkeyView.tabBarItem.badgeValue = "!"
+                }
             }
         }
     }
