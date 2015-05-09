@@ -29,3 +29,26 @@ func randomIntBetweenNumbers(firstNum: Int, secondNum: Int) -> Int {
     
     return Int(random)
 }
+
+func save(data: SaveData) -> Bool {
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
+    defaults.setObject(data.letters, forKey: "letters")
+    defaults.setObject(data.money, forKey: "money")
+    defaults.setObject(data.letterCounts, forKey: "letterCounts")
+    defaults.setObject(data.state, forKey: "stage")
+    
+    return true
+}
+
+func load() -> SaveData {
+    let defaults = NSUserDefaults.standardUserDefaults()
+    var save = SaveData()
+    
+    save.letters = defaults.integerForKey("letters")
+    save.money = defaults.floatForKey("money")
+    save.letterCounts = defaults.arrayForKey("letterCounts")
+    save.state = defaults.arrayForKey("stage")
+    
+    return save
+}

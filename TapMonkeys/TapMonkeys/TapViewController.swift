@@ -45,7 +45,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
     }
     
     func configure() {
-        defaults = NSUserDefaults.standardUserDefaults()
+        saveData = load()
         
         configureGestureRecognizers()
     }
@@ -140,7 +140,10 @@ class TapViewController: UIViewController, PopLabelDelegate {
         letterCount++
         
         let nc = NSNotificationCenter.defaultCenter()
-        nc.postNotificationName("updateHeaders", object: self, userInfo: ["letters" : Float(1)])
+        nc.postNotificationName("updateHeaders", object: self, userInfo: [
+            "letters" : 1,
+            "animated" : true
+        ])
     }
 }
 

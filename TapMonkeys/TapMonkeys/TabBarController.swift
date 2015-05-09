@@ -9,27 +9,43 @@
 import UIKit
 
 struct SaveData {
-    var letters: Int
-    var money: Float
-    var letterCounts: [Int]
+    var stage: Int?
+    var letters: Int?
+    var money: Float?
+    var letterCounts: [Int]?
 }
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var allViews: [AnyObject]?
     var defaults: NSUserDefaults!
     
+    var saveTimer = NSTimer()
+    var saveData = SaveData()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureView()
-        
-        defaults = NSUserDefaults.standardUserDefaults()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHeaders:", name: "updateHeaders", object: nil)
+        loadSave()
+        registerForUpdates()
     }
     
     override func viewDidLayoutSubviews() {
         initializeHeaders()
+    }
+    
+    func loadSave() {
+        saveData = load()
+        
+        saveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "timedSave", userInfo: nil, repeats: true)
+    }
+    
+    func timedSave() {
+        save(saveData)
+    }
+    
+    func registerForUpdates() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHeaders:", name: "updateHeaders", object: nil)
     }
     
     func initializeHeaders() {
@@ -47,22 +63,21 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     func updateHeaders(notification: NSNotification) {
         if allViews == nil { return }
         
+        let userInfo = notification.userInfo as! [String : AnyObject]
+        
+        if let letters = userInfo["letters"] as? Int {
+            saveData.letters! += letters
+        }
+        if let money = userInfo["money"] as? Float {
+            saveData.money! += money
+        }
+        
         for view in allViews! {
-            let userInfo = notification.userInfo as! [String : Float]
-            var updateLetters = 0
-            var updateMoney: Float = 0
-            
-            if let letters = userInfo["letters"] {
-                updateLetters = Int(letters)
-            }
-            if let money = userInfo["money"] {
-                updateMoney = money
-            }
-            
             if let
-                tapView = view as? TapViewController
+                tapView = view as? TapViewController,
+                animated = userInfo["animated"] as? Bool
             {
-                tapView.dataHeader.update(letters: updateLetters, money: updateMoney)
+                tapView.dataHeader.update(letters: saveData.letters!, money: saveData.money!, pulse: animated)
             }
         }
     }
@@ -169,8 +184,8 @@ class DataHeader: UIView {
             revealMoney()
         }
         
-        self.letters += letters
-        self.money += money
+        self.letters = letters
+        self.money = money
         
         let moneyText = NSString(format: "%.2f", money) as String
         
