@@ -45,9 +45,16 @@ class TapViewController: UIViewController, PopLabelDelegate {
     }
     
     func configure() {
+        configureInterface()
+        configureGestureRecognizers()
+    }
+    
+    func configureInterface() {
         saveData = load()
         
-        configureGestureRecognizers()
+        if saveData?.stage >= 0 {
+            tapLabel.alpha = 0.0
+        }
     }
     
     func configureGestureRecognizers() {
@@ -81,6 +88,16 @@ class TapViewController: UIViewController, PopLabelDelegate {
         }
     }
     
+    func updateStage(newStage: Int) {
+        self.stage = newStage
+        
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName("updateStage", object: self, userInfo: [
+            "stage" : newStage
+            ])
+        
+    }
+    
     func singleTapMain(sender: UITapGestureRecognizer) {
         // Tap till we have a monkey
         if stage == -1 {
@@ -88,7 +105,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 self.tapLabel.alpha = 0.0
                 self.tapLabel.transform = CGAffineTransformMakeScale(1.35, 1.35)
                 }, completion: { (Bool) -> Void in
-                    self.stage = 0
+                    self.updateStage(0)
                     self.prepGen(0)
             })
         }
@@ -121,6 +138,8 @@ class TapViewController: UIViewController, PopLabelDelegate {
                     delay(2.0 + 0.3 * Double(count(self.genLabels) - 1), {
                         self.tabBar.setTabBarVisible(true, animated: true)
                         self.tabBar.viewControllers![1].tabBarItem?.badgeValue = "!"
+                        
+                        self.updateStage(1)
                     })
                 }
             }
@@ -268,7 +287,7 @@ class PopLabel: UIView {
             self.animator?.removeAllBehaviors()
             
             // Scale and fade
-            UIView.animateWithDuration(fadeTime, delay: 0.0, options: nil, animations: {
+            UIView.animateWithDuration(0.4, delay: 0.0, options: nil, animations: {
                 self.layer.transform = customEnd ? CATransform3DMakeScale(1.4, 1.4, 1.4) : CATransform3DIdentity
                 self.frame = CGRect(origin: customPoint, size: CGSize(width: 28, height: 28))
                 self.alpha = customEnd ? 1.0 : 0.0

@@ -36,6 +36,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     func loadSave() {
         saveData = load()
+        save(saveData)
         
         saveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "timedSave", userInfo: nil, repeats: true)
     }
@@ -45,7 +46,10 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func registerForUpdates() {
+        defaults = NSUserDefaults.standardUserDefaults()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHeaders:", name: "updateHeaders", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateStage:", name: "updateStage", object: nil)
     }
     
     func initializeHeaders() {
@@ -55,8 +59,16 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             if let
                 tapView = view as? TapViewController
             {
-                tapView.dataHeader.initialize(letters: defaults.integerForKey("letters"), money: defaults.floatForKey("money"))
+                tapView.dataHeader.initialize(letters: defaults.integerForKey("letters"), money: defaults.floatForKey("money"), stage: defaults.integerForKey("stage"))
             }
+        }
+    }
+    
+    func updateStage(notification: NSNotification) {
+        let userInfo = notification.userInfo as! [String : AnyObject]
+        
+        if let stage = userInfo["stage"] as? Int {
+            saveData.stage = stage
         }
     }
     
@@ -172,8 +184,12 @@ class DataHeader: UIView {
         return CGPoint(x: newX, y: newY)
     }
     
-    func initialize(letters: Int = 0, money: Float = 0) {
+    func initialize(letters: Int = 0, money: Float = 0, stage: Int = -1) {
         update(letters: letters, money: money, pulse: false)
+        
+        if stage >= 1 {
+            revealLetters()
+        }
     }
     
     func update(letters: Int = 0, money: Float = 0, pulse: Bool = true) {

@@ -36,7 +36,7 @@ func save(data: SaveData) -> Bool {
     defaults.setObject(data.letters, forKey: "letters")
     defaults.setObject(data.money, forKey: "money")
     defaults.setObject(data.letterCounts, forKey: "letterCounts")
-    defaults.setObject(data.state, forKey: "stage")
+    defaults.setObject(data.stage, forKey: "stage")
     
     return true
 }
@@ -47,8 +47,8 @@ func load() -> SaveData {
     
     save.letters = defaults.integerForKey("letters")
     save.money = defaults.floatForKey("money")
-    save.letterCounts = defaults.arrayForKey("letterCounts")
-    save.state = defaults.arrayForKey("stage")
+    save.letterCounts = defaults.arrayForKey("letterCounts") as? [Int]
+    save.stage = defaults.integerForKey("stage")
     
     return save
 }
