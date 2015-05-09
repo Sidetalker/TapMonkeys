@@ -63,7 +63,7 @@ public class TapStyle : NSObject {
         CGContextRestoreGState(context)
     }
 
-    public class func drawBuy1(#frame: CGRect) {
+    public class func drawBuy1(#frame: CGRect, monkeyBuyText: String) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()
 
@@ -73,16 +73,15 @@ public class TapStyle : NSObject {
         UIColor.blackColor().setStroke()
         rectanglePath.lineWidth = 1
         rectanglePath.stroke()
-        var rectangleTextContent = NSString(string: "Buy 1")
         let rectangleStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
         rectangleStyle.alignment = NSTextAlignment.Center
 
-        let rectangleFontAttributes = [NSFontAttributeName: UIFont(name: "Didot", size: UIFont.labelFontSize())!, NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: rectangleStyle]
+        let rectangleFontAttributes = [NSFontAttributeName: UIFont(name: "Didot", size: 16)!, NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: rectangleStyle]
 
-        let rectangleTextHeight: CGFloat = rectangleTextContent.boundingRectWithSize(CGSizeMake(rectangleRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: rectangleFontAttributes, context: nil).size.height
+        let rectangleTextHeight: CGFloat = NSString(string: monkeyBuyText).boundingRectWithSize(CGSizeMake(rectangleRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: rectangleFontAttributes, context: nil).size.height
         CGContextSaveGState(context)
         CGContextClipToRect(context, rectangleRect);
-        rectangleTextContent.drawInRect(CGRectMake(rectangleRect.minX, rectangleRect.minY + (rectangleRect.height - rectangleTextHeight) / 2, rectangleRect.width, rectangleTextHeight), withAttributes: rectangleFontAttributes)
+        NSString(string: monkeyBuyText).drawInRect(CGRectMake(rectangleRect.minX, rectangleRect.minY + (rectangleRect.height - rectangleTextHeight) / 2, rectangleRect.width, rectangleTextHeight), withAttributes: rectangleFontAttributes)
         CGContextRestoreGState(context)
     }
 

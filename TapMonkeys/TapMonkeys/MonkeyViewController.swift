@@ -9,11 +9,23 @@
 import UIKit
 
 class MonkeyViewController: UIViewController {
+    var defaults: NSUserDefaults?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        defaults = NSUserDefaults.standardUserDefaults()
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
 }
 
 class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
 
 class MonkeyPicture: UIView {
@@ -40,7 +52,7 @@ class MonkeyBuyButton: UIView {
     
     override func drawRect(rect: CGRect) {
         if state == 0 {
-            TapStyle.drawBuy1(frame: rect)
+            TapStyle.drawBuy1(frame: rect, monkeyBuyText: "FREE")
         }
     }
 }
