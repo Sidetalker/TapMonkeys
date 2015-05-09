@@ -30,8 +30,15 @@ func randomIntBetweenNumbers(firstNum: Int, secondNum: Int) -> Int {
     return Int(random)
 }
 
+protocol PopLabelDelegate {
+    func finishedPopping(customEnd: Bool)
+}
+
 class PopLabel: UIView {
-    var character = "A"
+    var delegate: PopLabelDelegate?
+    var animator: UIDynamicAnimator?
+    
+    var index = 0
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -41,24 +48,52 @@ class PopLabel: UIView {
         super.init(frame: frame)
     }
     
+    init(frame: CGRect, charIndex: Int) {
+        super.init(frame: frame)
+        
+        setCharIndex(charIndex)
+    }
+    
     init(frame: CGRect, character: String) {
         super.init(frame: frame)
         
         setChar(character)
     }
     
-    override func drawRect(rect: CGRect) {
-        TapStyle.drawMainLetter(character: self.character)
+    func setCharIndex(charIndex: Int) {
+        index = charIndex
+        
+        setNeedsDisplay()
     }
     
     func setChar(character: String) {
-        self.character = character
-        self.setNeedsDisplay()
+        setCharIndex(find(alphabet, character)!)
     }
     
-    var animator: UIDynamicAnimator?
+    override func drawRect(rect: CGRect) {
+        TapStyle.drawMainLetter(character: alphabet[index])
+    }
     
-    func pop(success: Bool) {
+    func move(location: CGPoint, scale: CGFloat, alpha: CGFloat, duration: NSTimeInterval, delay: NSTimeInterval, remove: Bool) {
+        UIView.animateWithDuration(duration, delay: delay, options: nil, animations: { () -> Void in
+            self.frame = CGRect(origin: location, size: self.frame.size)
+            self.alpha = alpha
+            self.transform = CGAffineTransformMakeScale(scale, scale)
+            }, completion: { (Bool) -> Void in
+                if remove { self.removeFromSuperview() }
+        })
+    }
+    
+    func grow(scale: CGFloat = 1.3, alpha: CGFloat = 0.0, duration: NSTimeInterval = 0.3, delay: NSTimeInterval = 0.0, remove: Bool = true) {
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+            self.transform = CGAffineTransformMakeScale(scale, scale)
+            self.alpha = alpha
+            }, completion: { Bool -> Void in
+                if remove { self.removeFromSuperview() }
+        })
+    }
+    
+    func pop(remove: Bool = true, customEnd: Bool = false, customPoint: CGPoint = CGPointZero, noEnd: Bool = false) {
         // Angular velocity max and min
         let minAngularVelocity: CGFloat = 0.2
         let maxAngularVelocity: CGFloat = 0.8
@@ -70,12 +105,12 @@ class PopLabel: UIView {
         let maxHeight: CGFloat = 450
         
         // Growth scale
-        let minScale: CGFloat = 2.0
-        let maxScale: CGFloat = 2.0
+        let minScale: CGFloat = 0.5
+        let maxScale: CGFloat = 0.5
         
         // Timing variables
         let fadeDelay = 0.0
-        let fadeTime = 0.8
+        let fadeTime = 0.4
         let gravityWeight: CGFloat = 0.5
         
         // Calculate animation variables
@@ -95,20 +130,34 @@ class PopLabel: UIView {
         // Set up the gravitronator
         let gravity = UIGravityBehavior(items: [self])
         let velocity = UIDynamicItemBehavior(items: [self])
+        let collision = UICollisionBehavior(items: [self])
         
         gravity.gravityDirection = CGVectorMake(0, gravityWeight)
+        collision.translatesReferenceBoundsIntoBoundary = true
         
         velocity.addAngularVelocity(curAngularity, forItem: self)
         velocity.addLinearVelocity(curLinearity, forItem: self)
         
-        animator = UIDynamicAnimator(referenceView:self.superview!);
-        animator?.addBehavior(gravity);
+        animator = UIDynamicAnimator(referenceView:self.superview!)
+        animator?.addBehavior(gravity)
         animator?.addBehavior(velocity)
+        animator?.addBehavior(collision)
         
-        // Scale and fade
-        UIView.animateWithDuration(fadeTime, delay: 0.0, options: nil, animations: {
-            self.transform = CGAffineTransformMakeScale(curScale, curScale)
-            self.alpha = 0.0
-            }, completion: nil)
+        if noEnd { return }
+        
+        delay(0.8, {
+            self.animator?.removeAllBehaviors()
+            
+            // Scale and fade
+            UIView.animateWithDuration(fadeTime, delay: 0.0, options: nil, animations: {
+                self.layer.transform = customEnd ? CATransform3DMakeScale(1.4, 1.4, 1.4) : CATransform3DIdentity
+                self.frame = CGRect(origin: customEnd ? customPoint : CGPoint(x: 5, y: 5), size: CGSize(width: 28, height: 28))
+                self.alpha = customEnd ? 1.0 : 0.0
+                }, completion: { (Bool) -> Void in
+                    self.delegate?.finishedPopping(customEnd)
+                    if remove { self.removeFromSuperview() }
+            })
+        })
+        
     }
 }

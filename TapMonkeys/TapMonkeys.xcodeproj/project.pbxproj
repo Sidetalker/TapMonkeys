@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A9B687D1AFD3DE7006628D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B687C1AFD3DE7006628D1 /* AppDelegate.swift */; };
 		0A9B68801AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B687E1AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld */; };
-		0A9B68821AFD3DE7006628D1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B68811AFD3DE7006628D1 /* MainViewController.swift */; };
+		0A9B68821AFD3DE7006628D1 /* TapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B68811AFD3DE7006628D1 /* TapViewController.swift */; };
 		0A9B68851AFD3DE7006628D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68831AFD3DE7006628D1 /* Main.storyboard */; };
 		0A9B68871AFD3DE7006628D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68861AFD3DE7006628D1 /* Images.xcassets */; };
 		0A9B688A1AFD3DE7006628D1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68881AFD3DE7006628D1 /* LaunchScreen.xib */; };
@@ -17,6 +17,31 @@
 		0A9B68A01AFD3FE6006628D1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B689F1AFD3FE6006628D1 /* Helpers.swift */; };
 		0A9B68A21AFD4945006628D1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A9B68A11AFD4945006628D1 /* QuartzCore.framework */; };
 		0A9B68A51AFD6038006628D1 /* TapStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B68A41AFD6038006628D1 /* TapStyle.swift */; };
+		0A9B68A91AFD8DBB006628D1 /* alphaTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68A61AFD8DBB006628D1 /* alphaTab.png */; };
+		0A9B68AA1AFD8DBB006628D1 /* alphaTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68A71AFD8DBB006628D1 /* alphaTab@3x.png */; };
+		0A9B68AB1AFD8DBB006628D1 /* alphaTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68A81AFD8DBB006628D1 /* alphaTab@2x.png */; };
+		0A9B68AF1AFD90C3006628D1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B68AE1AFD90C3006628D1 /* TabBarController.swift */; };
+		0A9B68B31AFD9AC7006628D1 /* monkeyTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68B01AFD9AC7006628D1 /* monkeyTab.png */; };
+		0A9B68B41AFD9AC7006628D1 /* monkeyTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68B11AFD9AC7006628D1 /* monkeyTab@2x.png */; };
+		0A9B68B51AFD9AC7006628D1 /* monkeyTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68B21AFD9AC7006628D1 /* monkeyTab@3x.png */; };
+		0A9B68B91AFD9E21006628D1 /* writingTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68B61AFD9E21006628D1 /* writingTab.png */; };
+		0A9B68BA1AFD9E21006628D1 /* writingTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68B71AFD9E21006628D1 /* writingTab@2x.png */; };
+		0A9B68BB1AFD9E21006628D1 /* writingTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68B81AFD9E21006628D1 /* writingTab@3x.png */; };
+		0A9B68BF1AFD9F7F006628D1 /* incomeTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68BC1AFD9F7F006628D1 /* incomeTab.png */; };
+		0A9B68C01AFD9F7F006628D1 /* incomeTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68BD1AFD9F7F006628D1 /* incomeTab@2x.png */; };
+		0A9B68C11AFD9F7F006628D1 /* incomeTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68BE1AFD9F7F006628D1 /* incomeTab@3x.png */; };
+		0A9B68C51AFDA0E5006628D1 /* achievementsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68C21AFDA0E5006628D1 /* achievementsTab.png */; };
+		0A9B68C61AFDA0E5006628D1 /* achievementsTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68C31AFDA0E5006628D1 /* achievementsTab@2x.png */; };
+		0A9B68C71AFDA0E5006628D1 /* achievementsTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68C41AFDA0E5006628D1 /* achievementsTab@3x.png */; };
+		0A9B68CB1AFDA301006628D1 /* upgradesTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68C81AFDA301006628D1 /* upgradesTab.png */; };
+		0A9B68CC1AFDA301006628D1 /* upgradesTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68C91AFDA301006628D1 /* upgradesTab@2x.png */; };
+		0A9B68CD1AFDA301006628D1 /* upgradesTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68CA1AFDA301006628D1 /* upgradesTab@3x.png */; };
+		0A9B68D11AFDA4E0006628D1 /* statsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68CE1AFDA4E0006628D1 /* statsTab.png */; };
+		0A9B68D21AFDA4E0006628D1 /* statsTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68CF1AFDA4E0006628D1 /* statsTab@2x.png */; };
+		0A9B68D31AFDA4E0006628D1 /* statsTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68D01AFDA4E0006628D1 /* statsTab@3x.png */; };
+		0A9B68D71AFDA5A5006628D1 /* settingsTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68D41AFDA5A5006628D1 /* settingsTab.png */; };
+		0A9B68D81AFDA5A5006628D1 /* settingsTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68D51AFDA5A5006628D1 /* settingsTab@2x.png */; };
+		0A9B68D91AFDA5A5006628D1 /* settingsTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68D61AFDA5A5006628D1 /* settingsTab@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +59,7 @@
 		0A9B687B1AFD3DE7006628D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A9B687C1AFD3DE7006628D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A9B687F1AFD3DE7006628D1 /* TapMonkeys.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TapMonkeys.xcdatamodel; sourceTree = "<group>"; };
-		0A9B68811AFD3DE7006628D1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		0A9B68811AFD3DE7006628D1 /* TapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapViewController.swift; sourceTree = "<group>"; };
 		0A9B68841AFD3DE7006628D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A9B68861AFD3DE7006628D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0A9B68891AFD3DE7006628D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -44,6 +69,31 @@
 		0A9B689F1AFD3FE6006628D1 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		0A9B68A11AFD4945006628D1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0A9B68A41AFD6038006628D1 /* TapStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapStyle.swift; sourceTree = "<group>"; };
+		0A9B68A61AFD8DBB006628D1 /* alphaTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alphaTab.png; path = Images/alphaTab.png; sourceTree = "<group>"; };
+		0A9B68A71AFD8DBB006628D1 /* alphaTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alphaTab@3x.png"; path = "Images/alphaTab@3x.png"; sourceTree = "<group>"; };
+		0A9B68A81AFD8DBB006628D1 /* alphaTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alphaTab@2x.png"; path = "Images/alphaTab@2x.png"; sourceTree = "<group>"; };
+		0A9B68AE1AFD90C3006628D1 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		0A9B68B01AFD9AC7006628D1 /* monkeyTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = monkeyTab.png; path = Images/monkeyTab.png; sourceTree = "<group>"; };
+		0A9B68B11AFD9AC7006628D1 /* monkeyTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "monkeyTab@2x.png"; path = "Images/monkeyTab@2x.png"; sourceTree = "<group>"; };
+		0A9B68B21AFD9AC7006628D1 /* monkeyTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "monkeyTab@3x.png"; path = "Images/monkeyTab@3x.png"; sourceTree = "<group>"; };
+		0A9B68B61AFD9E21006628D1 /* writingTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = writingTab.png; path = Images/writingTab.png; sourceTree = "<group>"; };
+		0A9B68B71AFD9E21006628D1 /* writingTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writingTab@2x.png"; path = "Images/writingTab@2x.png"; sourceTree = "<group>"; };
+		0A9B68B81AFD9E21006628D1 /* writingTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "writingTab@3x.png"; path = "Images/writingTab@3x.png"; sourceTree = "<group>"; };
+		0A9B68BC1AFD9F7F006628D1 /* incomeTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incomeTab.png; path = Images/incomeTab.png; sourceTree = "<group>"; };
+		0A9B68BD1AFD9F7F006628D1 /* incomeTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "incomeTab@2x.png"; path = "Images/incomeTab@2x.png"; sourceTree = "<group>"; };
+		0A9B68BE1AFD9F7F006628D1 /* incomeTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "incomeTab@3x.png"; path = "Images/incomeTab@3x.png"; sourceTree = "<group>"; };
+		0A9B68C21AFDA0E5006628D1 /* achievementsTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = achievementsTab.png; path = Images/achievementsTab.png; sourceTree = "<group>"; };
+		0A9B68C31AFDA0E5006628D1 /* achievementsTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "achievementsTab@2x.png"; path = "Images/achievementsTab@2x.png"; sourceTree = "<group>"; };
+		0A9B68C41AFDA0E5006628D1 /* achievementsTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "achievementsTab@3x.png"; path = "Images/achievementsTab@3x.png"; sourceTree = "<group>"; };
+		0A9B68C81AFDA301006628D1 /* upgradesTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgradesTab.png; path = Images/upgradesTab.png; sourceTree = "<group>"; };
+		0A9B68C91AFDA301006628D1 /* upgradesTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "upgradesTab@2x.png"; path = "Images/upgradesTab@2x.png"; sourceTree = "<group>"; };
+		0A9B68CA1AFDA301006628D1 /* upgradesTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "upgradesTab@3x.png"; path = "Images/upgradesTab@3x.png"; sourceTree = "<group>"; };
+		0A9B68CE1AFDA4E0006628D1 /* statsTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statsTab.png; path = Images/statsTab.png; sourceTree = "<group>"; };
+		0A9B68CF1AFDA4E0006628D1 /* statsTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statsTab@2x.png"; path = "Images/statsTab@2x.png"; sourceTree = "<group>"; };
+		0A9B68D01AFDA4E0006628D1 /* statsTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statsTab@3x.png"; path = "Images/statsTab@3x.png"; sourceTree = "<group>"; };
+		0A9B68D41AFDA5A5006628D1 /* settingsTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingsTab.png; path = Images/settingsTab.png; sourceTree = "<group>"; };
+		0A9B68D51AFDA5A5006628D1 /* settingsTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settingsTab@2x.png"; path = "Images/settingsTab@2x.png"; sourceTree = "<group>"; };
+		0A9B68D61AFDA5A5006628D1 /* settingsTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settingsTab@3x.png"; path = "Images/settingsTab@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				0A9B687C1AFD3DE7006628D1 /* AppDelegate.swift */,
-				0A9B68811AFD3DE7006628D1 /* MainViewController.swift */,
-				0A9B689F1AFD3FE6006628D1 /* Helpers.swift */,
+				0A9B68811AFD3DE7006628D1 /* TapViewController.swift */,
+				0A9B68AE1AFD90C3006628D1 /* TabBarController.swift */,
 				0A9B68831AFD3DE7006628D1 /* Main.storyboard */,
 				0A9B68861AFD3DE7006628D1 /* Images.xcassets */,
 				0A9B68881AFD3DE7006628D1 /* LaunchScreen.xib */,
@@ -102,7 +152,9 @@
 		0A9B687A1AFD3DE7006628D1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A9B68AC1AFD8DC6006628D1 /* Images */,
 				0A9B68A41AFD6038006628D1 /* TapStyle.swift */,
+				0A9B689F1AFD3FE6006628D1 /* Helpers.swift */,
 				0A9B687B1AFD3DE7006628D1 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -131,6 +183,45 @@
 				0A9B68A11AFD4945006628D1 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0A9B68AC1AFD8DC6006628D1 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0A9B68AD1AFD8DCF006628D1 /* Tab Bar */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		0A9B68AD1AFD8DCF006628D1 /* Tab Bar */ = {
+			isa = PBXGroup;
+			children = (
+				0A9B68D41AFDA5A5006628D1 /* settingsTab.png */,
+				0A9B68D51AFDA5A5006628D1 /* settingsTab@2x.png */,
+				0A9B68D61AFDA5A5006628D1 /* settingsTab@3x.png */,
+				0A9B68CE1AFDA4E0006628D1 /* statsTab.png */,
+				0A9B68CF1AFDA4E0006628D1 /* statsTab@2x.png */,
+				0A9B68D01AFDA4E0006628D1 /* statsTab@3x.png */,
+				0A9B68C81AFDA301006628D1 /* upgradesTab.png */,
+				0A9B68C91AFDA301006628D1 /* upgradesTab@2x.png */,
+				0A9B68CA1AFDA301006628D1 /* upgradesTab@3x.png */,
+				0A9B68C21AFDA0E5006628D1 /* achievementsTab.png */,
+				0A9B68C31AFDA0E5006628D1 /* achievementsTab@2x.png */,
+				0A9B68C41AFDA0E5006628D1 /* achievementsTab@3x.png */,
+				0A9B68BC1AFD9F7F006628D1 /* incomeTab.png */,
+				0A9B68BD1AFD9F7F006628D1 /* incomeTab@2x.png */,
+				0A9B68BE1AFD9F7F006628D1 /* incomeTab@3x.png */,
+				0A9B68B61AFD9E21006628D1 /* writingTab.png */,
+				0A9B68B71AFD9E21006628D1 /* writingTab@2x.png */,
+				0A9B68B81AFD9E21006628D1 /* writingTab@3x.png */,
+				0A9B68B01AFD9AC7006628D1 /* monkeyTab.png */,
+				0A9B68B11AFD9AC7006628D1 /* monkeyTab@2x.png */,
+				0A9B68B21AFD9AC7006628D1 /* monkeyTab@3x.png */,
+				0A9B68A61AFD8DBB006628D1 /* alphaTab.png */,
+				0A9B68A81AFD8DBB006628D1 /* alphaTab@2x.png */,
+				0A9B68A71AFD8DBB006628D1 /* alphaTab@3x.png */,
+			);
+			name = "Tab Bar";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,9 +304,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A9B68A91AFD8DBB006628D1 /* alphaTab.png in Resources */,
+				0A9B68B31AFD9AC7006628D1 /* monkeyTab.png in Resources */,
 				0A9B68851AFD3DE7006628D1 /* Main.storyboard in Resources */,
+				0A9B68C71AFDA0E5006628D1 /* achievementsTab@3x.png in Resources */,
 				0A9B688A1AFD3DE7006628D1 /* LaunchScreen.xib in Resources */,
+				0A9B68D21AFDA4E0006628D1 /* statsTab@2x.png in Resources */,
+				0A9B68C11AFD9F7F006628D1 /* incomeTab@3x.png in Resources */,
 				0A9B68871AFD3DE7006628D1 /* Images.xcassets in Resources */,
+				0A9B68AA1AFD8DBB006628D1 /* alphaTab@3x.png in Resources */,
+				0A9B68BB1AFD9E21006628D1 /* writingTab@3x.png in Resources */,
+				0A9B68D11AFDA4E0006628D1 /* statsTab.png in Resources */,
+				0A9B68D31AFDA4E0006628D1 /* statsTab@3x.png in Resources */,
+				0A9B68CC1AFDA301006628D1 /* upgradesTab@2x.png in Resources */,
+				0A9B68D71AFDA5A5006628D1 /* settingsTab.png in Resources */,
+				0A9B68D91AFDA5A5006628D1 /* settingsTab@3x.png in Resources */,
+				0A9B68BA1AFD9E21006628D1 /* writingTab@2x.png in Resources */,
+				0A9B68D81AFDA5A5006628D1 /* settingsTab@2x.png in Resources */,
+				0A9B68C51AFDA0E5006628D1 /* achievementsTab.png in Resources */,
+				0A9B68B51AFD9AC7006628D1 /* monkeyTab@3x.png in Resources */,
+				0A9B68C01AFD9F7F006628D1 /* incomeTab@2x.png in Resources */,
+				0A9B68AB1AFD8DBB006628D1 /* alphaTab@2x.png in Resources */,
+				0A9B68CB1AFDA301006628D1 /* upgradesTab.png in Resources */,
+				0A9B68BF1AFD9F7F006628D1 /* incomeTab.png in Resources */,
+				0A9B68C61AFDA0E5006628D1 /* achievementsTab@2x.png in Resources */,
+				0A9B68B91AFD9E21006628D1 /* writingTab.png in Resources */,
+				0A9B68CD1AFDA301006628D1 /* upgradesTab@3x.png in Resources */,
+				0A9B68B41AFD9AC7006628D1 /* monkeyTab@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,9 +348,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A9B68821AFD3DE7006628D1 /* MainViewController.swift in Sources */,
+				0A9B68821AFD3DE7006628D1 /* TapViewController.swift in Sources */,
 				0A9B68801AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld in Sources */,
 				0A9B68A51AFD6038006628D1 /* TapStyle.swift in Sources */,
+				0A9B68AF1AFD90C3006628D1 /* TabBarController.swift in Sources */,
 				0A9B687D1AFD3DE7006628D1 /* AppDelegate.swift in Sources */,
 				0A9B68A01AFD3FE6006628D1 /* Helpers.swift in Sources */,
 			);
@@ -370,7 +486,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -382,7 +498,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
