@@ -184,7 +184,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oae-IX-Nuc" customClass="MonkeyBuyButton" customModule="TapMonkeys" customModuleProvider="target">
-                                                    <rect key="frame" x="128" y="80" width="456" height="32"/>
+                                                    <rect key="frame" x="128" y="80" width="464" height="32"/>
                                                     <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="3VT-IN-xaj"/>
@@ -194,8 +194,8 @@
                                                     </variation>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exn-gL-jdB">
-                                                    <rect key="frame" x="8" y="121" width="576" height="33"/>
-                                                    <string key="text">Hardly ever spotted in the wild, the Finger Monkey's hands are far too small to tap. Instead, the Finger Monkey commandeers the first human finger it comes across.</string>
+                                                    <rect key="frame" x="8" y="121" width="584" height="33"/>
+                                                    <string key="text">Hardly ever spotted in the wild, the Finger Monkey's hands are too small to tap. Instead, the Finger Monkey commandeers the first human finger it comes across.</string>
                                                     <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -209,17 +209,17 @@
                                                 <constraint firstItem="oae-IX-Nuc" firstAttribute="bottom" secondItem="sWT-GO-Wpt" secondAttribute="bottom" constant="-4" id="1sn-Zb-yt1"/>
                                                 <constraint firstItem="Exn-gL-jdB" firstAttribute="top" secondItem="sWT-GO-Wpt" secondAttribute="bottom" constant="5" id="30x-26-Azh"/>
                                                 <constraint firstItem="ZI0-Ag-uh1" firstAttribute="leading" secondItem="m5d-0h-TVN" secondAttribute="leading" id="E1U-h9-hri"/>
+                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="trailing" secondItem="sXl-Qt-MnW" secondAttribute="trailingMargin" id="E5I-Gg-NDq"/>
                                                 <constraint firstItem="ZI0-Ag-uh1" firstAttribute="top" secondItem="Hnz-4f-FiB" secondAttribute="bottom" id="LeA-xm-erX"/>
                                                 <constraint firstItem="oae-IX-Nuc" firstAttribute="leading" secondItem="Hnz-4f-FiB" secondAttribute="leading" id="LhV-ev-r7E"/>
                                                 <constraint firstItem="sWT-GO-Wpt" firstAttribute="leading" secondItem="sXl-Qt-MnW" secondAttribute="leadingMargin" id="M91-tJ-Df2"/>
                                                 <constraint firstItem="m5d-0h-TVN" firstAttribute="leading" secondItem="Hnz-4f-FiB" secondAttribute="leading" id="MkJ-TY-X0n"/>
                                                 <constraint firstItem="sWT-GO-Wpt" firstAttribute="leading" secondItem="Exn-gL-jdB" secondAttribute="leading" id="OLC-ds-Lng"/>
-                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="trailing" secondItem="Exn-gL-jdB" secondAttribute="trailing" id="QYF-t4-u06"/>
                                                 <constraint firstItem="sWT-GO-Wpt" firstAttribute="top" secondItem="sXl-Qt-MnW" secondAttribute="topMargin" constant="8" id="bfv-eH-mBI"/>
                                                 <constraint firstItem="Hnz-4f-FiB" firstAttribute="leading" secondItem="sWT-GO-Wpt" secondAttribute="trailing" constant="20" id="dCQ-N4-iSd"/>
                                                 <constraint firstItem="m5d-0h-TVN" firstAttribute="top" secondItem="ZI0-Ag-uh1" secondAttribute="bottom" id="ehv-TN-MYA"/>
+                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="trailing" secondItem="Exn-gL-jdB" secondAttribute="trailing" id="iwv-F1-ks8"/>
                                                 <constraint firstItem="ZI0-Ag-uh1" firstAttribute="leading" secondItem="Hnz-4f-FiB" secondAttribute="leading" id="p74-yK-Xd0"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="oae-IX-Nuc" secondAttribute="trailing" constant="8" id="tTo-rf-djj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
