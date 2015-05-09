@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baP-49-eRm">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baP-49-eRm">
                                 <rect key="frame" x="8" y="20" width="19" height="44"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="27"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -73,7 +73,6 @@
         <!--Income-->
         <scene sceneID="kdM-Nk-tE1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YOE-Af-5IY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="sXD-2P-paj" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="G9A-Qe-HSi"/>
@@ -86,13 +85,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Income" image="incomeTab.png" id="1tY-Ru-69W"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YOE-Af-5IY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-556" y="1156"/>
         </scene>
         <!--Writing-->
         <scene sceneID="zKB-Lx-AKZ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iwu-01-WoN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Chv-lT-2hb" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5qf-fV-CvJ"/>
@@ -105,13 +104,14 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Writing" image="writingTab.png" id="hce-Em-cWT"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iwu-01-WoN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="236" y="1156"/>
         </scene>
         <!--Monkeys-->
         <scene sceneID="0AG-eb-caP">
             <objects>
-                <viewController id="ERN-06-7NL" sceneMemberID="viewController">
+                <viewController id="ERN-06-7NL" customClass="MonkeyViewController" customModule="TapMonkeys" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qNn-4U-V5z"/>
                         <viewControllerLayoutGuide type="bottom" id="yGX-Ag-f91"/>
@@ -119,7 +119,21 @@
                     <view key="view" contentMode="scaleToFill" id="eqp-GY-pZ4">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sWT-GO-Wpt" customClass="MonkeyPicture" customModule="TapMonkeys" customModuleProvider="target">
+                                <rect key="frame" x="250" y="250" width="100" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Mk0-pD-E8x"/>
+                                    <constraint firstAttribute="width" constant="100" id="Nvi-5r-0hD"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="sWT-GO-Wpt" secondAttribute="centerY" id="4YF-ww-q0m"/>
+                            <constraint firstAttribute="centerX" secondItem="sWT-GO-Wpt" secondAttribute="centerX" id="PtN-IT-rMa"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Monkeys" image="monkeyTab.png" id="w8G-qj-RR5"/>
                 </viewController>
@@ -130,7 +144,6 @@
         <!--Achievements-->
         <scene sceneID="oh8-Hh-JRy">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="60a-Kx-JYa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Abc-yJ-JA1" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="14l-0B-x0L"/>
@@ -143,6 +156,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Achievements" image="achievementsTab.png" id="dwW-Qt-uCS"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="60a-Kx-JYa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-556" y="-434"/>
         </scene>
