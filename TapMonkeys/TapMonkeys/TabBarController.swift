@@ -41,4 +41,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     func tabBarIsVisible() -> Bool {
         return self.tabBarController?.tabBar.frame.origin.y < CGRectGetMaxY(self.view.frame)
     }
+    
+    func tabBarHeight() -> CGFloat {
+        return self.tabBar.bounds.size.height
+    }
 }

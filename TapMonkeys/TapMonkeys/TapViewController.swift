@@ -72,7 +72,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
         let gapWidth = self.view.frame.width - genWidth
         let frameMod = gapWidth / CGFloat((count(gen) + 1))
         let size = CGSize(width: 28, height: 28)
-        let yLoc: CGFloat = 100.0
+        let yLoc: CGFloat = (self.view.frame.height - tabBar.tabBarHeight()) / 2
         
         var curFrameMod = frameMod
         
@@ -107,22 +107,21 @@ class TapViewController: UIViewController, PopLabelDelegate {
             if contains(gen, letter) {
                 let index = find(gen, letter)!
                 
-                popLabel.pop(remove: false, customEnd: true, customPoint: genPoints[index], noEnd: true)
+                popLabel.pop(remove: false, customEnd: true, customPoint: genPoints[index], noEnd: false)
                 
                 gen.removeAtIndex(index)
                 genPoints.removeAtIndex(index)
                 genLabels.append(popLabel)
                 
-                delay(2.0, {
-                    if self.gen.count == 0 {
-                        for i in 0...count(self.genLabels) - 1 {
-                            self.genLabels[i].move(CGPoint(x: 10, y: self.genLabels[i].frame.origin.y), scale: 0.3, alpha: 0.0, duration: 0.4, delay: Double(i) * 0.1, remove: true)
-                        }
+                if self.gen.count == 0 {
+                    for i in 0...count(self.genLabels) - 1 {
+                        delay(2.0 + Double(i) * 0.3, {
+                            self.genLabels[i].pop(remove: true, customEnd: false, customPoint: CGPointZero, noEnd: true)
+                        })
                     }
-                })
+                }
             }
             else {
-//                popLabel.move(CGPoint(x: 10, y: 10), scale: 0.3, alpha: 0.0, duration: 0.4, delay: 0.0, remove: true, pulse: true)
                 popLabel.pop()
             }
         }

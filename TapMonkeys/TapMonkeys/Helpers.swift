@@ -84,6 +84,15 @@ class PopLabel: UIView {
         })
     }
     
+    func grow(scale: CGFloat = 1.3, alpha: CGFloat = 0.0, duration: NSTimeInterval = 0.3, delay: NSTimeInterval = 0.0, remove: Bool = true) {
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+            self.transform = CGAffineTransformMakeScale(scale, scale)
+            self.alpha = alpha
+            }, completion: { Bool -> Void in
+                if remove { self.removeFromSuperview() }
+        })
+    }
+    
     func pop(remove: Bool = true, customEnd: Bool = false, customPoint: CGPoint = CGPointZero, noEnd: Bool = false) {
         // Angular velocity max and min
         let minAngularVelocity: CGFloat = 0.2
@@ -141,7 +150,7 @@ class PopLabel: UIView {
             
             // Scale and fade
             UIView.animateWithDuration(fadeTime, delay: 0.0, options: nil, animations: {
-                self.transform = CGAffineTransformMakeScale(curScale, curScale)
+                self.layer.transform = customEnd ? CATransform3DMakeScale(1.4, 1.4, 1.4) : CATransform3DIdentity
                 self.frame = CGRect(origin: customEnd ? customPoint : CGPoint(x: 5, y: 5), size: CGSize(width: 28, height: 28))
                 self.alpha = customEnd ? 1.0 : 0.0
                 }, completion: { (Bool) -> Void in
