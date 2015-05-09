@@ -43,7 +43,6 @@ class TapViewController: UIViewController, PopLabelDelegate {
     
     func configure() {
         configureGestureRecognizers()
-        prepareForDisplay()
     }
     
     func configureGestureRecognizers() {
@@ -54,14 +53,8 @@ class TapViewController: UIViewController, PopLabelDelegate {
         self.view.addGestureRecognizer(tapHold)
     }
     
-    func prepareForDisplay() {
-        
-    }
-    
     override func viewDidLayoutSubviews() {
         tabBar = self.tabBarController as? TabBarController
-//        tabBar.setTabBarVisible(false, animated: false)
-//        tabBar.hide()
     }
     
     func prepGen(index: Int) {
@@ -116,9 +109,14 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 if self.gen.count == 0 {
                     for i in 0...count(self.genLabels) - 1 {
                         delay(2.0 + Double(i) * 0.3, {
-                            self.genLabels[i].pop(remove: true, customEnd: false, customPoint: CGPointZero, noEnd: true)
+                            self.genLabels[i].pop()
                         })
                     }
+                    
+                    delay(2.0 + 0.3 * Double(count(self.genLabels) - 1), {
+                        self.tabBar.setTabBarVisible(true, animated: true)
+                        self.tabBar.viewControllers![1].tabBarItem?.badgeValue = "!"
+                    })
                 }
             }
             else {

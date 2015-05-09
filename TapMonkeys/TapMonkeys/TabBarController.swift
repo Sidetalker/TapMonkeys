@@ -9,14 +9,15 @@
 import UIKit
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
-    var allViews = [UIViewController]()
+    var allViews: [AnyObject]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        allViews = self.viewControllers as [UI]
+        allViews = self.viewControllers
         
-//        self.setTabBarVisible(false, animated: false)
+        self.setViewControllers([allViews![0], allViews![1]], animated: false)
+        self.setTabBarVisible(false, animated: false)
     }
     
     func setTabBarVisible(visible: Bool, animated: Bool) {
@@ -25,7 +26,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let screenRect = UIScreen.mainScreen().bounds
         
         UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(animated ? 0.3 : 0.0)
+        UIView.setAnimationDuration(animated ? 0.6 : 0.0)
         
         var height = screenRect.height
         
@@ -33,13 +34,15 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             height = screenRect.size.width
         }
         
+        if visible { height -= self.tabBar.frame.height }
+        
         self.tabBar.frame = CGRect(x: self.tabBar.frame.origin.x, y: height, width: self.tabBar.frame.width, height: self.tabBar.frame.height)
         
         UIView.commitAnimations()
     }
     
     func tabBarIsVisible() -> Bool {
-        return self.tabBarController?.tabBar.frame.origin.y < CGRectGetMaxY(self.view.frame)
+        return self.tabBar.frame.origin.y != CGRectGetMaxY(self.view.frame)
     }
     
     func tabBarHeight() -> CGFloat {
