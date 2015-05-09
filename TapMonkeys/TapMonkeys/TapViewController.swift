@@ -15,11 +15,11 @@ let gens = [
     ["M", "O", "N", "K", "E", "Y", "S"]
 ]
 
-class MainViewController: UIViewController, PopLabelDelegate {
-    @IBOutlet weak var startT: PopLabel!
-    @IBOutlet weak var startA: PopLabel!
-    @IBOutlet weak var startP: PopLabel!
+class TapViewController: UIViewController, PopLabelDelegate {
+    @IBOutlet weak var tapLabel: UILabel!
     @IBOutlet weak var letterCountLabel: UILabel!
+    
+    var tabBar: TabBarController!
     
     var stage = -1
     var genLabels = [PopLabel]()
@@ -55,18 +55,13 @@ class MainViewController: UIViewController, PopLabelDelegate {
     }
     
     func prepareForDisplay() {
-        startT.setChar("T")
-        startA.setChar("A")
-        startP.setChar("P")
         
-        startT.delegate = self
-        startA.delegate = self
-        startP.delegate = self
-        
-        if stage == -1 {
-            prepGen(0)
-            stage = 0
-        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        tabBar = self.tabBarController as? TabBarController
+//        tabBar.setTabBarVisible(false, animated: false)
+//        tabBar.hide()
     }
     
     func prepGen(index: Int) {
@@ -90,7 +85,16 @@ class MainViewController: UIViewController, PopLabelDelegate {
     
     func singleTapMain(sender: UITapGestureRecognizer) {
         // Tap till we have a monkey
-        if stage == 0 {
+        if stage == -1 {
+            UIView.animateWithDuration(0.6, animations: { () -> Void in
+                self.tapLabel.alpha = 0.0
+                self.tapLabel.transform = CGAffineTransformMakeScale(1.35, 1.35)
+                }, completion: { (Bool) -> Void in
+                    self.stage = 0
+                    self.prepGen(0)
+            })
+        }
+        else if stage == 0 {
             let tapLoc = sender.locationOfTouch(0, inView: self.view)
             let frame = CGRect(origin: CGPoint(x: tapLoc.x - 14, y: tapLoc.y - 14), size: CGSize(width: 28, height: 28))
             let letter = alphabet[randomIntBetweenNumbers(0, 26)]
@@ -103,7 +107,7 @@ class MainViewController: UIViewController, PopLabelDelegate {
             if contains(gen, letter) {
                 let index = find(gen, letter)!
                 
-                popLabel.pop(remove: false, customEnd: true, customPoint: genPoints[index])
+                popLabel.pop(remove: false, customEnd: true, customPoint: genPoints[index], noEnd: true)
                 
                 gen.removeAtIndex(index)
                 genPoints.removeAtIndex(index)
@@ -112,7 +116,7 @@ class MainViewController: UIViewController, PopLabelDelegate {
                 delay(2.0, {
                     if self.gen.count == 0 {
                         for i in 0...count(self.genLabels) - 1 {
-                            self.genLabels[i].move(CGPoint(x: 10, y: self.genLabels[i].frame.origin.y), scale: 0.3, alpha: 0.0, duration: 0.4, delay: Double(i) * 0.1, remove: true, pulse: false)
+                            self.genLabels[i].move(CGPoint(x: 10, y: self.genLabels[i].frame.origin.y), scale: 0.3, alpha: 0.0, duration: 0.4, delay: Double(i) * 0.1, remove: true)
                         }
                     }
                 })

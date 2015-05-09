@@ -20,17 +20,17 @@ public class TapStyle : NSObject {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()
 
-        //// Text 2 Drawing
-        let text2Rect = CGRectMake(0, -0, 28, 28)
-        let text2Style = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-        text2Style.alignment = NSTextAlignment.Center
+        //// letter Drawing
+        let letterRect = CGRectMake(0, -0, 28, 28)
+        let letterStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+        letterStyle.alignment = NSTextAlignment.Center
 
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(30), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text2Style]
+        let letterFontAttributes = [NSFontAttributeName: UIFont(name: "Noteworthy-Light", size: 27)!, NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: letterStyle]
 
-        let text2TextHeight: CGFloat = NSString(string: character).boundingRectWithSize(CGSizeMake(text2Rect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).size.height
+        let letterTextHeight: CGFloat = NSString(string: character).boundingRectWithSize(CGSizeMake(letterRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: letterFontAttributes, context: nil).size.height
         CGContextSaveGState(context)
-        CGContextClipToRect(context, text2Rect);
-        NSString(string: character).drawInRect(CGRectMake(text2Rect.minX, text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, text2Rect.width, text2TextHeight), withAttributes: text2FontAttributes)
+        CGContextClipToRect(context, letterRect);
+        NSString(string: character).drawInRect(CGRectMake(letterRect.minX, letterRect.minY + (letterRect.height - letterTextHeight) / 2, letterRect.width, letterTextHeight), withAttributes: letterFontAttributes)
         CGContextRestoreGState(context)
     }
 

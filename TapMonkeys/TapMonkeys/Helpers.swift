@@ -74,36 +74,17 @@ class PopLabel: UIView {
         TapStyle.drawMainLetter(character: alphabet[index])
     }
     
-    func move(location: CGPoint, scale: CGFloat, alpha: CGFloat, duration: NSTimeInterval, delay: NSTimeInterval, remove: Bool, pulse: Bool) {
-        if pulse {
-            UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-                self.transform = CGAffineTransformMakeScale(1.35, 1.35)
-                }, completion: { (Bool) -> Void in
-                    UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                        self.transform = CGAffineTransformIdentity
-                        }, completion: { (Bool) -> Void in
-                            UIView.animateWithDuration(duration, delay: delay, options: nil, animations: { () -> Void in
-                                self.frame = CGRect(origin: location, size: self.frame.size)
-                                self.alpha = alpha
-//                                self.transform = CGAffineTransformMakeScale(scale, scale)
-                                }, completion: { (Bool) -> Void in
-                                    if remove { self.removeFromSuperview() }
-                            })
-                    })
-            })
-        }
-        else {
-            UIView.animateWithDuration(duration, delay: delay, options: nil, animations: { () -> Void in
-                self.frame = CGRect(origin: location, size: self.frame.size)
-                self.alpha = alpha
-                self.transform = CGAffineTransformMakeScale(scale, scale)
-                }, completion: { (Bool) -> Void in
-                    if remove { self.removeFromSuperview() }
-            })
-        }
+    func move(location: CGPoint, scale: CGFloat, alpha: CGFloat, duration: NSTimeInterval, delay: NSTimeInterval, remove: Bool) {
+        UIView.animateWithDuration(duration, delay: delay, options: nil, animations: { () -> Void in
+            self.frame = CGRect(origin: location, size: self.frame.size)
+            self.alpha = alpha
+            self.transform = CGAffineTransformMakeScale(scale, scale)
+            }, completion: { (Bool) -> Void in
+                if remove { self.removeFromSuperview() }
+        })
     }
     
-    func pop(remove: Bool = true, customEnd: Bool = false, customPoint: CGPoint = CGPointZero) {
+    func pop(remove: Bool = true, customEnd: Bool = false, customPoint: CGPoint = CGPointZero, noEnd: Bool = false) {
         // Angular velocity max and min
         let minAngularVelocity: CGFloat = 0.2
         let maxAngularVelocity: CGFloat = 0.8
@@ -153,13 +134,15 @@ class PopLabel: UIView {
         animator?.addBehavior(velocity)
         animator?.addBehavior(collision)
         
+        if noEnd { return }
+        
         delay(0.8, {
             self.animator?.removeAllBehaviors()
             
             // Scale and fade
             UIView.animateWithDuration(fadeTime, delay: 0.0, options: nil, animations: {
                 self.transform = CGAffineTransformMakeScale(curScale, curScale)
-                self.frame = CGRect(origin: customEnd ? customPoint : CGPoint(x: 5, y: self.superview!.frame.height - 20), size: CGSize(width: 28, height: 28))
+                self.frame = CGRect(origin: customEnd ? customPoint : CGPoint(x: 5, y: 5), size: CGSize(width: 28, height: 28))
                 self.alpha = customEnd ? 1.0 : 0.0
                 }, completion: { (Bool) -> Void in
                     self.delegate?.finishedPopping(customEnd)
