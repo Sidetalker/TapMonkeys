@@ -8,16 +8,79 @@
 
 import UIKit
 
+struct SaveData {
+    var letters: Int
+    var money: Float
+    var letterCounts: [Int]
+}
+
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
+    var allHeaders = [DataHeader?]()
+    
     var allViews: [AnyObject]?
+    var defaults: NSUserDefaults?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureView()
+        
+        defaults = NSUserDefaults.standardUserDefaults()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHeaders:", name: "updateHeaders", object: nil)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        prepareViews()
+    }
+    
+    func updateHeaders(notification: NSNotification) {
+        if allViews == nil { return }
+        
+        for view in allViews! {
+            let userInfo = notification.userInfo as! [String : Float]
+            var updateLetters = 0
+            var updateMoney: Float = 0
+            
+            if let letters = userInfo["letters"] {
+                updateLetters = Int(letters)
+            }
+            if let money = userInfo["money"] {
+                updateMoney = money
+            }
+            
+            if let tapView = view as? TapViewController {
+                tapView.dataHeader.update(letters: updateLetters, money: updateMoney)
+            }
+        }
+    }
+    
+    func configureView() {
         allViews = self.viewControllers
         
         self.setViewControllers([allViews![0], allViews![1]], animated: false)
         self.setTabBarVisible(false, animated: false)
+    }
+    
+    func prepareViews() {
+        for view in allViews! {
+            var found = false
+            
+            if let curView = view as? UIView {
+                for subview in curView.subviews {
+                    if let header = subview as? DataHeader {
+                        allHeaders.append(header)
+                        found = true
+                        
+                        break
+                    }
+                }
+            }
+            
+            if !found {
+                allHeaders.append(nil)
+            }
+        }
     }
     
     func setTabBarVisible(visible: Bool, animated: Bool) {
@@ -105,10 +168,10 @@ class DataHeader: UIView {
     
     func update(letters: Int = 0, money: Float = 0) {
         if self.letters == 0 && letters > 0 {
-            self.revealLetters()
+            revealLetters()
         }
         if self.money == 0 && money > 0 {
-            self.revealMoney()
+            revealMoney()
         }
         
         self.letters += letters
@@ -121,6 +184,9 @@ class DataHeader: UIView {
         
         lettersLabel?.sizeToFit()
         moneyLabel?.sizeToFit()
+        
+        if letters > 0 { pulseLetters() }
+        if money > 0 { pulseMoney() }
     }
     
     func revealLetters() {

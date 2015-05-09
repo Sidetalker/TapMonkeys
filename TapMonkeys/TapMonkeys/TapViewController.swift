@@ -21,12 +21,14 @@ class TapViewController: UIViewController, PopLabelDelegate {
     @IBOutlet weak var dataHeader: DataHeader!
     
     var tabBar: TabBarController!
+    var defaults: NSUserDefaults?
     
     var stage = -1
     var genLabels = [PopLabel]()
     var genPoints = [CGPoint]()
     var gen = [String]()
     var letterCount = 0
+    var saveData: SaveData?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,8 @@ class TapViewController: UIViewController, PopLabelDelegate {
     }
     
     func configure() {
+        defaults = NSUserDefaults.standardUserDefaults()
+        
         configureGestureRecognizers()
     }
     
@@ -135,8 +139,8 @@ class TapViewController: UIViewController, PopLabelDelegate {
         
         letterCount++
         
-        dataHeader.update(letters: 1)
-        dataHeader.pulseLetters()
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName("updateHeaders", object: self, userInfo: ["letters" : Float(1)])
     }
 }
 

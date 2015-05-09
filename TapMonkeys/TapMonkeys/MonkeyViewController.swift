@@ -9,8 +9,12 @@
 import UIKit
 
 class MonkeyViewController: UIViewController {
+    var defaults: NSUserDefaults?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        defaults = NSUserDefaults.standardUserDefaults()
     }
     
     override func prefersStatusBarHidden() -> Bool {
