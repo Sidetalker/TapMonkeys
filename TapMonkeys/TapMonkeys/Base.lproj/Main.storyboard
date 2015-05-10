@@ -125,7 +125,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4V2-L1-dRe">
                                 <rect key="frame" x="0.0" y="95" width="600" height="456"/>
                                 <connections>
-                                    <segue destination="oo1-WO-HrJ" kind="embed" id="8eu-59-jMw"/>
+                                    <segue destination="oo1-WO-HrJ" kind="embed" identifier="segueMonkeyTable" id="8eu-59-jMw"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U07-LZ-yQE" customClass="DataHeader" customModule="TapMonkeys" customModuleProvider="target">

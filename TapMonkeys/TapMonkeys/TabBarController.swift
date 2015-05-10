@@ -40,7 +40,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     func loadSave() {
         saveData = load()
         
-        validate(saveData)
+        saveData = validate(saveData)
         save(saveData)
         
         saveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "timedSave", userInfo: nil, repeats: true)
@@ -198,6 +198,12 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         return self.tabBar.bounds.size.height
     }
     
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        syncSaveData()
+        
+        return true
+    }
+    
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
         initializeHeaders()
         alignHeaders()
@@ -209,8 +215,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             if saveData.stage == 2 {
                 monkeyView.tabBarItem.badgeValue = nil
                 saveData.stage = 3
-                
-                syncSaveData()
             }
         }
     }

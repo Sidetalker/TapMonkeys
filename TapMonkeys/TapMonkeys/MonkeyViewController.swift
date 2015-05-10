@@ -24,6 +24,8 @@ struct MonkeyData {
 class MonkeyViewController: UIViewController {
     @IBOutlet weak var dataHeader: DataHeader!
     
+    var monkeyTable: MonkeyTableViewController?
+    
     var defaults: NSUserDefaults?
     var saveData: SaveData?
     var monkeys: [MonkeyData]!
@@ -86,7 +88,20 @@ class MonkeyViewController: UIViewController {
     }
     
     func configureMonkeys() {
+        let totalMonkeys = count(monkeys)
+        let monkeyCounts = saveData!.monkeyCounts!
+        let monkeyUnlocks = saveData!.monkeyUnlocks!
         
+        if totalMonkeys != count(monkeyCounts) {
+            println("Houston, we have a problem")
+        }
+        
+        for i in 0...totalMonkeys - 1 {
+            monkeys[i].unlocked = monkeyUnlocks[i]
+            monkeys[i].count = monkeyCounts[i]
+        }
+        
+        monkeyTable!.monkeys = monkeys
     }
     
     // Parses a string in this format: 0 - 0 | 1 - 1
@@ -104,9 +119,19 @@ class MonkeyViewController: UIViewController {
         
         return final
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueMonkeyTable" {
+            if let dest = segue.destinationViewController as? MonkeyTableViewController {
+                monkeyTable = dest
+            }
+        }
+    }
 }
 
 class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+    var monkeys: [MonkeyData]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
