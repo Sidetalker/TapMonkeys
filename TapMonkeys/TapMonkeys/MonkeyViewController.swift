@@ -8,21 +8,36 @@
 
 import UIKit
 
+struct MonkeyData {
+    var index: Int?
+    var name: String?
+    var description: String?
+    var modifiers: [(Int, Float)]?
+    var costs: [(Int, Float)]?
+}
+
 class MonkeyViewController: UIViewController {
     @IBOutlet weak var dataHeader: DataHeader!
     
     var defaults: NSUserDefaults?
     var saveData: SaveData?
+    var monkeys: [MonkeyData]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         defaults = NSUserDefaults.standardUserDefaults()
         saveData = load()
+        
+        loadMonkeys()
     }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    func loadMonkeys() {
+        
     }
 }
 

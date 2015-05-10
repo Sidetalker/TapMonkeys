@@ -307,6 +307,25 @@
             </objects>
             <point key="canvasLocation" x="-1280" y="-434"/>
         </scene>
+        <!--Market-->
+        <scene sceneID="ZEG-El-YT2">
+            <objects>
+                <viewController id="vvQ-PU-VcA" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Q0z-8G-hBl"/>
+                        <viewControllerLayoutGuide type="bottom" id="14Z-JT-30l"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="n4Z-Yo-glX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Market" image="marketTab.png" id="2SH-fE-nOB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T9X-gV-gk0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1280" y="342"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="BDQ-NK-LON">
             <objects>
@@ -321,6 +340,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="EQT-tT-ut8"/>
                         <segue destination="ERN-06-7NL" kind="relationship" relationship="viewControllers" id="3mV-cT-Spm"/>
                         <segue destination="Chv-lT-2hb" kind="relationship" relationship="viewControllers" id="1d6-nu-fHz"/>
+                        <segue destination="vvQ-PU-VcA" kind="relationship" relationship="viewControllers" id="CdL-g5-Hof"/>
                         <segue destination="sXD-2P-paj" kind="relationship" relationship="viewControllers" id="ygh-sh-hXO"/>
                         <segue destination="Abc-yJ-JA1" kind="relationship" relationship="viewControllers" id="UX4-8e-Jxc"/>
                         <segue destination="lZR-JJ-Wk6" kind="relationship" relationship="viewControllers" id="y4H-8B-4SN"/>
@@ -330,7 +350,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MkK-hl-A1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1280" y="342"/>
+            <point key="canvasLocation" x="-2029" y="342"/>
         </scene>
         <!--Settings-->
         <scene sceneID="bjD-f2-ZkT">
@@ -356,6 +376,7 @@
         <image name="achievementsTab.png" width="30" height="30"/>
         <image name="alphaTab.png" width="30" height="30"/>
         <image name="incomeTab.png" width="30" height="30"/>
+        <image name="marketTab.png" width="30" height="30"/>
         <image name="monkeyTab.png" width="30" height="30"/>
         <image name="settingsTab.png" width="30" height="30"/>
         <image name="statsTab.png" width="30" height="30"/>
