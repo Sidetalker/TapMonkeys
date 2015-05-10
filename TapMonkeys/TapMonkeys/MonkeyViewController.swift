@@ -9,11 +9,16 @@
 import UIKit
 
 struct MonkeyData {
-    var index: Int?
-    var name: String?
-    var description: String?
-    var modifiers: [(Int, Float)]?
-    var costs: [(Int, Float)]?
+    var index: Int = -1
+    var name: String = "ERROR MONKEY"
+    var description: String = "This abomination should have never been birthed"
+    var modifiers: [(Float, Float)] = [(-1, -1)]
+    var costs: [(Float, Float)] = [(-1, -1)]
+    var unlockCost: [(Float, Float)] = [(-1, -1)]
+    
+    var unlocked: Bool = false
+    var count: Int = 0
+    var modifier: Int = 0
 }
 
 class MonkeyViewController: UIViewController {
@@ -30,6 +35,7 @@ class MonkeyViewController: UIViewController {
         saveData = load()
         
         loadMonkeys()
+        configureMonkeys()
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -37,7 +43,66 @@ class MonkeyViewController: UIViewController {
     }
     
     func loadMonkeys() {
+        let path = NSBundle.mainBundle().pathForResource("monkeys", ofType: "dat")!
+        let content = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)! as String
+        let splitContent = split(content) { $0 == "\n" }
         
+        monkeys = [MonkeyData]()
+        
+        for i in 0...splitContent.count / 5 - 1 {
+            var newMonkey = MonkeyData()
+            
+            for x in 0...5 {
+                let data = splitContent[i * 5 + x]
+                
+                // Name
+                if x == 0 {
+                    newMonkey.name = data
+                }
+                // Description
+                else if x == 1 {
+                    newMonkey.description = data
+                }
+                // Unlock requirements
+                else if x == 2 {
+                    newMonkey.unlockCost = parseFloatTuples(data)
+                }
+                // Modifiers
+                else if x == 3 {
+                    newMonkey.modifiers = parseFloatTuples(data)
+                }
+                // Unlock cost overrides
+                else if x == 4 {
+                    newMonkey.costs = parseFloatTuples(data)
+                }
+                // Newline
+                else if x == 5 {
+                    // Don't do jack fucking shit
+                }
+            }
+            
+            monkeys.append(newMonkey)
+        }
+    }
+    
+    func configureMonkeys() {
+        
+    }
+    
+    // Parses a string in this format: 0 - 0 | 1 - 1
+    // Into an array of tuples: [(0, 0), (1, 1)]
+    func parseFloatTuples(string: String) -> [(Float, Float)] {
+        let cleanString = string.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        var final = [(Float, Float)]()
+        var tupleStrings = split(cleanString) { $0 == "|" }
+        
+        for tuple in tupleStrings {
+            let tupleString = split(tuple) { $0 == "-" }
+            
+            final.append((tupleString[0].floatValue, tupleString[1].floatValue))
+        }
+        
+        return final
     }
 }
 

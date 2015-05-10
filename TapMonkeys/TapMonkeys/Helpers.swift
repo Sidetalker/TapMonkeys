@@ -9,6 +9,12 @@
 import UIKit
 import QuartzCore
 
+extension String {
+    var floatValue: Float {
+        return (self as NSString).floatValue
+    }
+}
+
 func delay(delay: Double, closure:()->()) {
     dispatch_after(
         dispatch_time(

@@ -110,6 +110,7 @@
 		0A9B68EE1AFF952B006628D1 /* marketTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marketTab.png; path = Images/marketTab.png; sourceTree = "<group>"; };
 		0A9B68EF1AFF952B006628D1 /* marketTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marketTab@2x.png"; path = "Images/marketTab@2x.png"; sourceTree = "<group>"; };
 		0A9B68F01AFF952B006628D1 /* marketTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marketTab@3x.png"; path = "Images/marketTab@3x.png"; sourceTree = "<group>"; };
+		0A9B68F41AFFA1B2006628D1 /* Monkey.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Monkey.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +173,7 @@
 				0A9B68861AFD3DE7006628D1 /* Images.xcassets */,
 				0A9B68A41AFD6038006628D1 /* TapStyle.swift */,
 				0A9B689F1AFD3FE6006628D1 /* Helpers.swift */,
+				0A9B68F41AFFA1B2006628D1 /* Monkey.playground */,
 				0A9B687E1AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld */,
 				0A9B687B1AFD3DE7006628D1 /* Info.plist */,
 			);

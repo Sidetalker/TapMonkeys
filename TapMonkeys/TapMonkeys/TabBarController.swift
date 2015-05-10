@@ -13,6 +13,7 @@ struct SaveData {
     var letters: Int?
     var money: Float?
     var letterCounts: [Int]?
+    var monkeyCounts: [Int]?
 }
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
