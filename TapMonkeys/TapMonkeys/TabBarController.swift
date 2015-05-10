@@ -97,7 +97,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         if let stage = userInfo["stage"] as? Int {
             saveData.stage = stage
             
-            save()
+            save(saveData)
             syncSaveData()
         }
     }
@@ -128,6 +128,25 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 {
                     header.update(letters: saveData.letters!, money: saveData.money!, animated: animated)
                 }
+            }
+        }
+    }
+    
+    func alignHeaders() {
+        if allViews == nil { return }
+        
+        for view in allViews! {
+            if let
+                tapView = view as? TapViewController,
+                header = tapView.dataHeader
+            {
+                header.align()
+            }
+            if let
+                monkeyView = view as? MonkeyViewController,
+                header = monkeyView.dataHeader
+            {
+                header.align()
             }
         }
     }
@@ -181,6 +200,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
         initializeHeaders()
+        alignHeaders()
         
         if let tapView = viewController as? TapViewController {
             
@@ -196,9 +216,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
 }
 
-class DataHeader: UIView {
-    var lettersLabel: UILabel!
-    var moneyLabel: UILabel!
+@IBDesignable class DataHeader: UIView {
+    @IBOutlet var nibView: UIView!
+    
+    @IBOutlet weak var lettersLabel: UILabel!
+    @IBOutlet weak var moneyLabel: UILabel!
     
     var letters = 0
     var money: Float = 0
@@ -209,26 +231,32 @@ class DataHeader: UIView {
         configure()
     }
     
-    func configure() {
-        lettersLabel = UILabel(frame: CGRect(x: 22, y: 0, width: self.frame.width, height: 40))
-        moneyLabel = UILabel(frame: CGRect(x: 8, y: 29, width: self.frame.width, height: 40))
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        lettersLabel.font = UIFont(name: "Noteworthy-Light", size: 27)
-        moneyLabel.font = UIFont(name: "Noteworthy-Light", size: 27)
+        configure()
+    }
+    
+    func configure() {
+        NSBundle.mainBundle().loadNibNamed("DataHeader", owner: self, options: nil)
+        
+        self.addSubview(nibView)
+        self.frame = nibView.frame
         
         lettersLabel.text = "0"
         moneyLabel.text = "$0.00"
         
         lettersLabel.alpha = 0.0
         moneyLabel.alpha = 0.0
-        
-        lettersLabel.sizeToFit()
-        moneyLabel.sizeToFit()
-        
-        self.addSubview(lettersLabel)
-        self.addSubview(moneyLabel)
+            
+        align()
         
         self.backgroundColor = UIColor.clearColor()
+    }
+    
+    func align() {
+        lettersLabel.sizeToFit()
+        moneyLabel.sizeToFit()
     }
     
     func getCenterLetters() -> CGPoint {
@@ -273,8 +301,7 @@ class DataHeader: UIView {
         lettersLabel?.text = "\(self.letters)"
         moneyLabel?.text = "$\(moneyText)"
         
-        lettersLabel?.sizeToFit()
-        moneyLabel?.sizeToFit()
+        align()
         
         if letters > 0 && animated { pulseLetters() }
         if money > 0 && animated { pulseMoney() }

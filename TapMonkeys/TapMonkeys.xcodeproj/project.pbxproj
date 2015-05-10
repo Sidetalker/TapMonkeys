@@ -50,6 +50,7 @@
 		0A9B68F11AFF952B006628D1 /* marketTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68EE1AFF952B006628D1 /* marketTab.png */; };
 		0A9B68F21AFF952B006628D1 /* marketTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68EF1AFF952B006628D1 /* marketTab@2x.png */; };
 		0A9B68F31AFF952B006628D1 /* marketTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68F01AFF952B006628D1 /* marketTab@3x.png */; };
+		0A9B68F61AFFBAE6006628D1 /* DataHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68F51AFFBAE6006628D1 /* DataHeader.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		0A9B68EF1AFF952B006628D1 /* marketTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marketTab@2x.png"; path = "Images/marketTab@2x.png"; sourceTree = "<group>"; };
 		0A9B68F01AFF952B006628D1 /* marketTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marketTab@3x.png"; path = "Images/marketTab@3x.png"; sourceTree = "<group>"; };
 		0A9B68F41AFFA1B2006628D1 /* Monkey.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Monkey.playground; sourceTree = "<group>"; };
+		0A9B68F51AFFBAE6006628D1 /* DataHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataHeader.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				0A9B68811AFD3DE7006628D1 /* TapViewController.swift */,
 				0A9B68E91AFE58A5006628D1 /* MonkeyViewController.swift */,
 				0A9B68831AFD3DE7006628D1 /* Main.storyboard */,
+				0A9B68F51AFFBAE6006628D1 /* DataHeader.xib */,
 				0A9B68881AFD3DE7006628D1 /* LaunchScreen.xib */,
 				0A9B687A1AFD3DE7006628D1 /* Supporting Files */,
 			);
@@ -347,6 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A9B68A91AFD8DBB006628D1 /* alphaTab.png in Resources */,
+				0A9B68F61AFFBAE6006628D1 /* DataHeader.xib in Resources */,
 				0A9B68B31AFD9AC7006628D1 /* monkeyTab.png in Resources */,
 				0A9B68E71AFDCD4A006628D1 /* monkeyA@3x.jpg in Resources */,
 				0A9B68851AFD3DE7006628D1 /* Main.storyboard in Resources */,
