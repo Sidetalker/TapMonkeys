@@ -51,6 +51,7 @@
 		0A9B68F21AFF952B006628D1 /* marketTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68EF1AFF952B006628D1 /* marketTab@2x.png */; };
 		0A9B68F31AFF952B006628D1 /* marketTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68F01AFF952B006628D1 /* marketTab@3x.png */; };
 		0A9B68F61AFFBAE6006628D1 /* DataHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68F51AFFBAE6006628D1 /* DataHeader.xib */; };
+		0A9B68F81AFFF3E7006628D1 /* MonkeyLockView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68F71AFFF3E7006628D1 /* MonkeyLockView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		0A9B68F01AFF952B006628D1 /* marketTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marketTab@3x.png"; path = "Images/marketTab@3x.png"; sourceTree = "<group>"; };
 		0A9B68F41AFFA1B2006628D1 /* Monkey.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Monkey.playground; sourceTree = "<group>"; };
 		0A9B68F51AFFBAE6006628D1 /* DataHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataHeader.xib; sourceTree = "<group>"; };
+		0A9B68F71AFFF3E7006628D1 /* MonkeyLockView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonkeyLockView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,9 +162,6 @@
 				0A9B68AE1AFD90C3006628D1 /* TabBarController.swift */,
 				0A9B68811AFD3DE7006628D1 /* TapViewController.swift */,
 				0A9B68E91AFE58A5006628D1 /* MonkeyViewController.swift */,
-				0A9B68831AFD3DE7006628D1 /* Main.storyboard */,
-				0A9B68F51AFFBAE6006628D1 /* DataHeader.xib */,
-				0A9B68881AFD3DE7006628D1 /* LaunchScreen.xib */,
 				0A9B687A1AFD3DE7006628D1 /* Supporting Files */,
 			);
 			path = TapMonkeys;
@@ -171,6 +170,7 @@
 		0A9B687A1AFD3DE7006628D1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A9B68F91AFFF3F1006628D1 /* UI */,
 				0A9B68ED1AFF9184006628D1 /* Data */,
 				0A9B68AC1AFD8DC6006628D1 /* Images */,
 				0A9B68861AFD3DE7006628D1 /* Images.xcassets */,
@@ -267,6 +267,17 @@
 				0A9B68EB1AFF917F006628D1 /* monkeys.dat */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		0A9B68F91AFFF3F1006628D1 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0A9B68831AFD3DE7006628D1 /* Main.storyboard */,
+				0A9B68F51AFFBAE6006628D1 /* DataHeader.xib */,
+				0A9B68F71AFFF3E7006628D1 /* MonkeyLockView.xib */,
+				0A9B68881AFD3DE7006628D1 /* LaunchScreen.xib */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,6 +386,7 @@
 				0A9B68C51AFDA0E5006628D1 /* achievementsTab.png in Resources */,
 				0A9B68B51AFD9AC7006628D1 /* monkeyTab@3x.png in Resources */,
 				0A9B68C01AFD9F7F006628D1 /* incomeTab@2x.png in Resources */,
+				0A9B68F81AFFF3E7006628D1 /* MonkeyLockView.xib in Resources */,
 				0A9B68AB1AFD8DBB006628D1 /* alphaTab@2x.png in Resources */,
 				0A9B68CB1AFDA301006628D1 /* upgradesTab.png in Resources */,
 				0A9B68BF1AFD9F7F006628D1 /* incomeTab.png in Resources */,

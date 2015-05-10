@@ -58,7 +58,7 @@ public class TapStyle : NSObject {
         CGContextSaveGState(context)
         CGContextSetShadowWithColor(context, monkeyPicShadow.shadowOffset, monkeyPicShadow.shadowBlurRadius, (monkeyPicShadow.shadowColor as! UIColor).CGColor)
         UIColor.blackColor().setStroke()
-        ovalPath.lineWidth = 0.5
+        ovalPath.lineWidth = 1
         ovalPath.stroke()
         CGContextRestoreGState(context)
     }

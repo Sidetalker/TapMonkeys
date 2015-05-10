@@ -12,6 +12,7 @@ struct MonkeyData {
     var index: Int = -1
     var name: String = "ERROR MONKEY"
     var description: String = "This abomination should have never been birthed"
+    var lettersPerSecond: Int = 0
     var modifiers: [(Float, Float)] = [(-1, -1)]
     var costs: [(Float, Float)] = [(-1, -1)]
     var unlockCost: [(Float, Float)] = [(-1, -1)]
@@ -19,6 +20,10 @@ struct MonkeyData {
     var unlocked: Bool = false
     var count: Int = 0
     var modifier: Int = 0
+    
+    func lettersPerSecondCumulative() -> Int {
+        return count * lettersPerSecond
+    }
 }
 
 class MonkeyViewController: UIViewController {
@@ -55,7 +60,7 @@ class MonkeyViewController: UIViewController {
             var newMonkey = MonkeyData()
             
             for x in 0...5 {
-                let data = splitContent[i * 5 + x]
+                let data = splitContent[i * 6 + x]
                 
                 // Name
                 if x == 0 {
@@ -65,21 +70,21 @@ class MonkeyViewController: UIViewController {
                 else if x == 1 {
                     newMonkey.description = data
                 }
-                // Unlock requirements
+                // Letters/sec
                 else if x == 2 {
+                    newMonkey.lettersPerSecond = data.toInt()!
+                }
+                // Unlock requirements
+                else if x == 3 {
                     newMonkey.unlockCost = parseFloatTuples(data)
                 }
                 // Modifiers
-                else if x == 3 {
+                else if x == 4 {
                     newMonkey.modifiers = parseFloatTuples(data)
                 }
                 // Unlock cost overrides
-                else if x == 4 {
-                    newMonkey.costs = parseFloatTuples(data)
-                }
-                // Newline
                 else if x == 5 {
-                    // Don't do jack fucking shit
+                    newMonkey.costs = parseFloatTuples(data)
                 }
             }
             
@@ -130,14 +135,78 @@ class MonkeyViewController: UIViewController {
 }
 
 class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
-    var monkeys: [MonkeyData]?
+    var monkeys = [MonkeyData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 250
+    }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return count(monkeys) == 0 ? 0 : 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return count(monkeys) == 0 ? 0 : count(monkeys)
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let index = indexPath.row
+        let curMonkey = monkeys[index]
+        
+        if !curMonkey.unlocked {
+            if let blurView = cell.viewWithTag(8) as? UIVisualEffectView {
+                // We're good to go I guess
+            }
+            else {
+                let blur = UIBlurEffect(style: UIBlurEffectStyle.Light)
+                var blurView = UIVisualEffectView(effect: blur)
+                
+                blurView.frame = cell.contentView.frame
+                blurView.tag = 8
+                
+                cell.contentView.addSubview(blurView)
+            }
+        }
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if let
+            cell = self.tableView.dequeueReusableCellWithIdentifier("cellMonkey") as? UITableViewCell,
+            monkeyPic = cell.viewWithTag(1) as? MonkeyPicture,
+            name = cell.viewWithTag(2) as? UILabel,
+            owned = cell.viewWithTag(3) as? UILabel,
+            frequency = cell.viewWithTag(4) as? UILabel,
+            total = cell.viewWithTag(5) as? UILabel,
+            buyButton = cell.viewWithTag(6) as? MonkeyBuyButton,
+            description = cell.viewWithTag(7) as? UILabel
+        {
+            let index = indexPath.row
+            let curMonkey = monkeys[index]
+            
+            monkeyPic.monkeyIndex = index
+            monkeyPic.setNeedsDisplay()
+            
+            name.text = curMonkey.name
+            owned.text = "Owned: \(curMonkey.count)"
+            frequency.text = "Letters/sec: \(curMonkey.lettersPerSecondCumulative())"
+            
+            
+            return cell
+        }
+        else {
+            println("Unable to load monkey cell / subviews!")
+        }
+        
+        return UITableViewCell()
     }
 }
 
 class MonkeyPicture: UIView {
+    var monkeyIndex = 0
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -145,7 +214,9 @@ class MonkeyPicture: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-        TapStyle.drawFingerMonkey()
+        if monkeyIndex == 0 {
+            TapStyle.drawFingerMonkey()
+        }
     }
 }
 
@@ -164,4 +235,17 @@ class MonkeyBuyButton: UIView {
             TapStyle.drawBuy1(frame: rect, monkeyBuyText: "FREE")
         }
     }
+}
+
+class MonkeyLockView: UIView {
+    var locked = true
+    var blurView: UIVisualEffectView
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.backgroundColor = UIColor.clearColor()
+    }
+    
+    var unlock
 }
