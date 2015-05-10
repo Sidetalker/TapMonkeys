@@ -23,7 +23,6 @@ class TapViewController: UIViewController, PopLabelDelegate {
     var tabBar: TabBarController!
     var defaults: NSUserDefaults?
     
-    var stage = -1
     var genLabels = [PopLabel]()
     var genPoints = [CGPoint]()
     var gen = [String]()
@@ -52,7 +51,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
     func configureInterface() {
         saveData = load()
         
-        if saveData?.stage >= 0 {
+        if saveData?.stage > 0 {
             tapLabel.alpha = 0.0
         }
     }
@@ -89,7 +88,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
     }
     
     func updateStage(newStage: Int) {
-        self.stage = newStage
+        saveData?.stage = newStage
         
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("updateStage", object: self, userInfo: [
@@ -99,25 +98,19 @@ class TapViewController: UIViewController, PopLabelDelegate {
     }
     
     func singleTapMain(sender: UITapGestureRecognizer) {
-        // Tap till we have a monkey
-        if stage == -1 {
+        let letter = alphabet[randomIntBetweenNumbers(0, 26)]
+        
+        if saveData?.stage == 0 {
             UIView.animateWithDuration(0.6, animations: { () -> Void in
                 self.tapLabel.alpha = 0.0
                 self.tapLabel.transform = CGAffineTransformMakeScale(1.35, 1.35)
                 }, completion: { (Bool) -> Void in
-                    self.updateStage(0)
+                    self.updateStage(1)
                     self.prepGen(0)
             })
         }
-        else if stage == 0 {
-            let tapLoc = sender.locationOfTouch(0, inView: self.view)
-            let frame = CGRect(origin: CGPoint(x: tapLoc.x - 14, y: tapLoc.y - 14), size: CGSize(width: 28, height: 28))
-            let letter = alphabet[randomIntBetweenNumbers(0, 26)]
-            let popLabel = PopLabel(frame: frame, character: letter)
-            popLabel.backgroundColor = UIColor.clearColor()
-            popLabel.delegate = self
-            
-            self.view.addSubview(popLabel)
+        else if saveData?.stage == 1 {
+            let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
             
             if contains(gen, letter) {
                 let index = find(gen, letter)!
@@ -139,7 +132,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
                         self.tabBar.setTabBarVisible(true, animated: true)
                         self.tabBar.viewControllers![1].tabBarItem?.badgeValue = "!"
                         
-                        self.updateStage(1)
+                        self.updateStage(2)
                     })
                 }
             }
@@ -147,6 +140,23 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
             }
         }
+        else if saveData?.stage == 2 {
+            let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
+            
+            popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
+        }
+    }
+    
+    func popOne(tapLoc: CGPoint, letter: String) -> PopLabel {
+        let frame = CGRect(origin: CGPoint(x: tapLoc.x - 14, y: tapLoc.y - 14), size: CGSize(width: 28, height: 28))
+        let popLabel = PopLabel(frame: frame, character: letter)
+        
+        popLabel.backgroundColor = UIColor.clearColor()
+        popLabel.delegate = self
+        
+        self.view.addSubview(popLabel)
+        
+        return popLabel
     }
     
     func holdMain(sender: UILongPressGestureRecognizer) {

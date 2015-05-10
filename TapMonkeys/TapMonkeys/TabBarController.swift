@@ -46,6 +46,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func registerForUpdates() {
+        self.delegate = self
+        
         defaults = NSUserDefaults.standardUserDefaults()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHeaders:", name: "updateHeaders", object: nil)
@@ -61,15 +63,18 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         for view in allViews! {
             if let tapView = view as? TapViewController {
-                if stage >= 1 {
+                if stage >= 2 {
                     self.setTabBarVisible(true, animated: true)
                 }
                 
                 tapView.dataHeader.initialize(letters: letters, money: money, stage: stage)
             }
             else if let monkeyView = view as? MonkeyViewController {
-                if stage == 1 {
+                if stage == 2 {
                     monkeyView.tabBarItem.badgeValue = "!"
+                }
+                else if stage == 3 {
+                    monkeyView.tabBarItem.badgeValue = nil
                 }
             }
         }
@@ -133,12 +138,36 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         UIView.commitAnimations()
     }
     
+    func updateSaveData() {
+        for view in self.viewControllers! {
+            if let tapView = view as? TapViewController {
+                tapView.saveData = saveData
+            }
+            if let monkeyView = view as? MonkeyViewController {
+                monkeyView.saveData = saveData
+            }
+        }
+    }
+    
     func tabBarIsVisible() -> Bool {
         return self.tabBar.frame.origin.y != CGRectGetMaxY(self.view.frame)
     }
     
     func tabBarHeight() -> CGFloat {
         return self.tabBar.bounds.size.height
+    }
+    
+    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+        if let tapView = viewController as? TapViewController {
+            
+        }
+        if let monkeyView = viewController as? MonkeyViewController {
+            if saveData.stage == 2 {
+                monkeyView.tabBarItem.badgeValue = nil
+                saveData.stage = 3
+                updateSaveData()
+            }
+        }
     }
 }
 
