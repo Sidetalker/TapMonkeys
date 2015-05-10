@@ -9,6 +9,8 @@
 import UIKit
 
 class MonkeyViewController: UIViewController {
+    @IBOutlet weak var dataHeader: DataHeader!
+    
     var defaults: NSUserDefaults?
     var saveData: SaveData?
     

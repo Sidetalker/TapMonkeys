@@ -123,21 +123,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4V2-L1-dRe">
-                                <rect key="frame" x="0.0" y="20" width="600" height="531"/>
+                                <rect key="frame" x="0.0" y="95" width="600" height="456"/>
                                 <connections>
                                     <segue destination="oo1-WO-HrJ" kind="embed" id="8eu-59-jMw"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U07-LZ-yQE" customClass="DataHeader" customModule="TapMonkeys" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="600" height="75"/>
+                                <color key="backgroundColor" red="0.0" green="0.56078431370000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="flK-vC-C2p"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="U07-LZ-yQE" firstAttribute="top" secondItem="qNn-4U-V5z" secondAttribute="bottom" id="0vK-rE-pPL"/>
+                            <constraint firstItem="4V2-L1-dRe" firstAttribute="top" secondItem="U07-LZ-yQE" secondAttribute="bottom" id="80w-5G-UVg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4V2-L1-dRe" secondAttribute="trailing" constant="-16" id="QEd-Oc-04n"/>
+                            <constraint firstItem="U07-LZ-yQE" firstAttribute="leading" secondItem="eqp-GY-pZ4" secondAttribute="leadingMargin" constant="-16" id="X6Q-5H-pM9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="U07-LZ-yQE" secondAttribute="trailing" constant="-16" id="Xaa-Wh-wnW"/>
                             <constraint firstItem="yGX-Ag-f91" firstAttribute="top" secondItem="4V2-L1-dRe" secondAttribute="bottom" id="fC5-S4-H1l"/>
-                            <constraint firstItem="4V2-L1-dRe" firstAttribute="top" secondItem="qNn-4U-V5z" secondAttribute="bottom" id="mSE-uC-VLI"/>
                             <constraint firstItem="4V2-L1-dRe" firstAttribute="leading" secondItem="eqp-GY-pZ4" secondAttribute="leadingMargin" constant="-16" id="yXM-kR-vkO"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Monkeys" image="monkeyTab.png" id="w8G-qj-RR5"/>
+                    <connections>
+                        <outlet property="dataHeader" destination="U07-LZ-yQE" id="Pp1-tO-Eae"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v1m-1A-BSs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -148,7 +161,7 @@
             <objects>
                 <tableViewController id="oo1-WO-HrJ" customClass="MonkeyTableViewController" customModule="TapMonkeys" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="195" sectionHeaderHeight="22" sectionFooterHeight="22" id="ccU-Iv-eDI">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="531"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="456"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -185,8 +198,8 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oae-IX-Nuc" customClass="MonkeyBuyButton" customModule="TapMonkeys" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="124" width="989" height="32"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oae-IX-Nuc" customClass="MonkeyBuyButton" customModule="TapMonkeys" customModuleProvider="target">
+                                                    <rect key="frame" x="8" y="121" width="584" height="32"/>
                                                     <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="3VT-IN-xaj"/>

@@ -67,6 +67,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                     self.setTabBarVisible(true, animated: true)
                 }
                 
+                if tapView.dataHeader == nil { return }
+                
                 tapView.dataHeader.initialize(letters: letters, money: money, stage: stage)
             }
             else if let monkeyView = view as? MonkeyViewController {
@@ -76,6 +78,10 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 else if stage == 3 {
                     monkeyView.tabBarItem.badgeValue = nil
                 }
+                
+                if monkeyView.dataHeader == nil { return }
+                
+                monkeyView.dataHeader.initialize(letters: letters, money: money, stage: stage)
             }
         }
     }
@@ -100,12 +106,20 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             saveData.money! += money
         }
         
-        for view in allViews! {
-            if let
-                tapView = view as? TapViewController,
-                animated = userInfo["animated"] as? Bool
-            {
-                tapView.dataHeader.update(letters: saveData.letters!, money: saveData.money!, pulse: animated)
+        if let animated = userInfo["animated"] as? Bool {
+            for view in allViews! {
+                if let
+                    tapView = view as? TapViewController,
+                    header = tapView.dataHeader
+                {
+                    header.update(letters: saveData.letters!, money: saveData.money!, animated: animated)
+                }
+                if let
+                    monkeyView = view as? MonkeyViewController,
+                    header = monkeyView.dataHeader
+                {
+                    header.update(letters: saveData.letters!, money: saveData.money!, animated: animated)
+                }
             }
         }
     }
@@ -158,6 +172,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+        initializeHeaders()
+        
         if let tapView = viewController as? TapViewController {
             
         }
@@ -165,6 +181,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             if saveData.stage == 2 {
                 monkeyView.tabBarItem.badgeValue = nil
                 saveData.stage = 3
+                
                 updateSaveData()
             }
         }
@@ -225,19 +242,19 @@ class DataHeader: UIView {
     }
     
     func initialize(letters: Int = 0, money: Float = 0, stage: Int = -1) {
-        update(letters: letters, money: money, pulse: false)
+        update(letters: letters, money: money, animated: false)
         
         if stage >= 1 {
-            revealLetters()
+            revealLetters(false)
         }
     }
     
-    func update(letters: Int = 0, money: Float = 0, pulse: Bool = true) {
+    func update(letters: Int = 0, money: Float = 0, animated: Bool = true) {
         if self.letters == 0 && letters > 0 {
-            revealLetters()
+            revealLetters(animated)
         }
         if self.money == 0 && money > 0 {
-            revealMoney()
+            revealMoney(animated)
         }
         
         self.letters = letters
@@ -251,20 +268,20 @@ class DataHeader: UIView {
         lettersLabel?.sizeToFit()
         moneyLabel?.sizeToFit()
         
-        if letters > 0 { pulseLetters() }
-        if money > 0 { pulseMoney() }
+        if letters > 0 && animated { pulseLetters() }
+        if money > 0 && animated { pulseMoney() }
     }
     
-    func revealLetters() {
-        reveal(lettersLabel)
+    func revealLetters(animated: Bool) {
+        reveal(lettersLabel, animated: animated)
     }
     
-    func revealMoney() {
-        reveal(moneyLabel)
+    func revealMoney(animated: Bool) {
+        reveal(moneyLabel, animated: animated)
     }
     
-    func reveal(view: UIView) {
-        UIView.animateWithDuration(0.4, animations: { () -> Void in
+    func reveal(view: UIView, animated: Bool = true) {
+        UIView.animateWithDuration(animated ? 0.4 : 0.1, animations: { () -> Void in
             view.alpha = 1.0
         })
     }
