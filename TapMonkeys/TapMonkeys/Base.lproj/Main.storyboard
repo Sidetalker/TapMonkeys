@@ -181,20 +181,20 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finger Monkey" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Hnz-4f-FiB">
-                                                    <rect key="frame" x="128" y="16" width="444" height="31"/>
-                                                    <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="24"/>
+                                                    <rect key="frame" x="128" y="16" width="444" height="32"/>
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="26"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Owned: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZI0-Ag-uh1">
-                                                    <rect key="frame" x="128" y="52" width="444" height="17"/>
-                                                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="13"/>
+                                                    <rect key="frame" x="128" y="50" width="444" height="17"/>
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Letters / sec: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="m5d-0h-TVN">
-                                                    <rect key="frame" x="128" y="74" width="444" height="17"/>
-                                                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="13"/>
+                                                    <rect key="frame" x="128" y="72" width="444" height="17"/>
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -209,15 +209,15 @@
                                                     </variation>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Letters: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="U0A-Ei-714">
-                                                    <rect key="frame" x="128" y="96" width="444" height="17"/>
-                                                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="13"/>
+                                                    <rect key="frame" x="128" y="94" width="444" height="17"/>
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exn-gL-jdB">
-                                                    <rect key="frame" x="8" y="161" width="584" height="33"/>
+                                                    <rect key="frame" x="8" y="161" width="584" height="34"/>
                                                     <string key="text">Almost never spotted in the wild, the Finger Monkey's tiny taps do not register on standard smartphones. Instead, it commandeers the first human finger it comes across.</string>
-                                                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="13"/>
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact" misplaced="YES">
@@ -231,7 +231,7 @@
                                                 <constraint firstItem="U0A-Ei-714" firstAttribute="top" secondItem="m5d-0h-TVN" secondAttribute="bottom" constant="5" id="BOx-sN-YX6"/>
                                                 <constraint firstItem="ZI0-Ag-uh1" firstAttribute="leading" secondItem="m5d-0h-TVN" secondAttribute="leading" id="E1U-h9-hri"/>
                                                 <constraint firstItem="Hnz-4f-FiB" firstAttribute="trailing" secondItem="m5d-0h-TVN" secondAttribute="trailing" id="Ie6-xv-DC3"/>
-                                                <constraint firstItem="ZI0-Ag-uh1" firstAttribute="top" secondItem="Hnz-4f-FiB" secondAttribute="bottom" constant="5" id="LeA-xm-erX"/>
+                                                <constraint firstItem="ZI0-Ag-uh1" firstAttribute="top" secondItem="Hnz-4f-FiB" secondAttribute="bottom" constant="2" id="LeA-xm-erX"/>
                                                 <constraint firstItem="sWT-GO-Wpt" firstAttribute="leading" secondItem="sXl-Qt-MnW" secondAttribute="leadingMargin" id="M91-tJ-Df2"/>
                                                 <constraint firstItem="m5d-0h-TVN" firstAttribute="leading" secondItem="Hnz-4f-FiB" secondAttribute="leading" id="MkJ-TY-X0n"/>
                                                 <constraint firstItem="sWT-GO-Wpt" firstAttribute="leading" secondItem="Exn-gL-jdB" secondAttribute="leading" id="OLC-ds-Lng"/>

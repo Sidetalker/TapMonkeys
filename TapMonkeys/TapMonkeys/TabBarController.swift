@@ -13,6 +13,8 @@ struct SaveData {
     var letters: Int?
     var money: Float?
     var letterCounts: [Int]?
+    
+    var monkeyUnlocks: [Bool]?
     var monkeyCounts: [Int]?
 }
 
@@ -37,6 +39,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     func loadSave() {
         saveData = load()
+        
+        validate(saveData)
         save(saveData)
         
         saveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "timedSave", userInfo: nil, repeats: true)
@@ -92,6 +96,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         if let stage = userInfo["stage"] as? Int {
             saveData.stage = stage
+            
+            save()
+            syncSaveData()
         }
     }
     
@@ -153,7 +160,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         UIView.commitAnimations()
     }
     
-    func updateSaveData() {
+    func syncSaveData() {
         for view in self.viewControllers! {
             if let tapView = view as? TapViewController {
                 tapView.saveData = saveData
@@ -183,7 +190,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 monkeyView.tabBarItem.badgeValue = nil
                 saveData.stage = 3
                 
-                updateSaveData()
+                syncSaveData()
             }
         }
     }

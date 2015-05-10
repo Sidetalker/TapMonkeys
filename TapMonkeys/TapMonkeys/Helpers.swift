@@ -44,6 +44,9 @@ func save(data: SaveData) -> Bool {
     defaults.setObject(data.letterCounts, forKey: "letterCounts")
     defaults.setObject(data.stage, forKey: "stage")
     
+    defaults.setObject(data.monkeyUnlocks, forKey: "monkeyUnlocks")
+    defaults.setObject(data.monkeyCounts, forKey: "monkeyCounts")
+    
     return true
 }
 
@@ -56,5 +59,45 @@ func load() -> SaveData {
     save.letterCounts = defaults.arrayForKey("letterCounts") as? [Int]
     save.stage = defaults.integerForKey("stage")
     
+    save.monkeyUnlocks = defaults.arrayForKey("monkeyUnlocks") as? [Bool]
+    save.monkeyCounts = defaults.arrayForKey("monkeyCounts") as? [Int]
+    
     return save
+}
+
+func validate(save: SaveData) -> SaveData {
+    let numLetterCounts = 26
+    let numMonkeyCounts = 1
+    let numMonkeyUnlocks = 1
+    
+    var newSave = save
+    
+    if newSave.letterCounts == nil {
+        newSave.letterCounts = [Int](count: numLetterCounts, repeatedValue: 0)
+    }
+    else if count(newSave.letterCounts!) < numLetterCounts {
+        for i in count(newSave.letterCounts!)...numLetterCounts - 1 {
+            newSave.letterCounts?.append(0)
+        }
+    }
+    
+    if newSave.monkeyCounts == nil {
+        newSave.monkeyCounts = [Int](count: numMonkeyCounts, repeatedValue: 0)
+    }
+    else if count(newSave.monkeyCounts!) < numMonkeyCounts {
+        for i in count(newSave.monkeyCounts!)...numMonkeyCounts - 1 {
+            newSave.monkeyCounts?.append(0)
+        }
+    }
+    
+    if newSave.monkeyUnlocks == nil {
+        newSave.monkeyUnlocks = [Bool](count: numMonkeyUnlocks, repeatedValue: false)
+    }
+    else if count(newSave.monkeyUnlocks!) < numMonkeyUnlocks {
+        for i in count(newSave.monkeyUnlocks!)...numMonkeyUnlocks - 1 {
+            newSave.monkeyUnlocks?.append(false)
+        }
+    }
+    
+    return newSave
 }

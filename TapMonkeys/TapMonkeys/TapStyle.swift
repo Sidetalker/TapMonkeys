@@ -76,7 +76,7 @@ public class TapStyle : NSObject {
         let rectangleStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
         rectangleStyle.alignment = NSTextAlignment.Center
 
-        let rectangleFontAttributes = [NSFontAttributeName: UIFont(name: "Didot", size: 16)!, NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: rectangleStyle]
+        let rectangleFontAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 14)!, NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: rectangleStyle]
 
         let rectangleTextHeight: CGFloat = NSString(string: monkeyBuyText).boundingRectWithSize(CGSizeMake(rectangleRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: rectangleFontAttributes, context: nil).size.height
         CGContextSaveGState(context)
