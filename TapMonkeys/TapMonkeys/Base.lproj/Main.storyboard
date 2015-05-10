@@ -168,25 +168,25 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finger Monkey" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Hnz-4f-FiB">
-                                                    <rect key="frame" x="128" y="16" width="169" height="31"/>
+                                                    <rect key="frame" x="128" y="16" width="444" height="31"/>
                                                     <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="24"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Owned: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZI0-Ag-uh1">
-                                                    <rect key="frame" x="128" y="47" width="56" height="17"/>
+                                                    <rect key="frame" x="128" y="52" width="444" height="17"/>
                                                     <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Letters / sec: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="m5d-0h-TVN">
-                                                    <rect key="frame" x="128" y="64" width="85" height="17"/>
+                                                    <rect key="frame" x="128" y="74" width="444" height="17"/>
                                                     <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oae-IX-Nuc" customClass="MonkeyBuyButton" customModule="TapMonkeys" customModuleProvider="target">
-                                                    <rect key="frame" x="128" y="80" width="464" height="32"/>
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oae-IX-Nuc" customClass="MonkeyBuyButton" customModule="TapMonkeys" customModuleProvider="target">
+                                                    <rect key="frame" x="8" y="124" width="989" height="32"/>
                                                     <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="3VT-IN-xaj"/>
@@ -195,9 +195,15 @@
                                                         <rect key="frame" x="128" y="80" width="840" height="32"/>
                                                     </variation>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Letters: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="U0A-Ei-714">
+                                                    <rect key="frame" x="128" y="96" width="444" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exn-gL-jdB">
-                                                    <rect key="frame" x="8" y="121" width="584" height="33"/>
-                                                    <string key="text">Hardly ever spotted in the wild, the Finger Monkey's hands are too small to tap. Instead, the Finger Monkey commandeers the first human finger it comes across.</string>
+                                                    <rect key="frame" x="8" y="161" width="584" height="33"/>
+                                                    <string key="text">Almost never spotted in the wild, the Finger Monkey's tiny taps do not register on standard smartphones. Instead, it commandeers the first human finger it comes across.</string>
                                                     <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -208,21 +214,33 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Hnz-4f-FiB" firstAttribute="top" secondItem="sWT-GO-Wpt" secondAttribute="top" id="1cQ-Yi-B0z"/>
-                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="bottom" secondItem="sWT-GO-Wpt" secondAttribute="bottom" constant="-4" id="1sn-Zb-yt1"/>
-                                                <constraint firstItem="Exn-gL-jdB" firstAttribute="top" secondItem="sWT-GO-Wpt" secondAttribute="bottom" constant="5" id="30x-26-Azh"/>
+                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="top" secondItem="sWT-GO-Wpt" secondAttribute="bottom" constant="5" id="4nM-Fw-V4F"/>
+                                                <constraint firstItem="U0A-Ei-714" firstAttribute="top" secondItem="m5d-0h-TVN" secondAttribute="bottom" constant="5" id="BOx-sN-YX6"/>
                                                 <constraint firstItem="ZI0-Ag-uh1" firstAttribute="leading" secondItem="m5d-0h-TVN" secondAttribute="leading" id="E1U-h9-hri"/>
-                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="trailing" secondItem="sXl-Qt-MnW" secondAttribute="trailingMargin" id="E5I-Gg-NDq"/>
-                                                <constraint firstItem="ZI0-Ag-uh1" firstAttribute="top" secondItem="Hnz-4f-FiB" secondAttribute="bottom" id="LeA-xm-erX"/>
-                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="leading" secondItem="Hnz-4f-FiB" secondAttribute="leading" id="LhV-ev-r7E"/>
+                                                <constraint firstItem="Hnz-4f-FiB" firstAttribute="trailing" secondItem="m5d-0h-TVN" secondAttribute="trailing" id="Ie6-xv-DC3"/>
+                                                <constraint firstItem="ZI0-Ag-uh1" firstAttribute="top" secondItem="Hnz-4f-FiB" secondAttribute="bottom" constant="5" id="LeA-xm-erX"/>
                                                 <constraint firstItem="sWT-GO-Wpt" firstAttribute="leading" secondItem="sXl-Qt-MnW" secondAttribute="leadingMargin" id="M91-tJ-Df2"/>
                                                 <constraint firstItem="m5d-0h-TVN" firstAttribute="leading" secondItem="Hnz-4f-FiB" secondAttribute="leading" id="MkJ-TY-X0n"/>
                                                 <constraint firstItem="sWT-GO-Wpt" firstAttribute="leading" secondItem="Exn-gL-jdB" secondAttribute="leading" id="OLC-ds-Lng"/>
                                                 <constraint firstItem="sWT-GO-Wpt" firstAttribute="top" secondItem="sXl-Qt-MnW" secondAttribute="topMargin" constant="8" id="bfv-eH-mBI"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Hnz-4f-FiB" secondAttribute="trailing" constant="20" id="cjK-Y4-y42"/>
                                                 <constraint firstItem="Hnz-4f-FiB" firstAttribute="leading" secondItem="sWT-GO-Wpt" secondAttribute="trailing" constant="20" id="dCQ-N4-iSd"/>
-                                                <constraint firstItem="m5d-0h-TVN" firstAttribute="top" secondItem="ZI0-Ag-uh1" secondAttribute="bottom" id="ehv-TN-MYA"/>
-                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="trailing" secondItem="Exn-gL-jdB" secondAttribute="trailing" id="iwv-F1-ks8"/>
+                                                <constraint firstItem="Hnz-4f-FiB" firstAttribute="trailing" secondItem="ZI0-Ag-uh1" secondAttribute="trailing" id="dnN-Ig-Dq9"/>
+                                                <constraint firstItem="Exn-gL-jdB" firstAttribute="top" secondItem="oae-IX-Nuc" secondAttribute="bottom" constant="8" id="eIb-dl-Y9q"/>
+                                                <constraint firstItem="U0A-Ei-714" firstAttribute="trailing" secondItem="Hnz-4f-FiB" secondAttribute="trailing" id="eKP-LZ-pNs"/>
+                                                <constraint firstItem="m5d-0h-TVN" firstAttribute="top" secondItem="ZI0-Ag-uh1" secondAttribute="bottom" constant="5" id="ehv-TN-MYA"/>
+                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="leading" secondItem="Exn-gL-jdB" secondAttribute="leading" id="jKW-2T-YXp"/>
+                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="trailing" secondItem="Exn-gL-jdB" secondAttribute="trailing" id="oOc-Qe-h47"/>
                                                 <constraint firstItem="ZI0-Ag-uh1" firstAttribute="leading" secondItem="Hnz-4f-FiB" secondAttribute="leading" id="p74-yK-Xd0"/>
+                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="leading" secondItem="sXl-Qt-MnW" secondAttribute="leadingMargin" id="pTb-sp-9ka"/>
+                                                <constraint firstItem="oae-IX-Nuc" firstAttribute="trailing" secondItem="sXl-Qt-MnW" secondAttribute="trailingMargin" id="vRd-Ul-dkG"/>
+                                                <constraint firstItem="U0A-Ei-714" firstAttribute="leading" secondItem="Hnz-4f-FiB" secondAttribute="leading" id="wH2-HD-2h6"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="OLC-ds-Lng"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>

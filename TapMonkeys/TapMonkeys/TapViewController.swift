@@ -140,7 +140,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
             }
         }
-        else if saveData?.stage == 2 {
+        else if saveData?.stage == 2 || saveData?.stage == 3 {
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
             
             popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
