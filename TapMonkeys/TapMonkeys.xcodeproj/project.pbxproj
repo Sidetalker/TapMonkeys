@@ -88,6 +88,7 @@
 		0A9B69411B00047D006628D1 /* monkeyLock11@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B69291B00047D006628D1 /* monkeyLock11@3x.png */; };
 		0A9B69421B00047D006628D1 /* monkeyLock12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B692A1B00047D006628D1 /* monkeyLock12@2x.png */; };
 		0A9B69431B00047D006628D1 /* monkeyLock12@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B692B1B00047D006628D1 /* monkeyLock12@3x.png */; };
+		0A9B69451B010BBB006628D1 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B69441B010BBB006628D1 /* DataStructures.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +188,7 @@
 		0A9B69291B00047D006628D1 /* monkeyLock11@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "monkeyLock11@3x.png"; path = "Images/monkeyLock11@3x.png"; sourceTree = "<group>"; };
 		0A9B692A1B00047D006628D1 /* monkeyLock12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "monkeyLock12@2x.png"; path = "Images/monkeyLock12@2x.png"; sourceTree = "<group>"; };
 		0A9B692B1B00047D006628D1 /* monkeyLock12@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "monkeyLock12@3x.png"; path = "Images/monkeyLock12@3x.png"; sourceTree = "<group>"; };
+		0A9B69441B010BBB006628D1 /* DataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,13 +244,13 @@
 		0A9B687A1AFD3DE7006628D1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A9B68F41AFFA1B2006628D1 /* Monkey.playground */,
+				0A9B69441B010BBB006628D1 /* DataStructures.swift */,
+				0A9B689F1AFD3FE6006628D1 /* Helpers.swift */,
+				0A9B68A41AFD6038006628D1 /* TapStyle.swift */,
 				0A9B68F91AFFF3F1006628D1 /* UI */,
 				0A9B68ED1AFF9184006628D1 /* Data */,
 				0A9B68AC1AFD8DC6006628D1 /* Images */,
-				0A9B68861AFD3DE7006628D1 /* Images.xcassets */,
-				0A9B68A41AFD6038006628D1 /* TapStyle.swift */,
-				0A9B689F1AFD3FE6006628D1 /* Helpers.swift */,
-				0A9B68F41AFFA1B2006628D1 /* Monkey.playground */,
 				0A9B687E1AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld */,
 				0A9B687B1AFD3DE7006628D1 /* Info.plist */,
 			);
@@ -283,6 +285,7 @@
 		0A9B68AC1AFD8DC6006628D1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0A9B68861AFD3DE7006628D1 /* Images.xcassets */,
 				0A9B69121B0000C3006628D1 /* Animations */,
 				0A9B68E81AFDCD51006628D1 /* Monkeys */,
 				0A9B68AD1AFD8DCF006628D1 /* Tab Bar */,
@@ -578,6 +581,7 @@
 				0A9B68801AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld in Sources */,
 				0A9B68A51AFD6038006628D1 /* TapStyle.swift in Sources */,
 				0A9B68AF1AFD90C3006628D1 /* TabBarController.swift in Sources */,
+				0A9B69451B010BBB006628D1 /* DataStructures.swift in Sources */,
 				0A9B687D1AFD3DE7006628D1 /* AppDelegate.swift in Sources */,
 				0A9B68A01AFD3FE6006628D1 /* Helpers.swift in Sources */,
 			);

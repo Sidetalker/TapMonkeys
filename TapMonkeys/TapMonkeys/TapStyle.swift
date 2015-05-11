@@ -68,7 +68,7 @@ public class TapStyle : NSObject {
         let context = UIGraphicsGetCurrentContext()
 
         //// Rectangle Drawing
-        let rectangleRect = CGRectMake(frame.minX + 5, frame.minY + 5, floor((frame.width - 5) * 0.97959 + 0.5), floor((frame.height - 5) * 0.88889 + 0.5))
+        let rectangleRect = CGRectMake(frame.minX + 5, frame.minY + 0.5, floor((frame.width - 5) * 0.97959 + 0.5), floor((frame.height - 0.5) * 0.98990 + 0.5))
         let rectanglePath = UIBezierPath(roundedRect: rectangleRect, cornerRadius: 10)
         UIColor.blackColor().setStroke()
         rectanglePath.lineWidth = 1

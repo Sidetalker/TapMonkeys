@@ -8,24 +8,6 @@
 
 import UIKit
 
-struct MonkeyData {
-    var index: Int = -1
-    var name: String = "ERROR MONKEY"
-    var description: String = "This abomination should have never been birthed"
-    var lettersPerSecond: Int = 0
-    var modifiers: [(Float, Float)] = [(-1, -1)]
-    var costs: [(Float, Float)] = [(-1, -1)]
-    var unlockCost: [(Float, Float)] = [(-1, -1)]
-    
-    var unlocked: Bool = false
-    var count: Int = 0
-    var modifier: Int = 0
-    
-    func lettersPerSecondCumulative() -> Int {
-        return count * lettersPerSecond
-    }
-}
-
 class MonkeyViewController: UIViewController {
     @IBOutlet weak var dataHeader: DataHeader!
     
@@ -341,13 +323,13 @@ class MonkeyLockView: UIView {
                 
         })
         
-        UIView.animateWithDuration(1.1, delay: 0.2, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+        UIView.animateWithDuration(1.1, delay: 0.2, options: nil, animations: { () -> Void in
             self.blurView?.alpha = 0.0
             }, completion: { (Bool) -> Void in
                 
         })
         
-        UIView.animateWithDuration(0.49, delay: 0.34, options: nil, animations: { () -> Void in
+        UIView.animateWithDuration(0.51, delay: 0.39, options: nil, animations: { () -> Void in
             self.lockImage.alpha = 0.0
             }, completion: { (Bool) -> Void in
                 

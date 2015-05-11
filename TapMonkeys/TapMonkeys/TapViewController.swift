@@ -9,13 +9,6 @@
 import UIKit
 import QuartzCore
 
-let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-
-let gens = [
-    ["M", "O", "N", "K", "E", "Y", "S"],
-    ["W", "R", "I", "T", "I", "N", "G"]
-]
-
 class TapViewController: UIViewController, PopLabelDelegate {
     @IBOutlet weak var tapLabel: UILabel!
     @IBOutlet weak var dataHeader: DataHeader!

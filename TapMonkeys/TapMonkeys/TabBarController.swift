@@ -8,16 +8,6 @@
 
 import UIKit
 
-struct SaveData {
-    var stage: Int?
-    var letters: Int?
-    var money: Float?
-    var letterCounts: [Int]?
-    
-    var monkeyUnlocks: [Bool]?
-    var monkeyCounts: [Int]?
-}
-
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var allViews: [AnyObject]?
     var defaults: NSUserDefaults!
