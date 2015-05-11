@@ -54,6 +54,9 @@ func save(data: SaveData) -> Bool {
     
     defaults.setObject(data.monkeyUnlocks, forKey: "monkeyUnlocks")
     defaults.setObject(data.monkeyCounts, forKey: "monkeyCounts")
+    defaults.setObject(data.monkeyTotals, forKey: "monkeyTotals")
+    defaults.setObject(data.monkeyLastCost, forKey: "monkeyLastCost")
+    defaults.setObject(data.monkeyLastMod, forKey: "monkeyLastMod")
     
     return true
 }
@@ -69,14 +72,16 @@ func load() -> SaveData {
     
     save.monkeyUnlocks = defaults.arrayForKey("monkeyUnlocks") as? [Bool]
     save.monkeyCounts = defaults.arrayForKey("monkeyCounts") as? [Int]
+    save.monkeyTotals = defaults.arrayForKey("monkeyTotals") as? [Int]
+    save.monkeyLastCost = defaults.integerForKey("monkeyLastCount")
+    save.monkeyLastMod = defaults.floatForKey("monkeyLastMod")
     
     return save
 }
 
 func validate(save: SaveData) -> SaveData {
     let numLetterCounts = 26
-    let numMonkeyCounts = 1
-    let numMonkeyUnlocks = 1
+    let numMonkeys = 1
     
     var newSave = save
     
@@ -90,21 +95,25 @@ func validate(save: SaveData) -> SaveData {
     }
     
     if newSave.monkeyCounts == nil {
-        newSave.monkeyCounts = [Int](count: numMonkeyCounts, repeatedValue: 0)
+        newSave.monkeyCounts = [Int](count: numMonkeys, repeatedValue: 0)
     }
-    else if count(newSave.monkeyCounts!) < numMonkeyCounts {
-        for i in count(newSave.monkeyCounts!)...numMonkeyCounts - 1 {
+    else if count(newSave.monkeyCounts!) < numMonkeys {
+        for i in count(newSave.monkeyCounts!)...numMonkeys - 1 {
             newSave.monkeyCounts?.append(0)
         }
     }
     
     if newSave.monkeyUnlocks == nil {
-        newSave.monkeyUnlocks = [Bool](count: numMonkeyUnlocks, repeatedValue: false)
+        newSave.monkeyUnlocks = [Bool](count: numMonkeys, repeatedValue: false)
     }
-    else if count(newSave.monkeyUnlocks!) < numMonkeyUnlocks {
-        for i in count(newSave.monkeyUnlocks!)...numMonkeyUnlocks - 1 {
+    else if count(newSave.monkeyUnlocks!) < numMonkeys {
+        for i in count(newSave.monkeyUnlocks!)...numMonkeys - 1 {
             newSave.monkeyUnlocks?.append(false)
         }
+    }
+    
+    if newSave.monkeyTotals == nil {
+        newSave.monkeyTotals = [Int](count: numMonkeys, repeatedValue: 0)
     }
     
     return newSave

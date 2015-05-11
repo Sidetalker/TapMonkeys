@@ -15,7 +15,6 @@ class MonkeyViewController: UIViewController {
     
     var defaults: NSUserDefaults?
     var saveData: SaveData?
-    var monkeys: [MonkeyData]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,55 +22,11 @@ class MonkeyViewController: UIViewController {
         defaults = NSUserDefaults.standardUserDefaults()
         saveData = load()
         
-        loadMonkeys()
         configureMonkeys()
     }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
-    }
-    
-    func loadMonkeys() {
-        let path = NSBundle.mainBundle().pathForResource("monkeys", ofType: "dat")!
-        let content = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)! as String
-        let splitContent = split(content) { $0 == "\n" }
-        
-        monkeys = [MonkeyData]()
-        
-        for i in 0...splitContent.count / 5 - 1 {
-            var newMonkey = MonkeyData()
-            
-            for x in 0...5 {
-                let data = splitContent[i * 6 + x]
-                
-                // Name
-                if x == 0 {
-                    newMonkey.name = data
-                }
-                // Description
-                else if x == 1 {
-                    newMonkey.description = data
-                }
-                // Letters/sec
-                else if x == 2 {
-                    newMonkey.lettersPerSecond = data.toInt()!
-                }
-                // Unlock requirements
-                else if x == 3 {
-                    newMonkey.unlockCost = parseFloatTuples(data)
-                }
-                // Modifiers
-                else if x == 4 {
-                    newMonkey.modifiers = parseFloatTuples(data)
-                }
-                // Unlock cost overrides
-                else if x == 5 {
-                    newMonkey.costs = parseFloatTuples(data)
-                }
-            }
-            
-            monkeys.append(newMonkey)
-        }
     }
     
     func configureMonkeys() {
@@ -100,18 +55,20 @@ class MonkeyViewController: UIViewController {
     }
 }
 
-class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, MonkeyLockDelegate {
+class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, MonkeyLockDelegate, MonkeyBuyButtonDelegate {
     var monkeys = [MonkeyData]()
+    
+    var defaults: NSUserDefaults?
+    var saveData: SaveData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 250
-    }
-    
-    func tappedLock(view: MonkeyLockView) {
-        let index = view.index
+        
+        defaults = NSUserDefaults.standardUserDefaults()
+        saveData = load()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -155,13 +112,16 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             let index = indexPath.row
             let curMonkey = monkeys[index]
             
+            buyButton.monkeyIndex = index
             monkeyPic.monkeyIndex = index
             monkeyPic.setNeedsDisplay()
+            
+            buyButton.delegate = self
             
             name.text = curMonkey.name
             owned.text = "Owned: \(curMonkey.count)"
             frequency.text = "Letters/sec: \(curMonkey.lettersPerSecondCumulative())"
-            
+            total.text = "Total Letters: 0"
             
             return cell
         }
@@ -171,37 +131,119 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         
         return UITableViewCell()
     }
-}
-
-class MonkeyPicture: UIView {
-    var monkeyIndex = 0
     
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    func tappedLock(view: MonkeyLockView) {
+        let index = view.index
         
-        self.backgroundColor = UIColor.clearColor()
+        if index == 0 && saveData!.stage == 3 {
+            saveData?.stage = 4
+            
+            view.unlock()
+            save(saveData!)
+        }
     }
     
-    override func drawRect(rect: CGRect) {
-        if monkeyIndex == 0 {
-            TapStyle.drawFingerMonkey()
+    func buyTapped(monkeyIndex: Int) {
+        let monkey = monkeys[monkeyIndex]
+        
+        if monkeyIndex == 0 && saveData!.stage == 4 {
+            if monkey.canPurchase(1, data: saveData!) {
+                monkey.purchase(1, data: saveData!)
+                
+                if let
+                    monkeyCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: monkeyIndex, inSection: 0)),
+                    monkeyPic = monkeyCell.viewWithTag(1) as? MonkeyPicture
+                {
+                    monkeyPic.getFunky()
+                }
+            }
         }
     }
 }
 
-class MonkeyBuyButton: UIView {
-    // 0 is 1 only, 1 is 1 | 10, 2 is 1 | 10 | 100
-    var state = 0
+class MonkeyPicture: UIView {
+    var monkeyIndex = 0
+    var strokeWidth: CGFloat = 1
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         self.backgroundColor = UIColor.clearColor()
+    }
+    
+    init(frame: CGRect, strokeWidth: CGFloat) {
+        super.init(frame: frame)
+        
+        self.backgroundColor = UIColor.clearColor()
+        self.strokeWidth = strokeWidth
+        
+        self.setNeedsDisplay()
+    }
+    
+    override func drawRect(rect: CGRect) {
+        if monkeyIndex == 0 {
+            TapStyle.drawFingerMonkey(monkeyStrokeWidth: strokeWidth)
+        }
+    }
+    
+    func getFunky() {
+        let viewTwo = MonkeyPicture(frame: CGRect(origin: CGPointZero, size: self.frame.size), strokeWidth: 0.0)
+        
+        self.addSubview(viewTwo)
+        
+        UIView.animateWithDuration(0.8, animations: { () -> Void in
+            viewTwo.transform = CGAffineTransformMakeScale(1.2, 1.2)
+            viewTwo.alpha = 0.0
+            }, completion: { (Bool) -> Void in
+                viewTwo.removeFromSuperview()
+        })
+    }
+}
+
+protocol MonkeyBuyButtonDelegate {
+    func buyTapped(monkeyIndex: Int)
+}
+
+class MonkeyBuyButton: UIView {
+    // 0 is 1 only, 1 is 1 | 10, 2 is 1 | 10 | 100
+    // Like, maybe
+    var state = 0
+    var monkeyIndex = -1
+    
+    var delegate: MonkeyBuyButtonDelegate?
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.backgroundColor = UIColor.clearColor()
+        
+        let tap = UILongPressGestureRecognizer(target: self, action: "tappedMe:")
+        tap.minimumPressDuration = 0.0
+        
+        self.addGestureRecognizer(tap)
     }
     
     override func drawRect(rect: CGRect) {
         if state == 0 {
             TapStyle.drawBuy1(frame: rect, monkeyBuyText: "FREE")
+        }
+    }
+    
+    
+    func tappedMe(sender: UITapGestureRecognizer) {
+        if sender.state == UIGestureRecognizerState.Began {
+            UIView.animateWithDuration(0.15, animations: {
+                self.transform = CGAffineTransformMakeScale(0.91, 0.91)
+            })
+        }
+        else if sender.state == UIGestureRecognizerState.Ended {
+            self.delegate?.buyTapped(self.monkeyIndex)
+            
+            UIView.animateWithDuration(0.35, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                self.transform = CGAffineTransformIdentity
+                }, completion: { (Bool) -> Void in
+                    
+            })
         }
     }
 }
@@ -310,7 +352,7 @@ class MonkeyLockView: UIView {
         UIView.animateWithDuration(1.1, delay: 0.2, options: nil, animations: { () -> Void in
             self.blurView?.alpha = 0.0
             }, completion: { (Bool) -> Void in
-                
+                self.removeFromSuperview()
         })
         
         UIView.animateWithDuration(0.51, delay: 0.39, options: nil, animations: { () -> Void in

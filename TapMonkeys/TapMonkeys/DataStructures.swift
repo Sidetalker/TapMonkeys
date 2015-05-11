@@ -32,6 +32,9 @@ struct SaveData {
     
     var monkeyUnlocks: [Bool]?
     var monkeyCounts: [Int]?
+    var monkeyTotals: [Int]?
+    var monkeyLastCost: Int?
+    var monkeyLastMod: Float?
 }
 
 struct MonkeyData {
@@ -43,17 +46,55 @@ struct MonkeyData {
     var costs: [(Float, Float)] = [(-1, -1)]
     var unlockCost: [(Float, Float)] = [(-1, -1)]
     
+    var previousMod: Float = 0.0
+    var previousCost: Int = -1
     var unlocked: Bool = false
     var count: Int = 0
     var modifier: Int = 0
+    var totalProduced: Int = 0
+    
+    func initialize() {
+        
+    }
     
     func lettersPerSecondCumulative() -> Int {
         return count * lettersPerSecond
     }
+    
+    func lettersTotal() -> Int {
+        return totalProduced
+    }
+    
+    func canPurchase(count: Int, data: SaveData) -> Bool {
+        let letters = data.letters
+        
+        if letters >= getPrice(count) {
+            return true
+        }
+        
+        return false
+    }
+    
+    func purchase(count: Int, data: SaveData) -> Bool {
+        
+        
+        return true
+    }
+    
+    // Return (totalCost, previousSingleCost, previousMod)
+    func getPrice(count: Int) -> (Int, Int, Float) {
+        if previousCost == -1 { return (0, 0, modifiers[0][1]) }
+        
+        var costBuffer = previousCost
+        var modBuffer = previousMod
+        
+        for i in 0...count - 1 {
+            
+        }
+    }
 }
 
 func loadMonkeys() {
-    
     let path = NSBundle.mainBundle().pathForResource("monkeys", ofType: "dat")!
     let content = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)! as String
     let splitContent = split(content) { $0 == "\n" }

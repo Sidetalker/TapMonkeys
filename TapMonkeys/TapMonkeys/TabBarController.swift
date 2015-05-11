@@ -19,7 +19,10 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         
         configureView()
+        
         loadSave()
+        loadMonkeys()
+        
         registerForUpdates()
     }
     
