@@ -91,22 +91,6 @@ class MonkeyViewController: UIViewController {
         monkeyTable!.monkeys = monkeys
     }
     
-    // Parses a string in this format: 0 - 0 | 1 - 1
-    // Into an array of tuples: [(0, 0), (1, 1)]
-    func parseFloatTuples(string: String) -> [(Float, Float)] {
-        let cleanString = string.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        var final = [(Float, Float)]()
-        var tupleStrings = split(cleanString) { $0 == "|" }
-        
-        for tuple in tupleStrings {
-            let tupleString = split(tuple) { $0 == "-" }
-            
-            final.append((tupleString[0].floatValue, tupleString[1].floatValue))
-        }
-        
-        return final
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "segueMonkeyTable" {
             if let dest = segue.destinationViewController as? MonkeyTableViewController {
@@ -127,7 +111,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     func tappedLock(view: MonkeyLockView) {
-        view.unlock()
+        let index = view.index
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
