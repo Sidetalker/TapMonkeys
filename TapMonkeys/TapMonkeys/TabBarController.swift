@@ -36,11 +36,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         saveData = validate(saveData)
         save(saveData)
         
-        saveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "timedSave", userInfo: nil, repeats: true)
-    }
-    
-    func timedSave() {
-        save(saveData)
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     func registerForUpdates() {
@@ -49,7 +45,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         defaults = NSUserDefaults.standardUserDefaults()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHeaders:", name: "updateHeaders", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateStage:", name: "updateStage", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateSave:", name: "updateSave", object: nil)
     }
     
     func initializeHeaders() {
@@ -84,12 +80,14 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         }
     }
     
-    func updateStage(notification: NSNotification) {
+    func updateSave(notification: NSNotification) {
         let userInfo = notification.userInfo as! [String : AnyObject]
         
-        if let stage = userInfo["stage"] as? Int {
-            saveData.stage = stage
+        if let encodedSave = userInfo["saveData"] as? NSData {
+            var newSave = SaveData()
+            encodedSave.getBytes(&newSave, length: sizeof(SaveData))
             
+            saveData = newSave
             save(saveData)
             syncSaveData()
         }
@@ -123,25 +121,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 }
             }
         }
-    }
-    
-    func alignHeaders() {
-        if allViews == nil { return }
         
-        for view in allViews! {
-            if let
-                tapView = view as? TapViewController,
-                header = tapView.dataHeader
-            {
-                header.align()
-            }
-            if let
-                monkeyView = view as? MonkeyViewController,
-                header = monkeyView.dataHeader
-            {
-                header.align()
-            }
-        }
+        save(saveData)
+        syncSaveData()
     }
     
     func configureView() {
@@ -173,6 +155,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func syncSaveData() {
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
         for view in self.viewControllers! {
             if let tapView = view as? TapViewController {
                 tapView.saveData = saveData
@@ -199,7 +183,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
         initializeHeaders()
-        alignHeaders()
         
         if let tapView = viewController as? TapViewController {
             

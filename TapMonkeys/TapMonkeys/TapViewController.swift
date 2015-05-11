@@ -82,12 +82,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
     
     func updateStage(newStage: Int) {
         saveData?.stage = newStage
-        
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.postNotificationName("updateStage", object: self, userInfo: [
-            "stage" : newStage
-            ])
-        
+        updateGlobalSave(saveData!)
     }
     
     func singleTapMain(sender: UITapGestureRecognizer) {

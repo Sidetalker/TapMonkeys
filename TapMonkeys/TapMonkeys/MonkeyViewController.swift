@@ -134,12 +134,11 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         let index = view.index
         
         if index == 0 && saveData!.stage == 3 {
-            saveData?.stage = 4
+            saveData!.stage = 4
+            save(saveData!)
             
             view.unlock()
             monkeys[index].unlocked = true
-            
-            save(saveData!)
         }
     }
     
@@ -150,7 +149,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             if monkey.canPurchase(1, data: saveData!) {
                 var price = monkey.getPrice(1).0 * -1
                 
-                saveData = monkey.purchase(1, data: saveData!)
+                saveData = monkey.purchase(1, data: load())
                 
                 if let
                     monkeyCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: monkeyIndex, inSection: 0)),

@@ -58,6 +58,8 @@ func save(data: SaveData) -> Bool {
     defaults.setObject(data.monkeyLastCost, forKey: "monkeyLastCost")
     defaults.setObject(data.monkeyLastMod, forKey: "monkeyLastMod")
     
+    defaults.synchronize()
+    
     return true
 }
 
@@ -77,6 +79,16 @@ func load() -> SaveData {
     save.monkeyLastMod = defaults.arrayForKey("monkeyLastMod") as? [Float]
     
     return save
+}
+
+func updateGlobalSave(save: SaveData) {
+    var curSave = save
+    let dataWrapper = NSData(bytes: &curSave, length: sizeof(SaveData))
+    
+    let nc = NSNotificationCenter.defaultCenter()
+    nc.postNotificationName("updateSave", object: nil, userInfo: [
+        "saveData" : dataWrapper
+        ])
 }
 
 func validate(save: SaveData) -> SaveData {
