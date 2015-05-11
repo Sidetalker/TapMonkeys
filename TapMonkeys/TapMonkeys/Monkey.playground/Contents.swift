@@ -5,3 +5,4 @@ import UIKit
 let testStr = "0 - 0"
 let test2 = split(testStr) { $0 == "|" }
 println(test2)
+println("\(0...0)")

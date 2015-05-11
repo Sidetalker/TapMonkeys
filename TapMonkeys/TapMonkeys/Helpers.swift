@@ -73,8 +73,8 @@ func load() -> SaveData {
     save.monkeyUnlocks = defaults.arrayForKey("monkeyUnlocks") as? [Bool]
     save.monkeyCounts = defaults.arrayForKey("monkeyCounts") as? [Int]
     save.monkeyTotals = defaults.arrayForKey("monkeyTotals") as? [Int]
-    save.monkeyLastCost = defaults.integerForKey("monkeyLastCount")
-    save.monkeyLastMod = defaults.floatForKey("monkeyLastMod")
+    save.monkeyLastCost = defaults.arrayForKey("monkeyLastCost") as? [Int]
+    save.monkeyLastMod = defaults.arrayForKey("monkeyLastMod") as? [Float]
     
     return save
 }
@@ -114,6 +114,29 @@ func validate(save: SaveData) -> SaveData {
     
     if newSave.monkeyTotals == nil {
         newSave.monkeyTotals = [Int](count: numMonkeys, repeatedValue: 0)
+    }
+    else if count(newSave.monkeyTotals!) < numMonkeys {
+        for i in count(newSave.monkeyTotals!)...numMonkeys - 1 {
+            newSave.monkeyTotals?.append(0)
+        }
+    }
+    
+    if newSave.monkeyLastCost == nil {
+        newSave.monkeyLastCost = [Int](count: numMonkeys, repeatedValue: 0)
+    }
+    else if count(newSave.monkeyLastCost!) < numMonkeys {
+        for i in count(newSave.monkeyLastCost!)...numMonkeys - 1 {
+            newSave.monkeyLastCost?.append(0)
+        }
+    }
+    
+    if newSave.monkeyLastMod == nil {
+        newSave.monkeyLastMod = [Float](count: numMonkeys, repeatedValue: 0.0)
+    }
+    else if count(newSave.monkeyLastMod!) < numMonkeys {
+        for i in count(newSave.monkeyLastMod!)...numMonkeys - 1 {
+            newSave.monkeyLastMod?.append(0.0)
+        }
     }
     
     return newSave

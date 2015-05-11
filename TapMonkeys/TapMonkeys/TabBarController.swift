@@ -21,7 +21,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         configureView()
         
         loadSave()
-        loadMonkeys()
+        loadMonkeys(saveData)
         
         registerForUpdates()
     }

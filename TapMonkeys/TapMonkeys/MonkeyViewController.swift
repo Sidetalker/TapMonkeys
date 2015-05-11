@@ -42,8 +42,6 @@ class MonkeyViewController: UIViewController {
             monkeys[i].unlocked = monkeyUnlocks[i]
             monkeys[i].count = monkeyCounts[i]
         }
-        
-        monkeyTable!.monkeys = monkeys
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -56,8 +54,6 @@ class MonkeyViewController: UIViewController {
 }
 
 class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, MonkeyLockDelegate, MonkeyBuyButtonDelegate {
-    var monkeys = [MonkeyData]()
-    
     var defaults: NSUserDefaults?
     var saveData: SaveData?
     
@@ -111,17 +107,19 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         {
             let index = indexPath.row
             let curMonkey = monkeys[index]
+            let curPrice = curMonkey.getPrice(1).0
             
             buyButton.monkeyIndex = index
             monkeyPic.monkeyIndex = index
             monkeyPic.setNeedsDisplay()
             
             buyButton.delegate = self
+            buyButton.setNeedsDisplay()
             
             name.text = curMonkey.name
             owned.text = "Owned: \(curMonkey.count)"
             frequency.text = "Letters/sec: \(curMonkey.lettersPerSecondCumulative())"
-            total.text = "Total Letters: 0"
+            total.text = "Total Letters: \(curMonkey.totalProduced)"
             
             return cell
         }
@@ -139,23 +137,39 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             saveData?.stage = 4
             
             view.unlock()
+            monkeys[index].unlocked = true
+            
             save(saveData!)
         }
     }
     
     func buyTapped(monkeyIndex: Int) {
-        let monkey = monkeys[monkeyIndex]
+        var monkey = monkeys[monkeyIndex]
         
         if monkeyIndex == 0 && saveData!.stage == 4 {
             if monkey.canPurchase(1, data: saveData!) {
-                monkey.purchase(1, data: saveData!)
+                var price = monkey.getPrice(1).0 * -1
+                
+                saveData = monkey.purchase(1, data: saveData!)
                 
                 if let
                     monkeyCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: monkeyIndex, inSection: 0)),
                     monkeyPic = monkeyCell.viewWithTag(1) as? MonkeyPicture
                 {
-                    monkeyPic.getFunky()
+//                    monkeyPic.getFunky()
                 }
+                
+                monkeys[monkeyIndex] = monkey
+                
+                delay(0.2, {
+                    self.tableView.reloadData()
+                    
+                    let nc = NSNotificationCenter.defaultCenter()
+                    nc.postNotificationName("updateHeaders", object: self, userInfo: [
+                        "letters" : price,
+                        "animated" : false
+                        ])
+                })
             }
         }
     }
@@ -225,7 +239,14 @@ class MonkeyBuyButton: UIView {
     
     override func drawRect(rect: CGRect) {
         if state == 0 {
-            TapStyle.drawBuy1(frame: rect, monkeyBuyText: "FREE")
+            let price = monkeys[monkeyIndex].getPrice(1).0
+            var text = "FREE"
+            
+            if price > 0 {
+                text = "$\(price)"
+            }
+            
+            TapStyle.drawBuy1(frame: rect, monkeyBuyText: text)
         }
     }
     
