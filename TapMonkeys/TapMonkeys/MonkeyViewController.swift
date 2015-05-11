@@ -134,7 +134,7 @@ class MonkeyViewController: UIViewController {
     }
 }
 
-class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, MonkeyLockDelegate {
     var monkeys = [MonkeyData]()
     
     override func viewDidLoad() {
@@ -142,6 +142,10 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 250
+    }
+    
+    func tappedLock(view: MonkeyLockView) {
+        view.unlock()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -157,17 +161,16 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         let curMonkey = monkeys[index]
         
         if !curMonkey.unlocked {
-            if let blurView = cell.viewWithTag(8) as? UIVisualEffectView {
+            if let lockView = cell.viewWithTag(8) as? MonkeyLockView {
                 // We're good to go I guess
             }
             else {
-                let blur = UIBlurEffect(style: UIBlurEffectStyle.Light)
-                var blurView = UIVisualEffectView(effect: blur)
+                let lockView = MonkeyLockView(frame: cell.contentView.frame)
+                lockView.tag = 8
+                lockView.index = indexPath.row
+                lockView.delegate = self
                 
-                blurView.frame = cell.contentView.frame
-                blurView.tag = 8
-                
-                cell.contentView.addSubview(blurView)
+                cell.contentView.addSubview(lockView)
             }
         }
     }
@@ -237,15 +240,117 @@ class MonkeyBuyButton: UIView {
     }
 }
 
+protocol MonkeyLockDelegate {
+    func tappedLock(view: MonkeyLockView)
+}
+
 class MonkeyLockView: UIView {
+    @IBOutlet var nibView: UIView!
+    @IBOutlet weak var lockImage: UIImageView!
+    @IBOutlet weak var requirementsText: UILabel!
+    @IBOutlet weak var staticText: UILabel!
+    
     var locked = true
-    var blurView: UIVisualEffectView
+    var index = -1
+    var blurView: UIVisualEffectView!
+    var animator: UIDynamicAnimator?
+    var delegate: MonkeyLockDelegate?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        self.backgroundColor = UIColor.clearColor()
+        configure()
     }
     
-    var unlock
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        configure()
+    }
+    
+    func configure() {
+        NSBundle.mainBundle().loadNibNamed("MonkeyLockView", owner: self, options: nil)
+        
+        nibView.frame = self.frame
+        
+        self.addSubview(nibView)
+        
+        let blur = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        blurView = UIVisualEffectView(effect: blur)
+        
+        blurView.frame = self.frame
+        blurView.tag = 1
+        
+        self.backgroundColor = UIColor.clearColor()
+        
+        self.nibView.addSubview(blurView)
+        self.nibView.sendSubviewToBack(blurView)
+        
+        var animationImages = [UIImage]()
+        
+        for i in 1...12 {
+            let imageName = "monkeyLock" + (NSString(format: "%02d", i) as String)
+            
+            if let image = UIImage(named: imageName) {
+                animationImages.append(image)
+            }
+            else {
+                println("Error: Unable to load all images for monkey lock sequence")
+                break
+            }
+        }
+        
+        lockImage.animationImages = animationImages
+        lockImage.animationDuration = 0.35
+        lockImage.animationRepeatCount = 1
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: Selector("lockTap:"))
+        
+        self.addGestureRecognizer(singleTap)
+    }
+    
+    func lockTap(sender: UITapGestureRecognizer) {
+        delegate?.tappedLock(self)
+    }
+    
+    func unlock() {
+        lockImage.image = UIImage(named: "monkeyLock12")
+        
+        lockImage.startAnimating()
+        
+        let angularVelocityLock: CGFloat = 0.4
+        let linearVelocityLock = CGPoint(x: 25, y: -150)
+        
+        // Set up the gravitronator
+        let gravity = UIGravityBehavior(items: [lockImage])
+        let velocity = UIDynamicItemBehavior(items: [lockImage])
+        
+        gravity.gravityDirection = CGVectorMake(0, 0.4)
+        
+        velocity.addAngularVelocity(angularVelocityLock, forItem: lockImage)
+        velocity.addLinearVelocity(linearVelocityLock, forItem: lockImage)
+        
+        animator = UIDynamicAnimator(referenceView: self.nibView)
+        animator?.addBehavior(velocity)
+        animator?.addBehavior(gravity)
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, options: nil, animations: { () -> Void in
+            self.requirementsText.alpha = 0.0
+            self.staticText.alpha = 0.0
+            }, completion: { (Bool) -> Void in
+                
+        })
+        
+        UIView.animateWithDuration(1.1, delay: 0.2, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+            self.blurView?.alpha = 0.0
+            }, completion: { (Bool) -> Void in
+                
+        })
+        
+        UIView.animateWithDuration(0.49, delay: 0.34, options: nil, animations: { () -> Void in
+            self.lockImage.alpha = 0.0
+            }, completion: { (Bool) -> Void in
+                
+        })
+    }
 }

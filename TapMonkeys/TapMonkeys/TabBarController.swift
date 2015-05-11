@@ -220,7 +220,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
 }
 
-@IBDesignable class DataHeader: UIView {
+//@IBDesignable class DataHeader: UIView {
+class DataHeader: UIView {
     @IBOutlet var nibView: UIView!
     
     @IBOutlet weak var lettersLabel: UILabel!
