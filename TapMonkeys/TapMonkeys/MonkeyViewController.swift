@@ -13,14 +13,8 @@ class MonkeyViewController: UIViewController {
     
     var monkeyTable: MonkeyTableViewController?
     
-    var defaults: NSUserDefaults?
-    var saveData: SaveData?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        defaults = NSUserDefaults.standardUserDefaults()
-        saveData = load()
         
         configureMonkeys()
     }
@@ -30,9 +24,11 @@ class MonkeyViewController: UIViewController {
     }
     
     func configureMonkeys() {
+        let saveData = load(self.tabBarController)
+        
         let totalMonkeys = count(monkeys)
-        let monkeyCounts = saveData!.monkeyCounts!
-        let monkeyUnlocks = saveData!.monkeyUnlocks!
+        let monkeyCounts = saveData.monkeyCounts!
+        let monkeyUnlocks = saveData.monkeyUnlocks!
         
         if totalMonkeys != count(monkeyCounts) {
             println("Houston, we have a problem")
@@ -54,17 +50,12 @@ class MonkeyViewController: UIViewController {
 }
 
 class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, MonkeyLockDelegate, MonkeyBuyButtonDelegate {
-    var defaults: NSUserDefaults?
-    var saveData: SaveData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 250
-        
-        defaults = NSUserDefaults.standardUserDefaults()
-        saveData = load()
+        self.tableView.estimatedRowHeight = 25
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -131,11 +122,12 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     func tappedLock(view: MonkeyLockView) {
+        var saveData = load(self.tabBarController)
         let index = view.index
         
-        if index == 0 && saveData!.stage == 3 {
-            saveData!.stage = 4
-            save(saveData!)
+        if index == 0 && saveData.stage == 3 {
+            saveData.stage = 4
+            save(self.tabBarController, saveData)
             
             view.unlock()
             monkeys[index].unlocked = true
@@ -143,13 +135,14 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     func buyTapped(monkeyIndex: Int) {
+        var saveData = load(self.tabBarController)
         var monkey = monkeys[monkeyIndex]
         
-        if monkeyIndex == 0 && saveData!.stage == 4 {
-            if monkey.canPurchase(1, data: saveData!) {
+        if monkeyIndex == 0 && saveData.stage == 4 {
+            if monkey.canPurchase(1, data: saveData) {
                 var price = monkey.getPrice(1).0 * -1
                 
-                saveData = monkey.purchase(1, data: load())
+                saveData = monkey.purchase(1, data: saveData)!
                 
                 if let
                     monkeyCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: monkeyIndex, inSection: 0)),

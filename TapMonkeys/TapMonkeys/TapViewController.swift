@@ -13,14 +13,10 @@ class TapViewController: UIViewController, PopLabelDelegate {
     @IBOutlet weak var tapLabel: UILabel!
     @IBOutlet weak var dataHeader: DataHeader!
     
-    var tabBar: TabBarController!
-    var defaults: NSUserDefaults?
-    
     var genLabels = [PopLabel]()
     var genPoints = [CGPoint]()
     var gen = [String]()
     var letterCount = 0
-    var saveData: SaveData?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +38,9 @@ class TapViewController: UIViewController, PopLabelDelegate {
     }
     
     func configureInterface() {
-        saveData = load()
+        let saveData = load(self.tabBarController)
         
-        if saveData?.stage > 0 {
+        if saveData.stage > 0 {
             tapLabel.alpha = 0.0
         }
     }
@@ -57,14 +53,11 @@ class TapViewController: UIViewController, PopLabelDelegate {
         self.view.addGestureRecognizer(tapHold)
     }
     
-    override func viewDidLayoutSubviews() {
-        tabBar = self.tabBarController as? TabBarController
-    }
-    
     func prepGen(index: Int) {
         gen = gens[index]
         genPoints = [CGPoint]()
         
+        let tabBar = self.tabBarController as! TabBarController
         let genWidth = CGFloat(count(gen) * 28)
         let gapWidth = self.view.frame.width - genWidth
         let frameMod = gapWidth / CGFloat((count(gen) + 1))
@@ -81,14 +74,17 @@ class TapViewController: UIViewController, PopLabelDelegate {
     }
     
     func updateStage(newStage: Int) {
-        saveData?.stage = newStage
-        updateGlobalSave(saveData!)
+        var saveData = load(self.tabBarController)
+        saveData.stage = newStage
+        
+        save(self.tabBarController, saveData)
     }
     
     func singleTapMain(sender: UITapGestureRecognizer) {
         let letter = alphabet[randomIntBetweenNumbers(0, 26)]
+        let saveData = load(self.tabBarController)
         
-        if saveData?.stage == 0 {
+        if saveData.stage == 0 {
             UIView.animateWithDuration(0.6, animations: { () -> Void in
                 self.tapLabel.alpha = 0.0
                 self.tapLabel.transform = CGAffineTransformMakeScale(1.35, 1.35)
@@ -97,7 +93,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
                     self.prepGen(0)
             })
         }
-        else if saveData?.stage == 1 {
+        else if saveData.stage == 1 {
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
             
             if contains(gen, letter) {
@@ -117,8 +113,10 @@ class TapViewController: UIViewController, PopLabelDelegate {
                     }
                     
                     delay(2.0 + 0.3 * Double(count(self.genLabels) - 1), {
-                        self.tabBar.setTabBarVisible(true, animated: true)
-                        self.tabBar.viewControllers![1].tabBarItem?.badgeValue = "!"
+                        let tabBar = self.tabBarController as! TabBarController
+                        
+                        tabBar.setTabBarVisible(true, animated: true)
+                        tabBar.viewControllers![1].tabBarItem?.badgeValue = "!"
                         
                         self.updateStage(2)
                     })
@@ -128,7 +126,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
             }
         }
-        else if saveData?.stage == 2 || saveData?.stage == 3 {
+        else if saveData.stage == 2 || saveData.stage == 3 {
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
             
             popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())

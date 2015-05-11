@@ -44,7 +44,28 @@ func randomIntBetweenNumbers(firstNum: Int, secondNum: Int) -> Int {
     return Int(random)
 }
 
-func save(data: SaveData) -> Bool {
+func save(sender: AnyObject?, data: SaveData) -> Bool {
+    if let controller = sender as? TabBarController {
+        controller.saveData = data
+        return true
+    }
+    else {
+        println("Error saving - sender is not a TabBarController")
+        return false
+    }
+}
+
+func load(sender: AnyObject?) -> SaveData {
+    if let controller = sender as? TabBarController {
+        return controller.saveData
+    }
+    else {
+        println("Error loading - sender is not a TabBarController")
+        return SaveData()
+    }
+}
+
+func writeDefaults(data: SaveData) -> Bool {
     let defaults = NSUserDefaults.standardUserDefaults()
     
     defaults.setObject(data.letters, forKey: "letters")
@@ -63,7 +84,7 @@ func save(data: SaveData) -> Bool {
     return true
 }
 
-func load() -> SaveData {
+func readDefaults() -> SaveData {
     let defaults = NSUserDefaults.standardUserDefaults()
     var save = SaveData()
     

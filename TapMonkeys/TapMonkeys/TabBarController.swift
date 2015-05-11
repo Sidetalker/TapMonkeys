@@ -31,10 +31,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func loadSave() {
-        saveData = load()
+        saveData = readDefaults()
         
         saveData = validate(saveData)
-        save(saveData)
         
         NSUserDefaults.standardUserDefaults().synchronize()
     }
@@ -88,8 +87,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             encodedSave.getBytes(&newSave, length: sizeof(SaveData))
             
             saveData = newSave
-            save(saveData)
-            syncSaveData()
+            save(self, saveData)
         }
     }
     
@@ -122,8 +120,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             }
         }
         
-        save(saveData)
-        syncSaveData()
+        save(self, saveData)
     }
     
     func configureView() {
@@ -154,31 +151,12 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         UIView.commitAnimations()
     }
     
-    func syncSaveData() {
-        NSUserDefaults.standardUserDefaults().synchronize()
-        
-        for view in self.viewControllers! {
-            if let tapView = view as? TapViewController {
-                tapView.saveData = saveData
-            }
-            if let monkeyView = view as? MonkeyViewController {
-                monkeyView.saveData = saveData
-            }
-        }
-    }
-    
     func tabBarIsVisible() -> Bool {
         return self.tabBar.frame.origin.y != CGRectGetMaxY(self.view.frame)
     }
     
     func tabBarHeight() -> CGFloat {
         return self.tabBar.bounds.size.height
-    }
-    
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        syncSaveData()
-        
-        return true
     }
     
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
