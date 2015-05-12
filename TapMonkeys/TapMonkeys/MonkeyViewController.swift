@@ -23,6 +23,14 @@ class MonkeyViewController: UIViewController {
         return true
     }
     
+    override func viewWillAppear(animated: Bool) {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName("updateHeaders", object: self, userInfo: [
+            "letters" : 0,
+            "animated" : true
+            ])
+    }
+    
     func configureMonkeys() {
         let saveData = load(self.tabBarController)
         

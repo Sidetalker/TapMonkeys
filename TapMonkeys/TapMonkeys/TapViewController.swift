@@ -32,6 +32,14 @@ class TapViewController: UIViewController, PopLabelDelegate {
         return true
     }
     
+    override func viewWillAppear(animated: Bool) {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName("updateHeaders", object: self, userInfo: [
+            "letters" : 0,
+            "animated" : true
+            ])
+    }
+    
     func configure() {
         configureInterface()
         configureGestureRecognizers()
@@ -126,7 +134,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
             }
         }
-        else if saveData.stage == 2 || saveData.stage == 3 {
+        else {
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
             
             popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())

@@ -62,7 +62,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 
                 if tapView.dataHeader == nil { return }
                 
-                tapView.dataHeader.initialize(letters: letters, money: money, stage: stage)
+                tapView.dataHeader.update(saveData, animated: true)
             }
             else if let monkeyView = view as? MonkeyViewController {
                 if stage == 2 {
@@ -74,7 +74,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 
                 if monkeyView.dataHeader == nil { return }
                 
-                monkeyView.dataHeader.initialize(letters: letters, money: money, stage: stage)
+                monkeyView.dataHeader.update(saveData, animated: true)
             }
         }
     }
@@ -109,13 +109,13 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                     tapView = view as? TapViewController,
                     header = tapView.dataHeader
                 {
-                    header.update(letters: saveData.letters!, money: saveData.money!, animated: animated)
+                    header.update(saveData, animated: animated)
                 }
                 if let
                     monkeyView = view as? MonkeyViewController,
                     header = monkeyView.dataHeader
                 {
-                    header.update(letters: saveData.letters!, money: saveData.money!, animated: animated)
+                    header.update(saveData, animated: animated)
                 }
             }
         }
@@ -236,26 +236,18 @@ class DataHeader: UIView {
         return CGPoint(x: newX, y: newY)
     }
     
-    func initialize(letters: Int = 0, money: Float = 0, stage: Int = -1) {
-        update(letters: letters, money: money, animated: false)
-        
-        if stage >= 1 {
-            revealLetters(false)
-        }
-    }
-    
-    func update(letters: Int = 0, money: Float = 0, animated: Bool = true) {
-        if self.letters == 0 && letters > 0 {
+    func update(data: SaveData, animated: Bool = true) {
+        if self.letters == 0 && data.letters! > 0 {
             revealLetters(animated)
         }
-        if self.money == 0 && money > 0 {
+        if self.money == 0 && data.money! > 0 {
             revealMoney(animated)
         }
         
-        self.letters = letters
-        self.money = money
+        self.letters = data.letters!
+        self.money = data.money!
         
-        let moneyText = NSString(format: "%.2f", money) as String
+        let moneyText = NSString(format: "%.2f", data.money!) as String
         
         lettersLabel?.text = "\(self.letters)"
         moneyLabel?.text = "$\(moneyText)"
