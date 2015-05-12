@@ -61,6 +61,10 @@ struct MonkeyData {
         return totalProduced
     }
     
+    func lettersPer(timeInterval: Float) -> Int {
+        return Int(Float(self.count * self.lettersPerSecond) * timeInterval)
+    }
+    
     func canPurchase(count: Int, data: SaveData) -> Bool {
         if data.letters >= getPrice(count).0 {
             return true

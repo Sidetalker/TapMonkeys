@@ -12,7 +12,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var allViews: [AnyObject]?
     var defaults: NSUserDefaults!
     
-    var saveTimer = NSTimer()
+    var monkeyTimer = NSTimer()
+    var lettersPerBuffer = 0
+    
     var saveData = SaveData()
     
     override func viewDidLoad() {
@@ -22,12 +24,31 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         loadSave()
         loadMonkeys(saveData)
+        updateMonkeyProduction()
         
         registerForUpdates()
     }
     
     override func viewDidLayoutSubviews() {
         initializeHeaders()
+    }
+    
+    func updateMonkeyProduction() {
+        monkeyTimer.invalidate()
+        
+        let interval = monkeyProductionTimer()
+        
+        lettersPerBuffer = fullLettersPer(interval)
+        
+        monkeyTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(interval), target: self, selector: Selector("getMonkeyLetters"), userInfo: nil, repeats: true)
+    }
+    
+    func getMonkeyLetters() {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName("updateHeaders", object: self, userInfo: [
+            "letters" : lettersPerBuffer,
+            "animated" : false
+            ])
     }
     
     func loadSave() {
@@ -43,8 +64,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         defaults = NSUserDefaults.standardUserDefaults()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHeaders:", name: "updateHeaders", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateSave:", name: "updateSave", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHeaders:", name: "updateHeaders", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMonkeyProduction", name: "updateMonkeyProduction", object: nil)
     }
     
     func initializeHeaders() {

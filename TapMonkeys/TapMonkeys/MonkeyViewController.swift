@@ -169,6 +169,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
                         "letters" : price,
                         "animated" : false
                         ])
+                    nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
                 })
             }
         }

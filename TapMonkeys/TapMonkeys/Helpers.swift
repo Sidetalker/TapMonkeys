@@ -174,3 +174,37 @@ func validate(save: SaveData) -> SaveData {
     
     return newSave
 }
+
+func fullLettersPer(timeInterval: Float) -> Int {
+    var lettersPer = 0
+    
+    for monkey in monkeys {
+        lettersPer += monkey.lettersPer(timeInterval)
+    }
+    
+    return lettersPer
+}
+
+func monkeyProductionTimer() -> Float {
+    var lowestLettersPerSecond = 1000
+    
+    for monkey in monkeys {
+        if monkey.lettersPerSecondCumulative() < lowestLettersPerSecond {
+            lowestLettersPerSecond = monkey.lettersPerSecondCumulative()
+        }
+    }
+    
+    if lowestLettersPerSecond == 0 {
+        return 1
+    }
+    
+    return 1.0 / Float(lowestLettersPerSecond)
+}
+
+
+
+
+
+
+
+
