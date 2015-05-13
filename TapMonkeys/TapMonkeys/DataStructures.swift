@@ -23,6 +23,7 @@ let gens = [
 ]
 
 var monkeys = [MonkeyData]()
+var writings = [WritingData]()
 
 struct SaveData {
     var stage: Int?
@@ -35,6 +36,78 @@ struct SaveData {
     var monkeyTotals: [Int]?
     var monkeyLastCost: [Int]?
     var monkeyLastMod: [Float]?
+}
+
+struct WritingData {
+    var index: Int = -1
+    var name: String = "ERROR WRITETHING"
+    var description: String = "kill.....me"
+    var costLow: Int = -1
+    var costHigh: Int = -1
+    var costLowOffset: Int = -1
+    var costHighOffset: Int = -1
+    
+    var count: Int = 0
+    var unlocked: Bool = false
+    var level: Int = 1
+    
+    // Return (lettersLow, lettersHigh)
+    func getPrice(count: Int) -> (Int, Int) {
+        let low = costLow + costLowOffset
+        let high = costHigh + costHighOffset
+        
+        return (low * count, high * count)
+    }
+}
+
+func loadWritings(data: SaveData) {
+    let path = NSBundle.mainBundle().pathForResource("monkeys", ofType: "dat")!
+    let content = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)! as String
+    let splitContent = split(content) { $0 == "\n" }
+    
+    writings = [WritingData]()
+    
+    for i in 0...splitContent.count / 5 - 1 {
+        var newMonkey = MonkeyData()
+        
+        for x in 0...5 {
+            let data = splitContent[i * 6 + x]
+            
+            // Name
+            if x == 0 {
+                newMonkey.name = data
+            }
+                // Description
+            else if x == 1 {
+                newMonkey.description = data
+            }
+                // Letters/sec
+            else if x == 2 {
+                newMonkey.lettersPerSecond = data.toInt()!
+            }
+                // Unlock requirements
+            else if x == 3 {
+                newMonkey.unlockCost = parseFloatTuples(data)
+            }
+                // Modifiers
+            else if x == 4 {
+                newMonkey.modifiers = parseFloatTuples(data)
+            }
+                // Unlock cost overrides
+            else if x == 5 {
+                newMonkey.costs = parseFloatTuples(data)
+            }
+        }
+        
+        monkeys.append(newMonkey)
+    }
+    
+    for i in 0...count(monkeys) - 1 {
+        monkeys[i].previousCost = data.monkeyLastCost![i]
+        monkeys[i].previousMod = data.monkeyLastMod![i]
+        monkeys[i].count = data.monkeyCounts![i]
+        monkeys[i].index = i
+    }
 }
 
 struct MonkeyData {

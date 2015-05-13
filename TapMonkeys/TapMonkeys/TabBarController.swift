@@ -177,7 +177,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         self.setViewControllers([allViews![0], allViews![1]], animated: false)
         self.setTabBarVisible(false, animated: false)
         
-        if saveData.stage >= 7 {
+        if saveData.stage >= 6 {
             revealTab(2)
         }
     }

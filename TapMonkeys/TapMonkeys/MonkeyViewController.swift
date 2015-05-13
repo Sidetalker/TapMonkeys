@@ -227,7 +227,7 @@ class MonkeyPicture: UIView {
     
     override func drawRect(rect: CGRect) {
         if monkeyIndex == 0 {
-            TapStyle.drawFingerMonkey(monkeyStrokeWidth: strokeWidth)
+            TapStyle.drawFingerMonkey()
         }
     }
 }

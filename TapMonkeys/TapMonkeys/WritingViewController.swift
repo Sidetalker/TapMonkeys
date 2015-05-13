@@ -111,12 +111,9 @@ class WritingBuyButton: UIView {
     
     override func drawRect(rect: CGRect) {
         if state == 0 {
-            let price = monkeys[monkeyIndex].getPrice(1).0
-            var text = "FREE"
-            
-            if price > 0 {
-                text = "$\(price)"
-            }
+            let priceLow = writings[writingIndex].getPrice(1).0
+            let priceHigh = writings[writingIndex].getPrice(1).1
+            var text = "\(priceLow) - \(priceHigh) Letters"
             
             TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
         }
@@ -130,7 +127,7 @@ class WritingBuyButton: UIView {
             })
         }
         else if sender.state == UIGestureRecognizerState.Ended {
-            self.delegate?.buyTapped(self.monkeyIndex)
+            self.delegate?.buyTapped(self.writingIndex)
             
             UIView.animateWithDuration(0.35, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
                 self.transform = CGAffineTransformIdentity
