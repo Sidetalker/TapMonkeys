@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A5529F91B03BF4D00CD8E78 /* WritingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5529F81B03BF4D00CD8E78 /* WritingViewController.swift */; };
 		0A9B687D1AFD3DE7006628D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B687C1AFD3DE7006628D1 /* AppDelegate.swift */; };
 		0A9B68801AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B687E1AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld */; };
 		0A9B68821AFD3DE7006628D1 /* TapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B68811AFD3DE7006628D1 /* TapViewController.swift */; };
@@ -102,6 +103,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A5529F81B03BF4D00CD8E78 /* WritingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WritingViewController.swift; sourceTree = "<group>"; };
 		0A9B68771AFD3DE7006628D1 /* TapMonkeys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapMonkeys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A9B687B1AFD3DE7006628D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A9B687C1AFD3DE7006628D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				0A9B68AE1AFD90C3006628D1 /* TabBarController.swift */,
 				0A9B68811AFD3DE7006628D1 /* TapViewController.swift */,
 				0A9B68E91AFE58A5006628D1 /* MonkeyViewController.swift */,
+				0A5529F81B03BF4D00CD8E78 /* WritingViewController.swift */,
 				0A9B687A1AFD3DE7006628D1 /* Supporting Files */,
 			);
 			path = TapMonkeys;
@@ -577,6 +580,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A9B68821AFD3DE7006628D1 /* TapViewController.swift in Sources */,
+				0A5529F91B03BF4D00CD8E78 /* WritingViewController.swift in Sources */,
 				0A9B68EA1AFE58A5006628D1 /* MonkeyViewController.swift in Sources */,
 				0A9B68801AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld in Sources */,
 				0A9B68A51AFD6038006628D1 /* TapStyle.swift in Sources */,

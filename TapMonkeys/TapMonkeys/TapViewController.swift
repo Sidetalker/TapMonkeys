@@ -168,11 +168,11 @@ class TapViewController: UIViewController, PopLabelDelegate {
                     delay(2.0 + 0.3 * Double(count(self.genLabels) - 1), {
                         let tabBar = self.tabBarController as! TabBarController
                         
-                        tabBar.reveal(2)
+                        tabBar.revealTab(2)
                         
                         tabBar.viewControllers![2].tabBarItem?.badgeValue = "!"
                         
-//                        self.updateStage(6)
+                        self.updateStage(6)
                     })
                 }
             }

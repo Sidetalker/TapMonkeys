@@ -33,7 +33,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         initializeHeaders()
     }
     
-    func reveal(index: Int) {
+    func revealTab(index: Int) {
         self.viewControllers = [AnyObject]()
         
         for i in 0...index {
@@ -94,17 +94,29 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 
                 tapView.dataHeader.update(saveData, animated: true)
             }
-            else if let monkeyView = view as? MonkeyViewController {
+            if let monkeyView = view as? MonkeyViewController {
                 if stage == 2 {
                     monkeyView.tabBarItem.badgeValue = "!"
                 }
-                else if stage == 3 {
+                else if stage >= 3 {
                     monkeyView.tabBarItem.badgeValue = nil
                 }
                 
                 if monkeyView.dataHeader == nil { return }
                 
                 monkeyView.dataHeader.update(saveData, animated: true)
+            }
+            if let writingView = view as? WritingViewController {
+                if stage == 6 {
+                    writingView.tabBarItem.badgeValue = "!"
+                }
+                else if stage >= 7 {
+                    writingView.tabBarItem.badgeValue = nil
+                }
+                
+                if writingView.dataHeader == nil { return }
+                
+                writingView.dataHeader.update(saveData, animated: true)
             }
         }
     }
@@ -147,6 +159,12 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 {
                     header.update(saveData, animated: animated)
                 }
+                if let
+                    writingView = view as? WritingViewController,
+                    header = writingView.dataHeader
+                {
+                    header.update(saveData, animated: animated)
+                }
             }
         }
         
@@ -158,6 +176,10 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         self.setViewControllers([allViews![0], allViews![1]], animated: false)
         self.setTabBarVisible(false, animated: false)
+        
+        if saveData.stage >= 7 {
+            revealTab(2)
+        }
     }
     
     func setTabBarVisible(visible: Bool, animated: Bool) {
@@ -199,6 +221,12 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             if saveData.stage == 2 {
                 monkeyView.tabBarItem.badgeValue = nil
                 saveData.stage = 3
+            }
+        }
+        if let writingView = viewController as? WritingViewController {
+            if saveData.stage == 6 {
+                writingView.tabBarItem.badgeValue = nil
+                saveData.stage = 7
             }
         }
     }
