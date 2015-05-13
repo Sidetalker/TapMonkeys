@@ -55,7 +55,7 @@ class MonkeyViewController: UIViewController {
     }
 }
 
-class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, MonkeyLockDelegate, MonkeyBuyButtonDelegate {
+class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, AnimatedLockDelegate, MonkeyBuyButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,11 +77,11 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         let curMonkey = monkeys[index]
         
         if !curMonkey.unlocked {
-            if let lockView = cell.contentView.viewWithTag(8) as? MonkeyLockView {
+            if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
                 // We're good to go I guess
             }
             else {
-                let lockView = MonkeyLockView(frame: cell.contentView.frame)
+                let lockView = AnimatedLockView(frame: cell.contentView.frame)
                 lockView.tag = 8
                 lockView.index = indexPath.row
                 lockView.delegate = self
@@ -127,7 +127,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         return UITableViewCell()
     }
     
-    func tappedLock(view: MonkeyLockView) {
+    func tappedLock(view: AnimatedLockView) {
         var saveData = load(self.tabBarController)
         let index = view.index
         
@@ -284,7 +284,7 @@ class MonkeyBuyButton: UIView {
                 text = "$\(price)"
             }
             
-            TapStyle.drawBuy1(frame: rect, monkeyBuyText: text)
+            TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
         }
     }
     
@@ -307,11 +307,11 @@ class MonkeyBuyButton: UIView {
     }
 }
 
-protocol MonkeyLockDelegate {
-    func tappedLock(view: MonkeyLockView)
+protocol AnimatedLockDelegate {
+    func tappedLock(view: AnimatedLockView)
 }
 
-class MonkeyLockView: UIView {
+class AnimatedLockView: UIView {
     @IBOutlet var nibView: UIView!
     @IBOutlet weak var lockImage: UIImageView!
     @IBOutlet weak var requirementsText: UILabel!
@@ -321,7 +321,7 @@ class MonkeyLockView: UIView {
     var index = -1
     var blurView: UIVisualEffectView!
     var animator: UIDynamicAnimator?
-    var delegate: MonkeyLockDelegate?
+    var delegate: AnimatedLockDelegate?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -336,7 +336,7 @@ class MonkeyLockView: UIView {
     }
     
     func configure() {
-        NSBundle.mainBundle().loadNibNamed("MonkeyLockView", owner: self, options: nil)
+        NSBundle.mainBundle().loadNibNamed("AnimatedLockView", owner: self, options: nil)
         
         nibView.frame = self.frame
         
@@ -356,7 +356,7 @@ class MonkeyLockView: UIView {
         var animationImages = [UIImage]()
         
         for i in 1...12 {
-            let imageName = "monkeyLock" + (NSString(format: "%02d", i) as String)
+            let imageName = "animatedLock" + (NSString(format: "%02d", i) as String)
             
             if let image = UIImage(named: imageName) {
                 animationImages.append(image)
@@ -381,7 +381,7 @@ class MonkeyLockView: UIView {
     }
     
     func unlock() {
-        lockImage.image = UIImage(named: "monkeyLock12")
+        lockImage.image = UIImage(named: "animatedLock12")
         
         lockImage.startAnimating()
         

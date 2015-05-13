@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MonkeyLockView" customModule="TapMonkeys" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnimatedLockView" customModule="TapMonkeys" customModuleProvider="target">
             <connections>
                 <outlet property="lockImage" destination="Fe3-uz-y1r" id="Wnw-A4-d9t"/>
                 <outlet property="nibView" destination="iN0-l3-epB" id="ue2-Zx-5F7"/>
@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="337" height="227"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monkeyLock01.png" translatesAutoresizingMaskIntoConstraints="NO" id="Fe3-uz-y1r">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="animatedLock01.png" translatesAutoresizingMaskIntoConstraints="NO" id="Fe3-uz-y1r">
                     <rect key="frame" x="35" y="73" width="54" height="82"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="82" id="Sdb-9z-VoE"/>
@@ -63,6 +63,6 @@
         </view>
     </objects>
     <resources>
-        <image name="monkeyLock01.png" width="54" height="82"/>
+        <image name="animatedLock01.png" width="54" height="82"/>
     </resources>
 </document>

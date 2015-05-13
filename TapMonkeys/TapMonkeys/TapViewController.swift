@@ -147,6 +147,8 @@ class TapViewController: UIViewController, PopLabelDelegate {
             }
         }
         else if saveData.stage == 5 {
+            if count(gen) == 0 { prepGen(1) }
+            
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
             
             if contains(gen, letter) {
@@ -159,6 +161,8 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 genLabels.append(popLabel)
                 
                 if self.gen.count == 0 {
+                    self.updateStage(6)
+                    
                     for i in 0...count(self.genLabels) - 1 {
                         delay(2.0 + Double(i) * 0.3, {
                             self.genLabels[i].pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
@@ -171,8 +175,6 @@ class TapViewController: UIViewController, PopLabelDelegate {
                         tabBar.revealTab(2)
                         
                         tabBar.viewControllers![2].tabBarItem?.badgeValue = "!"
-                        
-                        self.updateStage(6)
                     })
                 }
             }

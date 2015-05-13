@@ -44,6 +44,28 @@ public class TapStyle : NSObject {
         CGContextRestoreGState(context)
     }
 
+    public class func drawBuy(#frame: CGRect, monkeyBuyText: String) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
+
+        //// Rectangle Drawing
+        let rectangleRect = CGRectMake(frame.minX + 5, frame.minY + 0.5, floor((frame.width - 5) * 0.97959 + 0.5), floor((frame.height - 0.5) * 0.98990 + 0.5))
+        let rectanglePath = UIBezierPath(roundedRect: rectangleRect, cornerRadius: 10)
+        UIColor.blackColor().setStroke()
+        rectanglePath.lineWidth = 1
+        rectanglePath.stroke()
+        let rectangleStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+        rectangleStyle.alignment = NSTextAlignment.Center
+
+        let rectangleFontAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 14)!, NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: rectangleStyle]
+
+        let rectangleTextHeight: CGFloat = NSString(string: monkeyBuyText).boundingRectWithSize(CGSizeMake(rectangleRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: rectangleFontAttributes, context: nil).size.height
+        CGContextSaveGState(context)
+        CGContextClipToRect(context, rectangleRect);
+        NSString(string: monkeyBuyText).drawInRect(CGRectMake(rectangleRect.minX, rectangleRect.minY + (rectangleRect.height - rectangleTextHeight) / 2, rectangleRect.width, rectangleTextHeight), withAttributes: rectangleFontAttributes)
+        CGContextRestoreGState(context)
+    }
+
     public class func drawFingerMonkey(#monkeyStrokeWidth: CGFloat) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()
@@ -64,28 +86,6 @@ public class TapStyle : NSObject {
         UIColor.blackColor().setStroke()
         ovalPath.lineWidth = monkeyStrokeWidth
         ovalPath.stroke()
-        CGContextRestoreGState(context)
-    }
-
-    public class func drawBuy1(#frame: CGRect, monkeyBuyText: String) {
-        //// General Declarations
-        let context = UIGraphicsGetCurrentContext()
-
-        //// Rectangle Drawing
-        let rectangleRect = CGRectMake(frame.minX + 5, frame.minY + 0.5, floor((frame.width - 5) * 0.97959 + 0.5), floor((frame.height - 0.5) * 0.98990 + 0.5))
-        let rectanglePath = UIBezierPath(roundedRect: rectangleRect, cornerRadius: 10)
-        UIColor.blackColor().setStroke()
-        rectanglePath.lineWidth = 1
-        rectanglePath.stroke()
-        let rectangleStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-        rectangleStyle.alignment = NSTextAlignment.Center
-
-        let rectangleFontAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 14)!, NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: rectangleStyle]
-
-        let rectangleTextHeight: CGFloat = NSString(string: monkeyBuyText).boundingRectWithSize(CGSizeMake(rectangleRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: rectangleFontAttributes, context: nil).size.height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, rectangleRect);
-        NSString(string: monkeyBuyText).drawInRect(CGRectMake(rectangleRect.minX, rectangleRect.minY + (rectangleRect.height - rectangleTextHeight) / 2, rectangleRect.width, rectangleTextHeight), withAttributes: rectangleFontAttributes)
         CGContextRestoreGState(context)
     }
 
