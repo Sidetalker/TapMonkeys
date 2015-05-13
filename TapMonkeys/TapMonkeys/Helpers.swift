@@ -46,7 +46,9 @@ func randomIntBetweenNumbers(firstNum: Int, secondNum: Int) -> Int {
 
 func save(sender: AnyObject?, data: SaveData) -> Bool {
     if let controller = sender as? TabBarController {
+        writeDefaults(data)
         controller.saveData = data
+        
         return true
     }
     else {

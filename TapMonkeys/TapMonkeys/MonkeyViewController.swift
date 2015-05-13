@@ -79,7 +79,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         let curMonkey = monkeys[index]
         
         if !curMonkey.unlocked {
-            if let lockView = cell.viewWithTag(8) as? MonkeyLockView {
+            if let lockView = cell.contentView.viewWithTag(8) as? MonkeyLockView {
                 // We're good to go I guess
             }
             else {
@@ -133,15 +133,18 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         var saveData = load(self.tabBarController)
         let index = view.index
         
-        if index == 0 && saveData.stage == 3 {
-            saveData.stage = 4
-            save(self.tabBarController, saveData)
-            
+        if index == 0 && saveData.stage == 3 || saveData.stage == 4 {
             view.unlock()
+            
+            saveData.stage = 4
+            saveData.monkeyUnlocks![index] = true
             monkeys[index].unlocked = true
+            
+            save(self.tabBarController, saveData)
         }
     }
     
+    // REFACTOR you wrote this all stupid cause you wanted to move on
     func buyTapped(monkeyIndex: Int) {
         var saveData = load(self.tabBarController)
         var monkey = monkeys[monkeyIndex]
@@ -160,6 +163,42 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
                 }
                 
                 monkeys[monkeyIndex] = monkey
+                
+                saveData.monkeyCounts![monkeyIndex] = monkey.count
+                saveData.monkeyTotals![monkeyIndex] = monkey.lettersTotal()
+                saveData.monkeyLastMod![monkeyIndex] = monkey.previousMod
+                saveData.monkeyLastCost![monkeyIndex] = monkey.previousCost
+                
+                saveData.stage = 5
+                
+                save(self.tabBarController, saveData)
+                
+                delay(0.2, {
+                    self.tableView.reloadData()
+                    
+                    let nc = NSNotificationCenter.defaultCenter()
+                    nc.postNotificationName("updateHeaders", object: self, userInfo: [
+                        "letters" : price,
+                        "animated" : false
+                        ])
+                    nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
+                })
+            }
+        }
+        else {
+            if monkey.canPurchase(1, data: saveData) {
+                var price = monkey.getPrice(1).0 * -1
+                
+                saveData = monkey.purchase(1, data: saveData)!
+                
+                monkeys[monkeyIndex] = monkey
+                
+                saveData.monkeyCounts![monkeyIndex] = monkey.count
+                saveData.monkeyTotals![monkeyIndex] = monkey.lettersTotal()
+                saveData.monkeyLastMod![monkeyIndex] = monkey.previousMod
+                saveData.monkeyLastCost![monkeyIndex] = monkey.previousCost
+                
+                save(self.tabBarController, saveData)
                 
                 delay(0.2, {
                     self.tableView.reloadData()

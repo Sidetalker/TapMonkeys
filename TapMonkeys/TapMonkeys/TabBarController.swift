@@ -20,17 +20,25 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureView()
-        
         loadSave()
         loadMonkeys(saveData)
         updateMonkeyProduction()
         
         registerForUpdates()
+        
+        configureView()
     }
     
     override func viewDidLayoutSubviews() {
         initializeHeaders()
+    }
+    
+    func reveal(index: Int) {
+        self.viewControllers = [AnyObject]()
+        
+        for i in 0...index {
+            self.viewControllers?.append(allViews![i])
+        }
     }
     
     func updateMonkeyProduction() {
