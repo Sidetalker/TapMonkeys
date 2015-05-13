@@ -128,8 +128,8 @@ func updateGlobalSave(save: SaveData) {
 
 func validate(save: SaveData) -> SaveData {
     let numLetterCounts = 26
-    let numMonkeys = 1
-    let numWriting = 1
+    let numMonkeys = 3
+    let numWriting = 2
     
     var newSave = save
     

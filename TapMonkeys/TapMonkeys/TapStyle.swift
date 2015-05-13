@@ -112,6 +112,29 @@ public class TapStyle : NSObject {
         CGContextRestoreGState(context)
     }
 
+    public class func drawDigitDestroyer() {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
+
+
+        //// Image Declarations
+        let imgDigitDestroyer = UIImage(named: "imgDigitDestroyer.jpg")!
+
+        //// Oval Drawing
+        var ovalPath = UIBezierPath(ovalInRect: CGRectMake(5, 5, 90, 90))
+        CGContextSaveGState(context)
+        CGContextSetPatternPhase(context, CGSizeMake(5, 5))
+        UIColor(patternImage: imgDigitDestroyer).setFill()
+        ovalPath.fill()
+        CGContextRestoreGState(context)
+        CGContextSaveGState(context)
+        CGContextSetShadowWithColor(context, TapStyle.picShadow.shadowOffset, TapStyle.picShadow.shadowBlurRadius, (TapStyle.picShadow.shadowColor as! UIColor).CGColor)
+        UIColor.blackColor().setStroke()
+        ovalPath.lineWidth = 0.5
+        ovalPath.stroke()
+        CGContextRestoreGState(context)
+    }
+
     public class func drawWords() {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()
@@ -125,6 +148,29 @@ public class TapStyle : NSObject {
         CGContextSaveGState(context)
         CGContextSetPatternPhase(context, CGSizeMake(5, 6))
         UIColor(patternImage: imgWords).setFill()
+        ovalPath.fill()
+        CGContextRestoreGState(context)
+        CGContextSaveGState(context)
+        CGContextSetShadowWithColor(context, TapStyle.picShadow.shadowOffset, TapStyle.picShadow.shadowBlurRadius, (TapStyle.picShadow.shadowColor as! UIColor).CGColor)
+        UIColor.blackColor().setStroke()
+        ovalPath.lineWidth = 0.5
+        ovalPath.stroke()
+        CGContextRestoreGState(context)
+    }
+
+    public class func drawFragmentedSentence() {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
+
+
+        //// Image Declarations
+        let imgFragmentedSentence = UIImage(named: "imgFragmentedSentence.jpg")!
+
+        //// Oval Drawing
+        var ovalPath = UIBezierPath(ovalInRect: CGRectMake(5, 5, 90, 90))
+        CGContextSaveGState(context)
+        CGContextSetPatternPhase(context, CGSizeMake(6, 5))
+        UIColor(patternImage: imgFragmentedSentence).setFill()
         ovalPath.fill()
         CGContextRestoreGState(context)
         CGContextSaveGState(context)

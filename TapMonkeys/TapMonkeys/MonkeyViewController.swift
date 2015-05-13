@@ -114,6 +114,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             buyButton.setNeedsDisplay()
             
             name.text = curMonkey.name
+            description.text = curMonkey.description
             owned.text = "Owned: \(curMonkey.count)"
             frequency.text = "Letters/sec: \(curMonkey.lettersPerSecondCumulative())"
             total.text = "Total Letters: \(curMonkey.totalProduced)"
@@ -229,6 +230,12 @@ class MonkeyPicture: UIView {
         if monkeyIndex == 0 {
             TapStyle.drawFingerMonkey()
         }
+        else if monkeyIndex == 1 {
+            TapStyle.drawGoofkey()
+        }
+        else if monkeyIndex == 2 {
+            TapStyle.drawDigitDestroyer()
+        }
     }
 }
 
@@ -256,16 +263,14 @@ class MonkeyBuyButton: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-        if state == 0 {
-            let price = monkeys[monkeyIndex].getPrice(1).0
-            var text = "FREE"
-            
-            if price > 0 {
-                text = "$\(price)"
-            }
-            
-            TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
+        let price = monkeys[monkeyIndex].getPrice(1).0
+        var text = "FREE"
+        
+        if price > 0 {
+            text = "$\(price)"
         }
+        
+        TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
     }
     
     
