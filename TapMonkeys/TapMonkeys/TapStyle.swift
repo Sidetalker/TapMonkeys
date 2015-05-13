@@ -17,12 +17,12 @@ public class TapStyle : NSObject {
     //// Cache
 
     private struct Cache {
-        static var monkeyPicShadow: NSShadow = NSShadow(color: UIColor.blackColor().colorWithAlphaComponent(0.8), offset: CGSizeMake(0.1, -0.1), blurRadius: 3)
+        static var picShadow: NSShadow = NSShadow(color: UIColor.blackColor().colorWithAlphaComponent(0.8), offset: CGSizeMake(0.1, -0.1), blurRadius: 3)
     }
 
     //// Shadows
 
-    public class var monkeyPicShadow: NSShadow { return Cache.monkeyPicShadow }
+    public class var picShadow: NSShadow { return Cache.picShadow }
 
     //// Drawing Methods
 
@@ -66,25 +66,48 @@ public class TapStyle : NSObject {
         CGContextRestoreGState(context)
     }
 
-    public class func drawFingerMonkey(#monkeyStrokeWidth: CGFloat) {
+    public class func drawFingerMonkey() {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()
 
 
         //// Image Declarations
-        let monkeyA = UIImage(named: "monkeyA.jpg")!
+        let imgFingerMonkey = UIImage(named: "imgFingerMonkey.jpg")!
 
         //// Oval Drawing
         var ovalPath = UIBezierPath(ovalInRect: CGRectMake(5, 5, 90, 90))
         CGContextSaveGState(context)
         CGContextSetPatternPhase(context, CGSizeMake(4, 5))
-        UIColor(patternImage: monkeyA).setFill()
+        UIColor(patternImage: imgFingerMonkey).setFill()
         ovalPath.fill()
         CGContextRestoreGState(context)
         CGContextSaveGState(context)
-        CGContextSetShadowWithColor(context, TapStyle.monkeyPicShadow.shadowOffset, TapStyle.monkeyPicShadow.shadowBlurRadius, (TapStyle.monkeyPicShadow.shadowColor as! UIColor).CGColor)
+        CGContextSetShadowWithColor(context, TapStyle.picShadow.shadowOffset, TapStyle.picShadow.shadowBlurRadius, (TapStyle.picShadow.shadowColor as! UIColor).CGColor)
         UIColor.blackColor().setStroke()
-        ovalPath.lineWidth = monkeyStrokeWidth
+        ovalPath.lineWidth = 0.5
+        ovalPath.stroke()
+        CGContextRestoreGState(context)
+    }
+
+    public class func drawWords() {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
+
+
+        //// Image Declarations
+        let imgWords = UIImage(named: "imgWords.png")!
+
+        //// Oval Drawing
+        var ovalPath = UIBezierPath(ovalInRect: CGRectMake(5, 5, 90, 90))
+        CGContextSaveGState(context)
+        CGContextSetPatternPhase(context, CGSizeMake(5, 6))
+        UIColor(patternImage: imgWords).setFill()
+        ovalPath.fill()
+        CGContextRestoreGState(context)
+        CGContextSaveGState(context)
+        CGContextSetShadowWithColor(context, TapStyle.picShadow.shadowOffset, TapStyle.picShadow.shadowBlurRadius, (TapStyle.picShadow.shadowColor as! UIColor).CGColor)
+        UIColor.blackColor().setStroke()
+        ovalPath.lineWidth = 0.5
         ovalPath.stroke()
         CGContextRestoreGState(context)
     }

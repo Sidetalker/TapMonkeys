@@ -59,3 +59,84 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
         return UITableViewCell()
     }
 }
+
+class WritingPicture: UIView {
+    var writingIndex = 0
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.backgroundColor = UIColor.clearColor()
+        
+        self.setNeedsDisplay()
+    }
+    
+    init(frame: CGRect, strokeWidth: CGFloat) {
+        super.init(frame: frame)
+        
+        self.backgroundColor = UIColor.clearColor()
+        
+        self.setNeedsDisplay()
+    }
+    
+    override func drawRect(rect: CGRect) {
+        if writingIndex == 0 {
+            TapStyle.drawWords()
+        }
+    }
+}
+
+protocol WritingBuyButtonDelegate {
+    func buyTapped(writingIndex: Int)
+}
+
+class WritingBuyButton: UIView {
+    // 0 is 1 only, 1 is 1 | 10, 2 is 1 | 10 | 100
+    // Like, maybe
+    var state = 0
+    var writingIndex = -1
+    
+    var delegate: WritingBuyButtonDelegate?
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.backgroundColor = UIColor.clearColor()
+        
+        let tap = UILongPressGestureRecognizer(target: self, action: "tappedMe:")
+        tap.minimumPressDuration = 0.0
+        
+        self.addGestureRecognizer(tap)
+    }
+    
+    override func drawRect(rect: CGRect) {
+        if state == 0 {
+            let price = monkeys[monkeyIndex].getPrice(1).0
+            var text = "FREE"
+            
+            if price > 0 {
+                text = "$\(price)"
+            }
+            
+            TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
+        }
+    }
+    
+    
+    func tappedMe(sender: UITapGestureRecognizer) {
+        if sender.state == UIGestureRecognizerState.Began {
+            UIView.animateWithDuration(0.15, animations: {
+                self.transform = CGAffineTransformMakeScale(0.91, 0.91)
+            })
+        }
+        else if sender.state == UIGestureRecognizerState.Ended {
+            self.delegate?.buyTapped(self.monkeyIndex)
+            
+            UIView.animateWithDuration(0.35, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                self.transform = CGAffineTransformIdentity
+                }, completion: { (Bool) -> Void in
+                    
+            })
+        }
+    }
+}

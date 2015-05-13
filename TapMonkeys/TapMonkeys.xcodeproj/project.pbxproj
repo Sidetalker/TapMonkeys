@@ -44,6 +44,7 @@
 		0A552A3F1B03D51700CD8E78 /* animatedLock12.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A552A1B1B03D51700CD8E78 /* animatedLock12.png */; };
 		0A552A401B03D51700CD8E78 /* animatedLock12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A552A1C1B03D51700CD8E78 /* animatedLock12@2x.png */; };
 		0A552A411B03D51700CD8E78 /* animatedLock12@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A552A1D1B03D51700CD8E78 /* animatedLock12@3x.png */; };
+		0A552A431B03D75600CD8E78 /* GlobalUIClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A552A421B03D75600CD8E78 /* GlobalUIClasses.swift */; };
 		0A9B687D1AFD3DE7006628D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B687C1AFD3DE7006628D1 /* AppDelegate.swift */; };
 		0A9B68801AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B687E1AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld */; };
 		0A9B68821AFD3DE7006628D1 /* TapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B68811AFD3DE7006628D1 /* TapViewController.swift */; };
@@ -140,6 +141,7 @@
 		0A552A1B1B03D51700CD8E78 /* animatedLock12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animatedLock12.png; path = Images/animatedLock12.png; sourceTree = "<group>"; };
 		0A552A1C1B03D51700CD8E78 /* animatedLock12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "animatedLock12@2x.png"; path = "Images/animatedLock12@2x.png"; sourceTree = "<group>"; };
 		0A552A1D1B03D51700CD8E78 /* animatedLock12@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "animatedLock12@3x.png"; path = "Images/animatedLock12@3x.png"; sourceTree = "<group>"; };
+		0A552A421B03D75600CD8E78 /* GlobalUIClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalUIClasses.swift; sourceTree = "<group>"; };
 		0A9B68771AFD3DE7006628D1 /* TapMonkeys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapMonkeys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A9B687B1AFD3DE7006628D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A9B687C1AFD3DE7006628D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 				0A9B68F51AFFBAE6006628D1 /* DataHeader.xib */,
 				0A9B68F71AFFF3E7006628D1 /* AnimatedLockView.xib */,
 				0A9B68881AFD3DE7006628D1 /* LaunchScreen.xib */,
+				0A552A421B03D75600CD8E78 /* GlobalUIClasses.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				0A9B68EA1AFE58A5006628D1 /* MonkeyViewController.swift in Sources */,
 				0A9B68801AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld in Sources */,
 				0A9B68A51AFD6038006628D1 /* TapStyle.swift in Sources */,
+				0A552A431B03D75600CD8E78 /* GlobalUIClasses.swift in Sources */,
 				0A9B68AF1AFD90C3006628D1 /* TabBarController.swift in Sources */,
 				0A9B69451B010BBB006628D1 /* DataStructures.swift in Sources */,
 				0A9B687D1AFD3DE7006628D1 /* AppDelegate.swift in Sources */,
