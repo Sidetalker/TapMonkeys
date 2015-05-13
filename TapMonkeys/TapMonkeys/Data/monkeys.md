@@ -35,10 +35,11 @@
 
 | Image | Description | Letters / sec |
 | ----- | ----------- | :-----------: |
-| ![Goofkey](https://github.com/Sidetalker/TapMonkeys/blob/feature/writingScreen/TapMonkeys/TapMonkeys/Images/imgDigitDestroyer%403x.jpg) | The Goofkey was cleverly named for its goofiness. A proud history of inbreeding has left this creature with very little hair, highly refined taste buds, and unnecessarily large ears. | 2 |
+| ![Digit Destroyer](https://github.com/Sidetalker/TapMonkeys/blob/feature/writingScreen/TapMonkeys/TapMonkeys/Images/imgDigitDestroyer%403x.jpg) | This terrifying monstrosity grows exponentially in power as it consumes the fingers of any animal it comes across. Though the Digit Destroyer prefers pinkies, no little piggie is safe. | 5 |
 
 | Count | Modifier | Cost Override | 
 | :---: | :------: | :-----------: |
-| 0     | 1.15     | 2			   |
-| 50    | 1.25     | -			   |
-| 100   | 1.0      | -			   |
+| 0     | 1.0      | 5			   |
+| 50    | 1.15     | -			   |
+| 100   | 1.3      | -			   |
+| 1000  | 2.5      | -			   |

@@ -14,4 +14,4 @@
 
 | Image | Description | Cost |
 | ----- | ----------- | :--: |
-| ![Fragmented Sentence](https://github.com/Sidetalker/TapMonkeys/blob/feature/writingScreen/TapMonkeys/TapMonkeys/Images/imgFragmentedSentence%403x.png) | Excusable as a child. But fragmented sentences. They're so hard to spot, nobody these days. When we speak, if you listen closely. But, who does? | 50 - 85 Letters
+| ![Fragmented Sentence](https://github.com/Sidetalker/TapMonkeys/blob/feature/writingScreen/TapMonkeys/TapMonkeys/Images/imgFragmentedSentence%403x.jpg) | Excusable as a child. But fragmented sentences. They're so hard to spot, nobody these days. When we speak, if you listen closely. But, who does? | 50 - 85 Letters
