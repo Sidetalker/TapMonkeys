@@ -217,7 +217,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
 
 class MonkeyPicture: UIView {
     var monkeyIndex = 0
-    var strokeWidth: CGFloat = 1
+    var strokeWidth: CGFloat = 0.5
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
