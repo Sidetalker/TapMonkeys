@@ -114,7 +114,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSM-ZY-84r">
                                 <rect key="frame" x="0.0" y="95" width="300" height="356"/>
                                 <connections>
-                                    <segue destination="18K-1X-0w3" kind="embed" id="LF4-4a-LOB"/>
+                                    <segue destination="18K-1X-0w3" kind="embed" identifier="segueWritingTable" id="LF4-4a-LOB"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -311,16 +311,16 @@
             </objects>
             <point key="canvasLocation" x="643" y="414"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Writing Table View Controller-->
         <scene sceneID="io8-BR-lqu">
             <objects>
-                <tableViewController id="18K-1X-0w3" sceneMemberID="viewController">
+                <tableViewController id="18K-1X-0w3" customClass="WritingTableViewController" customModule="TapMonkeys" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="232" sectionHeaderHeight="22" sectionFooterHeight="22" id="go2-2H-xEi">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="356"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="232" id="6I7-Ps-J20">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellWriting" rowHeight="232" id="6I7-Ps-J20">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6I7-Ps-J20" id="qs1-TW-1Ll">
                                     <autoresizingMask key="autoresizingMask"/>

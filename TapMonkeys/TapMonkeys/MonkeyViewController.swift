@@ -50,9 +50,7 @@ class MonkeyViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "segueMonkeyTable" {
-            if let dest = segue.destinationViewController as? MonkeyTableViewController {
-                monkeyTable = dest
-            }
+            monkeyTable = segue.destinationViewController as? MonkeyTableViewController
         }
     }
 }
@@ -63,7 +61,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         super.viewDidLoad()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 25
+        self.tableView.estimatedRowHeight = 250
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
