@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>58829246-FB6A-41A5-B4B5-3DAE5E49CC96</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>TapMonkeys</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>AE440CF601EF519F50C32F768B329E80AE83C647</key>
 		<string>https://github.com/Sidetalker/TapMonkeys.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>TapMonkeys/TapMonkeys.xcodeproj/project.xcworkspace</string>
+	<string>TapMonkeys/TapMonkeys.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>AE440CF601EF519F50C32F768B329E80AE83C647</key>

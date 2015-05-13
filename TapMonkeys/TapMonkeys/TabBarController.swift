@@ -22,9 +22,10 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         loadSave()
         loadMonkeys(saveData)
-        updateMonkeyProduction()
+        loadWritings(saveData)
         
         registerForUpdates()
+        updateMonkeyProduction()
         
         configureView()
     }

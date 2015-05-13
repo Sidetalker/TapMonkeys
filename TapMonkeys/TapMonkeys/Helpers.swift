@@ -81,6 +81,12 @@ func writeDefaults(data: SaveData) -> Bool {
     defaults.setObject(data.monkeyLastCost, forKey: "monkeyLastCost")
     defaults.setObject(data.monkeyLastMod, forKey: "monkeyLastMod")
     
+    defaults.setObject(data.writingCount, forKey: "writingCount")
+    defaults.setObject(data.writingUnlocked, forKey: "writingUnlocked")
+    defaults.setObject(data.writingLevel, forKey: "writingLevel")
+    defaults.setObject(data.writingCostLow, forKey: "writingCostLow")
+    defaults.setObject(data.writingCostHigh, forKey: "writingCostHigh")
+    
     defaults.synchronize()
     
     return true
@@ -101,6 +107,12 @@ func readDefaults() -> SaveData {
     save.monkeyLastCost = defaults.arrayForKey("monkeyLastCost") as? [Int]
     save.monkeyLastMod = defaults.arrayForKey("monkeyLastMod") as? [Float]
     
+    save.writingCount = defaults.arrayForKey("writingCount") as? [Int]
+    save.writingUnlocked = defaults.arrayForKey("writingUnlocked") as? [Bool]
+    save.writingLevel = defaults.arrayForKey("writingLevel") as? [Int]
+    save.writingCostLow = defaults.arrayForKey("writingCostLow") as? [Int]
+    save.writingCostHigh = defaults.arrayForKey("writingCostHigh") as? [Int]
+    
     return save
 }
 
@@ -117,6 +129,7 @@ func updateGlobalSave(save: SaveData) {
 func validate(save: SaveData) -> SaveData {
     let numLetterCounts = 26
     let numMonkeys = 1
+    let numWriting = 1
     
     var newSave = save
     
@@ -171,6 +184,51 @@ func validate(save: SaveData) -> SaveData {
     else if count(newSave.monkeyLastMod!) < numMonkeys {
         for i in count(newSave.monkeyLastMod!)...numMonkeys - 1 {
             newSave.monkeyLastMod?.append(0.0)
+        }
+    }
+    
+    if newSave.writingCount == nil {
+        newSave.writingCount = [Int](count: numWriting, repeatedValue: 0)
+    }
+    else if count(newSave.writingCount!) < numWriting {
+        for i in count(newSave.writingCount!)...numWriting - 1 {
+            newSave.writingCount?.append(0)
+        }
+    }
+    
+    if newSave.writingUnlocked == nil {
+        newSave.writingUnlocked = [Bool](count: numWriting, repeatedValue: false)
+    }
+    else if count(newSave.writingUnlocked!) < numWriting {
+        for i in count(newSave.writingUnlocked!)...numWriting - 1 {
+            newSave.writingUnlocked?.append(false)
+        }
+    }
+    
+    if newSave.writingLevel == nil {
+        newSave.writingLevel = [Int](count: numWriting, repeatedValue: 1)
+    }
+    else if count(newSave.writingLevel!) < numWriting {
+        for i in count(newSave.writingLevel!)...numWriting - 1 {
+            newSave.writingLevel?.append(1)
+        }
+    }
+    
+    if newSave.writingCostLow == nil {
+        newSave.writingCostLow = [Int](count: numWriting, repeatedValue: 0)
+    }
+    else if count(newSave.writingCostLow!) < numWriting {
+        for i in count(newSave.writingCostLow!)...numWriting - 1 {
+            newSave.writingCostLow?.append(0)
+        }
+    }
+    
+    if newSave.writingCostHigh == nil {
+        newSave.writingCostHigh = [Int](count: numWriting, repeatedValue: 0)
+    }
+    else if count(newSave.writingCostHigh!) < numWriting {
+        for i in count(newSave.writingCostHigh!)...numWriting - 1 {
+            newSave.writingCostHigh?.append(0)
         }
     }
     

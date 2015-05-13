@@ -111,8 +111,10 @@ class WritingBuyButton: UIView {
     
     override func drawRect(rect: CGRect) {
         if state == 0 {
-            let priceLow = writings[writingIndex].getPrice(1).0
-            let priceHigh = writings[writingIndex].getPrice(1).1
+//            let priceLow = writings[writingIndex].getPrice(1).0
+//            let priceHigh = writings[writingIndex].getPrice(1).1
+            let priceLow = 6
+            let priceHigh = 10
             var text = "\(priceLow) - \(priceHigh) Letters"
             
             TapStyle.drawBuy(frame: rect, monkeyBuyText: text)

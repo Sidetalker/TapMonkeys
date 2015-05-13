@@ -3,27 +3,3 @@ First discovered in the early 1700s, the word failed to gain widespread populari
 100
 6
 10
-
-
-
-Finger Monkey
-Almost never spotted in the wild, the Finger Monkey's tiny taps do not register on standard smartphones. Instead, it commandeers the first human finger it comes across.
-1
-0 - 0
-1 - 1.15 | 50 - 1.25 | 100 - 1.5
-0 - 0 | 1 - 1
-
-
-
-    var index: Int = -1
-    var name: String = "ERROR WRITETHING"
-    var description: String = "kill.....me"
-    var costLow: Int = -1
-    var costHigh: Int = -1
-    var costLowOffset: Int = -1
-    var costHighOffset: Int = -1
-    
-    var count: Int = 0
-    var unlocked: Bool = false
-    var level: Int = 1
-}

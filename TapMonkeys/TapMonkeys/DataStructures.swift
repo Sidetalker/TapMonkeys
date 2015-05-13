@@ -36,12 +36,19 @@ struct SaveData {
     var monkeyTotals: [Int]?
     var monkeyLastCost: [Int]?
     var monkeyLastMod: [Float]?
+    
+    var writingCount: [Int]?
+    var writingUnlocked: [Bool]?
+    var writingLevel: [Int]?
+    var writingCostLow: [Int]?
+    var writingCostHigh: [Int]?
 }
 
 struct WritingData {
     var index: Int = -1
     var name: String = "ERROR WRITETHING"
     var description: String = "kill.....me"
+    var unlockCost: Int = -1
     var costLow: Int = -1
     var costHigh: Int = -1
     var costLowOffset: Int = -1
@@ -61,52 +68,50 @@ struct WritingData {
 }
 
 func loadWritings(data: SaveData) {
-    let path = NSBundle.mainBundle().pathForResource("monkeys", ofType: "dat")!
+    let path = NSBundle.mainBundle().pathForResource("writing", ofType: "dat")!
     let content = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)! as String
     let splitContent = split(content) { $0 == "\n" }
     
     writings = [WritingData]()
     
-    for i in 0...splitContent.count / 5 - 1 {
-        var newMonkey = MonkeyData()
+    for i in 0...splitContent.count / 4 - 1 {
+        var entry = WritingData()
         
-        for x in 0...5 {
-            let data = splitContent[i * 6 + x]
+        for x in 0...4 {
+            let data = splitContent[i * 5 + x]
             
             // Name
             if x == 0 {
-                newMonkey.name = data
+                entry.name = data
             }
                 // Description
             else if x == 1 {
-                newMonkey.description = data
+                entry.description = data
             }
                 // Letters/sec
             else if x == 2 {
-                newMonkey.lettersPerSecond = data.toInt()!
+                entry.unlockCost = data.toInt()!
             }
                 // Unlock requirements
             else if x == 3 {
-                newMonkey.unlockCost = parseFloatTuples(data)
+                entry.costLow = data.toInt()!
             }
                 // Modifiers
             else if x == 4 {
-                newMonkey.modifiers = parseFloatTuples(data)
-            }
-                // Unlock cost overrides
-            else if x == 5 {
-                newMonkey.costs = parseFloatTuples(data)
+                entry.costHigh = data.toInt()!
             }
         }
         
-        monkeys.append(newMonkey)
+        writings.append(entry)
     }
     
-    for i in 0...count(monkeys) - 1 {
-        monkeys[i].previousCost = data.monkeyLastCost![i]
-        monkeys[i].previousMod = data.monkeyLastMod![i]
-        monkeys[i].count = data.monkeyCounts![i]
-        monkeys[i].index = i
+    for i in 0...count(writings) - 1 {
+        writings[i].count = data.writingCount![i]
+        writings[i].unlocked = data.writingUnlocked![i]
+        writings[i].level = data.writingLevel![i]
+        writings[i].costLowOffset = data.writingCostLow![i]
+        writings[i].costHighOffset = data.writingCostHigh![i]
+        writings[i].index = i
     }
 }
 
