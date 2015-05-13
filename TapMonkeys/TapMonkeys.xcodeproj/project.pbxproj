@@ -94,6 +94,9 @@
 		0A9B68F61AFFBAE6006628D1 /* DataHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68F51AFFBAE6006628D1 /* DataHeader.xib */; };
 		0A9B68F81AFFF3E7006628D1 /* AnimatedLockView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68F71AFFF3E7006628D1 /* AnimatedLockView.xib */; };
 		0A9B69451B010BBB006628D1 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B69441B010BBB006628D1 /* DataStructures.swift */; };
+		0ABEEC941B03F9C4004AC5B6 /* imgGoofkey.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEEC911B03F9C4004AC5B6 /* imgGoofkey.jpg */; };
+		0ABEEC951B03F9C4004AC5B6 /* imgGoofkey@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEEC921B03F9C4004AC5B6 /* imgGoofkey@2x.jpg */; };
+		0ABEEC961B03F9C4004AC5B6 /* imgGoofkey@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEEC931B03F9C4004AC5B6 /* imgGoofkey@3x.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,6 +202,9 @@
 		0A9B68F51AFFBAE6006628D1 /* DataHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataHeader.xib; sourceTree = "<group>"; };
 		0A9B68F71AFFF3E7006628D1 /* AnimatedLockView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimatedLockView.xib; sourceTree = "<group>"; };
 		0A9B69441B010BBB006628D1 /* DataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
+		0ABEEC911B03F9C4004AC5B6 /* imgGoofkey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = imgGoofkey.jpg; path = Images/imgGoofkey.jpg; sourceTree = "<group>"; };
+		0ABEEC921B03F9C4004AC5B6 /* imgGoofkey@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "imgGoofkey@2x.jpg"; path = "Images/imgGoofkey@2x.jpg"; sourceTree = "<group>"; };
+		0ABEEC931B03F9C4004AC5B6 /* imgGoofkey@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "imgGoofkey@3x.jpg"; path = "Images/imgGoofkey@3x.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -352,6 +358,9 @@
 		0A9B68E81AFDCD51006628D1 /* Monkeys */ = {
 			isa = PBXGroup;
 			children = (
+				0ABEEC911B03F9C4004AC5B6 /* imgGoofkey.jpg */,
+				0ABEEC921B03F9C4004AC5B6 /* imgGoofkey@2x.jpg */,
+				0ABEEC931B03F9C4004AC5B6 /* imgGoofkey@3x.jpg */,
 				0A552A441B03E21C00CD8E78 /* imgFingerMonkey.jpg */,
 				0A552A451B03E21C00CD8E78 /* imgFingerMonkey@2x.jpg */,
 				0A552A461B03E21C00CD8E78 /* imgFingerMonkey@3x.jpg */,
@@ -479,6 +488,7 @@
 				TargetAttributes = {
 					0A9B68761AFD3DE7006628D1 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = S7BT87895F;
 					};
 					0A9B688E1AFD3DE7006628D1 = {
 						CreatedOnToolsVersion = 6.3;
@@ -526,6 +536,7 @@
 				0A9B68C71AFDA0E5006628D1 /* achievementsTab@3x.png in Resources */,
 				0A552A3C1B03D51700CD8E78 /* animatedLock11.png in Resources */,
 				0A9B688A1AFD3DE7006628D1 /* LaunchScreen.xib in Resources */,
+				0ABEEC961B03F9C4004AC5B6 /* imgGoofkey@3x.jpg in Resources */,
 				0A552A371B03D51700CD8E78 /* animatedLock09@2x.png in Resources */,
 				0A552A281B03D51700CD8E78 /* animatedLock04@2x.png in Resources */,
 				0A9B68D21AFDA4E0006628D1 /* statsTab@2x.png in Resources */,
@@ -564,6 +575,7 @@
 				0A9B68CB1AFDA301006628D1 /* upgradesTab.png in Resources */,
 				0A552A2A1B03D51700CD8E78 /* animatedLock05.png in Resources */,
 				0A9B68BF1AFD9F7F006628D1 /* incomeTab.png in Resources */,
+				0ABEEC941B03F9C4004AC5B6 /* imgGoofkey.jpg in Resources */,
 				0A552A471B03E21C00CD8E78 /* imgFingerMonkey.jpg in Resources */,
 				0A9B68C61AFDA0E5006628D1 /* achievementsTab@2x.png in Resources */,
 				0A552A3D1B03D51700CD8E78 /* animatedLock11@2x.png in Resources */,
@@ -585,6 +597,7 @@
 				0A9B68B41AFD9AC7006628D1 /* monkeyTab@2x.png in Resources */,
 				0A552A401B03D51700CD8E78 /* animatedLock12@2x.png in Resources */,
 				0A552A2D1B03D51700CD8E78 /* animatedLock06.png in Resources */,
+				0ABEEC951B03F9C4004AC5B6 /* imgGoofkey@2x.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,6 +753,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				INFOPLIST_FILE = TapMonkeys/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -752,6 +766,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				INFOPLIST_FILE = TapMonkeys/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

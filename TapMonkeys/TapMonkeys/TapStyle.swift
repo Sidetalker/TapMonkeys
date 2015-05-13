@@ -89,6 +89,29 @@ public class TapStyle : NSObject {
         CGContextRestoreGState(context)
     }
 
+    public class func drawGoofkey() {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
+
+
+        //// Image Declarations
+        let imgGoofkey = UIImage(named: "imgGoofkey.jpg")!
+
+        //// Oval Drawing
+        var ovalPath = UIBezierPath(ovalInRect: CGRectMake(5, 5, 90, 90))
+        CGContextSaveGState(context)
+        CGContextSetPatternPhase(context, CGSizeMake(5, 4))
+        UIColor(patternImage: imgGoofkey).setFill()
+        ovalPath.fill()
+        CGContextRestoreGState(context)
+        CGContextSaveGState(context)
+        CGContextSetShadowWithColor(context, TapStyle.picShadow.shadowOffset, TapStyle.picShadow.shadowBlurRadius, (TapStyle.picShadow.shadowColor as! UIColor).CGColor)
+        UIColor.blackColor().setStroke()
+        ovalPath.lineWidth = 0.5
+        ovalPath.stroke()
+        CGContextRestoreGState(context)
+    }
+
     public class func drawWords() {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()
