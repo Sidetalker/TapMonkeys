@@ -101,7 +101,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 
                 if tapView.dataHeader == nil { return }
                 
-                tapView.dataHeader.update(saveData, animated: true)
+                tapView.dataHeader.update(saveData, animated: false)
             }
             if let monkeyView = view as? MonkeyViewController {
                 if stage == 2 {
@@ -113,7 +113,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 
                 if monkeyView.dataHeader == nil { return }
                 
-                monkeyView.dataHeader.update(saveData, animated: true)
+                monkeyView.dataHeader.update(saveData, animated: false)
             }
             if let writingView = view as? WritingViewController {
                 if stage == 6 {
@@ -125,7 +125,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 
                 if writingView.dataHeader == nil { return }
                 
-                writingView.dataHeader.update(saveData, animated: true)
+                writingView.dataHeader.update(saveData, animated: false)
             }
         }
     }
@@ -220,7 +220,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         return self.tabBar.bounds.size.height
     }
     
-    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         initializeHeaders()
         
         if let tapView = viewController as? TapViewController {
@@ -238,5 +238,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 saveData.stage = 7
             }
         }
+        
+        return true
     }
 }

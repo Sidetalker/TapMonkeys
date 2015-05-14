@@ -165,7 +165,7 @@ class DataHeader: UIView {
         
         align()
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.whiteColor()
     }
     
     func align() {

@@ -68,7 +68,9 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
                 lockView.delegate = self
                 lockView.type = AnimatedLockViewType.Monkey
                 
-                cell.contentView.addSubview(lockView)
+                if index == 0 {
+                    cell.contentView.addSubview(lockView)
+                }
             }
         }
     }
@@ -88,10 +90,10 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             let curMonkey = monkeys[index]
             let curPrice = curMonkey.getPrice(1).0
             
-            buyButton.monkeyIndex = index
             monkeyPic.monkeyIndex = index
             monkeyPic.setNeedsDisplay()
             
+            buyButton.monkeyIndex = index
             buyButton.delegate = self
             buyButton.setNeedsDisplay()
             
@@ -249,11 +251,8 @@ class MonkeyBuyButton: UIView {
     
     override func drawRect(rect: CGRect) {
         let price = monkeys[monkeyIndex].getPrice(1).0
-        var text = "FREE"
         
-        if price > 0 {
-            text = "$\(price)"
-        }
+        let text = NSString(format: "$%.2f", price) as String
         
         TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
     }

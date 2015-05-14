@@ -112,15 +112,15 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSM-ZY-84r">
-                                <rect key="frame" x="0.0" y="95" width="300" height="356"/>
+                                <rect key="frame" x="0.0" y="96" width="300" height="355"/>
                                 <connections>
                                     <segue destination="18K-1X-0w3" kind="embed" identifier="segueWritingTable" id="LF4-4a-LOB"/>
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="QSM-ZY-84r" firstAttribute="top" secondItem="6xA-pS-WjW" secondAttribute="bottom" id="Oku-x6-jeg"/>
+                            <constraint firstItem="QSM-ZY-84r" firstAttribute="top" secondItem="6xA-pS-WjW" secondAttribute="bottom" constant="1" id="Oku-x6-jeg"/>
                             <constraint firstItem="ENU-VF-G4R" firstAttribute="top" secondItem="QSM-ZY-84r" secondAttribute="bottom" id="V5Q-N3-pEz"/>
                             <constraint firstItem="6xA-pS-WjW" firstAttribute="leading" secondItem="YsF-yu-THg" secondAttribute="leadingMargin" constant="-16" id="WQh-HC-GVO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QSM-ZY-84r" secondAttribute="trailing" constant="-16" id="fx8-Sa-Tc9"/>
@@ -153,7 +153,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4V2-L1-dRe">
-                                <rect key="frame" x="0.0" y="95" width="300" height="356"/>
+                                <rect key="frame" x="0.0" y="96" width="300" height="355"/>
                                 <connections>
                                     <segue destination="oo1-WO-HrJ" kind="embed" identifier="segueMonkeyTable" id="8eu-59-jMw"/>
                                 </connections>
@@ -166,10 +166,10 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="U07-LZ-yQE" firstAttribute="top" secondItem="qNn-4U-V5z" secondAttribute="bottom" id="0vK-rE-pPL"/>
-                            <constraint firstItem="4V2-L1-dRe" firstAttribute="top" secondItem="U07-LZ-yQE" secondAttribute="bottom" id="80w-5G-UVg"/>
+                            <constraint firstItem="4V2-L1-dRe" firstAttribute="top" secondItem="U07-LZ-yQE" secondAttribute="bottom" constant="1" id="80w-5G-UVg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4V2-L1-dRe" secondAttribute="trailing" constant="-16" id="QEd-Oc-04n"/>
                             <constraint firstItem="U07-LZ-yQE" firstAttribute="leading" secondItem="eqp-GY-pZ4" secondAttribute="leadingMargin" constant="-16" id="X6Q-5H-pM9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="U07-LZ-yQE" secondAttribute="trailing" constant="-16" id="Xaa-Wh-wnW"/>
@@ -193,7 +193,7 @@
             <objects>
                 <tableViewController id="oo1-WO-HrJ" customClass="MonkeyTableViewController" customModule="TapMonkeys" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="238" sectionHeaderHeight="22" sectionFooterHeight="22" id="ccU-Iv-eDI">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="356"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="355"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -315,8 +315,8 @@
         <scene sceneID="io8-BR-lqu">
             <objects>
                 <tableViewController id="18K-1X-0w3" customClass="WritingTableViewController" customModule="TapMonkeys" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="232" sectionHeaderHeight="22" sectionFooterHeight="22" id="go2-2H-xEi">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="356"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="232" sectionHeaderHeight="22" sectionFooterHeight="22" id="go2-2H-xEi">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="355"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

@@ -56,6 +56,7 @@ struct WritingData {
     
     var count: Int = 0
     var unlocked: Bool = false
+    var values = [Float]()
     var level: Int = 1
     
     // Return (lettersLow, lettersHigh)
@@ -64,6 +65,10 @@ struct WritingData {
         let high = costHigh + costHighOffset
         
         return (low * count, high * count)
+    }
+    
+    func getValue() -> Float {
+        return values[level - 1]
     }
 }
 
@@ -74,13 +79,13 @@ func loadWritings(data: SaveData) {
     
     writings = [WritingData]()
     
-    for i in 0...splitContent.count / 4 - 1 {
+    for i in 0...splitContent.count / 5 - 1 {
         var entry = WritingData()
         
-        for x in 0...4 {
-            let data = splitContent[i * 5 + x]
+        for x in 0...5 {
+            let data = splitContent[i * 6 + x]
             
-            // Name
+                // Name
             if x == 0 {
                 entry.name = data
             }
@@ -88,16 +93,24 @@ func loadWritings(data: SaveData) {
             else if x == 1 {
                 entry.description = data
             }
-                // Letters/sec
+                // Value
             else if x == 2 {
+                let result = parseFloatTuples(data)
+                
+                for value in result {
+                    entry.values.append(value.1)
+                }
+            }
+                // Letters/sec
+            else if x == 3 {
                 entry.unlockCost = data.toInt()!
             }
                 // Unlock requirements
-            else if x == 3 {
+            else if x == 4 {
                 entry.costLow = data.toInt()!
             }
                 // Modifiers
-            else if x == 4 {
+            else if x == 5 {
                 entry.costHigh = data.toInt()!
             }
         }

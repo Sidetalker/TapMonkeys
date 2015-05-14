@@ -34,7 +34,7 @@ class WritingViewController: UIViewController {
     }
 }
 
-class WritingTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class WritingTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, AnimatedLockDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +63,8 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
                 let lockView = AnimatedLockView(frame: cell.contentView.frame)
                 lockView.tag = 8
                 lockView.index = indexPath.row
+                lockView.delegate = self
+                lockView.type = AnimatedLockViewType.Writing
             }
         }
     }
@@ -73,15 +75,32 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
             pic = cell.viewWithTag(1) as? WritingPicture,
             title = cell.viewWithTag(2) as? UILabel,
             owned = cell.viewWithTag(3) as? UILabel,
-            level = cell.viewWithTag(4) as? UILabel,
-            button = cell.viewWithTag(5) as? WritingBuyButton,
-            description = cell.viewWithTag(6) as? UILabel
-        
+            value = cell.viewWithTag(4) as? UILabel,
+            level = cell.viewWithTag(5) as? UILabel,
+            button = cell.viewWithTag(6) as? WritingBuyButton,
+            description = cell.viewWithTag(7) as? UILabel
         {
+            let index = indexPath.row
+            
+            pic.writingIndex = index
+            title.text = writings[index].name
+            description.text = writings[index].description
+            owned.text = "Owned: \(writings[index].count)"
+            value.text = "Value: \(writings[index].getValue())"
+            level.text = "Level: \(writings[index].level)"
+            button.writingIndex = index
+            
+            pic.setNeedsDisplay()
+            button.setNeedsDisplay()
+            
             return cell
         }
         
         return UITableViewCell()
+    }
+    
+    func tappedLock(view: AnimatedLockView) {
+        return
     }
 }
 
@@ -107,6 +126,12 @@ class WritingPicture: UIView {
     override func drawRect(rect: CGRect) {
         if writingIndex == 0 {
             TapStyle.drawWords()
+        }
+        else if writingIndex == 1 {
+            TapStyle.drawFragmentedSentence()
+        }
+        else if writingIndex == 2 {
+            TapStyle.drawSentence()
         }
     }
 }
@@ -136,10 +161,8 @@ class WritingBuyButton: UIView {
     
     override func drawRect(rect: CGRect) {
         if state == 0 {
-//            let priceLow = writings[writingIndex].getPrice(1).0
-//            let priceHigh = writings[writingIndex].getPrice(1).1
-            let priceLow = 6
-            let priceHigh = 10
+            let priceLow = writings[writingIndex].getPrice(1).0
+            let priceHigh = writings[writingIndex].getPrice(1).1
             var text = "\(priceLow) - \(priceHigh) Letters"
             
             TapStyle.drawBuy(frame: rect, monkeyBuyText: text)

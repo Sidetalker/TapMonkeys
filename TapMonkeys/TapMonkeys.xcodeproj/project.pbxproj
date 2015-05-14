@@ -104,6 +104,9 @@
 		0ABEECA21B0401CD004AC5B6 /* imgFragmentedSentence.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEEC9F1B0401CD004AC5B6 /* imgFragmentedSentence.jpg */; };
 		0ABEECA31B0401CD004AC5B6 /* imgFragmentedSentence@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEECA01B0401CD004AC5B6 /* imgFragmentedSentence@2x.jpg */; };
 		0ABEECA41B0401CD004AC5B6 /* imgFragmentedSentence@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEECA11B0401CD004AC5B6 /* imgFragmentedSentence@3x.jpg */; };
+		0ABEECA81B05440C004AC5B6 /* imgSentence.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEECA51B05440C004AC5B6 /* imgSentence.jpg */; };
+		0ABEECA91B05440C004AC5B6 /* imgSentence@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEECA61B05440C004AC5B6 /* imgSentence@2x.jpg */; };
+		0ABEECAA1B05440C004AC5B6 /* imgSentence@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEECA71B05440C004AC5B6 /* imgSentence@3x.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,6 +222,9 @@
 		0ABEEC9F1B0401CD004AC5B6 /* imgFragmentedSentence.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = imgFragmentedSentence.jpg; path = Images/imgFragmentedSentence.jpg; sourceTree = "<group>"; };
 		0ABEECA01B0401CD004AC5B6 /* imgFragmentedSentence@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "imgFragmentedSentence@2x.jpg"; path = "Images/imgFragmentedSentence@2x.jpg"; sourceTree = "<group>"; };
 		0ABEECA11B0401CD004AC5B6 /* imgFragmentedSentence@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "imgFragmentedSentence@3x.jpg"; path = "Images/imgFragmentedSentence@3x.jpg"; sourceTree = "<group>"; };
+		0ABEECA51B05440C004AC5B6 /* imgSentence.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = imgSentence.jpg; path = Images/imgSentence.jpg; sourceTree = "<group>"; };
+		0ABEECA61B05440C004AC5B6 /* imgSentence@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "imgSentence@2x.jpg"; path = "Images/imgSentence@2x.jpg"; sourceTree = "<group>"; };
+		0ABEECA71B05440C004AC5B6 /* imgSentence@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "imgSentence@3x.jpg"; path = "Images/imgSentence@3x.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +249,9 @@
 		0A552A501B03E23100CD8E78 /* Writing */ = {
 			isa = PBXGroup;
 			children = (
+				0ABEECA51B05440C004AC5B6 /* imgSentence.jpg */,
+				0ABEECA61B05440C004AC5B6 /* imgSentence@2x.jpg */,
+				0ABEECA71B05440C004AC5B6 /* imgSentence@3x.jpg */,
 				0ABEEC9F1B0401CD004AC5B6 /* imgFragmentedSentence.jpg */,
 				0ABEECA01B0401CD004AC5B6 /* imgFragmentedSentence@2x.jpg */,
 				0ABEECA11B0401CD004AC5B6 /* imgFragmentedSentence@3x.jpg */,
@@ -555,6 +564,7 @@
 				0A552A491B03E21C00CD8E78 /* imgFingerMonkey@3x.jpg in Resources */,
 				0A9B68EC1AFF917F006628D1 /* monkeys.dat in Resources */,
 				0A9B68F21AFF952B006628D1 /* marketTab@2x.png in Resources */,
+				0ABEECAA1B05440C004AC5B6 /* imgSentence@3x.jpg in Resources */,
 				0A9B68C71AFDA0E5006628D1 /* achievementsTab@3x.png in Resources */,
 				0A552A3C1B03D51700CD8E78 /* animatedLock11.png in Resources */,
 				0A9B688A1AFD3DE7006628D1 /* LaunchScreen.xib in Resources */,
@@ -587,12 +597,14 @@
 				0A9B68D81AFDA5A5006628D1 /* settingsTab@2x.png in Resources */,
 				0A9B68F31AFF952B006628D1 /* marketTab@3x.png in Resources */,
 				0A552A2C1B03D51700CD8E78 /* animatedLock05@3x.png in Resources */,
+				0ABEECA81B05440C004AC5B6 /* imgSentence.jpg in Resources */,
 				0A9B68C51AFDA0E5006628D1 /* achievementsTab.png in Resources */,
 				0A9B68B51AFD9AC7006628D1 /* monkeyTab@3x.png in Resources */,
 				0A9B68C01AFD9F7F006628D1 /* incomeTab@2x.png in Resources */,
 				0A552A321B03D51700CD8E78 /* animatedLock07@3x.png in Resources */,
 				0A552A2E1B03D51700CD8E78 /* animatedLock06@2x.png in Resources */,
 				0A552A3F1B03D51700CD8E78 /* animatedLock12.png in Resources */,
+				0ABEECA91B05440C004AC5B6 /* imgSentence@2x.jpg in Resources */,
 				0A9B68F81AFFF3E7006628D1 /* AnimatedLockView.xib in Resources */,
 				0A9B68AB1AFD8DBB006628D1 /* alphaTab@2x.png in Resources */,
 				0A9B68CB1AFDA301006628D1 /* upgradesTab.png in Resources */,
