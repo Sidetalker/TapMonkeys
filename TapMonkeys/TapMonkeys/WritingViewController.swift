@@ -42,7 +42,7 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
         super.viewDidLoad()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 250
+        self.tableView.estimatedRowHeight = 232
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
