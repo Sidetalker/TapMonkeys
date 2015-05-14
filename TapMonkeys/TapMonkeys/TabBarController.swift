@@ -14,6 +14,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     var monkeyTimer = NSTimer()
     var lettersPerBuffer = 0
+    var individualLettersBuffer = [Int]()
     
     var saveData = SaveData()
     
@@ -48,11 +49,17 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let interval = monkeyProductionTimer()
         
         lettersPerBuffer = fullLettersPer(interval)
+        individualLettersBuffer = individualLettersPer(interval)
         
         monkeyTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(interval), target: self, selector: Selector("getMonkeyLetters"), userInfo: nil, repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(monkeyTimer, forMode: NSRunLoopCommonModes)
     }
     
     func getMonkeyLetters() {
+        for i in 0...count(monkeys) - 1 {
+            monkeys[i].totalProduced += individualLettersBuffer[i]
+        }
+        
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("updateHeaders", object: self, userInfo: [
             "letters" : lettersPerBuffer,

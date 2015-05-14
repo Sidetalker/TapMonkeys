@@ -140,7 +140,9 @@ struct MonkeyData {
     }
     
     func lettersPer(timeInterval: Float) -> Int {
-        return Int(Float(self.count * self.lettersPerSecond) * timeInterval)
+        println("count: \(self.count)\nLPS: \(lettersPerSecond)\n")
+        
+        return Int(Float(self.count * self.lettersPerSecond) / timeInterval)
     }
     
     func canPurchase(count: Int, data: SaveData) -> Bool {
