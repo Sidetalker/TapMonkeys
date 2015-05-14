@@ -15,8 +15,14 @@ class WritingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureWriting()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName("updateHeaders", object: self, userInfo: [
+            "letters" : 0,
+            "animated" : true
+            ])
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -28,13 +34,9 @@ class WritingViewController: UIViewController {
             writingTable = segue.destinationViewController as? WritingViewController
         }
     }
-    
-    func configureWriting() {
-        
-    }
 }
 
-class WritingTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, AnimatedLockDelegate {
+class WritingTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, AnimatedLockDelegate, WritingBuyButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,14 +83,17 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
             description = cell.viewWithTag(7) as? UILabel
         {
             let index = indexPath.row
+            let moneyText = NSString(format: "%.2f", writings[index].getValue()) as String
             
             pic.writingIndex = index
             title.text = writings[index].name
             description.text = writings[index].description
             owned.text = "Owned: \(writings[index].count)"
-            value.text = "Value: \(writings[index].getValue())"
+            value.text = "Value: $\(moneyText)"
             level.text = "Level: \(writings[index].level)"
             button.writingIndex = index
+            
+            button.delegate = self
             
             pic.setNeedsDisplay()
             button.setNeedsDisplay()
@@ -97,6 +102,30 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
         }
         
         return UITableViewCell()
+    }
+    
+    func buyTapped(writingIndex: Int) {
+        var saveData = load(self.tabBarController)
+        var writing = writings[writingIndex]
+        
+        var price = writing.getPrice(1).2
+        
+        if let newSave = writing.purchase(1, data: saveData) {
+            save(self.tabBarController, newSave)
+            
+            writings[writingIndex] = writing
+            
+            delay(0.2, {
+                self.tableView.reloadData()
+                
+                let nc = NSNotificationCenter.defaultCenter()
+                nc.postNotificationName("updateHeaders", object: self, userInfo: [
+                    "letters" : -price,
+                    "animated" : false
+                    ])
+                nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
+            })
+        }
     }
     
     func tappedLock(view: AnimatedLockView) {

@@ -59,16 +59,41 @@ struct WritingData {
     var values = [Float]()
     var level: Int = 1
     
-    // Return (lettersLow, lettersHigh)
-    func getPrice(count: Int) -> (Int, Int) {
+    // Return (lettersLow, lettersHigh, lettersRandom)
+    func getPrice(count: Int) -> (Int, Int, Int) {
         let low = costLow + costLowOffset
         let high = costHigh + costHighOffset
+        let random = randomIntBetweenNumbers(low, high)
         
-        return (low * count, high * count)
+        return (low * count, high * count, random)
     }
     
     func getValue() -> Float {
-        return values[level - 1]
+        return values[level - 1] * Float(count)
+    }
+    
+    mutating func purchase(count: Int, data: SaveData) -> SaveData? {
+        var curData = data
+        let price = getPrice(count)
+        
+        if curData.letters! >= count * price.1 {
+            var curPrice = 0
+            
+            for i in 0...count - 1 {
+                curPrice += randomIntBetweenNumbers(price.0, price.1)
+            }
+            
+            curData.letters! -= curPrice
+            curData.writingCount![index] += count
+            curData.writingCostLow![index] = costLowOffset
+            curData.writingCostHigh![index] = costHighOffset
+            
+            self.count += count
+            
+            return curData
+        }
+        
+        return nil
     }
 }
 

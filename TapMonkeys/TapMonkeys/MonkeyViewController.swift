@@ -184,7 +184,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
                     
                     let nc = NSNotificationCenter.defaultCenter()
                     nc.postNotificationName("updateHeaders", object: self, userInfo: [
-                        "letters" : price,
+                        "money" : price,
                         "animated" : false
                         ])
                     nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
