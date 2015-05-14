@@ -133,6 +133,12 @@ class WritingPicture: UIView {
         else if writingIndex == 2 {
             TapStyle.drawSentence()
         }
+        else if writingIndex == 3 {
+            TapStyle.drawTextMessage()
+        }
+        else if writingIndex == 4 {
+            TapStyle.drawTweet()
+        }
     }
 }
 

@@ -79,7 +79,7 @@ func loadWritings(data: SaveData) {
     
     writings = [WritingData]()
     
-    for i in 0...splitContent.count / 5 - 1 {
+    for i in 0...splitContent.count / 6 - 1 {
         var entry = WritingData()
         
         for x in 0...5 {

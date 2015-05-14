@@ -250,6 +250,52 @@ public class TapStyle : NSObject {
         CGContextRestoreGState(context)
     }
 
+    public class func drawTextMessage() {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
+
+
+        //// Image Declarations
+        let imgTextMessage = UIImage(named: "imgTextMessage.png")!
+
+        //// Oval Drawing
+        var ovalPath = UIBezierPath(ovalInRect: CGRectMake(5, 5, 90, 90))
+        CGContextSaveGState(context)
+        CGContextSetPatternPhase(context, CGSizeMake(5, 5))
+        UIColor(patternImage: imgTextMessage).setFill()
+        ovalPath.fill()
+        CGContextRestoreGState(context)
+        CGContextSaveGState(context)
+        CGContextSetShadowWithColor(context, TapStyle.picShadow.shadowOffset, TapStyle.picShadow.shadowBlurRadius, (TapStyle.picShadow.shadowColor as! UIColor).CGColor)
+        UIColor.blackColor().setStroke()
+        ovalPath.lineWidth = 0.5
+        ovalPath.stroke()
+        CGContextRestoreGState(context)
+    }
+
+    public class func drawTweet() {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
+
+
+        //// Image Declarations
+        let imgTwitter = UIImage(named: "imgTwitter.png")!
+
+        //// Oval Drawing
+        var ovalPath = UIBezierPath(ovalInRect: CGRectMake(5, 5, 90, 90))
+        CGContextSaveGState(context)
+        CGContextSetPatternPhase(context, CGSizeMake(3, 94))
+        UIColor(patternImage: imgTwitter).setFill()
+        ovalPath.fill()
+        CGContextRestoreGState(context)
+        CGContextSaveGState(context)
+        CGContextSetShadowWithColor(context, TapStyle.picShadow.shadowOffset, TapStyle.picShadow.shadowBlurRadius, (TapStyle.picShadow.shadowColor as! UIColor).CGColor)
+        UIColor.blackColor().setStroke()
+        ovalPath.lineWidth = 0.5
+        ovalPath.stroke()
+        CGContextRestoreGState(context)
+    }
+
 }
 
 

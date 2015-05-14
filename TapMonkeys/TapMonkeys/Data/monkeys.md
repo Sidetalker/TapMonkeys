@@ -50,7 +50,7 @@
 
 | Image | Description | Letters / sec |
 | ----- | ----------- | :-----------: |
-| ![Sea Monkey](https://github.com/Sidetalker/TapMonkeys/blob/feature/writingScreen/TapMonkeys/TapMonkeys/Images/imgSeaMonkey%403x.jpg) | The Loch Ness Sea Monkey has been scaring the kilts off Scottish swimmers since 1933. It has amassed an impressive collection of human arms over the years, more than sufficient for tapping.| 12 |
+| ![Sea Monkey](https://github.com/Sidetalker/TapMonkeys/blob/feature/writingScreen/TapMonkeys/TapMonkeys/Images/imgSeaMonkey%403x.png) | The Loch Ness Sea Monkey has been scaring the kilts off Scottish swimmers since 1933. It has amassed an impressive collection of human arms over the years, more than sufficient for tapping.| 12 |
 
 | Count | Modifier | Cost Override | 
 | :---: | :------: | :-----------: |
@@ -65,7 +65,7 @@
 
 | Image | Description | Letters / sec |
 | ----- | ----------- | :-----------: |
-| ![Jabba the Monkey](https://github.com/Sidetalker/TapMonkeys/blob/feature/writingScreen/TapMonkeys/TapMonkeys/Images/imgSeaMonkey%403x.jpg) | Having successfully collaborated with Leia to fake his own death, Jabba the Hutt officially became a post-op monkey. Jabba still struggles with his weight. | 15 |
+| ![Jabba the Monkey](https://github.com/Sidetalker/TapMonkeys/blob/feature/writingScreen/TapMonkeys/TapMonkeys/Images/imgJabbaTheMonkey%403x.png) | Having successfully collaborated with Leia to fake his own death, Jabba the Hutt officially became a post-op monkey. Jabba still struggles with his weight. | 15 |
 
 | Count | Modifier | Cost Override | 
 | :---: | :------: | :-----------: |
