@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum AnimatedLockViewType {
+    case Monkey
+    case Writing
+}
+
 protocol AnimatedLockDelegate {
     func tappedLock(view: AnimatedLockView)
 }
@@ -19,6 +24,7 @@ class AnimatedLockView: UIView {
     @IBOutlet weak var staticText: UILabel!
     
     var locked = true
+    var type = AnimatedLockViewType.Monkey
     var index = -1
     var blurView: UIVisualEffectView!
     var animator: UIDynamicAnimator?

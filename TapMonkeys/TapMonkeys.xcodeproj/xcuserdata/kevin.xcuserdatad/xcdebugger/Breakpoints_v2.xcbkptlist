@@ -297,38 +297,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453079667.897182"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453081474.687372"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "configureMonkeys()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "TapMonkeys/Helpers.swift"
             timestampString = "453306478.117077"
             startingColumnNumber = "9223372036854775807"
@@ -346,27 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453081474.687372"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "configureMonkeys()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453235307.432227"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "tableView(_:willDisplayCell:forRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -410,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453306115.977826"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "281"
-            endingLineNumber = "281"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "tappedMe(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -426,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453306115.977826"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "buyTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -442,11 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453306115.977826"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
             landmarkName = "tappedMe(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -458,11 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453306115.977826"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "init(frame:strokeWidth:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -746,11 +698,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453235307.432227"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -762,11 +714,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453306115.977826"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "buyTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -778,11 +730,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453306115.977826"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "buyTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -794,11 +746,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453306115.977826"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "buyTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -810,11 +762,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453306115.977826"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "buyTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -842,11 +794,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453306115.977826"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "tappedLock(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1018,11 +970,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453235307.432227"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "tableView(_:willDisplayCell:forRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1034,11 +986,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453306115.977826"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "tappedLock(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1050,11 +1002,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/MonkeyViewController.swift"
-            timestampString = "453235307.432227"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "tableView(_:willDisplayCell:forRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1274,11 +1226,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/WritingViewController.swift"
-            timestampString = "453235314.579394"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1290,11 +1242,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapMonkeys/WritingViewController.swift"
-            timestampString = "453235367.533435"
+            timestampString = "453314987.090527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>

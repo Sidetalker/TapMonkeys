@@ -123,7 +123,7 @@ func readDefaults() -> SaveData {
     save.monkeyUnlocks = defaults.arrayForKey("monkeyUnlocks") as? [Bool]
     save.monkeyCounts = defaults.arrayForKey("monkeyCounts") as? [Int]
     save.monkeyTotals = defaults.arrayForKey("monkeyTotals") as? [Int]
-    save.monkeyLastCost = defaults.arrayForKey("monkeyLastCost") as? [Int]
+    save.monkeyLastCost = defaults.arrayForKey("monkeyLastCost") as? [Float]
     save.monkeyLastMod = defaults.arrayForKey("monkeyLastMod") as? [Float]
     
     save.writingCount = defaults.arrayForKey("writingCount") as? [Int]
@@ -189,7 +189,7 @@ func validate(save: SaveData) -> SaveData {
     }
     
     if newSave.monkeyLastCost == nil {
-        newSave.monkeyLastCost = [Int](count: numMonkeys, repeatedValue: 0)
+        newSave.monkeyLastCost = [Float](count: numMonkeys, repeatedValue: 0.0)
     }
     else if count(newSave.monkeyLastCost!) < numMonkeys {
         for i in count(newSave.monkeyLastCost!)...numMonkeys - 1 {

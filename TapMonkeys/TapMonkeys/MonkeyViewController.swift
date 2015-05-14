@@ -15,8 +15,6 @@ class MonkeyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureMonkeys()
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -29,23 +27,6 @@ class MonkeyViewController: UIViewController {
             "letters" : 0,
             "animated" : true
             ])
-    }
-    
-    func configureMonkeys() {
-        let saveData = load(self.tabBarController)
-        
-        let totalMonkeys = count(monkeys)
-        let monkeyCounts = saveData.monkeyCounts!
-        let monkeyUnlocks = saveData.monkeyUnlocks!
-        
-        if totalMonkeys != count(monkeyCounts) {
-            println("Houston, we have a problem")
-        }
-        
-        for i in 0...totalMonkeys - 1 {
-            monkeys[i].unlocked = monkeyUnlocks[i]
-            monkeys[i].count = monkeyCounts[i]
-        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -69,7 +50,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return count(monkeys) == 0 ? 0 : count(monkeys)
+        return count(monkeys)
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -85,6 +66,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
                 lockView.tag = 8
                 lockView.index = indexPath.row
                 lockView.delegate = self
+                lockView.type = AnimatedLockViewType.Monkey
                 
                 cell.contentView.addSubview(lockView)
             }

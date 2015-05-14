@@ -44,15 +44,40 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return count(writings) == 0 ? 0 : 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return count(writings)
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let index = indexPath.row
+        let curWriting = writings[index]
+        
+        if !curWriting.unlocked {
+            if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
+                // That betch is hooked up, no worriez
+            }
+            else {
+                let lockView = AnimatedLockView(frame: cell.contentView.frame)
+                lockView.tag = 8
+                lockView.index = indexPath.row
+            }
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("cellWriting") as? UITableViewCell {
+        if let
+            cell = tableView.dequeueReusableCellWithIdentifier("cellWriting") as? UITableViewCell,
+            pic = cell.viewWithTag(1) as? WritingPicture,
+            title = cell.viewWithTag(2) as? UILabel,
+            owned = cell.viewWithTag(3) as? UILabel,
+            level = cell.viewWithTag(4) as? UILabel,
+            button = cell.viewWithTag(5) as? WritingBuyButton,
+            description = cell.viewWithTag(6) as? UILabel
+        
+        {
             return cell
         }
         
