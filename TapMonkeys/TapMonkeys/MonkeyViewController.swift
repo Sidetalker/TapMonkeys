@@ -15,8 +15,6 @@ class MonkeyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureMonkeys()
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -31,39 +29,20 @@ class MonkeyViewController: UIViewController {
             ])
     }
     
-    func configureMonkeys() {
-        let saveData = load(self.tabBarController)
-        
-        let totalMonkeys = count(monkeys)
-        let monkeyCounts = saveData.monkeyCounts!
-        let monkeyUnlocks = saveData.monkeyUnlocks!
-        
-        if totalMonkeys != count(monkeyCounts) {
-            println("Houston, we have a problem")
-        }
-        
-        for i in 0...totalMonkeys - 1 {
-            monkeys[i].unlocked = monkeyUnlocks[i]
-            monkeys[i].count = monkeyCounts[i]
-        }
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "segueMonkeyTable" {
-            if let dest = segue.destinationViewController as? MonkeyTableViewController {
-                monkeyTable = dest
-            }
+            monkeyTable = segue.destinationViewController as? MonkeyTableViewController
         }
     }
 }
 
-class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, MonkeyLockDelegate, MonkeyBuyButtonDelegate {
+class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, AnimatedLockDelegate, MonkeyBuyButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 25
+        self.tableView.estimatedRowHeight = 250
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -71,7 +50,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return count(monkeys) == 0 ? 0 : count(monkeys)
+        return count(monkeys)
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -79,16 +58,19 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         let curMonkey = monkeys[index]
         
         if !curMonkey.unlocked {
-            if let lockView = cell.contentView.viewWithTag(8) as? MonkeyLockView {
+            if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
                 // We're good to go I guess
             }
             else {
-                let lockView = MonkeyLockView(frame: cell.contentView.frame)
+                let lockView = AnimatedLockView(frame: cell.contentView.frame)
                 lockView.tag = 8
                 lockView.index = indexPath.row
                 lockView.delegate = self
+                lockView.type = AnimatedLockViewType.Monkey
                 
-                cell.contentView.addSubview(lockView)
+                if index == 0 {
+                    cell.contentView.addSubview(lockView)
+                }
             }
         }
     }
@@ -100,7 +82,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             name = cell.viewWithTag(2) as? UILabel,
             owned = cell.viewWithTag(3) as? UILabel,
             frequency = cell.viewWithTag(4) as? UILabel,
-            total = cell.viewWithTag(5) as? UILabel,
+            total = cell.viewWithTag(5) as? AutoUpdateLabel,
             buyButton = cell.viewWithTag(6) as? MonkeyBuyButton,
             description = cell.viewWithTag(7) as? UILabel
         {
@@ -108,14 +90,18 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             let curMonkey = monkeys[index]
             let curPrice = curMonkey.getPrice(1).0
             
-            buyButton.monkeyIndex = index
             monkeyPic.monkeyIndex = index
             monkeyPic.setNeedsDisplay()
             
+            buyButton.monkeyIndex = index
             buyButton.delegate = self
             buyButton.setNeedsDisplay()
             
+            total.index = index
+            total.controller = self.tabBarController as? TabBarController
+            
             name.text = curMonkey.name
+            description.text = curMonkey.description
             owned.text = "Owned: \(curMonkey.count)"
             frequency.text = "Letters/sec: \(curMonkey.lettersPerSecondCumulative())"
             total.text = "Total Letters: \(curMonkey.totalProduced)"
@@ -129,7 +115,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         return UITableViewCell()
     }
     
-    func tappedLock(view: MonkeyLockView) {
+    func tappedLock(view: AnimatedLockView) {
         var saveData = load(self.tabBarController)
         let index = view.index
         
@@ -154,13 +140,6 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
                 var price = monkey.getPrice(1).0 * -1
                 
                 saveData = monkey.purchase(1, data: saveData)!
-                
-                if let
-                    monkeyCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: monkeyIndex, inSection: 0)),
-                    monkeyPic = monkeyCell.viewWithTag(1) as? MonkeyPicture
-                {
-//                    monkeyPic.getFunky()
-                }
                 
                 monkeys[monkeyIndex] = monkey
                 
@@ -205,7 +184,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
                     
                     let nc = NSNotificationCenter.defaultCenter()
                     nc.postNotificationName("updateHeaders", object: self, userInfo: [
-                        "letters" : price,
+                        "money" : price,
                         "animated" : false
                         ])
                     nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
@@ -217,7 +196,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
 
 class MonkeyPicture: UIView {
     var monkeyIndex = 0
-    var strokeWidth: CGFloat = 1
+    var strokeWidth: CGFloat = 0.5
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -236,21 +215,20 @@ class MonkeyPicture: UIView {
     
     override func drawRect(rect: CGRect) {
         if monkeyIndex == 0 {
-            TapStyle.drawFingerMonkey(monkeyStrokeWidth: strokeWidth)
+            TapStyle.drawFingerMonkey()
         }
-    }
-    
-    func getFunky() {
-        let viewTwo = MonkeyPicture(frame: CGRect(origin: CGPointZero, size: self.frame.size), strokeWidth: 0.0)
-        
-        self.addSubview(viewTwo)
-        
-        UIView.animateWithDuration(0.8, animations: { () -> Void in
-            viewTwo.transform = CGAffineTransformMakeScale(1.2, 1.2)
-            viewTwo.alpha = 0.0
-            }, completion: { (Bool) -> Void in
-                viewTwo.removeFromSuperview()
-        })
+        else if monkeyIndex == 1 {
+            TapStyle.drawGoofkey()
+        }
+        else if monkeyIndex == 2 {
+            TapStyle.drawDigitDestroyer()
+        }
+        else if monkeyIndex == 3 {
+            TapStyle.drawSeaMonkey()
+        }
+        else if monkeyIndex == 4 {
+            TapStyle.drawJabbaTheMonkey()
+        }
     }
 }
 
@@ -278,16 +256,11 @@ class MonkeyBuyButton: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-        if state == 0 {
-            let price = monkeys[monkeyIndex].getPrice(1).0
-            var text = "FREE"
-            
-            if price > 0 {
-                text = "$\(price)"
-            }
-            
-            TapStyle.drawBuy1(frame: rect, monkeyBuyText: text)
-        }
+        let price = monkeys[monkeyIndex].getPrice(1).0
+        
+        let text = NSString(format: "$%.2f", price) as String
+        
+        TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
     }
     
     
@@ -306,120 +279,5 @@ class MonkeyBuyButton: UIView {
                     
             })
         }
-    }
-}
-
-protocol MonkeyLockDelegate {
-    func tappedLock(view: MonkeyLockView)
-}
-
-class MonkeyLockView: UIView {
-    @IBOutlet var nibView: UIView!
-    @IBOutlet weak var lockImage: UIImageView!
-    @IBOutlet weak var requirementsText: UILabel!
-    @IBOutlet weak var staticText: UILabel!
-    
-    var locked = true
-    var index = -1
-    var blurView: UIVisualEffectView!
-    var animator: UIDynamicAnimator?
-    var delegate: MonkeyLockDelegate?
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        configure()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        configure()
-    }
-    
-    func configure() {
-        NSBundle.mainBundle().loadNibNamed("MonkeyLockView", owner: self, options: nil)
-        
-        nibView.frame = self.frame
-        
-        self.addSubview(nibView)
-        
-        let blur = UIBlurEffect(style: UIBlurEffectStyle.Light)
-        blurView = UIVisualEffectView(effect: blur)
-        
-        blurView.frame = self.frame
-        blurView.tag = 1
-        
-        self.backgroundColor = UIColor.clearColor()
-        
-        self.nibView.addSubview(blurView)
-        self.nibView.sendSubviewToBack(blurView)
-        
-        var animationImages = [UIImage]()
-        
-        for i in 1...12 {
-            let imageName = "monkeyLock" + (NSString(format: "%02d", i) as String)
-            
-            if let image = UIImage(named: imageName) {
-                animationImages.append(image)
-            }
-            else {
-                println("Error: Unable to load all images for monkey lock sequence")
-                break
-            }
-        }
-        
-        lockImage.animationImages = animationImages
-        lockImage.animationDuration = 0.35
-        lockImage.animationRepeatCount = 1
-        
-        let singleTap = UITapGestureRecognizer(target: self, action: Selector("lockTap:"))
-        
-        self.addGestureRecognizer(singleTap)
-    }
-    
-    func lockTap(sender: UITapGestureRecognizer) {
-        delegate?.tappedLock(self)
-    }
-    
-    func unlock() {
-        lockImage.image = UIImage(named: "monkeyLock12")
-        
-        lockImage.startAnimating()
-        
-        let angularVelocityLock: CGFloat = 0.4
-        let linearVelocityLock = CGPoint(x: 25, y: -150)
-        
-        // Set up the gravitronator
-        let gravity = UIGravityBehavior(items: [lockImage])
-        let velocity = UIDynamicItemBehavior(items: [lockImage])
-        
-        gravity.gravityDirection = CGVectorMake(0, 0.4)
-        
-        velocity.addAngularVelocity(angularVelocityLock, forItem: lockImage)
-        velocity.addLinearVelocity(linearVelocityLock, forItem: lockImage)
-        
-        animator = UIDynamicAnimator(referenceView: self.nibView)
-        animator?.addBehavior(velocity)
-        animator?.addBehavior(gravity)
-        
-        UIView.animateWithDuration(0.5, delay: 0.0, options: nil, animations: { () -> Void in
-            self.requirementsText.alpha = 0.0
-            self.staticText.alpha = 0.0
-            }, completion: { (Bool) -> Void in
-                
-        })
-        
-        UIView.animateWithDuration(1.1, delay: 0.2, options: nil, animations: { () -> Void in
-            self.blurView?.alpha = 0.0
-            }, completion: { (Bool) -> Void in
-                self.removeFromSuperview()
-        })
-        
-        UIView.animateWithDuration(0.51, delay: 0.39, options: nil, animations: { () -> Void in
-            self.lockImage.alpha = 0.0
-            }, completion: { (Bool) -> Void in
-                
-        })
     }
 }

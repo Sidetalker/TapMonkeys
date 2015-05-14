@@ -23,6 +23,7 @@ let gens = [
 ]
 
 var monkeys = [MonkeyData]()
+var writings = [WritingData]()
 
 struct SaveData {
     var stage: Int?
@@ -33,8 +34,123 @@ struct SaveData {
     var monkeyUnlocks: [Bool]?
     var monkeyCounts: [Int]?
     var monkeyTotals: [Int]?
-    var monkeyLastCost: [Int]?
+    var monkeyLastCost: [Float]?
     var monkeyLastMod: [Float]?
+    
+    var writingCount: [Int]?
+    var writingUnlocked: [Bool]?
+    var writingLevel: [Int]?
+    var writingCostLow: [Int]?
+    var writingCostHigh: [Int]?
+}
+
+struct WritingData {
+    var index: Int = -1
+    var name: String = "ERROR WRITETHING"
+    var description: String = "kill.....me"
+    var unlockCost: Int = -1
+    var costLow: Int = -1
+    var costHigh: Int = -1
+    var costLowOffset: Int = -1
+    var costHighOffset: Int = -1
+    
+    var count: Int = 0
+    var unlocked: Bool = false
+    var values = [Float]()
+    var level: Int = 1
+    
+    // Return (lettersLow, lettersHigh, lettersRandom)
+    func getPrice(count: Int) -> (Int, Int, Int) {
+        let low = costLow + costLowOffset
+        let high = costHigh + costHighOffset
+        let random = randomIntBetweenNumbers(low, high)
+        
+        return (low * count, high * count, random)
+    }
+    
+    func getValue() -> Float {
+        return values[level - 1] * Float(count)
+    }
+    
+    mutating func purchase(count: Int, data: SaveData) -> SaveData? {
+        var curData = data
+        let price = getPrice(count)
+        
+        if curData.letters! >= count * price.1 {
+            var curPrice = 0
+            
+            for i in 0...count - 1 {
+                curPrice += randomIntBetweenNumbers(price.0, price.1)
+            }
+            
+            curData.letters! -= curPrice
+            curData.writingCount![index] += count
+            curData.writingCostLow![index] = costLowOffset
+            curData.writingCostHigh![index] = costHighOffset
+            
+            self.count += count
+            
+            return curData
+        }
+        
+        return nil
+    }
+}
+
+func loadWritings(data: SaveData) {
+    let path = NSBundle.mainBundle().pathForResource("writing", ofType: "dat")!
+    let content = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)! as String
+    let splitContent = split(content) { $0 == "\n" }
+    
+    writings = [WritingData]()
+    
+    for i in 0...splitContent.count / 6 - 1 {
+        var entry = WritingData()
+        
+        for x in 0...5 {
+            let data = splitContent[i * 6 + x]
+            
+                // Name
+            if x == 0 {
+                entry.name = data
+            }
+                // Description
+            else if x == 1 {
+                entry.description = data
+            }
+                // Value
+            else if x == 2 {
+                let result = parseFloatTuples(data)
+                
+                for value in result {
+                    entry.values.append(value.1)
+                }
+            }
+                // Letters/sec
+            else if x == 3 {
+                entry.unlockCost = data.toInt()!
+            }
+                // Unlock requirements
+            else if x == 4 {
+                entry.costLow = data.toInt()!
+            }
+                // Modifiers
+            else if x == 5 {
+                entry.costHigh = data.toInt()!
+            }
+        }
+        
+        writings.append(entry)
+    }
+    
+    for i in 0...count(writings) - 1 {
+        writings[i].count = data.writingCount![i]
+        writings[i].unlocked = data.writingUnlocked![i]
+        writings[i].level = data.writingLevel![i]
+        writings[i].costLowOffset = data.writingCostLow![i]
+        writings[i].costHighOffset = data.writingCostHigh![i]
+        writings[i].index = i
+    }
 }
 
 struct MonkeyData {
@@ -47,7 +163,7 @@ struct MonkeyData {
     var unlockCost: [(Float, Float)] = [(-1, -1)]
     
     var previousMod: Float = -1
-    var previousCost: Int = -1
+    var previousCost: Float = -1
     var unlocked: Bool = false
     var count: Int = 0
     var modifier: Float = 0
@@ -62,11 +178,17 @@ struct MonkeyData {
     }
     
     func lettersPer(timeInterval: Float) -> Int {
-        return Int(Float(self.count * self.lettersPerSecond) * timeInterval)
+        println("count: \(self.count)\nLPS: \(lettersPerSecond)\n")
+        
+        var preciseInterval = Float(self.count * self.lettersPerSecond) * timeInterval
+        
+        if preciseInterval < 1 { return 0 }
+        
+        return Int(preciseInterval)
     }
     
     func canPurchase(count: Int, data: SaveData) -> Bool {
-        if data.letters >= getPrice(count).0 {
+        if data.money! >= getPrice(count).0 {
             return true
         }
         
@@ -77,7 +199,7 @@ struct MonkeyData {
         var curData = data
         let pricing = getPrice(count)
         
-        curData.letters! -= pricing.0
+        curData.money! -= pricing.0
         curData.monkeyCounts![index] += count
         curData.monkeyLastCost![index] = pricing.1
         curData.monkeyLastMod![index] = pricing.2
@@ -90,13 +212,13 @@ struct MonkeyData {
     }
     
     // Return (totalCost, previousSingleCost, previousMod)
-    func getPrice(count: Int) -> (Int, Int, Float) {
+    func getPrice(count: Int) -> (Float, Float, Float) {
         var costBuffer = previousCost
         var modBuffer = previousMod
-        var totalCost = 0
+        var totalCost: Float = 0
         
         if costBuffer == -1 {
-            costBuffer = Int(costs[self.index].0)
+            costBuffer = costs[self.index].0
         }
         if modBuffer == -1 {
             modBuffer = modifiers[self.index].0
@@ -116,7 +238,7 @@ struct MonkeyData {
                 curMod = curModOverride
             }
             
-            curCost = Int(ceil(Float(curCost) * curMod))
+            curCost = curCost * curMod
             
             costBuffer = curCost
             modBuffer = curMod
@@ -128,10 +250,10 @@ struct MonkeyData {
         return (totalCost, costBuffer, modBuffer)
     }
     
-    func costOverride() -> Int {
+    func costOverride() -> Float {
         for cost in costs {
             if self.count == Int(cost.0) {
-                return Int(cost.1)
+                return cost.1
             }
         }
         
@@ -156,7 +278,7 @@ func loadMonkeys(data: SaveData) {
     
     monkeys = [MonkeyData]()
     
-    for i in 0...splitContent.count / 5 - 1 {
+    for i in 0...splitContent.count / 6 - 1 {
         var newMonkey = MonkeyData()
         
         for x in 0...5 {
@@ -194,6 +316,7 @@ func loadMonkeys(data: SaveData) {
     for i in 0...count(monkeys) - 1 {
         monkeys[i].previousCost = data.monkeyLastCost![i]
         monkeys[i].previousMod = data.monkeyLastMod![i]
+        monkeys[i].unlocked = data.monkeyUnlocks![i]
         monkeys[i].count = data.monkeyCounts![i]
         monkeys[i].index = i
     }

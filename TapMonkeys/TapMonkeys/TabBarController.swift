@@ -14,6 +14,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     var monkeyTimer = NSTimer()
     var lettersPerBuffer = 0
+    var individualLettersBuffer = [Int]()
     
     var saveData = SaveData()
     
@@ -22,9 +23,10 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         loadSave()
         loadMonkeys(saveData)
-        updateMonkeyProduction()
+        loadWritings(saveData)
         
         registerForUpdates()
+        updateMonkeyProduction()
         
         configureView()
     }
@@ -33,7 +35,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         initializeHeaders()
     }
     
-    func reveal(index: Int) {
+    func revealTab(index: Int) {
         self.viewControllers = [AnyObject]()
         
         for i in 0...index {
@@ -47,11 +49,18 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let interval = monkeyProductionTimer()
         
         lettersPerBuffer = fullLettersPer(interval)
+        individualLettersBuffer = individualLettersPer(interval)
         
         monkeyTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(interval), target: self, selector: Selector("getMonkeyLetters"), userInfo: nil, repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(monkeyTimer, forMode: NSRunLoopCommonModes)
     }
     
     func getMonkeyLetters() {
+        for i in 0...count(monkeys) - 1 {
+            monkeys[i].totalProduced += individualLettersBuffer[i]
+            saveData.monkeyTotals![i] += individualLettersBuffer[i]
+        }
+        
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("updateHeaders", object: self, userInfo: [
             "letters" : lettersPerBuffer,
@@ -92,19 +101,31 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 
                 if tapView.dataHeader == nil { return }
                 
-                tapView.dataHeader.update(saveData, animated: true)
+                tapView.dataHeader.update(saveData, animated: false)
             }
-            else if let monkeyView = view as? MonkeyViewController {
+            if let monkeyView = view as? MonkeyViewController {
                 if stage == 2 {
                     monkeyView.tabBarItem.badgeValue = "!"
                 }
-                else if stage == 3 {
+                else if stage >= 3 {
                     monkeyView.tabBarItem.badgeValue = nil
                 }
                 
                 if monkeyView.dataHeader == nil { return }
                 
-                monkeyView.dataHeader.update(saveData, animated: true)
+                monkeyView.dataHeader.update(saveData, animated: false)
+            }
+            if let writingView = view as? WritingViewController {
+                if stage == 6 {
+                    writingView.tabBarItem.badgeValue = "!"
+                }
+                else if stage >= 7 {
+                    writingView.tabBarItem.badgeValue = nil
+                }
+                
+                if writingView.dataHeader == nil { return }
+                
+                writingView.dataHeader.update(saveData, animated: false)
             }
         }
     }
@@ -147,6 +168,12 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 {
                     header.update(saveData, animated: animated)
                 }
+                if let
+                    writingView = view as? WritingViewController,
+                    header = writingView.dataHeader
+                {
+                    header.update(saveData, animated: animated)
+                }
             }
         }
         
@@ -158,6 +185,10 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         self.setViewControllers([allViews![0], allViews![1]], animated: false)
         self.setTabBarVisible(false, animated: false)
+        
+        if saveData.stage >= 6 {
+            revealTab(2)
+        }
     }
     
     func setTabBarVisible(visible: Bool, animated: Bool) {
@@ -189,7 +220,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         return self.tabBar.bounds.size.height
     }
     
-    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         initializeHeaders()
         
         if let tapView = viewController as? TapViewController {
@@ -201,122 +232,13 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 saveData.stage = 3
             }
         }
-    }
-}
-
-//@IBDesignable class DataHeader: UIView {
-class DataHeader: UIView {
-    @IBOutlet var nibView: UIView!
-    
-    @IBOutlet weak var lettersLabel: UILabel!
-    @IBOutlet weak var moneyLabel: UILabel!
-    
-    var letters = 0
-    var money: Float = 0
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        configure()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        configure()
-    }
-    
-    func configure() {
-        NSBundle.mainBundle().loadNibNamed("DataHeader", owner: self, options: nil)
-        
-        self.addSubview(nibView)
-        self.frame = nibView.frame
-        
-        lettersLabel.text = "0"
-        moneyLabel.text = "$0.00"
-        
-        lettersLabel.alpha = 0.0
-        moneyLabel.alpha = 0.0
-            
-        align()
-        
-        self.backgroundColor = UIColor.clearColor()
-    }
-    
-    func align() {
-        lettersLabel.sizeToFit()
-        moneyLabel.sizeToFit()
-    }
-    
-    func getCenterLetters() -> CGPoint {
-        return getCenter(lettersLabel)
-    }
-    
-    func getCenterMoney() -> CGPoint {
-        return getCenter(moneyLabel)
-    }
-    
-    func getCenter(view: UIView) ->CGPoint {
-        var newX = view.frame.origin.x
-        var newY = view.frame.origin.y
-        
-        newX += view.frame.width / 2
-        newY += view.frame.height / 2
-        
-        return CGPoint(x: newX, y: newY)
-    }
-    
-    func update(data: SaveData, animated: Bool = true) {
-        if self.letters == 0 && data.letters! > 0 {
-            revealLetters(animated)
-        }
-        if self.money == 0 && data.money! > 0 {
-            revealMoney(animated)
+        if let writingView = viewController as? WritingViewController {
+            if saveData.stage == 6 {
+                writingView.tabBarItem.badgeValue = nil
+                saveData.stage = 7
+            }
         }
         
-        self.letters = data.letters!
-        self.money = data.money!
-        
-        let moneyText = NSString(format: "%.2f", data.money!) as String
-        
-        lettersLabel?.text = "\(self.letters)"
-        moneyLabel?.text = "$\(moneyText)"
-        
-        align()
-        
-        if letters > 0 && animated { pulseLetters() }
-        if money > 0 && animated { pulseMoney() }
-    }
-    
-    func revealLetters(animated: Bool) {
-        reveal(lettersLabel, animated: animated)
-    }
-    
-    func revealMoney(animated: Bool) {
-        reveal(moneyLabel, animated: animated)
-    }
-    
-    func reveal(view: UIView, animated: Bool = true) {
-        UIView.animateWithDuration(animated ? 0.4 : 0.1, animations: { () -> Void in
-            view.alpha = 1.0
-        })
-    }
-    
-    func pulseLetters() {
-        pulse(lettersLabel)
-    }
-    
-    func pulseMoney() {
-        pulse(moneyLabel)
-    }
-    
-    func pulse(view: UIView) {
-        UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-            view.transform = CGAffineTransformMakeScale(1.35, 1.35)
-            }, completion: { (Bool) -> Void in
-                UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                    view.transform = CGAffineTransformIdentity
-                    }, completion: nil)
-        })
+        return true
     }
 }

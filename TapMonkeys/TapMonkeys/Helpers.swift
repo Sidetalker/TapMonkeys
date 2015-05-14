@@ -17,6 +17,25 @@ class ConstraintView: UIView {
     }
 }
 
+class AutoUpdateLabel: UILabel {
+    var index = -1
+    var controller: TabBarController?
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        let timer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
+    }
+    
+    func refresh() {
+        let saveData = load(controller!)
+        self.text = "Total Letters: \(saveData.monkeyTotals![index])"
+        
+        self.setNeedsDisplay()
+    }
+}
+
 extension String {
     var floatValue: Float {
         return (self as NSString).floatValue
@@ -81,6 +100,12 @@ func writeDefaults(data: SaveData) -> Bool {
     defaults.setObject(data.monkeyLastCost, forKey: "monkeyLastCost")
     defaults.setObject(data.monkeyLastMod, forKey: "monkeyLastMod")
     
+    defaults.setObject(data.writingCount, forKey: "writingCount")
+    defaults.setObject(data.writingUnlocked, forKey: "writingUnlocked")
+    defaults.setObject(data.writingLevel, forKey: "writingLevel")
+    defaults.setObject(data.writingCostLow, forKey: "writingCostLow")
+    defaults.setObject(data.writingCostHigh, forKey: "writingCostHigh")
+    
     defaults.synchronize()
     
     return true
@@ -98,8 +123,14 @@ func readDefaults() -> SaveData {
     save.monkeyUnlocks = defaults.arrayForKey("monkeyUnlocks") as? [Bool]
     save.monkeyCounts = defaults.arrayForKey("monkeyCounts") as? [Int]
     save.monkeyTotals = defaults.arrayForKey("monkeyTotals") as? [Int]
-    save.monkeyLastCost = defaults.arrayForKey("monkeyLastCost") as? [Int]
+    save.monkeyLastCost = defaults.arrayForKey("monkeyLastCost") as? [Float]
     save.monkeyLastMod = defaults.arrayForKey("monkeyLastMod") as? [Float]
+    
+    save.writingCount = defaults.arrayForKey("writingCount") as? [Int]
+    save.writingUnlocked = defaults.arrayForKey("writingUnlocked") as? [Bool]
+    save.writingLevel = defaults.arrayForKey("writingLevel") as? [Int]
+    save.writingCostLow = defaults.arrayForKey("writingCostLow") as? [Int]
+    save.writingCostHigh = defaults.arrayForKey("writingCostHigh") as? [Int]
     
     return save
 }
@@ -116,7 +147,8 @@ func updateGlobalSave(save: SaveData) {
 
 func validate(save: SaveData) -> SaveData {
     let numLetterCounts = 26
-    let numMonkeys = 1
+    let numMonkeys = 5
+    let numWriting = 5
     
     var newSave = save
     
@@ -157,7 +189,7 @@ func validate(save: SaveData) -> SaveData {
     }
     
     if newSave.monkeyLastCost == nil {
-        newSave.monkeyLastCost = [Int](count: numMonkeys, repeatedValue: 0)
+        newSave.monkeyLastCost = [Float](count: numMonkeys, repeatedValue: 0.0)
     }
     else if count(newSave.monkeyLastCost!) < numMonkeys {
         for i in count(newSave.monkeyLastCost!)...numMonkeys - 1 {
@@ -174,7 +206,62 @@ func validate(save: SaveData) -> SaveData {
         }
     }
     
+    if newSave.writingCount == nil {
+        newSave.writingCount = [Int](count: numWriting, repeatedValue: 0)
+    }
+    else if count(newSave.writingCount!) < numWriting {
+        for i in count(newSave.writingCount!)...numWriting - 1 {
+            newSave.writingCount?.append(0)
+        }
+    }
+    
+    if newSave.writingUnlocked == nil {
+        newSave.writingUnlocked = [Bool](count: numWriting, repeatedValue: false)
+    }
+    else if count(newSave.writingUnlocked!) < numWriting {
+        for i in count(newSave.writingUnlocked!)...numWriting - 1 {
+            newSave.writingUnlocked?.append(false)
+        }
+    }
+    
+    if newSave.writingLevel == nil {
+        newSave.writingLevel = [Int](count: numWriting, repeatedValue: 1)
+    }
+    else if count(newSave.writingLevel!) < numWriting {
+        for i in count(newSave.writingLevel!)...numWriting - 1 {
+            newSave.writingLevel?.append(1)
+        }
+    }
+    
+    if newSave.writingCostLow == nil {
+        newSave.writingCostLow = [Int](count: numWriting, repeatedValue: 0)
+    }
+    else if count(newSave.writingCostLow!) < numWriting {
+        for i in count(newSave.writingCostLow!)...numWriting - 1 {
+            newSave.writingCostLow?.append(0)
+        }
+    }
+    
+    if newSave.writingCostHigh == nil {
+        newSave.writingCostHigh = [Int](count: numWriting, repeatedValue: 0)
+    }
+    else if count(newSave.writingCostHigh!) < numWriting {
+        for i in count(newSave.writingCostHigh!)...numWriting - 1 {
+            newSave.writingCostHigh?.append(0)
+        }
+    }
+    
     return newSave
+}
+
+func individualLettersPer(timeInterval: Float) -> [Int] {
+    var lettersPer = [Int]()
+    
+    for monkey in monkeys {
+        lettersPer.append(monkey.lettersPer(timeInterval))
+    }
+    
+    return lettersPer
 }
 
 func fullLettersPer(timeInterval: Float) -> Int {
@@ -188,11 +275,15 @@ func fullLettersPer(timeInterval: Float) -> Int {
 }
 
 func monkeyProductionTimer() -> Float {
-    var lowestLettersPerSecond = 1000
+    var lowestLettersPerSecond = 0
     
     for monkey in monkeys {
-        if monkey.lettersPerSecondCumulative() < lowestLettersPerSecond {
+        if monkey.lettersPerSecondCumulative() > lowestLettersPerSecond {
             lowestLettersPerSecond = monkey.lettersPerSecondCumulative()
+        }
+        
+        if lowestLettersPerSecond >= 50 {
+            return 1 / 50
         }
     }
     
