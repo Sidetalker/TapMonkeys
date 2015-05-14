@@ -253,7 +253,7 @@ func loadMonkeys(data: SaveData) {
     
     monkeys = [MonkeyData]()
     
-    for i in 0...splitContent.count / 5 - 1 {
+    for i in 0...splitContent.count / 6 - 1 {
         var newMonkey = MonkeyData()
         
         for x in 0...5 {

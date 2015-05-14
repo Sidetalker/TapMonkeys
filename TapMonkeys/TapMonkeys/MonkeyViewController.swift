@@ -223,6 +223,12 @@ class MonkeyPicture: UIView {
         else if monkeyIndex == 2 {
             TapStyle.drawDigitDestroyer()
         }
+        else if monkeyIndex == 3 {
+            TapStyle.drawSeaMonkey()
+        }
+        else if monkeyIndex == 4 {
+            TapStyle.drawJabbaTheMonkey()
+        }
     }
 }
 

@@ -31,7 +31,7 @@
 
 ## Digit Destroyer
 
-> Unlocked with 5 1st Graders 
+> Unlocked with 3 1st Graders 
 
 | Image | Description | Letters / sec |
 | ----- | ----------- | :-----------: |
@@ -43,3 +43,30 @@
 | 50    | 1.15     | -			   |
 | 100   | 1.3      | -			   |
 | 1000  | 2.5      | -			   |
+
+## Sea Monkey
+
+> Unlocked with 5 Tweens
+
+| Image | Description | Letters / sec |
+| ----- | ----------- | :-----------: |
+| ![Sea Monkey](https://github.com/Sidetalker/TapMonkeys/blob/feature/writingScreen/TapMonkeys/TapMonkeys/Images/imgSeaMonkey%403x.jpg) | The Loch Ness Sea Monkey has been scaring the kilts off Scottish swimmers since 1933. It has amassed an impressive collection of human arms over the years, more than sufficient for tapping.| 12 |
+
+| Count | Modifier | Cost Override | 
+| :---: | :------: | :-----------: |
+| 0     | 1.0      | 15			   |
+| 50    | 1.15     | -			   |
+| 100   | 1.3      | -			   |
+| 1000  | 2.5      | -			   |
+
+## Jabba the Monkey
+
+> Unlocked with ???
+
+| Image | Description | Letters / sec |
+| ----- | ----------- | :-----------: |
+| ![Jabba the Monkey](https://github.com/Sidetalker/TapMonkeys/blob/feature/writingScreen/TapMonkeys/TapMonkeys/Images/imgSeaMonkey%403x.jpg) | Having successfully collaborated with Leia to fake his own death, Jabba the Hutt officially became a post-op monkey. Jabba still struggles with his weight. | 15 |
+
+| Count | Modifier | Cost Override | 
+| :---: | :------: | :-----------: |
+| 0     | 1.12     | 50			   |

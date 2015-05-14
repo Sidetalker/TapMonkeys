@@ -135,6 +135,52 @@ public class TapStyle : NSObject {
         CGContextRestoreGState(context)
     }
 
+    public class func drawSeaMonkey() {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
+
+
+        //// Image Declarations
+        let imgSeaMonkey = UIImage(named: "imgSeaMonkey.png")!
+
+        //// Oval Drawing
+        var ovalPath = UIBezierPath(ovalInRect: CGRectMake(5, 5, 90, 90))
+        CGContextSaveGState(context)
+        CGContextSetPatternPhase(context, CGSizeMake(5, 4))
+        UIColor(patternImage: imgSeaMonkey).setFill()
+        ovalPath.fill()
+        CGContextRestoreGState(context)
+        CGContextSaveGState(context)
+        CGContextSetShadowWithColor(context, TapStyle.picShadow.shadowOffset, TapStyle.picShadow.shadowBlurRadius, (TapStyle.picShadow.shadowColor as! UIColor).CGColor)
+        UIColor.blackColor().setStroke()
+        ovalPath.lineWidth = 0.5
+        ovalPath.stroke()
+        CGContextRestoreGState(context)
+    }
+
+    public class func drawJabbaTheMonkey() {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
+
+
+        //// Image Declarations
+        let imgJabbaTheMonkey = UIImage(named: "imgJabbaTheMonkey.png")!
+
+        //// Oval Drawing
+        var ovalPath = UIBezierPath(ovalInRect: CGRectMake(5, 5, 90, 90))
+        CGContextSaveGState(context)
+        CGContextSetPatternPhase(context, CGSizeMake(6, 6))
+        UIColor(patternImage: imgJabbaTheMonkey).setFill()
+        ovalPath.fill()
+        CGContextRestoreGState(context)
+        CGContextSaveGState(context)
+        CGContextSetShadowWithColor(context, TapStyle.picShadow.shadowOffset, TapStyle.picShadow.shadowBlurRadius, (TapStyle.picShadow.shadowColor as! UIColor).CGColor)
+        UIColor.blackColor().setStroke()
+        ovalPath.lineWidth = 0.5
+        ovalPath.stroke()
+        CGContextRestoreGState(context)
+    }
+
     public class func drawWords() {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()
