@@ -58,6 +58,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     func getMonkeyLetters() {
         for i in 0...count(monkeys) - 1 {
             monkeys[i].totalProduced += individualLettersBuffer[i]
+            saveData.monkeyTotals![i] += individualLettersBuffer[i]
         }
         
         let nc = NSNotificationCenter.defaultCenter()

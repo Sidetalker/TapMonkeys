@@ -98,7 +98,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             name = cell.viewWithTag(2) as? UILabel,
             owned = cell.viewWithTag(3) as? UILabel,
             frequency = cell.viewWithTag(4) as? UILabel,
-            total = cell.viewWithTag(5) as? UILabel,
+            total = cell.viewWithTag(5) as? AutoUpdateLabel,
             buyButton = cell.viewWithTag(6) as? MonkeyBuyButton,
             description = cell.viewWithTag(7) as? UILabel
         {
@@ -112,6 +112,9 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             
             buyButton.delegate = self
             buyButton.setNeedsDisplay()
+            
+            total.index = index
+            total.controller = self.tabBarController as? TabBarController
             
             name.text = curMonkey.name
             description.text = curMonkey.description

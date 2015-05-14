@@ -17,6 +17,25 @@ class ConstraintView: UIView {
     }
 }
 
+class AutoUpdateLabel: UILabel {
+    var index = -1
+    var controller: TabBarController?
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        let timer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
+    }
+    
+    func refresh() {
+        let saveData = load(controller!)
+        self.text = "Total Letters: \(saveData.monkeyTotals![index])"
+        
+        self.setNeedsDisplay()
+    }
+}
+
 extension String {
     var floatValue: Float {
         return (self as NSString).floatValue
@@ -261,6 +280,10 @@ func monkeyProductionTimer() -> Float {
     for monkey in monkeys {
         if monkey.lettersPerSecondCumulative() > lowestLettersPerSecond {
             lowestLettersPerSecond = monkey.lettersPerSecondCumulative()
+        }
+        
+        if lowestLettersPerSecond >= 50 {
+            return 1 / 50
         }
     }
     

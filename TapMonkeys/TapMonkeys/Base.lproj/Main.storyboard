@@ -247,7 +247,7 @@
                                                 <rect key="frame" x="128" y="80" width="840" height="32"/>
                                             </variation>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Letters: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="U0A-Ei-714">
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Letters: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="U0A-Ei-714" customClass="AutoUpdateLabel" customModule="TapMonkeys" customModuleProvider="target">
                                             <rect key="frame" x="116" y="88" width="156" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="17" id="7xf-at-fdl"/>
