@@ -400,7 +400,7 @@
             startingLineNumber = "138"
             endingLineNumber = "138"
             landmarkName = "loadWritings(_:)"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -416,7 +416,7 @@
             startingLineNumber = "150"
             endingLineNumber = "150"
             landmarkName = "loadWritings(_:)"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -432,7 +432,7 @@
             startingLineNumber = "139"
             endingLineNumber = "139"
             landmarkName = "loadWritings(_:)"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -448,7 +448,7 @@
             startingLineNumber = "141"
             endingLineNumber = "141"
             landmarkName = "loadWritings(_:)"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -528,7 +528,7 @@
             startingLineNumber = "146"
             endingLineNumber = "146"
             landmarkName = "loadWritings(_:)"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -543,7 +543,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "199"
             endingLineNumber = "199"
-            landmarkName = "purchase(_:data:)"
+            landmarkName = "lettersPer(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -575,7 +575,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "189"
             endingLineNumber = "189"
-            landmarkName = "canPurchase(_:data:)"
+            landmarkName = "lettersPerSecondCumulative()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -591,7 +591,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "258"
             endingLineNumber = "258"
-            landmarkName = "costOverride()"
+            landmarkName = "getPrice(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -607,8 +607,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "186"
             endingLineNumber = "186"
-            landmarkName = "lettersPer(_:)"
-            landmarkType = "5">
+            landmarkName = "MonkeyData"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -624,7 +624,7 @@
             startingLineNumber = "147"
             endingLineNumber = "147"
             landmarkName = "loadWritings(_:)"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -640,7 +640,7 @@
             startingLineNumber = "148"
             endingLineNumber = "148"
             landmarkName = "loadWritings(_:)"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1440,7 +1440,7 @@
             startingLineNumber = "128"
             endingLineNumber = "128"
             landmarkName = "loadWritings(_:)"
-            landmarkType = "7">
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1471,8 +1471,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "330"
             endingLineNumber = "330"
-            landmarkName = "parseFloatTuples(_:)"
-            landmarkType = "7">
+            landmarkName = "loadMonkeys(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1487,8 +1487,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "332"
             endingLineNumber = "332"
-            landmarkName = "parseFloatTuples(_:)"
-            landmarkType = "7">
+            landmarkName = "loadMonkeys(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1567,8 +1567,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "282"
             endingLineNumber = "282"
-            landmarkName = "loadMonkeys(_:)"
-            landmarkType = "7">
+            landmarkName = "modOverride()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1583,8 +1583,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "279"
             endingLineNumber = "279"
-            landmarkName = "loadMonkeys(_:)"
-            landmarkType = "7">
+            landmarkName = "modOverride()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

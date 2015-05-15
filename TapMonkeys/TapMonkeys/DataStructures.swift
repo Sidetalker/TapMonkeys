@@ -42,6 +42,12 @@ struct SaveData {
     var writingLevel: [Int]?
     var writingCostLow: [Int]?
     var writingCostHigh: [Int]?
+    
+    var incomeUnlocks: [Bool]?
+    var incomeCounts: [Int]?
+    var incomeTotals: [Int]?
+    var incomeLastCost: [Float]?
+    var incomeLastMod: [Float]?
 }
 
 struct IncomeData {
@@ -56,9 +62,86 @@ struct IncomeData {
     var previousCost: Float = -1
     var count: Int = 0
     var unlocked: Bool = false
-    var moneyProduces = [Float]()
+    var moneyProduced = [Float]()
     var level: Int = 1
     
+    mutating func purchase(count: Int, data: SaveData) -> SaveData? {
+        var curData = data
+        let price = getPrice(count)
+        
+        if writings[self.index].count >= Int(price.0) {
+            self.previousCost = price.1
+            self.previousMod = price.2
+            self.count += count
+            
+            writings[self.index].count -= count
+            
+            curData.writingCount![self.index] -= count
+            curData.incomeCounts![self.index] += count
+            curData.incomeLastCost![self.index] = price.1
+            curData.incomeLastMod![self.index] = price.2
+        }
+        
+        return nil
+    }
+    
+    // Return (total cost, last cost, last mod)
+    func getPrice(count: Int) -> (Float, Float, Float) {
+        var costBuffer = previousCost
+        var modBuffer = previousMod
+        var totalCost: Float = 0
+        
+        if costBuffer == -1 {
+            costBuffer = costs[self.index].0
+        }
+        if modBuffer == -1 {
+            modBuffer = modifiers[self.index].0
+        }
+        
+        for i in 0...count - 1 {
+            let curCostOverride = costOverride()
+            let curModOverride = modOverride()
+            
+            var curCost = costBuffer
+            var curMod = modBuffer
+            
+            if curCostOverride >= 0 {
+                curCost = curCostOverride
+            }
+            if curModOverride >= 0 {
+                curMod = curModOverride
+            }
+            
+            curCost = curCost * (curCostOverride == -1 ? 1 : curMod)
+            
+            costBuffer = curCost
+            modBuffer = curMod
+            
+            totalCost += curCost
+        }
+        
+        return (totalCost, costBuffer, modBuffer)
+    }
+    
+    func costOverride() -> Float {
+        for cost in costs {
+            if self.count == Int(cost.0) {
+                return cost.1
+            }
+        }
+        
+        return -1
+    }
+    
+    func modOverride() -> Float {
+        for mod in modifiers {
+            if self.count == Int(mod.0) {
+                return mod.1
+            }
+        }
+        
+        return -1
+    }
 }
 
 struct WritingData {
