@@ -44,6 +44,23 @@ struct SaveData {
     var writingCostHigh: [Int]?
 }
 
+struct IncomeData {
+    var index: Int = -1
+    var name: String = "ERROR WRITETHING"
+    var description: String = "kill.....me"
+    var unlockCost = [(Float, Float)]()
+    var costs = [(Float, Float)]()
+    var modifiers = [(Float, Float)]()
+    
+    var previousMod: Float = -1
+    var previousCost: Float = -1
+    var count: Int = 0
+    var unlocked: Bool = false
+    var moneyProduces = [Float]()
+    var level: Int = 1
+    
+}
+
 struct WritingData {
     var index: Int = -1
     var name: String = "ERROR WRITETHING"
