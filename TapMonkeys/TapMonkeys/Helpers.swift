@@ -31,8 +31,6 @@ class AutoUpdateLabel: UILabel {
     func refresh() {
         let saveData = load(controller!)
         self.text = "Total Letters: \(saveData.monkeyTotals![index])"
-        
-//        self.setNeedsDisplay()
     }
 }
 
@@ -106,6 +104,12 @@ func writeDefaults(data: SaveData) -> Bool {
     defaults.setObject(data.writingCostLow, forKey: "writingCostLow")
     defaults.setObject(data.writingCostHigh, forKey: "writingCostHigh")
     
+    defaults.setObject(data.incomeUnlocks, forKey: "incomeUnlocks")
+    defaults.setObject(data.incomeCounts, forKey: "incomeCounts")
+    defaults.setObject(data.incomeTotals, forKey: "incomeTotals")
+    defaults.setObject(data.incomeLastCost, forKey: "incomeLastCost")
+    defaults.setObject(data.incomeLastMod, forKey: "incomeLastMod")
+    
     defaults.synchronize()
     
     return true
@@ -132,6 +136,12 @@ func readDefaults() -> SaveData {
     save.writingCostLow = defaults.arrayForKey("writingCostLow") as? [Int]
     save.writingCostHigh = defaults.arrayForKey("writingCostHigh") as? [Int]
     
+    save.incomeUnlocks = defaults.arrayForKey("incomeUnlocks") as? [Bool]
+    save.incomeCounts = defaults.arrayForKey("incomeCounts") as? [Int]
+    save.incomeTotals = defaults.arrayForKey("incomeTotals") as? [Float]
+    save.incomeLastCost = defaults.arrayForKey("incomeLastCost") as? [Float]
+    save.incomeLastMod = defaults.arrayForKey("incomeLastMod") as? [Float]
+    
     return save
 }
 
@@ -149,6 +159,7 @@ func validate(save: SaveData) -> SaveData {
     let numLetterCounts = 26
     let numMonkeys = 5
     let numWriting = 5
+    let numIncome = 5
     
     var newSave = save
     
@@ -248,6 +259,51 @@ func validate(save: SaveData) -> SaveData {
     else if count(newSave.writingCostHigh!) < numWriting {
         for i in count(newSave.writingCostHigh!)...numWriting - 1 {
             newSave.writingCostHigh?.append(0)
+        }
+    }
+    
+    if newSave.incomeUnlocks == nil {
+        newSave.incomeUnlocks = [Bool](count: numIncome, repeatedValue: false)
+    }
+    else if count(newSave.incomeUnlocks!) < numIncome {
+        for i in count(newSave.incomeUnlocks!)...numIncome - 1 {
+            newSave.incomeUnlocks?.append(false)
+        }
+    }
+    
+    if newSave.incomeCounts == nil {
+        newSave.incomeCounts = [Int](count: numIncome, repeatedValue: 0)
+    }
+    else if count(newSave.incomeCounts!) < numIncome {
+        for i in count(newSave.incomeCounts!)...numIncome - 1 {
+            newSave.incomeCounts?.append(0)
+        }
+    }
+    
+    if newSave.incomeTotals == nil {
+        newSave.incomeTotals = [Float](count: numIncome, repeatedValue: 0)
+    }
+    else if count(newSave.incomeTotals!) < numIncome {
+        for i in count(newSave.incomeTotals!)...numIncome - 1 {
+            newSave.incomeTotals?.append(0)
+        }
+    }
+    
+    if newSave.incomeLastCost == nil {
+        newSave.incomeLastCost = [Float](count: numIncome, repeatedValue: 0)
+    }
+    else if count(newSave.incomeLastCost!) < numIncome {
+        for i in count(newSave.incomeLastCost!)...numIncome - 1 {
+            newSave.incomeLastCost?.append(0)
+        }
+    }
+    
+    if newSave.incomeLastMod == nil {
+        newSave.incomeLastMod = [Float](count: numIncome, repeatedValue: 0)
+    }
+    else if count(newSave.incomeLastMod!) < numIncome {
+        for i in count(newSave.incomeLastMod!)...numIncome - 1 {
+            newSave.incomeLastMod?.append(0)
         }
     }
     

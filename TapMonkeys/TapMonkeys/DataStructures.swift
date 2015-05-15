@@ -45,7 +45,7 @@ struct SaveData {
     
     var incomeUnlocks: [Bool]?
     var incomeCounts: [Int]?
-    var incomeTotals: [Int]?
+    var incomeTotals: [Float]?
     var incomeLastCost: [Float]?
     var incomeLastMod: [Float]?
 }
