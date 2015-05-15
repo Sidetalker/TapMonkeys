@@ -141,7 +141,7 @@ class WritingPicture: UIView {
         
         self.backgroundColor = UIColor.clearColor()
         
-        self.setNeedsDisplay()
+//        self.setNeedsDisplay()
     }
     
     init(frame: CGRect, strokeWidth: CGFloat) {
@@ -149,7 +149,7 @@ class WritingPicture: UIView {
         
         self.backgroundColor = UIColor.clearColor()
         
-        self.setNeedsDisplay()
+//        self.setNeedsDisplay()
     }
     
     override func drawRect(rect: CGRect) {

@@ -32,7 +32,7 @@ class AutoUpdateLabel: UILabel {
         let saveData = load(controller!)
         self.text = "Total Letters: \(saveData.monkeyTotals![index])"
         
-        self.setNeedsDisplay()
+//        self.setNeedsDisplay()
     }
 }
 

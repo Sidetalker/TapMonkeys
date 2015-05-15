@@ -210,7 +210,7 @@ class MonkeyPicture: UIView {
         self.backgroundColor = UIColor.clearColor()
         self.strokeWidth = strokeWidth
         
-        self.setNeedsDisplay()
+//        self.setNeedsDisplay()
     }
     
     override func drawRect(rect: CGRect) {

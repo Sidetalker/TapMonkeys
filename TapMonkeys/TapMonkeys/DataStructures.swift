@@ -178,8 +178,6 @@ struct MonkeyData {
     }
     
     func lettersPer(timeInterval: Float) -> Int {
-        println("count: \(self.count)\nLPS: \(lettersPerSecond)\n")
-        
         var preciseInterval = Float(self.count * self.lettersPerSecond) * timeInterval
         
         if preciseInterval < 1 { return 0 }
@@ -246,7 +244,6 @@ struct MonkeyData {
             totalCost += curCost
         }
         
-        println("\(totalCost, costBuffer, modBuffer)")
         return (totalCost, costBuffer, modBuffer)
     }
     
