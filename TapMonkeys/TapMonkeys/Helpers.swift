@@ -29,6 +29,8 @@ class AutoUpdateLabel: UILabel {
     }
     
     func refresh() {
+        if controller == nil { return }
+        
         let saveData = load(controller!)
         self.text = "Total Letters: \(saveData.monkeyTotals![index])"
     }

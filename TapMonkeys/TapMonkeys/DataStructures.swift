@@ -24,6 +24,7 @@ let gens = [
 
 var monkeys = [MonkeyData]()
 var writings = [WritingData]()
+var incomes = [IncomeData]()
 
 struct SaveData {
     var stage: Int?
@@ -62,7 +63,7 @@ struct IncomeData {
     var previousCost: Float = -1
     var count: Int = 0
     var unlocked: Bool = false
-    var moneyProduced = [Float]()
+    var moneyProduced = [Float, Float]()
     var level: Int = 1
     
     mutating func purchase(count: Int, data: SaveData) -> SaveData? {
@@ -141,6 +142,57 @@ struct IncomeData {
         }
         
         return -1
+    }
+}
+
+func loadIncome(data: SaveData) {
+    let path = NSBundle.mainBundle().pathForResource("income", ofType: "dat")!
+    let content = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)! as String
+    let splitContent = split(content) { $0 == "\n" }
+    
+    incomes = [IncomeData]()
+    
+    for i in 0...splitContent.count / 6 - 1 {
+        var newIncome = IncomeData()
+        
+        for x in 0...5 {
+            let data = splitContent[i * 6 + x]
+            
+            // Name
+            if x == 0 {
+                newIncome.name = data
+            }
+                // Description
+            else if x == 1 {
+                newIncome.description = data
+            }
+                // Unlock requirements
+            else if x == 2 {
+                newIncome.unlockCost = parseFloatTuples(data)
+            }
+                // Unlock costs
+            else if x == 3 {
+                newIncome.costs = parseFloatTuples(data)
+            }
+                // Modifiers
+            else if x == 4 {
+                newIncome.modifiers = parseFloatTuples(data)
+            }
+                // Unlock cost overrides
+            else if x == 5 {
+                newIncome.moneyProduced = parseFloatTuples(data)
+            }
+        }
+        
+        incomes.append(newIncome)
+    }
+    
+    for i in 0...count(incomes) - 1 {
+        incomes[i].previousCost = data.incomeLastCost![i]
+        incomes[i].previousMod = data.incomeLastMod![i]
+        incomes[i].unlocked = data.incomeUnlocks![i]
+        incomes[i].count = data.incomeCounts![i]
+        incomes[i].index = i
     }
 }
 

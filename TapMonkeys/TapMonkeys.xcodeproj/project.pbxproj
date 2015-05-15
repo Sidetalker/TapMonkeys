@@ -70,6 +70,7 @@
 		0A71780C1B067A6B006DEF7A /* imgLordVoldermonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177FA1B067A6B006DEF7A /* imgLordVoldermonkey.png */; };
 		0A71780D1B067A6B006DEF7A /* imgLordVoldermonkey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177FB1B067A6B006DEF7A /* imgLordVoldermonkey@2x.png */; };
 		0A71780E1B067A6B006DEF7A /* imgLordVoldermonkey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177FC1B067A6B006DEF7A /* imgLordVoldermonkey@3x.png */; };
+		0A7178111B06B10B006DEF7A /* IncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7178101B06B10B006DEF7A /* IncomeViewController.swift */; };
 		0A9B687D1AFD3DE7006628D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B687C1AFD3DE7006628D1 /* AppDelegate.swift */; };
 		0A9B68801AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B687E1AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld */; };
 		0A9B68821AFD3DE7006628D1 /* TapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B68811AFD3DE7006628D1 /* TapViewController.swift */; };
@@ -214,6 +215,7 @@
 		0A7177FA1B067A6B006DEF7A /* imgLordVoldermonkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imgLordVoldermonkey.png; path = Images/imgLordVoldermonkey.png; sourceTree = "<group>"; };
 		0A7177FB1B067A6B006DEF7A /* imgLordVoldermonkey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgLordVoldermonkey@2x.png"; path = "Images/imgLordVoldermonkey@2x.png"; sourceTree = "<group>"; };
 		0A7177FC1B067A6B006DEF7A /* imgLordVoldermonkey@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgLordVoldermonkey@3x.png"; path = "Images/imgLordVoldermonkey@3x.png"; sourceTree = "<group>"; };
+		0A7178101B06B10B006DEF7A /* IncomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeViewController.swift; sourceTree = "<group>"; };
 		0A9B68771AFD3DE7006628D1 /* TapMonkeys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapMonkeys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A9B687B1AFD3DE7006628D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A9B687C1AFD3DE7006628D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				0A9B68811AFD3DE7006628D1 /* TapViewController.swift */,
 				0A9B68E91AFE58A5006628D1 /* MonkeyViewController.swift */,
 				0A5529F81B03BF4D00CD8E78 /* WritingViewController.swift */,
+				0A7178101B06B10B006DEF7A /* IncomeViewController.swift */,
 				0A9B687A1AFD3DE7006628D1 /* Supporting Files */,
 			);
 			path = TapMonkeys;
@@ -787,6 +790,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A7178111B06B10B006DEF7A /* IncomeViewController.swift in Sources */,
 				0A9B68821AFD3DE7006628D1 /* TapViewController.swift in Sources */,
 				0A5529F91B03BF4D00CD8E78 /* WritingViewController.swift in Sources */,
 				0A9B68EA1AFE58A5006628D1 /* MonkeyViewController.swift in Sources */,

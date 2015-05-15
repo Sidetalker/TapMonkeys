@@ -24,11 +24,13 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         loadSave()
         loadMonkeys(saveData)
         loadWritings(saveData)
+        loadIncome(saveData)
         
         registerForUpdates()
         updateMonkeyProduction()
         
         configureView()
+        revealTab(3)
     }
     
     override func viewDidLayoutSubviews() {
