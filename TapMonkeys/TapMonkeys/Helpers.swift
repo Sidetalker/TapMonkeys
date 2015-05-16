@@ -363,6 +363,46 @@ func monkeyProductionTimer() -> Float {
     return 1.0 / Float(lowestLettersPerSecond)
 }
 
+func individualIncomePer(timeInterval: Float) -> [Float] {
+    var incomePer = [Float]()
+    
+    for income in incomes {
+        incomePer.append(income.moneyPer(timeInterval))
+    }
+    
+    return incomePer
+}
+
+func fullIncomePer(timeInterval: Float) -> Float {
+    var moneyPer: Float = 0
+    
+    for income in incomes {
+        moneyPer += income.moneyPer(timeInterval)
+    }
+    
+    return moneyPer
+}
+
+func incomeProductionTimer() -> Float {
+    var lowestIncomePerSecond: Float = 0
+    
+    for income in incomes {
+        if income.moneyPerSecond() > lowestIncomePerSecond {
+            lowestIncomePerSecond = income.moneyPerSecond()
+        }
+        
+        if lowestIncomePerSecond >= 50 {
+            return 1 / 50
+        }
+    }
+    
+    if lowestIncomePerSecond == 0 {
+        return 1
+    }
+    
+    return 1.0 / (lowestIncomePerSecond * 100)
+}
+
 
 
 

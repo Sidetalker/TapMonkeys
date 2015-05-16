@@ -78,9 +78,9 @@ struct IncomeData {
             self.previousMod = price.2
             self.count += count
             
-            writings[self.index].count -= count
+            writings[self.index].count -= Int(price.0)
             
-            curData.writingCount![self.index] -= count
+            curData.writingCount![self.index] -= Int(price.0)
             curData.incomeCounts![self.index] += count
             curData.incomeLastCost![self.index] = price.1
             curData.incomeLastMod![self.index] = price.2
@@ -89,6 +89,12 @@ struct IncomeData {
         }
         
         return nil
+    }
+    
+    func moneyPer(interval: Float) -> Float {
+        var preciseInterval = Float(self.count) * self.getProduction() * interval
+        
+        return preciseInterval
     }
     
     func moneyPerSecond() -> Float {
