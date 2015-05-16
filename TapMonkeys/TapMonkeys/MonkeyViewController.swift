@@ -180,19 +180,19 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             
             save(self.tabBarController, saveData)
             
+            let nc = NSNotificationCenter.defaultCenter()
+            nc.postNotificationName("updateHeaders", object: self, userInfo: [
+                "money" : price,
+                "animated" : false
+                ])
+            nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
+            
             delay(0.2, {
                 self.tableView.beginUpdates()
                 
                 self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: monkeyIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
                 
                 self.tableView.endUpdates()
-                
-                let nc = NSNotificationCenter.defaultCenter()
-                nc.postNotificationName("updateHeaders", object: self, userInfo: [
-                    "money" : price,
-                    "animated" : false
-                    ])
-                nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
             })
         }
     }
