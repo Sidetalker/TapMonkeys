@@ -71,6 +71,7 @@ struct IncomeData {
     mutating func purchase(count: Int, data: SaveData) -> SaveData? {
         var curData = data
         let price = getPrice(count)
+        println("\(index)")
         
         if writings[self.index].count >= Int(price.0) {
             self.previousCost = price.1
@@ -83,6 +84,8 @@ struct IncomeData {
             curData.incomeCounts![self.index] += count
             curData.incomeLastCost![self.index] = price.1
             curData.incomeLastMod![self.index] = price.2
+            
+            return curData
         }
         
         return nil
@@ -137,7 +140,7 @@ struct IncomeData {
                 curMod = curModOverride
             }
             
-            curCost = curCost * (curCostOverride == -1 ? 1 : curMod)
+            curCost = curCost * (curCostOverride == -1 ? curMod : 1)
             
             costBuffer = curCost
             modBuffer = curMod

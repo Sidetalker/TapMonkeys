@@ -116,6 +116,9 @@
                     <tabBarItem key="tabBarItem" title="Income" image="incomeTab.png" id="1tY-Ru-69W"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="500"/>
+                    <connections>
+                        <outlet property="dataHeader" destination="IHc-J1-HBw" id="Txg-Hq-MEm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YOE-Af-5IY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

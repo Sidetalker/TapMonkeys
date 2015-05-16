@@ -176,6 +176,12 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 {
                     header.update(saveData, animated: animated)
                 }
+                if let
+                    incomeView = view as? IncomeViewController,
+                    header = incomeView.dataHeader
+                {
+                    header.update(saveData, animated: animated)
+                }
             }
         }
         

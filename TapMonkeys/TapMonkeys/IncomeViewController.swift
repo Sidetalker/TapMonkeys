@@ -104,16 +104,16 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
         return UITableViewCell()
     }
     
-    func buyTapped(writingIndex: Int) {
+    func buyTapped(incomeIndex: Int) {
         var saveData = load(self.tabBarController)
-        var writing = writings[writingIndex]
+        var income = incomes[incomeIndex]
         
-        var price = writing.getPrice(1).2
+        var price = Int(income.getPrice(1).1)
         
-        if let newSave = writing.purchase(1, data: saveData) {
+        if let newSave = income.purchase(1, data: saveData) {
             save(self.tabBarController, newSave)
             
-            writings[writingIndex] = writing
+            incomes[incomeIndex] = income
             
             delay(0.2, {
                 self.tableView.reloadData()

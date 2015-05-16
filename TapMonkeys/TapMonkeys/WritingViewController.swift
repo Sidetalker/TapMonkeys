@@ -123,7 +123,6 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
                     "letters" : -price,
                     "animated" : false
                     ])
-                nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
             })
         }
     }
