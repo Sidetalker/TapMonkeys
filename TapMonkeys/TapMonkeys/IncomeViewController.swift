@@ -72,7 +72,7 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
                 lockView.tag = 8
                 lockView.index = indexPath.row
                 lockView.delegate = self
-                lockView.type = AnimatedLockViewType.Income
+                lockView.type = .Income
                 
                 lockView.customize(load(self.tabBarController))
                 
@@ -84,7 +84,7 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if let
             cell = tableView.dequeueReusableCellWithIdentifier("cellIncome") as? UITableViewCell,
-            pic = cell.viewWithTag(1) as? IncomePicture,
+            pic = cell.viewWithTag(1) as? DrawnPicture,
             title = cell.viewWithTag(2) as? UILabel,
             owned = cell.viewWithTag(3) as? UILabel,
             moneyPerSec = cell.viewWithTag(4) as? UILabel,
@@ -95,7 +95,9 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             let index = indexPath.row
             let moneyText = NSString(format: "%.2f", incomes[index].moneyPerSecond()) as String
             
-            pic.incomeIndex = index
+            pic.index = index
+            pic.type = .Income
+            
             title.text = incomes[index].name
             description.text = incomes[index].description
             owned.text = "Owned: \(incomes[index].count)"
@@ -183,40 +185,6 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
         }
         
         save(self.tabBarController, saveData)
-    }
-}
-
-class IncomePicture: UIView {
-    var incomeIndex = 0
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        self.backgroundColor = UIColor.clearColor()
-    }
-    
-    init(frame: CGRect, strokeWidth: CGFloat) {
-        super.init(frame: frame)
-        
-        self.backgroundColor = UIColor.clearColor()
-    }
-    
-    override func drawRect(rect: CGRect) {
-        if incomeIndex == 0 {
-            TapStyle.drawBaby()
-        }
-        else if incomeIndex == 1 {
-            TapStyle.drawKindergartner()
-        }
-        else if incomeIndex == 2 {
-            TapStyle.drawFourthGrader()
-        }
-        else if incomeIndex == 3 {
-            TapStyle.drawElementaryTeacher()
-        }
-        else if incomeIndex == 4 {
-            TapStyle.drawElementarySchool()
-        }
     }
 }
 

@@ -72,7 +72,7 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
                 lockView.tag = 8
                 lockView.index = indexPath.row
                 lockView.delegate = self
-                lockView.type = AnimatedLockViewType.Writing
+                lockView.type = .Writing
                 
                 lockView.customize(load(self.tabBarController))
                 
@@ -84,7 +84,7 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if let
             cell = tableView.dequeueReusableCellWithIdentifier("cellWriting") as? UITableViewCell,
-            pic = cell.viewWithTag(1) as? WritingPicture,
+            pic = cell.viewWithTag(1) as? DrawnPicture,
             title = cell.viewWithTag(2) as? UILabel,
             owned = cell.viewWithTag(3) as? UILabel,
             value = cell.viewWithTag(4) as? UILabel,
@@ -95,7 +95,9 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
             let index = indexPath.row
             let moneyText = NSString(format: "%.2f", writings[index].getValue()) as String
             
-            pic.writingIndex = index
+            pic.index = index
+            pic.type = .Writing
+            
             title.text = writings[index].name
             description.text = writings[index].description
             owned.text = "Owned: \(writings[index].count)"
@@ -108,7 +110,7 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
             if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
                 lockView.index = index
                 lockView.frame = cell.contentView.frame
-                lockView.type = AnimatedLockViewType.Writing
+                lockView.type = .Writing
                 lockView.customize(load(self.tabBarController))
                 
                 if writings[index].unlocked { lockView.removeFromSuperview() }
@@ -174,44 +176,6 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
         }
         
         save(self.tabBarController, saveData)
-    }
-}
-
-class WritingPicture: UIView {
-    var writingIndex = 0
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        self.backgroundColor = UIColor.clearColor()
-        
-//        self.setNeedsDisplay()
-    }
-    
-    init(frame: CGRect, strokeWidth: CGFloat) {
-        super.init(frame: frame)
-        
-        self.backgroundColor = UIColor.clearColor()
-        
-//        self.setNeedsDisplay()
-    }
-    
-    override func drawRect(rect: CGRect) {
-        if writingIndex == 0 {
-            TapStyle.drawWords()
-        }
-        else if writingIndex == 1 {
-            TapStyle.drawFragmentedSentence()
-        }
-        else if writingIndex == 2 {
-            TapStyle.drawSentence()
-        }
-        else if writingIndex == 3 {
-            TapStyle.drawTextMessage()
-        }
-        else if writingIndex == 4 {
-            TapStyle.drawTweet()
-        }
     }
 }
 

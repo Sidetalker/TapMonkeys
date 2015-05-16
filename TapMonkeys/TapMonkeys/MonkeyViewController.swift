@@ -72,7 +72,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
                 lockView.tag = 8
                 lockView.index = indexPath.row
                 lockView.delegate = self
-                lockView.type = AnimatedLockViewType.Monkey
+                lockView.type = .Monkey
                 
                 lockView.customize(load(self.tabBarController))
                 
@@ -84,7 +84,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if let
             cell = self.tableView.dequeueReusableCellWithIdentifier("cellMonkey") as? UITableViewCell,
-            monkeyPic = cell.viewWithTag(1) as? MonkeyPicture,
+            monkeyPic = cell.viewWithTag(1) as? DrawnPicture,
             name = cell.viewWithTag(2) as? UILabel,
             owned = cell.viewWithTag(3) as? UILabel,
             frequency = cell.viewWithTag(4) as? UILabel,
@@ -96,7 +96,8 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             let curMonkey = monkeys[index]
             let curPrice = curMonkey.getPrice(1).0
             
-            monkeyPic.monkeyIndex = index
+            monkeyPic.index = index
+            monkeyPic.type = .Monkey
             monkeyPic.setNeedsDisplay()
             
             buyButton.monkeyIndex = index
@@ -193,42 +194,6 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
                     ])
                 nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
             })
-        }
-    }
-}
-
-class MonkeyPicture: UIView {
-    var monkeyIndex = 0
-    var strokeWidth: CGFloat = 0.5
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        self.backgroundColor = UIColor.clearColor()
-    }
-    
-    init(frame: CGRect, strokeWidth: CGFloat) {
-        super.init(frame: frame)
-        
-        self.backgroundColor = UIColor.clearColor()
-        self.strokeWidth = strokeWidth
-    }
-    
-    override func drawRect(rect: CGRect) {
-        if monkeyIndex == 0 {
-            TapStyle.drawFingerMonkey()
-        }
-        else if monkeyIndex == 1 {
-            TapStyle.drawGoofkey()
-        }
-        else if monkeyIndex == 2 {
-            TapStyle.drawDigitDestroyer()
-        }
-        else if monkeyIndex == 3 {
-            TapStyle.drawSeaMonkey()
-        }
-        else if monkeyIndex == 4 {
-            TapStyle.drawJabbaTheMonkey()
         }
     }
 }

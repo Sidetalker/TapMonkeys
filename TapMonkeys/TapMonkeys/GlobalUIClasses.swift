@@ -8,14 +8,9 @@
 
 import UIKit
 
-enum AnimatedLockViewType {
+enum ObjectType {
     case Monkey
     case Writing
-    case Income
-}
-
-enum AutoUpdateLabelType {
-    case Monkey
     case Income
 }
 
@@ -27,10 +22,87 @@ class ConstraintView: UIView {
     }
 }
 
+class DrawnPicture: UIView {
+    var index = 0
+    var type: ObjectType = .Monkey
+    var unknown = false
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.backgroundColor = UIColor.clearColor()
+    }
+    
+    init(frame: CGRect, strokeWidth: CGFloat) {
+        super.init(frame: frame)
+        
+        self.backgroundColor = UIColor.clearColor()
+    }
+    
+    override func drawRect(rect: CGRect) {
+        if unknown {
+            TapStyle.drawUnknownUnlock()
+            return
+        }
+        
+        if type == .Income {
+            if index == 0 {
+                TapStyle.drawBaby()
+            }
+            else if index == 1 {
+                TapStyle.drawKindergartner()
+            }
+            else if index == 2 {
+                TapStyle.drawFourthGrader()
+            }
+            else if index == 3 {
+                TapStyle.drawElementaryTeacher()
+            }
+            else if index == 4 {
+                TapStyle.drawElementarySchool()
+            }
+        }
+        else if type == .Monkey {
+            if index == 0 {
+                TapStyle.drawFingerMonkey()
+            }
+            else if index == 1 {
+                TapStyle.drawGoofkey()
+            }
+            else if index == 2 {
+                TapStyle.drawDigitDestroyer()
+            }
+            else if index == 3 {
+                TapStyle.drawSeaMonkey()
+            }
+            else if index == 4 {
+                TapStyle.drawJabbaTheMonkey()
+            }
+        }
+        else if type == .Writing {
+            if index == 0 {
+                TapStyle.drawWords()
+            }
+            else if index == 1 {
+                TapStyle.drawFragmentedSentence()
+            }
+            else if index == 2 {
+                TapStyle.drawSentence()
+            }
+            else if index == 3 {
+                TapStyle.drawTextMessage()
+            }
+            else if index == 4 {
+                TapStyle.drawTweet()
+            }
+        }
+    }
+}
+
 class AutoUpdateLabel: UILabel {
     var index = -1
     var controller: TabBarController?
-    var type = AutoUpdateLabelType.Monkey
+    var type: ObjectType = .Monkey
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -64,13 +136,14 @@ class AnimatedLockView: UIView {
     @IBOutlet weak var lockImage: UIImageView!
     @IBOutlet weak var requirementsText: UILabel!
     @IBOutlet weak var staticText: UILabel!
+    @IBOutlet weak var pic: DrawnPicture!
     
     var locked = true
-    var type = AnimatedLockViewType.Monkey
+    var type: ObjectType = .Monkey
     var index = -1
-    var blurView: UIVisualEffectView!
     var animator: UIDynamicAnimator?
     var delegate: AnimatedLockDelegate?
+    var transitionView: UIView?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -91,16 +164,12 @@ class AnimatedLockView: UIView {
         
         self.addSubview(nibView)
         
-        let blur = UIBlurEffect(style: UIBlurEffectStyle.Light)
-        blurView = UIVisualEffectView(effect: blur)
+        transitionView = UIView(frame: self.frame)
+        transitionView!.backgroundColor = UIColor.whiteColor()
         
-        blurView.frame = self.frame
-        blurView.tag = 1
-        
-        self.backgroundColor = UIColor.clearColor()
-        
-        self.nibView.addSubview(blurView)
-        self.nibView.sendSubviewToBack(blurView)
+        self.nibView.addSubview(transitionView!)
+        self.nibView.sendSubviewToBack(transitionView!)
+        self.nibView.bringSubviewToFront(lockImage)
         
         var animationImages = [UIImage]()
         
@@ -132,10 +201,13 @@ class AnimatedLockView: UIView {
         
         staticText.text = "Unlock With"
         
-        if type == AnimatedLockViewType.Monkey {
+        if type == .Monkey {
             if index > 1 {
                 if !saveData.monkeyUnlocks![index - 1] && !saveData.monkeyUnlocks![index - 2] {
                     requirementsText.text = "?????"
+                    
+                    pic.unknown = true
+                    pic.setNeedsDisplay()
                     
                     return
                 }
@@ -152,10 +224,13 @@ class AnimatedLockView: UIView {
                 requirementsText.text = "FREE"
             }
         }
-        else if type == AnimatedLockViewType.Writing {
+        else if type == .Writing {
             if index > 1 {
                 if !saveData.writingUnlocked![index - 1] && !saveData.writingUnlocked![index - 2] {
                     requirementsText.text = "?????"
+                    
+                    pic.unknown = true
+                    pic.setNeedsDisplay()
                     
                     return
                 }
@@ -168,10 +243,13 @@ class AnimatedLockView: UIView {
                 requirementsText.text = "FREE"
             }
         }
-        else if type == AnimatedLockViewType.Income {
+        else if type == .Income {
             if index > 1 {
                 if !saveData.incomeUnlocks![index - 1] && !saveData.incomeUnlocks![index - 2] {
                     requirementsText.text = "?????"
+                    
+                    pic.unknown = true
+                    pic.setNeedsDisplay()
                     
                     return
                 }
@@ -188,6 +266,11 @@ class AnimatedLockView: UIView {
                 requirementsText.text = "FREE"
             }
         }
+        
+        pic.unknown = false
+        pic.type = type
+        pic.index = index
+        pic.setNeedsDisplay()
     }
     
     func lockTap(sender: UITapGestureRecognizer) {
@@ -215,23 +298,18 @@ class AnimatedLockView: UIView {
         animator?.addBehavior(velocity)
         animator?.addBehavior(gravity)
         
-        UIView.animateWithDuration(0.5, delay: 0.0, options: nil, animations: { () -> Void in
+        UIView.animateWithDuration(0.66, delay: 0.0, options: nil, animations: { () -> Void in
+            self.transitionView!.alpha = 0.0
             self.requirementsText.alpha = 0.0
             self.staticText.alpha = 0.0
             }, completion: { (Bool) -> Void in
                 
         })
         
-        UIView.animateWithDuration(1.1, delay: 0.2, options: nil, animations: { () -> Void in
-            self.blurView?.alpha = 0.0
-            }, completion: { (Bool) -> Void in
-                self.removeFromSuperview()
-        })
-        
         UIView.animateWithDuration(0.51, delay: 0.39, options: nil, animations: { () -> Void in
             self.lockImage.alpha = 0.0
             }, completion: { (Bool) -> Void in
-                
+                self.removeFromSuperview()
         })
     }
 }
