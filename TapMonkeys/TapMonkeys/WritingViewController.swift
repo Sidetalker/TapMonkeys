@@ -55,6 +55,10 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
         return count(writings)
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return writings[indexPath.row].unlocked ? UITableViewAutomaticDimension : 232
+    }
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let index = indexPath.row
         let curWriting = writings[index]
