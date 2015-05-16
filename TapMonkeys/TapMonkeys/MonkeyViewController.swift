@@ -22,6 +22,8 @@ class MonkeyViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.tabBarItem.badgeValue = nil
+        
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("updateHeaders", object: self, userInfo: [
             "letters" : 0,
@@ -53,6 +55,10 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         return count(monkeys)
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return monkeys[indexPath.row].unlocked ? UITableViewAutomaticDimension : 232
+    }
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let index = indexPath.row
         let curMonkey = monkeys[index]
@@ -68,9 +74,9 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
                 lockView.delegate = self
                 lockView.type = AnimatedLockViewType.Monkey
                 
-                if index == 0 {
-                    cell.contentView.addSubview(lockView)
-                }
+                lockView.customize(load(self.tabBarController))
+                
+                cell.contentView.addSubview(lockView)
             }
         }
     }
@@ -99,12 +105,21 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             
             total.index = index
             total.controller = self.tabBarController as? TabBarController
+            total.type = .Monkey
             
             name.text = curMonkey.name
             description.text = curMonkey.description
             owned.text = "Owned: \(curMonkey.count)"
             frequency.text = "Letters/sec: \(curMonkey.lettersPerSecondCumulative())"
             total.text = "Total Letters: \(curMonkey.totalProduced)"
+            
+            if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
+                lockView.index = index
+                lockView.type = .Monkey
+                lockView.customize(load(self.tabBarController))
+                
+                if curMonkey.unlocked { lockView.removeFromSuperview() }
+            }
             
             return cell
         }
@@ -119,15 +134,34 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         var saveData = load(self.tabBarController)
         let index = view.index
         
-        if index == 0 && saveData.stage == 3 || saveData.stage == 4 {
-            view.unlock()
-            
-            saveData.stage = 4
-            saveData.monkeyUnlocks![index] = true
-            monkeys[index].unlocked = true
-            
-            save(self.tabBarController, saveData)
+        for cost in monkeys[index].unlockCost {
+            if saveData.incomeCounts![Int(cost.0)] < Int(cost.1) { return }
         }
+        
+        for cost in monkeys[index].unlockCost {
+            saveData.incomeCounts![Int(cost.0)] -= Int(cost.1)
+        }
+        
+        view.unlock()
+        
+        saveData.monkeyUnlocks![index] = true
+        monkeys[index].unlocked = true
+        
+        if index + 1 <= count(monkeys) - 1 {
+            var paths = [NSIndexPath]()
+            
+            self.tableView.beginUpdates()
+            
+            for i in index + 1...count(monkeys) - 1 {
+                paths.append(NSIndexPath(forRow: i, inSection: 0))
+            }
+            
+            self.tableView.reloadRowsAtIndexPaths(paths, withRowAnimation: UITableViewRowAnimation.None)
+            
+            self.tableView.endUpdates()
+        }
+        
+        save(self.tabBarController, saveData)
     }
     
     // REFACTOR you wrote this all stupid cause you wanted to move on
@@ -135,56 +169,29 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         var saveData = load(self.tabBarController)
         var monkey = monkeys[monkeyIndex]
         
-        if monkeyIndex == 0 && saveData.stage == 4 {
-            if monkey.canPurchase(1, data: saveData) {
-                var price = monkey.getPrice(1).0 * -1
+        if monkey.canPurchase(1, data: saveData) {
+            var price = monkey.getPrice(1).0 * -1
+            
+            saveData = monkey.purchase(1, data: saveData)!
+            
+            monkeys[monkeyIndex] = monkey
+            
+            save(self.tabBarController, saveData)
+            
+            delay(0.2, {
+                self.tableView.beginUpdates()
                 
-                saveData = monkey.purchase(1, data: saveData)!
+                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: monkeyIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
                 
-                monkeys[monkeyIndex] = monkey
+                self.tableView.endUpdates()
                 
-                saveData.monkeyCounts![monkeyIndex] = monkey.count
-                saveData.monkeyTotals![monkeyIndex] = monkey.lettersTotal()
-                saveData.monkeyLastMod![monkeyIndex] = monkey.previousMod
-                saveData.monkeyLastCost![monkeyIndex] = monkey.previousCost
-                
-                saveData.stage = 5
-                
-                save(self.tabBarController, saveData)
-                
-                delay(0.2, {
-                    self.tableView.reloadData()
-                    
-                    let nc = NSNotificationCenter.defaultCenter()
-                    nc.postNotificationName("updateHeaders", object: self, userInfo: [
-                        "letters" : price,
-                        "animated" : false
-                        ])
-                    nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
-                })
-            }
-        }
-        else {
-            if monkey.canPurchase(1, data: saveData) {
-                var price = monkey.getPrice(1).0 * -1
-                
-                saveData = monkey.purchase(1, data: saveData)!
-                
-                monkeys[monkeyIndex] = monkey
-                
-                save(self.tabBarController, saveData)
-                
-                delay(0.2, {
-                    self.tableView.reloadData()
-                    
-                    let nc = NSNotificationCenter.defaultCenter()
-                    nc.postNotificationName("updateHeaders", object: self, userInfo: [
-                        "money" : price,
-                        "animated" : false
-                        ])
-                    nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
-                })
-            }
+                let nc = NSNotificationCenter.defaultCenter()
+                nc.postNotificationName("updateHeaders", object: self, userInfo: [
+                    "money" : price,
+                    "animated" : false
+                    ])
+                nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
+            })
         }
     }
 }
@@ -204,8 +211,6 @@ class MonkeyPicture: UIView {
         
         self.backgroundColor = UIColor.clearColor()
         self.strokeWidth = strokeWidth
-        
-//        self.setNeedsDisplay()
     }
     
     override func drawRect(rect: CGRect) {

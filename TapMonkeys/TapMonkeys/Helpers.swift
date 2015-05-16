@@ -9,33 +9,6 @@
 import UIKit
 import QuartzCore
 
-class ConstraintView: UIView {
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        self.backgroundColor = UIColor.clearColor()
-    }
-}
-
-class AutoUpdateLabel: UILabel {
-    var index = -1
-    var controller: TabBarController?
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        let timer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
-        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
-    }
-    
-    func refresh() {
-        if controller == nil { return }
-        
-        let saveData = load(controller!)
-        self.text = "Total Letters: \(saveData.monkeyTotals![index])"
-    }
-}
-
 extension String {
     var floatValue: Float {
         return (self as NSString).floatValue

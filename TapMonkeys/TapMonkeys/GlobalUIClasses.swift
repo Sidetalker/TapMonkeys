@@ -11,6 +11,48 @@ import UIKit
 enum AnimatedLockViewType {
     case Monkey
     case Writing
+    case Income
+}
+
+enum AutoUpdateLabelType {
+    case Monkey
+    case Income
+}
+
+class ConstraintView: UIView {
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.backgroundColor = UIColor.clearColor()
+    }
+}
+
+class AutoUpdateLabel: UILabel {
+    var index = -1
+    var controller: TabBarController?
+    var type = AutoUpdateLabelType.Monkey
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        let timer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
+    }
+    
+    func refresh() {
+        if controller == nil { return }
+        
+        let saveData = load(controller!)
+        
+        if type == .Monkey {
+            self.text = "Total Letters: \(saveData.monkeyTotals![index])"
+        }
+        else if type == .Income {
+            let amount = NSString(format: "%.2f", saveData.incomeTotals![index]) as String
+            
+            self.text = "Total: $\(amount)"
+        }
+    }
 }
 
 protocol AnimatedLockDelegate {
@@ -81,6 +123,71 @@ class AnimatedLockView: UIView {
         let singleTap = UITapGestureRecognizer(target: self, action: Selector("lockTap:"))
         
         self.addGestureRecognizer(singleTap)
+    }
+    
+    func customize(saveData: SaveData) {
+        if self.superview != nil {
+            self.frame = self.superview!.frame
+        }
+        
+        staticText.text = "Unlock With"
+        
+        if type == AnimatedLockViewType.Monkey {
+            if index > 1 {
+                if !saveData.monkeyUnlocks![index - 1] && !saveData.monkeyUnlocks![index - 2] {
+                    requirementsText.text = "?????"
+                    
+                    return
+                }
+            }
+            
+            let unlockIndex = Int(monkeys[index].unlockCost[0].0)
+            let quantity = Int(monkeys[index].unlockCost[0].1)
+            let plurarity = quantity > 1 ? "s" : ""
+            
+            requirementsText.text = "\(quantity) \(incomes[unlockIndex].name)\(plurarity)"
+            
+            if quantity == 0 {
+                staticText.text = "Unlock For"
+                requirementsText.text = "FREE"
+            }
+        }
+        else if type == AnimatedLockViewType.Writing {
+            if index > 1 {
+                if !saveData.writingUnlocked![index - 1] && !saveData.writingUnlocked![index - 2] {
+                    requirementsText.text = "?????"
+                    
+                    return
+                }
+            }
+            
+            requirementsText.text = "\(writings[index].unlockCost) Letters"
+            
+            if writings[index].unlockCost == 0 {
+                staticText.text = "Unlock For"
+                requirementsText.text = "FREE"
+            }
+        }
+        else if type == AnimatedLockViewType.Income {
+            if index > 1 {
+                if !saveData.incomeUnlocks![index - 1] && !saveData.incomeUnlocks![index - 2] {
+                    requirementsText.text = "?????"
+                    
+                    return
+                }
+            }
+            
+            let unlockIndex = Int(incomes[index].unlockCost[0].0)
+            let quantity = Int(incomes[index].unlockCost[0].1)
+            let plurarity = quantity > 1 ? "s" : ""
+            
+            requirementsText.text = "\(quantity) \(writings[unlockIndex].name)\(plurarity)"
+            
+            if quantity == 0 {
+                staticText.text = "Unlock For"
+                requirementsText.text = "FREE"
+            }
+        }
     }
     
     func lockTap(sender: UITapGestureRecognizer) {

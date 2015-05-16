@@ -18,6 +18,8 @@ class WritingViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.tabBarItem.badgeValue = nil
+        
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("updateHeaders", object: self, userInfo: [
             "letters" : 0,
@@ -53,6 +55,10 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
         return count(writings)
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return writings[indexPath.row].unlocked ? UITableViewAutomaticDimension : 232
+    }
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let index = indexPath.row
         let curWriting = writings[index]
@@ -67,6 +73,10 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
                 lockView.index = indexPath.row
                 lockView.delegate = self
                 lockView.type = AnimatedLockViewType.Writing
+                
+                lockView.customize(load(self.tabBarController))
+                
+                cell.contentView.addSubview(lockView)
             }
         }
     }
@@ -94,6 +104,15 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
             button.writingIndex = index
             
             button.delegate = self
+            
+            if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
+                lockView.index = index
+                lockView.frame = cell.contentView.frame
+                lockView.type = AnimatedLockViewType.Writing
+                lockView.customize(load(self.tabBarController))
+                
+                if writings[index].unlocked { lockView.removeFromSuperview() }
+            }
             
             pic.setNeedsDisplay()
             button.setNeedsDisplay()
@@ -128,7 +147,33 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
     }
     
     func tappedLock(view: AnimatedLockView) {
-        return
+        var saveData = load(self.tabBarController)
+        let index = view.index
+        
+        if saveData.letters! < writings[index].unlockCost { return }
+        
+        saveData.letters! -= writings[index].unlockCost
+        
+        view.unlock()
+        
+        saveData.writingUnlocked![index] = true
+        writings[index].unlocked = true
+        
+        if index + 1 <= count(writings) - 1 {
+            var paths = [NSIndexPath]()
+            
+            self.tableView.beginUpdates()
+            
+            for i in index + 1...count(writings) - 1 {
+                paths.append(NSIndexPath(forRow: i, inSection: 0))
+            }
+            
+            self.tableView.reloadRowsAtIndexPaths(paths, withRowAnimation: UITableViewRowAnimation.None)
+            
+            self.tableView.endUpdates()
+        }
+        
+        save(self.tabBarController, saveData)
     }
 }
 

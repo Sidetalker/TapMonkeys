@@ -18,6 +18,8 @@ class IncomeViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.tabBarItem.badgeValue = nil
+        
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("updateHeaders", object: self, userInfo: [
             "letters" : 0,
@@ -53,11 +55,15 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
         return count(incomes)
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return incomes[indexPath.row].unlocked ? UITableViewAutomaticDimension : 232
+    }
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let index = indexPath.row
-        let curWriting = writings[index]
+        let curIncome = incomes[index]
         
-        if !curWriting.unlocked {
+        if !curIncome.unlocked {
             if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
                 // That betch is hooked up, no worriez
             }
@@ -66,7 +72,11 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
                 lockView.tag = 8
                 lockView.index = indexPath.row
                 lockView.delegate = self
-                lockView.type = AnimatedLockViewType.Writing
+                lockView.type = AnimatedLockViewType.Income
+                
+                lockView.customize(load(self.tabBarController))
+                
+                cell.contentView.addSubview(lockView)
             }
         }
     }
@@ -78,7 +88,7 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             title = cell.viewWithTag(2) as? UILabel,
             owned = cell.viewWithTag(3) as? UILabel,
             moneyPerSec = cell.viewWithTag(4) as? UILabel,
-            totalMoney = cell.viewWithTag(5) as? UILabel,
+            totalMoney = cell.viewWithTag(5) as? AutoUpdateLabel,
             button = cell.viewWithTag(6) as? IncomeBuyButton,
             description = cell.viewWithTag(7) as? UILabel
         {
@@ -95,8 +105,20 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             
             button.delegate = self
             
+            totalMoney.index = index
+            totalMoney.controller = self.tabBarController as? TabBarController
+            totalMoney.type = .Income
+            
             pic.setNeedsDisplay()
             button.setNeedsDisplay()
+            
+            if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
+                lockView.index = index
+                lockView.type = .Income
+                lockView.customize(load(self.tabBarController))
+                
+                if incomes[index].unlocked { lockView.removeFromSuperview() }
+            }
             
             return cell
         }
@@ -129,7 +151,37 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     func tappedLock(view: AnimatedLockView) {
-        return
+        var saveData = load(self.tabBarController)
+        let index = view.index
+        
+        for cost in incomes[index].unlockCost {
+            if saveData.writingCount![Int(cost.0)] < Int(cost.1) { return }
+        }
+        
+        for cost in incomes[index].unlockCost {
+            saveData.writingCount![Int(cost.0)] -= Int(cost.1)
+        }
+        
+        view.unlock()
+        
+        saveData.incomeUnlocks![index] = true
+        incomes[index].unlocked = true
+        
+        if index + 1 <= count(incomes) - 1 {
+            var paths = [NSIndexPath]()
+            
+            self.tableView.beginUpdates()
+            
+            for i in index + 1...count(incomes) - 1 {
+                paths.append(NSIndexPath(forRow: i, inSection: 0))
+            }
+            
+            self.tableView.reloadRowsAtIndexPaths(paths, withRowAnimation: UITableViewRowAnimation.None)
+            
+            self.tableView.endUpdates()
+        }
+        
+        save(self.tabBarController, saveData)
     }
 }
 
