@@ -68,9 +68,9 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
                 lockView.delegate = self
                 lockView.type = AnimatedLockViewType.Monkey
                 
-                if index == 0 {
-                    cell.contentView.addSubview(lockView)
-                }
+                lockView.customize(load(self.tabBarController))
+                
+                cell.contentView.addSubview(lockView)
             }
         }
     }
@@ -86,6 +86,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             buyButton = cell.viewWithTag(6) as? MonkeyBuyButton,
             description = cell.viewWithTag(7) as? UILabel
         {
+            println("cell for \(indexPath.row)")
             let index = indexPath.row
             let curMonkey = monkeys[index]
             let curPrice = curMonkey.getPrice(1).0
@@ -106,6 +107,15 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             frequency.text = "Letters/sec: \(curMonkey.lettersPerSecondCumulative())"
             total.text = "Total Letters: \(curMonkey.totalProduced)"
             
+            if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
+                println("has lock view")
+                lockView.index = index
+                lockView.type = AnimatedLockViewType.Monkey
+                lockView.customize(load(self.tabBarController))
+                
+                if curMonkey.unlocked { lockView.removeFromSuperview() }
+            }
+            
             return cell
         }
         else {
@@ -120,14 +130,15 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         let index = view.index
         
         if index == 0 && saveData.stage == 3 || saveData.stage == 4 {
-            view.unlock()
-            
             saveData.stage = 4
-            saveData.monkeyUnlocks![index] = true
-            monkeys[index].unlocked = true
-            
-            save(self.tabBarController, saveData)
         }
+        
+        view.unlock()
+        
+        saveData.monkeyUnlocks![index] = true
+        monkeys[index].unlocked = true
+        
+        save(self.tabBarController, saveData)
     }
     
     // REFACTOR you wrote this all stupid cause you wanted to move on
@@ -204,8 +215,6 @@ class MonkeyPicture: UIView {
         
         self.backgroundColor = UIColor.clearColor()
         self.strokeWidth = strokeWidth
-        
-//        self.setNeedsDisplay()
     }
     
     override func drawRect(rect: CGRect) {

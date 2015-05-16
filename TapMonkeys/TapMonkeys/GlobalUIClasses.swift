@@ -83,6 +83,24 @@ class AnimatedLockView: UIView {
         self.addGestureRecognizer(singleTap)
     }
     
+    func customize(saveData: SaveData) {
+        if type == AnimatedLockViewType.Monkey {
+            if index > 1 {
+                if !saveData.monkeyUnlocks![index - 1] && !saveData.monkeyUnlocks![index - 2] {
+                    requirementsText.text = "?????"
+                    println("configured with ??? for index \(index)")
+                    
+                    return
+                }
+            }
+            
+            let text = NSString(format: "%.2f", monkeys[index].getPrice(1).0) as String
+            
+            requirementsText.text = "$\(text)"
+            println("configured with $\(text) for index \(index)")
+        }
+    }
+    
     func lockTap(sender: UITapGestureRecognizer) {
         delegate?.tappedLock(self)
     }
