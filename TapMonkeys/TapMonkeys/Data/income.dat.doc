@@ -3,4 +3,4 @@ Young Jeremy, pictured above, is head wordologist on the team of scientists cont
 0 - 10 			// 10 lvl 0 income items to unlock
 0 - 1			// At count 0, cost 1 income item (FIXME matching indexes only for now)
 0 - 1.15		// At count 0, modifier 1.15 
-1 - 0.01 		// 0.01 $/sec @ upgrade lvl 1
+0 - 0.01 		// 0.01 $/sec @ upgrade lvl 0

@@ -111,6 +111,7 @@ func writeDefaults(data: SaveData) -> Bool {
     defaults.setObject(data.incomeTotals, forKey: "incomeTotals")
     defaults.setObject(data.incomeLastCost, forKey: "incomeLastCost")
     defaults.setObject(data.incomeLastMod, forKey: "incomeLastMod")
+    defaults.setObject(data.incomeLevel, forKey: "incomeLevel")
     
     defaults.synchronize()
     
@@ -143,6 +144,7 @@ func readDefaults() -> SaveData {
     save.incomeTotals = defaults.arrayForKey("incomeTotals") as? [Float]
     save.incomeLastCost = defaults.arrayForKey("incomeLastCost") as? [Float]
     save.incomeLastMod = defaults.arrayForKey("incomeLastMod") as? [Float]
+    save.incomeLevel = defaults.arrayForKey("incomeLevel") as? [Int]
     
     return save
 }
@@ -306,6 +308,15 @@ func validate(save: SaveData) -> SaveData {
     else if count(newSave.incomeLastMod!) < numIncome {
         for i in count(newSave.incomeLastMod!)...numIncome - 1 {
             newSave.incomeLastMod?.append(0)
+        }
+    }
+    
+    if newSave.incomeLevel == nil {
+        newSave.incomeLevel = [Int](count: numIncome, repeatedValue: 0)
+    }
+    else if count(newSave.incomeLevel!) < numIncome {
+        for i in count(newSave.incomeLevel!)...numIncome - 1 {
+            newSave.incomeLevel?.append(0)
         }
     }
     

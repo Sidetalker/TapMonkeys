@@ -83,14 +83,14 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             description = cell.viewWithTag(7) as? UILabel
         {
             let index = indexPath.row
-//            let moneyText = NSString(format: "%.2f", writings[index].getValue()) as String
+            let moneyText = NSString(format: "%.2f", incomes[index].moneyPerSecond()) as String
             
             pic.incomeIndex = index
-            title.text = writings[index].name
-            description.text = writings[index].description
-//            owned.text = "Owned: \(incomes[index].count)"
-//            value.text = "$/sec: $\(moneyText)"
-//            level.text = "Total: \(writings[index].level)"
+            title.text = incomes[index].name
+            description.text = incomes[index].description
+            owned.text = "Owned: \(incomes[index].count)"
+            moneyPerSec.text = "$/sec: $\(moneyText)"
+            totalMoney.text = "Total: $\(incomes[index].totalProduced)"
             button.incomeIndex = index
             
             button.delegate = self
@@ -192,9 +192,7 @@ class IncomeBuyButton: UIView {
     
     override func drawRect(rect: CGRect) {
         if state == 0 {
-//            let priceLow = writings[writingIndex].getPrice(1).0
-//            let priceHigh = writings[writingIndex].getPrice(1).1
-            var text = "Placeholder"
+            var text = incomes[incomeIndex].getPurchaseString(1)
             
             TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
         }

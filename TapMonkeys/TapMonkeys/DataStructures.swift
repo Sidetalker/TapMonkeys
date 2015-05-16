@@ -47,6 +47,7 @@ struct SaveData {
     var incomeUnlocks: [Bool]?
     var incomeCounts: [Int]?
     var incomeTotals: [Float]?
+    var incomeLevel: [Int]?
     var incomeLastCost: [Float]?
     var incomeLastMod: [Float]?
 }
@@ -63,8 +64,9 @@ struct IncomeData {
     var previousCost: Float = -1
     var count: Int = 0
     var unlocked: Bool = false
-    var moneyProduced = [Float, Float]()
-    var level: Int = 1
+    var moneyProduced = [(Float, Float)]()
+    var totalProduced: Float = 0
+    var level: Int = 0
     
     mutating func purchase(count: Int, data: SaveData) -> SaveData? {
         var curData = data
@@ -84,6 +86,28 @@ struct IncomeData {
         }
         
         return nil
+    }
+    
+    func moneyPerSecond() -> Float {
+        return Float(count) * getProduction()
+    }
+    
+    func getProduction() -> Float {
+        for item in moneyProduced {
+            if Int(item.0) == level {
+                return item.1
+            }
+        }
+        
+        return moneyProduced[moneyProduced.count - 1].1
+    }
+    
+    func getPurchaseString(count: Int) -> String {
+        let price = Int(getPrice(count).0)
+        let itemName = writings[Int(unlockCost[0].0)].name
+        let plurarity = price > 1 ? true : false
+        
+        return "\(price) \(itemName)s"
     }
     
     // Return (total cost, last cost, last mod)
@@ -192,6 +216,7 @@ func loadIncome(data: SaveData) {
         incomes[i].previousMod = data.incomeLastMod![i]
         incomes[i].unlocked = data.incomeUnlocks![i]
         incomes[i].count = data.incomeCounts![i]
+        incomes[i].level = data.incomeLevel![i]
         incomes[i].index = i
     }
 }
