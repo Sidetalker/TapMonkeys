@@ -99,6 +99,8 @@ class TapViewController: UIViewController, PopLabelDelegate {
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
             
             popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
+            
+            return
         }
         
         if saveData.stage == 0 {
@@ -110,7 +112,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
             })
         }
         else if saveData.stage == 1 {
-            if count(gen) == 0 && count(genLabels) == 0 { prepGen(0) }
+            if count(gen) == 0 { prepGen(0) }
             
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
             
@@ -147,7 +149,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
             }
         }
         else if saveData.stage == 2 {
-            if count(gen) == 0 && count(genLabels) == 0  { prepGen(1) }
+            if count(gen) == 0 { prepGen(1) }
             
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
             
@@ -186,7 +188,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
             }
         }
         else if saveData.stage == 3 {
-            if count(gen) == 0 && count(genLabels) == 0  { prepGen(2) }
+            if count(gen) == 0 { prepGen(2) }
             
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
             
@@ -259,8 +261,6 @@ class TapViewController: UIViewController, PopLabelDelegate {
         ])
     }
 }
-
-
 
 protocol PopLabelDelegate {
     func finishedPopping(customEnd: Bool)

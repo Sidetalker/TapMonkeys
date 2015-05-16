@@ -69,6 +69,10 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
                 lockView.index = indexPath.row
                 lockView.delegate = self
                 lockView.type = AnimatedLockViewType.Writing
+                
+                lockView.customize(load(self.tabBarController))
+                
+                cell.contentView.addSubview(lockView)
             }
         }
     }
@@ -96,6 +100,15 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
             button.writingIndex = index
             
             button.delegate = self
+            
+            if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
+                lockView.index = index
+                lockView.frame = cell.contentView.frame
+                lockView.type = AnimatedLockViewType.Writing
+                lockView.customize(load(self.tabBarController))
+                
+                if writings[index].unlocked { lockView.removeFromSuperview() }
+            }
             
             pic.setNeedsDisplay()
             button.setNeedsDisplay()
@@ -130,7 +143,33 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
     }
     
     func tappedLock(view: AnimatedLockView) {
-        return
+        var saveData = load(self.tabBarController)
+        let index = view.index
+        
+        if saveData.letters! < writings[index].unlockCost { return }
+        
+        saveData.letters! -= writings[index].unlockCost
+        
+        view.unlock()
+        
+        saveData.writingUnlocked![index] = true
+        writings[index].unlocked = true
+        
+        if index + 1 <= count(writings) - 1 {
+            var paths = [NSIndexPath]()
+            
+            self.tableView.beginUpdates()
+            
+            for i in index + 1...count(writings) - 1 {
+                paths.append(NSIndexPath(forRow: i, inSection: 0))
+            }
+            
+            self.tableView.reloadRowsAtIndexPaths(paths, withRowAnimation: UITableViewRowAnimation.None)
+            
+            self.tableView.endUpdates()
+        }
+        
+        save(self.tabBarController, saveData)
     }
 }
 

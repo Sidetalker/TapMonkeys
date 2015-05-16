@@ -84,6 +84,10 @@ class AnimatedLockView: UIView {
     }
     
     func customize(saveData: SaveData) {
+        if self.superview != nil {
+            self.frame = self.superview!.frame
+        }
+        
         staticText.text = "Unlock With"
         
         if type == AnimatedLockViewType.Monkey {
@@ -102,6 +106,22 @@ class AnimatedLockView: UIView {
             requirementsText.text = "\(quantity) \(incomes[unlockIndex].name)\(plurarity)"
             
             if quantity == 0 {
+                staticText.text = "Unlock For"
+                requirementsText.text = "FREE"
+            }
+        }
+        else if type == AnimatedLockViewType.Writing {
+            if index > 1 {
+                if !saveData.writingUnlocked![index - 1] && !saveData.writingUnlocked![index - 2] {
+                    requirementsText.text = "?????"
+                    
+                    return
+                }
+            }
+            
+            requirementsText.text = "\(writings[index].unlockCost) Letters"
+            
+            if writings[index].unlockCost == 0 {
                 staticText.text = "Unlock For"
                 requirementsText.text = "FREE"
             }
