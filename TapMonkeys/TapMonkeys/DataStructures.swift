@@ -19,11 +19,13 @@ let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
 
 let gens = [
     ["M", "O", "N", "K", "E", "Y", "S"],
-    ["W", "R", "I", "T", "I", "N", "G"]
+    ["W", "R", "I", "T", "I", "N", "G"],
+    ["I", "N", "C", "O", "M", "E"]
 ]
 
 var monkeys = [MonkeyData]()
 var writings = [WritingData]()
+var incomes = [IncomeData]()
 
 struct SaveData {
     var stage: Int?
@@ -42,6 +44,190 @@ struct SaveData {
     var writingLevel: [Int]?
     var writingCostLow: [Int]?
     var writingCostHigh: [Int]?
+    
+    var incomeUnlocks: [Bool]?
+    var incomeCounts: [Int]?
+    var incomeTotals: [Float]?
+    var incomeLevel: [Int]?
+    var incomeLastCost: [Float]?
+    var incomeLastMod: [Float]?
+}
+
+struct IncomeData {
+    var index: Int = -1
+    var name: String = "ERROR WRITETHING"
+    var description: String = "kill.....me"
+    var unlockCost = [(Float, Float)]()
+    var costs = [(Float, Float)]()
+    var modifiers = [(Float, Float)]()
+    
+    var previousMod: Float = -1
+    var previousCost: Float = -1
+    var count: Int = 0
+    var unlocked: Bool = false
+    var moneyProduced = [(Float, Float)]()
+    var totalProduced: Float = 0
+    var level: Int = 0
+    
+    mutating func purchase(count: Int, data: SaveData) -> SaveData? {
+        var curData = data
+        let price = getPrice(count)
+        
+        if writings[self.index].count >= Int(price.0) {
+            self.previousCost = price.1
+            self.previousMod = price.2
+            self.count += count
+            
+            writings[self.index].count -= Int(price.0)
+            
+            curData.writingCount![self.index] -= Int(price.0)
+            curData.incomeCounts![self.index] += count
+            curData.incomeLastCost![self.index] = price.1
+            curData.incomeLastMod![self.index] = price.2
+            
+            return curData
+        }
+        
+        return nil
+    }
+    
+    func moneyPer(interval: Float) -> Float {
+        var preciseInterval = Float(self.count) * self.getProduction() * interval
+        
+        return preciseInterval
+    }
+    
+    func moneyPerSecond() -> Float {
+        return Float(count) * getProduction()
+    }
+    
+    func getProduction() -> Float {
+        for item in moneyProduced {
+            if Int(item.0) == level {
+                return item.1
+            }
+        }
+        
+        return moneyProduced[moneyProduced.count - 1].1
+    }
+    
+    func getPurchaseString(count: Int) -> String {
+        let price = Int(getPrice(count).0)
+        let itemName = writings[Int(unlockCost[0].0)].name
+        let plurarity = price > 1 ? true : false
+        
+        return "\(price) \(itemName)s"
+    }
+    
+    // Return (total cost, last cost, last mod)
+    func getPrice(count: Int) -> (Float, Float, Float) {
+        var costBuffer = previousCost
+        var modBuffer = previousMod
+        var totalCost: Float = 0
+        
+        if costBuffer == -1 {
+            costBuffer = costs[self.index].0
+        }
+        if modBuffer == -1 {
+            modBuffer = modifiers[self.index].0
+        }
+        
+        for i in 0...count - 1 {
+            let curCostOverride = costOverride()
+            let curModOverride = modOverride()
+            
+            var curCost = costBuffer
+            var curMod = modBuffer
+            
+            if curCostOverride >= 0 {
+                curCost = curCostOverride
+            }
+            if curModOverride >= 0 {
+                curMod = curModOverride
+            }
+            
+            curCost = curCost * (curCostOverride == -1 ? curMod : 1)
+            
+            costBuffer = curCost
+            modBuffer = curMod
+            
+            totalCost += curCost
+        }
+        
+        return (totalCost, costBuffer, modBuffer)
+    }
+    
+    func costOverride() -> Float {
+        for cost in costs {
+            if self.count == Int(cost.0) {
+                return cost.1
+            }
+        }
+        
+        return -1
+    }
+    
+    func modOverride() -> Float {
+        for mod in modifiers {
+            if self.count == Int(mod.0) {
+                return mod.1
+            }
+        }
+        
+        return -1
+    }
+}
+
+func loadIncome(data: SaveData) {
+    let path = NSBundle.mainBundle().pathForResource("income", ofType: "dat")!
+    let content = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)! as String
+    let splitContent = split(content) { $0 == "\n" }
+    
+    incomes = [IncomeData]()
+    
+    for i in 0...splitContent.count / 6 - 1 {
+        var newIncome = IncomeData()
+        
+        for x in 0...5 {
+            let data = splitContent[i * 6 + x]
+            
+            // Name
+            if x == 0 {
+                newIncome.name = data
+            }
+                // Description
+            else if x == 1 {
+                newIncome.description = data
+            }
+                // Unlock requirements
+            else if x == 2 {
+                newIncome.unlockCost = parseFloatTuples(data)
+            }
+                // Unlock costs
+            else if x == 3 {
+                newIncome.costs = parseFloatTuples(data)
+            }
+                // Modifiers
+            else if x == 4 {
+                newIncome.modifiers = parseFloatTuples(data)
+            }
+                // Unlock cost overrides
+            else if x == 5 {
+                newIncome.moneyProduced = parseFloatTuples(data)
+            }
+        }
+        
+        incomes.append(newIncome)
+    }
+    
+    for i in 0...count(incomes) - 1 {
+        incomes[i].previousCost = data.incomeLastCost![i]
+        incomes[i].previousMod = data.incomeLastMod![i]
+        incomes[i].unlocked = data.incomeUnlocks![i]
+        incomes[i].count = data.incomeCounts![i]
+        incomes[i].level = data.incomeLevel![i]
+        incomes[i].index = i
+    }
 }
 
 struct WritingData {

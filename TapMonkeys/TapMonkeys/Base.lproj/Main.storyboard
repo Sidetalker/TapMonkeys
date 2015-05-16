@@ -79,7 +79,7 @@
         <!--Income-->
         <scene sceneID="kdM-Nk-tE1">
             <objects>
-                <viewController id="sXD-2P-paj" sceneMemberID="viewController">
+                <viewController id="sXD-2P-paj" customClass="IncomeViewController" customModule="TapMonkeys" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="G9A-Qe-HSi"/>
                         <viewControllerLayoutGuide type="bottom" id="pCr-Zt-Ibg"/>
@@ -98,7 +98,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Stq-7w-mDx">
                                 <rect key="frame" x="0.0" y="96" width="300" height="355"/>
                                 <connections>
-                                    <segue destination="olK-4s-zCg" kind="embed" id="X3t-Wb-ptN"/>
+                                    <segue destination="olK-4s-zCg" kind="embed" identifier="segueIncomeTable" id="X3t-Wb-ptN"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -116,6 +116,9 @@
                     <tabBarItem key="tabBarItem" title="Income" image="incomeTab.png" id="1tY-Ru-69W"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="500"/>
+                    <connections>
+                        <outlet property="dataHeader" destination="IHc-J1-HBw" id="Txg-Hq-MEm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YOE-Af-5IY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -452,21 +455,21 @@
             </objects>
             <point key="canvasLocation" x="-953" y="-283.5"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Income Table View Controller-->
         <scene sceneID="9yi-E2-xW7">
             <objects>
-                <tableViewController id="olK-4s-zCg" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ChI-my-1Xo">
+                <tableViewController id="olK-4s-zCg" customClass="IncomeTableViewController" customModule="TapMonkeys" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="267" sectionHeaderHeight="22" sectionFooterHeight="22" id="ChI-my-1Xo">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="355"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellIncome" rowHeight="238" id="OYq-j9-8pP">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellIncome" rowHeight="267" id="OYq-j9-8pP">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OYq-j9-8pP" id="iic-q3-8SA">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9FW-pR-pbC" customClass="MonkeyPicture" customModule="TapMonkeys" customModuleProvider="target">
+                                        <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9FW-pR-pbC" customClass="IncomePicture" customModule="TapMonkeys" customModuleProvider="target">
                                             <rect key="frame" x="8" y="8" width="100" height="100"/>
                                             <color key="backgroundColor" red="0.98594826459999996" green="0.0" blue="0.026950567960000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -501,7 +504,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ldr-Td-q3b" customClass="MonkeyBuyButton" customModule="TapMonkeys" customModuleProvider="target">
+                                        <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ldr-Td-q3b" customClass="IncomeBuyButton" customModule="TapMonkeys" customModuleProvider="target">
                                             <rect key="frame" x="8" y="113" width="284" height="32"/>
                                             <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -521,8 +524,8 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="7" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3J-wE-ZJN">
-                                            <rect key="frame" x="8" y="153" width="284" height="76"/>
-                                            <string key="text">Almost never spotted in the wild, the Finger Monkey's tiny taps do not register on standard smartphones. Instead, it commandeers the first human finger it comes across.</string>
+                                            <rect key="frame" x="8" y="153" width="284" height="105"/>
+                                            <string key="text">Young Jeremy, pictured above, is head wordologist on the team of scientists continuing to study the origins and applications of the word. Fooled by the investors backing the project, he receives a pissant salary of under $75k.</string>
                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -561,12 +564,6 @@
                                             <exclude reference="NE8-ou-Afi"/>
                                         </mask>
                                     </variation>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dID-gQ-xDQ">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dID-gQ-xDQ" id="pbW-2x-8s6">
-                                    <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>

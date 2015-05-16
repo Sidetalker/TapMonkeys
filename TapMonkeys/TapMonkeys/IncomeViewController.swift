@@ -1,24 +1,20 @@
 //
-//  MonkeyViewController.swift
+//  IncomeViewController.swift
 //  TapMonkeys
 //
-//  Created by Kevin Sullivan on 5/9/15.
+//  Created by Kevin Sullivan on 5/15/15.
 //  Copyright (c) 2015 Kevin Sullivan. All rights reserved.
 //
 
 import UIKit
 
-class MonkeyViewController: UIViewController {
+class IncomeViewController: UIViewController {
     @IBOutlet weak var dataHeader: DataHeader!
     
-    var monkeyTable: MonkeyTableViewController?
+    var incomeTable: IncomeTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func prefersStatusBarHidden() -> Bool {
-        return true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -31,14 +27,18 @@ class MonkeyViewController: UIViewController {
             ])
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "segueMonkeyTable" {
-            monkeyTable = segue.destinationViewController as? MonkeyTableViewController
+        if segue.identifier == "segueIncomeTable" {
+            incomeTable = segue.destinationViewController as? IncomeTableViewController
         }
     }
 }
 
-class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, AnimatedLockDelegate, MonkeyBuyButtonDelegate {
+class IncomeTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, AnimatedLockDelegate, IncomeBuyButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,31 +48,31 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return count(monkeys) == 0 ? 0 : 1
+        return count(incomes) == 0 ? 0 : 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return count(monkeys)
+        return count(incomes)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return monkeys[indexPath.row].unlocked ? UITableViewAutomaticDimension : 232
+        return incomes[indexPath.row].unlocked ? UITableViewAutomaticDimension : 232
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let index = indexPath.row
-        let curMonkey = monkeys[index]
+        let curIncome = incomes[index]
         
-        if !curMonkey.unlocked {
+        if !curIncome.unlocked {
             if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
-                // We're good to go I guess
+                // That betch is hooked up, no worriez
             }
             else {
                 let lockView = AnimatedLockView(frame: cell.contentView.frame)
                 lockView.tag = 8
                 lockView.index = indexPath.row
                 lockView.delegate = self
-                lockView.type = AnimatedLockViewType.Monkey
+                lockView.type = AnimatedLockViewType.Income
                 
                 lockView.customize(load(self.tabBarController))
                 
@@ -83,76 +83,96 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if let
-            cell = self.tableView.dequeueReusableCellWithIdentifier("cellMonkey") as? UITableViewCell,
-            monkeyPic = cell.viewWithTag(1) as? MonkeyPicture,
-            name = cell.viewWithTag(2) as? UILabel,
+            cell = tableView.dequeueReusableCellWithIdentifier("cellIncome") as? UITableViewCell,
+            pic = cell.viewWithTag(1) as? IncomePicture,
+            title = cell.viewWithTag(2) as? UILabel,
             owned = cell.viewWithTag(3) as? UILabel,
-            frequency = cell.viewWithTag(4) as? UILabel,
-            total = cell.viewWithTag(5) as? AutoUpdateLabel,
-            buyButton = cell.viewWithTag(6) as? MonkeyBuyButton,
+            moneyPerSec = cell.viewWithTag(4) as? UILabel,
+            totalMoney = cell.viewWithTag(5) as? AutoUpdateLabel,
+            button = cell.viewWithTag(6) as? IncomeBuyButton,
             description = cell.viewWithTag(7) as? UILabel
         {
             let index = indexPath.row
-            let curMonkey = monkeys[index]
-            let curPrice = curMonkey.getPrice(1).0
+            let moneyText = NSString(format: "%.2f", incomes[index].moneyPerSecond()) as String
             
-            monkeyPic.monkeyIndex = index
-            monkeyPic.setNeedsDisplay()
+            pic.incomeIndex = index
+            title.text = incomes[index].name
+            description.text = incomes[index].description
+            owned.text = "Owned: \(incomes[index].count)"
+            moneyPerSec.text = "$/sec: $\(moneyText)"
+            totalMoney.text = "Total: $\(incomes[index].totalProduced)"
+            button.incomeIndex = index
             
-            buyButton.monkeyIndex = index
-            buyButton.delegate = self
-            buyButton.setNeedsDisplay()
+            button.delegate = self
             
-            total.index = index
-            total.controller = self.tabBarController as? TabBarController
-            total.type = .Monkey
+            totalMoney.index = index
+            totalMoney.controller = self.tabBarController as? TabBarController
+            totalMoney.type = .Income
             
-            name.text = curMonkey.name
-            description.text = curMonkey.description
-            owned.text = "Owned: \(curMonkey.count)"
-            frequency.text = "Letters/sec: \(curMonkey.lettersPerSecondCumulative())"
-            total.text = "Total Letters: \(curMonkey.totalProduced)"
+            pic.setNeedsDisplay()
+            button.setNeedsDisplay()
             
             if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
                 lockView.index = index
-                lockView.type = .Monkey
+                lockView.type = .Income
                 lockView.customize(load(self.tabBarController))
                 
-                if curMonkey.unlocked { lockView.removeFromSuperview() }
+                if incomes[index].unlocked { lockView.removeFromSuperview() }
             }
             
             return cell
         }
-        else {
-            println("Unable to load monkey cell / subviews!")
-        }
         
         return UITableViewCell()
+    }
+    
+    func buyTapped(incomeIndex: Int) {
+        var saveData = load(self.tabBarController)
+        var income = incomes[incomeIndex]
+        
+        var price = Int(income.getPrice(1).0)
+        
+        if let newSave = income.purchase(1, data: saveData) {
+            save(self.tabBarController, newSave)
+            
+            incomes[incomeIndex] = income
+            
+            delay(0.2, {
+                self.tableView.reloadData()
+                
+                let nc = NSNotificationCenter.defaultCenter()
+                nc.postNotificationName("updateHeaders", object: self, userInfo: [
+                    "letters" : -price,
+                    "animated" : false
+                    ])
+                nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
+            })
+        }
     }
     
     func tappedLock(view: AnimatedLockView) {
         var saveData = load(self.tabBarController)
         let index = view.index
         
-        for cost in monkeys[index].unlockCost {
-            if saveData.incomeCounts![Int(cost.0)] < Int(cost.1) { return }
+        for cost in incomes[index].unlockCost {
+            if saveData.writingCount![Int(cost.0)] < Int(cost.1) { return }
         }
         
-        for cost in monkeys[index].unlockCost {
-            saveData.incomeCounts![Int(cost.0)] -= Int(cost.1)
+        for cost in incomes[index].unlockCost {
+            saveData.writingCount![Int(cost.0)] -= Int(cost.1)
         }
         
         view.unlock()
         
-        saveData.monkeyUnlocks![index] = true
-        monkeys[index].unlocked = true
+        saveData.incomeUnlocks![index] = true
+        incomes[index].unlocked = true
         
-        if index + 1 <= count(monkeys) - 1 {
+        if index + 1 <= count(incomes) - 1 {
             var paths = [NSIndexPath]()
             
             self.tableView.beginUpdates()
             
-            for i in index + 1...count(monkeys) - 1 {
+            for i in index + 1...count(incomes) - 1 {
                 paths.append(NSIndexPath(forRow: i, inSection: 0))
             }
             
@@ -163,42 +183,10 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         
         save(self.tabBarController, saveData)
     }
-    
-    // REFACTOR you wrote this all stupid cause you wanted to move on
-    func buyTapped(monkeyIndex: Int) {
-        var saveData = load(self.tabBarController)
-        var monkey = monkeys[monkeyIndex]
-        
-        if monkey.canPurchase(1, data: saveData) {
-            var price = monkey.getPrice(1).0 * -1
-            
-            saveData = monkey.purchase(1, data: saveData)!
-            
-            monkeys[monkeyIndex] = monkey
-            
-            save(self.tabBarController, saveData)
-            
-            delay(0.2, {
-                self.tableView.beginUpdates()
-                
-                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: monkeyIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
-                
-                self.tableView.endUpdates()
-                
-                let nc = NSNotificationCenter.defaultCenter()
-                nc.postNotificationName("updateHeaders", object: self, userInfo: [
-                    "money" : price,
-                    "animated" : false
-                    ])
-                nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
-            })
-        }
-    }
 }
 
-class MonkeyPicture: UIView {
-    var monkeyIndex = 0
-    var strokeWidth: CGFloat = 0.5
+class IncomePicture: UIView {
+    var incomeIndex = 0
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -210,39 +198,38 @@ class MonkeyPicture: UIView {
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.clearColor()
-        self.strokeWidth = strokeWidth
     }
     
     override func drawRect(rect: CGRect) {
-        if monkeyIndex == 0 {
-            TapStyle.drawFingerMonkey()
+        if incomeIndex == 0 {
+            TapStyle.drawBaby()
         }
-        else if monkeyIndex == 1 {
-            TapStyle.drawGoofkey()
+        else if incomeIndex == 1 {
+            TapStyle.drawKindergartner()
         }
-        else if monkeyIndex == 2 {
-            TapStyle.drawDigitDestroyer()
+        else if incomeIndex == 2 {
+            TapStyle.drawFourthGrader()
         }
-        else if monkeyIndex == 3 {
-            TapStyle.drawSeaMonkey()
+        else if incomeIndex == 3 {
+            TapStyle.drawElementaryTeacher()
         }
-        else if monkeyIndex == 4 {
-            TapStyle.drawJabbaTheMonkey()
+        else if incomeIndex == 4 {
+            TapStyle.drawElementarySchool()
         }
     }
 }
 
-protocol MonkeyBuyButtonDelegate {
-    func buyTapped(monkeyIndex: Int)
+protocol IncomeBuyButtonDelegate {
+    func buyTapped(incomeIndex: Int)
 }
 
-class MonkeyBuyButton: UIView {
+class IncomeBuyButton: UIView {
     // 0 is 1 only, 1 is 1 | 10, 2 is 1 | 10 | 100
     // Like, maybe
     var state = 0
-    var monkeyIndex = -1
+    var incomeIndex = -1
     
-    var delegate: MonkeyBuyButtonDelegate?
+    var delegate: IncomeBuyButtonDelegate?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -256,11 +243,11 @@ class MonkeyBuyButton: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-        let price = monkeys[monkeyIndex].getPrice(1).0
-        
-        let text = NSString(format: "$%.2f", price) as String
-        
-        TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
+        if state == 0 {
+            var text = incomes[incomeIndex].getPurchaseString(1)
+            
+            TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
+        }
     }
     
     
@@ -271,7 +258,7 @@ class MonkeyBuyButton: UIView {
             })
         }
         else if sender.state == UIGestureRecognizerState.Ended {
-            self.delegate?.buyTapped(self.monkeyIndex)
+            self.delegate?.buyTapped(self.incomeIndex)
             
             UIView.animateWithDuration(0.35, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
                 self.transform = CGAffineTransformIdentity
