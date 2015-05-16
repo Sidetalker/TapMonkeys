@@ -109,10 +109,11 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 self.tapLabel.transform = CGAffineTransformMakeScale(1.35, 1.35)
                 }, completion: { (Bool) -> Void in
                     self.updateStage(1)
-                    self.prepGen(0)
             })
         }
         else if saveData.stage == 1 {
+            if count(gen) == 0 && count(genLabels) == 0 { prepGen(0) }
+            
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
             
             if contains(gen, letter) {
@@ -125,6 +126,8 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 genLabels.append(popLabel)
                 
                 if self.gen.count == 0 {
+                    self.updateStage(2)
+                    
                     for i in 0...count(self.genLabels) - 1 {
                         delay(2.0 + Double(i) * 0.3, {
                             self.genLabels[i].pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
@@ -136,9 +139,6 @@ class TapViewController: UIViewController, PopLabelDelegate {
                         
                         tabBar.setTabBarVisible(true, animated: true)
                         tabBar.viewControllers![1].tabBarItem?.badgeValue = "!"
-                        
-                        self.updateStage(2)
-                        self.prepGen(1)
                     })
                 }
             }
@@ -146,7 +146,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
             }
         }
-        else if saveData.stage == 5 {
+        else if saveData.stage == 2 {
             if count(gen) == 0 { prepGen(1) }
             
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
@@ -161,7 +161,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 genLabels.append(popLabel)
                 
                 if self.gen.count == 0 {
-                    self.updateStage(6)
+                    self.updateStage(3)
                     
                     for i in 0...count(self.genLabels) - 1 {
                         delay(2.0 + Double(i) * 0.3, {
@@ -175,6 +175,42 @@ class TapViewController: UIViewController, PopLabelDelegate {
                         tabBar.revealTab(2)
                         
                         tabBar.viewControllers![2].tabBarItem?.badgeValue = "!"
+                    })
+                }
+            }
+            else {
+                popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
+            }
+        }
+        else if saveData.stage == 3 {
+            if count(gen) == 0 { prepGen(2) }
+            
+            let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
+            
+            if contains(gen, letter) {
+                let index = find(gen, letter)!
+                
+                popLabel.pop(remove: false, customEnd: true, customPoint: genPoints[index], noEnd: false)
+                
+                gen.removeAtIndex(index)
+                genPoints.removeAtIndex(index)
+                genLabels.append(popLabel)
+                
+                if self.gen.count == 0 {
+                    self.updateStage(4)
+                    
+                    for i in 0...count(self.genLabels) - 1 {
+                        delay(2.0 + Double(i) * 0.3, {
+                            self.genLabels[i].pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
+                        })
+                    }
+                    
+                    delay(2.0 + 0.3 * Double(count(self.genLabels) - 1), {
+                        let tabBar = self.tabBarController as! TabBarController
+                        
+                        tabBar.revealTab(3)
+                        
+                        tabBar.viewControllers![3].tabBarItem?.badgeValue = "!"
                     })
                 }
             }

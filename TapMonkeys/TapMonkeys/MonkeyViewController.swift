@@ -22,6 +22,8 @@ class MonkeyViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.tabBarItem.badgeValue = nil
+        
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("updateHeaders", object: self, userInfo: [
             "letters" : 0,
@@ -86,7 +88,6 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             buyButton = cell.viewWithTag(6) as? MonkeyBuyButton,
             description = cell.viewWithTag(7) as? UILabel
         {
-            println("cell for \(indexPath.row)")
             let index = indexPath.row
             let curMonkey = monkeys[index]
             let curPrice = curMonkey.getPrice(1).0
@@ -108,7 +109,6 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             total.text = "Total Letters: \(curMonkey.totalProduced)"
             
             if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
-                println("has lock view")
                 lockView.index = index
                 lockView.type = AnimatedLockViewType.Monkey
                 lockView.customize(load(self.tabBarController))
@@ -137,6 +137,20 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         
         saveData.monkeyUnlocks![index] = true
         monkeys[index].unlocked = true
+        
+        if index + 1 <= count(monkeys) - 1 {
+            var paths = [NSIndexPath]()
+            
+            self.tableView.beginUpdates()
+            
+            for i in index + 1...count(monkeys) - 1 {
+                paths.append(NSIndexPath(forRow: i, inSection: 0))
+            }
+            
+            self.tableView.reloadRowsAtIndexPaths(paths, withRowAnimation: UITableViewRowAnimation.None)
+            
+            self.tableView.endUpdates()
+        }
         
         save(self.tabBarController, saveData)
     }

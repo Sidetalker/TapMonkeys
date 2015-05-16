@@ -88,7 +88,6 @@ class AnimatedLockView: UIView {
             if index > 1 {
                 if !saveData.monkeyUnlocks![index - 1] && !saveData.monkeyUnlocks![index - 2] {
                     requirementsText.text = "?????"
-                    println("configured with ??? for index \(index)")
                     
                     return
                 }

@@ -18,6 +18,8 @@ class WritingViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.tabBarItem.badgeValue = nil
+        
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("updateHeaders", object: self, userInfo: [
             "letters" : 0,
