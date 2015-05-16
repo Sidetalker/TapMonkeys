@@ -17,6 +17,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
     var genPoints = [CGPoint]()
     var gen = [String]()
     var letterCount = 0
+    var popping = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,15 +52,6 @@ class TapViewController: UIViewController, PopLabelDelegate {
         
         if saveData.stage > 0 {
             tapLabel.alpha = 0.0
-        }
-        if saveData.stage == 1 {
-            self.prepGen(0)
-        }
-        if saveData.stage == 2 {
-            tabBar.setTabBarVisible(true, animated: true)
-            tabBar.viewControllers![1].tabBarItem?.badgeValue = "!"
-            
-            self.prepGen(1)
         }
     }
     
@@ -103,6 +95,12 @@ class TapViewController: UIViewController, PopLabelDelegate {
         let letter = alphabet[randomIntBetweenNumbers(0, 26)]
         let saveData = load(self.tabBarController)
         
+        if popping {
+            let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
+            
+            popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
+        }
+        
         if saveData.stage == 0 {
             UIView.animateWithDuration(0.6, animations: { () -> Void in
                 self.tapLabel.alpha = 0.0
@@ -126,6 +124,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 genLabels.append(popLabel)
                 
                 if self.gen.count == 0 {
+                    popping = true
                     self.updateStage(2)
                     
                     for i in 0...count(self.genLabels) - 1 {
@@ -139,6 +138,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
                         
                         tabBar.setTabBarVisible(true, animated: true)
                         tabBar.viewControllers![1].tabBarItem?.badgeValue = "!"
+                        self.popping = false
                     })
                 }
             }
@@ -147,7 +147,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
             }
         }
         else if saveData.stage == 2 {
-            if count(gen) == 0 { prepGen(1) }
+            if count(gen) == 0 && count(genLabels) == 0  { prepGen(1) }
             
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
             
@@ -161,6 +161,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 genLabels.append(popLabel)
                 
                 if self.gen.count == 0 {
+                    popping = true
                     self.updateStage(3)
                     
                     for i in 0...count(self.genLabels) - 1 {
@@ -175,6 +176,8 @@ class TapViewController: UIViewController, PopLabelDelegate {
                         tabBar.revealTab(2)
                         
                         tabBar.viewControllers![2].tabBarItem?.badgeValue = "!"
+                        
+                        self.popping = false
                     })
                 }
             }
@@ -183,7 +186,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
             }
         }
         else if saveData.stage == 3 {
-            if count(gen) == 0 { prepGen(2) }
+            if count(gen) == 0 && count(genLabels) == 0  { prepGen(2) }
             
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
             
@@ -197,6 +200,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
                 genLabels.append(popLabel)
                 
                 if self.gen.count == 0 {
+                    popping = true
                     self.updateStage(4)
                     
                     for i in 0...count(self.genLabels) - 1 {
@@ -211,6 +215,8 @@ class TapViewController: UIViewController, PopLabelDelegate {
                         tabBar.revealTab(3)
                         
                         tabBar.viewControllers![3].tabBarItem?.badgeValue = "!"
+                        
+                        self.popping = false
                     })
                 }
             }
@@ -323,14 +329,14 @@ class PopLabel: UIView {
         if self.superview == nil { return }
         
         // Angular velocity max and min
-        let minAngularVelocity: CGFloat = 0.2
+        let minAngularVelocity: CGFloat = 0.4
         let maxAngularVelocity: CGFloat = 0.8
         
         // Burst direction max and min
-        let minDirection: CGFloat = 10
-        let maxDirection: CGFloat = 70
-        let minHeight: CGFloat = 250
-        let maxHeight: CGFloat = 450
+        let minDirection: CGFloat = 15
+        let maxDirection: CGFloat = 115
+        let minHeight: CGFloat = 400
+        let maxHeight: CGFloat = 650
         
         // Growth scale
         let minScale: CGFloat = 0.5
@@ -339,7 +345,7 @@ class PopLabel: UIView {
         // Timing variables
         let fadeDelay = 0.0
         let fadeTime = 0.4
-        let gravityWeight: CGFloat = 0.5
+        let gravityWeight: CGFloat = 0.7
         
         // Calculate animation variables
         var curAngularity = randomFloatBetweenNumbers(minAngularVelocity, maxAngularVelocity)
@@ -373,7 +379,7 @@ class PopLabel: UIView {
         
         if noEnd { return }
         
-        delay(0.8, {
+        delay(0.9, {
             self.animator?.removeAllBehaviors()
             
             // Scale and fade

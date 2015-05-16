@@ -84,6 +84,8 @@ class AnimatedLockView: UIView {
     }
     
     func customize(saveData: SaveData) {
+        staticText.text = "Unlock With"
+        
         if type == AnimatedLockViewType.Monkey {
             if index > 1 {
                 if !saveData.monkeyUnlocks![index - 1] && !saveData.monkeyUnlocks![index - 2] {
@@ -93,10 +95,16 @@ class AnimatedLockView: UIView {
                 }
             }
             
-            let text = NSString(format: "%.2f", monkeys[index].getPrice(1).0) as String
+            let unlockIndex = Int(monkeys[index].unlockCost[0].0)
+            let quantity = Int(monkeys[index].unlockCost[0].1)
+            let plurarity = quantity > 1 ? "s" : ""
             
-            requirementsText.text = "$\(text)"
-            println("configured with $\(text) for index \(index)")
+            requirementsText.text = "\(quantity) \(incomes[unlockIndex].name)\(plurarity)"
+            
+            if quantity == 0 {
+                staticText.text = "Unlock For"
+                requirementsText.text = "FREE"
+            }
         }
     }
     

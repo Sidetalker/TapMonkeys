@@ -129,8 +129,12 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         var saveData = load(self.tabBarController)
         let index = view.index
         
-        if index == 0 && saveData.stage == 3 || saveData.stage == 4 {
-            saveData.stage = 4
+        for cost in monkeys[index].unlockCost {
+            if saveData.incomeCounts![Int(cost.0)] < Int(cost.1) { return }
+        }
+        
+        for cost in monkeys[index].unlockCost {
+            saveData.incomeCounts![Int(cost.0)] -= Int(cost.1)
         }
         
         view.unlock()
@@ -160,56 +164,29 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         var saveData = load(self.tabBarController)
         var monkey = monkeys[monkeyIndex]
         
-        if monkeyIndex == 0 && saveData.stage == 4 {
-            if monkey.canPurchase(1, data: saveData) {
-                var price = monkey.getPrice(1).0 * -1
+        if monkey.canPurchase(1, data: saveData) {
+            var price = monkey.getPrice(1).0 * -1
+            
+            saveData = monkey.purchase(1, data: saveData)!
+            
+            monkeys[monkeyIndex] = monkey
+            
+            save(self.tabBarController, saveData)
+            
+            delay(0.2, {
+                self.tableView.beginUpdates()
                 
-                saveData = monkey.purchase(1, data: saveData)!
+                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: monkeyIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
                 
-                monkeys[monkeyIndex] = monkey
+                self.tableView.endUpdates()
                 
-                saveData.monkeyCounts![monkeyIndex] = monkey.count
-                saveData.monkeyTotals![monkeyIndex] = monkey.lettersTotal()
-                saveData.monkeyLastMod![monkeyIndex] = monkey.previousMod
-                saveData.monkeyLastCost![monkeyIndex] = monkey.previousCost
-                
-                saveData.stage = 5
-                
-                save(self.tabBarController, saveData)
-                
-                delay(0.2, {
-                    self.tableView.reloadData()
-                    
-                    let nc = NSNotificationCenter.defaultCenter()
-                    nc.postNotificationName("updateHeaders", object: self, userInfo: [
-                        "letters" : price,
-                        "animated" : false
-                        ])
-                    nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
-                })
-            }
-        }
-        else {
-            if monkey.canPurchase(1, data: saveData) {
-                var price = monkey.getPrice(1).0 * -1
-                
-                saveData = monkey.purchase(1, data: saveData)!
-                
-                monkeys[monkeyIndex] = monkey
-                
-                save(self.tabBarController, saveData)
-                
-                delay(0.2, {
-                    self.tableView.reloadData()
-                    
-                    let nc = NSNotificationCenter.defaultCenter()
-                    nc.postNotificationName("updateHeaders", object: self, userInfo: [
-                        "money" : price,
-                        "animated" : false
-                        ])
-                    nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
-                })
-            }
+                let nc = NSNotificationCenter.defaultCenter()
+                nc.postNotificationName("updateHeaders", object: self, userInfo: [
+                    "money" : price,
+                    "animated" : false
+                    ])
+                nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
+            })
         }
     }
 }

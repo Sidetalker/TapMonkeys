@@ -19,7 +19,8 @@ let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
 
 let gens = [
     ["M", "O", "N", "K", "E", "Y", "S"],
-    ["W", "R", "I", "T", "I", "N", "G"]
+    ["W", "R", "I", "T", "I", "N", "G"],
+    ["I", "N", "C", "O", "M", "E"]
 ]
 
 var monkeys = [MonkeyData]()
@@ -71,7 +72,6 @@ struct IncomeData {
     mutating func purchase(count: Int, data: SaveData) -> SaveData? {
         var curData = data
         let price = getPrice(count)
-        println("\(index)")
         
         if writings[self.index].count >= Int(price.0) {
             self.previousCost = price.1
