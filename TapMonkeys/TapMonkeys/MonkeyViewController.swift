@@ -55,6 +55,10 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         return count(monkeys)
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return monkeys[indexPath.row].unlocked ? UITableViewAutomaticDimension : 232
+    }
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let index = indexPath.row
         let curMonkey = monkeys[index]

@@ -11,6 +11,7 @@ import UIKit
 enum AnimatedLockViewType {
     case Monkey
     case Writing
+    case Income
 }
 
 protocol AnimatedLockDelegate {
@@ -122,6 +123,26 @@ class AnimatedLockView: UIView {
             requirementsText.text = "\(writings[index].unlockCost) Letters"
             
             if writings[index].unlockCost == 0 {
+                staticText.text = "Unlock For"
+                requirementsText.text = "FREE"
+            }
+        }
+        else if type == AnimatedLockViewType.Income {
+            if index > 1 {
+                if !saveData.incomeUnlocks![index - 1] && !saveData.incomeUnlocks![index - 2] {
+                    requirementsText.text = "?????"
+                    
+                    return
+                }
+            }
+            
+            let unlockIndex = Int(incomes[index].unlockCost[0].0)
+            let quantity = Int(incomes[index].unlockCost[0].1)
+            let plurarity = quantity > 1 ? "s" : ""
+            
+            requirementsText.text = "\(quantity) \(writings[unlockIndex].name)\(plurarity)"
+            
+            if quantity == 0 {
                 staticText.text = "Unlock For"
                 requirementsText.text = "FREE"
             }

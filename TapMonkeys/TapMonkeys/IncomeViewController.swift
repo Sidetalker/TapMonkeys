@@ -55,11 +55,15 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
         return count(incomes)
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return incomes[indexPath.row].unlocked ? UITableViewAutomaticDimension : 232
+    }
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let index = indexPath.row
-        let curWriting = writings[index]
+        let curIncome = incomes[index]
         
-        if !curWriting.unlocked {
+        if !curIncome.unlocked {
             if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
                 // That betch is hooked up, no worriez
             }
@@ -68,7 +72,11 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
                 lockView.tag = 8
                 lockView.index = indexPath.row
                 lockView.delegate = self
-                lockView.type = AnimatedLockViewType.Writing
+                lockView.type = AnimatedLockViewType.Income
+                
+                lockView.customize(load(self.tabBarController))
+                
+                cell.contentView.addSubview(lockView)
             }
         }
     }
@@ -99,6 +107,14 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             
             pic.setNeedsDisplay()
             button.setNeedsDisplay()
+            
+            if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
+                lockView.index = index
+                lockView.type = AnimatedLockViewType.Income
+                lockView.customize(load(self.tabBarController))
+                
+                if incomes[index].unlocked { lockView.removeFromSuperview() }
+            }
             
             return cell
         }
@@ -131,7 +147,37 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     func tappedLock(view: AnimatedLockView) {
-        return
+        var saveData = load(self.tabBarController)
+        let index = view.index
+        
+        for cost in incomes[index].unlockCost {
+            if saveData.writingCount![Int(cost.0)] < Int(cost.1) { return }
+        }
+        
+        for cost in incomes[index].unlockCost {
+            saveData.writingCount![Int(cost.0)] -= Int(cost.1)
+        }
+        
+        view.unlock()
+        
+        saveData.incomeUnlocks![index] = true
+        incomes[index].unlocked = true
+        
+        if index + 1 <= count(incomes) - 1 {
+            var paths = [NSIndexPath]()
+            
+            self.tableView.beginUpdates()
+            
+            for i in index + 1...count(incomes) - 1 {
+                paths.append(NSIndexPath(forRow: i, inSection: 0))
+            }
+            
+            self.tableView.reloadRowsAtIndexPaths(paths, withRowAnimation: UITableViewRowAnimation.None)
+            
+            self.tableView.endUpdates()
+        }
+        
+        save(self.tabBarController, saveData)
     }
 }
 
