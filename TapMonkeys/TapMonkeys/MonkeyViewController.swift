@@ -140,6 +140,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
         
         for cost in monkeys[index].unlockCost {
             saveData.incomeCounts![Int(cost.0)] -= Int(cost.1)
+            incomes[Int(cost.0)].count -= Int(cost.1)
         }
         
         view.unlock()

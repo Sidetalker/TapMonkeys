@@ -160,6 +160,7 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
         
         for cost in incomes[index].unlockCost {
             saveData.writingCount![Int(cost.0)] -= Int(cost.1)
+            writings[Int(cost.0)].count -= Int(cost.1)
         }
         
         view.unlock()
