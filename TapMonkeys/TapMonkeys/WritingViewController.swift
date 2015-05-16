@@ -136,14 +136,18 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
             
             writings[writingIndex] = writing
             
+            let nc = NSNotificationCenter.defaultCenter()
+            nc.postNotificationName("updateHeaders", object: self, userInfo: [
+                "letters" : -price,
+                "animated" : false
+                ])
+            
             delay(0.2, {
-                self.tableView.reloadData()
+                self.tableView.beginUpdates()
                 
-                let nc = NSNotificationCenter.defaultCenter()
-                nc.postNotificationName("updateHeaders", object: self, userInfo: [
-                    "letters" : -price,
-                    "animated" : false
-                    ])
+                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: writingIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+                
+                self.tableView.endUpdates()
             })
         }
     }

@@ -139,15 +139,19 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             
             incomes[incomeIndex] = income
             
+            let nc = NSNotificationCenter.defaultCenter()
+            nc.postNotificationName("updateHeaders", object: self, userInfo: [
+                "letters" : -price,
+                "animated" : false
+                ])
+            nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
+            
             delay(0.2, {
-                self.tableView.reloadData()
+                self.tableView.beginUpdates()
                 
-                let nc = NSNotificationCenter.defaultCenter()
-                nc.postNotificationName("updateHeaders", object: self, userInfo: [
-                    "letters" : -price,
-                    "animated" : false
-                    ])
-                nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
+                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: incomeIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+                
+                self.tableView.endUpdates()
             })
         }
     }

@@ -269,7 +269,6 @@ struct WritingData {
                 curPrice += randomIntBetweenNumbers(price.0, price.1)
             }
             
-            curData.letters! -= curPrice
             curData.writingCount![index] += count
             curData.writingCostLow![index] = costLowOffset
             curData.writingCostHigh![index] = costHighOffset
@@ -383,7 +382,6 @@ struct MonkeyData {
         var curData = data
         let pricing = getPrice(count)
         
-        curData.money! -= pricing.0
         curData.monkeyCounts![index] += count
         curData.monkeyLastCost![index] = pricing.1
         curData.monkeyLastMod![index] = pricing.2
