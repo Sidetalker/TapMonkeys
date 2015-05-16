@@ -105,6 +105,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             
             total.index = index
             total.controller = self.tabBarController as? TabBarController
+            total.type = .Monkey
             
             name.text = curMonkey.name
             description.text = curMonkey.description
@@ -114,7 +115,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             
             if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
                 lockView.index = index
-                lockView.type = AnimatedLockViewType.Monkey
+                lockView.type = .Monkey
                 lockView.customize(load(self.tabBarController))
                 
                 if curMonkey.unlocked { lockView.removeFromSuperview() }

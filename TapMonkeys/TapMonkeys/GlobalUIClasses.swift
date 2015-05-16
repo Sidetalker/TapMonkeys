@@ -14,6 +14,47 @@ enum AnimatedLockViewType {
     case Income
 }
 
+enum AutoUpdateLabelType {
+    case Monkey
+    case Income
+}
+
+class ConstraintView: UIView {
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.backgroundColor = UIColor.clearColor()
+    }
+}
+
+class AutoUpdateLabel: UILabel {
+    var index = -1
+    var controller: TabBarController?
+    var type = AutoUpdateLabelType.Monkey
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        let timer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: Selector("refresh"), userInfo: nil, repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
+    }
+    
+    func refresh() {
+        if controller == nil { return }
+        
+        let saveData = load(controller!)
+        
+        if type == .Monkey {
+            self.text = "Total Letters: \(saveData.monkeyTotals![index])"
+        }
+        else if type == .Income {
+            let amount = NSString(format: "%.2f", saveData.incomeTotals![index]) as String
+            
+            self.text = "Total: $\(amount)"
+        }
+    }
+}
+
 protocol AnimatedLockDelegate {
     func tappedLock(view: AnimatedLockView)
 }

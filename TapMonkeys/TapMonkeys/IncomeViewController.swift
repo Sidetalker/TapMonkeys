@@ -88,7 +88,7 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             title = cell.viewWithTag(2) as? UILabel,
             owned = cell.viewWithTag(3) as? UILabel,
             moneyPerSec = cell.viewWithTag(4) as? UILabel,
-            totalMoney = cell.viewWithTag(5) as? UILabel,
+            totalMoney = cell.viewWithTag(5) as? AutoUpdateLabel,
             button = cell.viewWithTag(6) as? IncomeBuyButton,
             description = cell.viewWithTag(7) as? UILabel
         {
@@ -105,12 +105,16 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             
             button.delegate = self
             
+            totalMoney.index = index
+            totalMoney.controller = self.tabBarController as? TabBarController
+            totalMoney.type = .Income
+            
             pic.setNeedsDisplay()
             button.setNeedsDisplay()
             
             if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
                 lockView.index = index
-                lockView.type = AnimatedLockViewType.Income
+                lockView.type = .Income
                 lockView.customize(load(self.tabBarController))
                 
                 if incomes[index].unlocked { lockView.removeFromSuperview() }
