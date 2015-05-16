@@ -237,7 +237,7 @@ class DataHeader: UIView {
     
     func pulse(view: UIView) {
         UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-            view.transform = CGAffineTransformMakeScale(1.35, 1.35)
+            view.transform = CGAffineTransformMakeScale(1.15, 1.15)
             }, completion: { (Bool) -> Void in
                 UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                     view.transform = CGAffineTransformIdentity

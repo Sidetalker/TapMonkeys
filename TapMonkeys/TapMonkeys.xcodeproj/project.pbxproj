@@ -51,6 +51,26 @@
 		0A552A4D1B03E22C00CD8E78 /* imgWords.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A552A4A1B03E22C00CD8E78 /* imgWords.png */; };
 		0A552A4E1B03E22C00CD8E78 /* imgWords@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A552A4B1B03E22C00CD8E78 /* imgWords@2x.png */; };
 		0A552A4F1B03E22C00CD8E78 /* imgWords@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A552A4C1B03E22C00CD8E78 /* imgWords@3x.png */; };
+		0A7177EA1B067A35006DEF7A /* income.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177E91B067A35006DEF7A /* income.dat */; };
+		0A7177FD1B067A6B006DEF7A /* imgBaby.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177EB1B067A6B006DEF7A /* imgBaby.png */; };
+		0A7177FE1B067A6B006DEF7A /* imgBaby@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177EC1B067A6B006DEF7A /* imgBaby@2x.png */; };
+		0A7177FF1B067A6B006DEF7A /* imgBaby@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177ED1B067A6B006DEF7A /* imgBaby@3x.png */; };
+		0A7178001B067A6B006DEF7A /* imgElementarySchool.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177EE1B067A6B006DEF7A /* imgElementarySchool.png */; };
+		0A7178011B067A6B006DEF7A /* imgElementarySchool@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177EF1B067A6B006DEF7A /* imgElementarySchool@2x.png */; };
+		0A7178021B067A6B006DEF7A /* imgElementarySchool@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177F01B067A6B006DEF7A /* imgElementarySchool@3x.png */; };
+		0A7178031B067A6B006DEF7A /* imgElementaryTeacher.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177F11B067A6B006DEF7A /* imgElementaryTeacher.png */; };
+		0A7178041B067A6B006DEF7A /* imgElementaryTeacher@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177F21B067A6B006DEF7A /* imgElementaryTeacher@2x.png */; };
+		0A7178051B067A6B006DEF7A /* imgElementaryTeacher@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177F31B067A6B006DEF7A /* imgElementaryTeacher@3x.png */; };
+		0A7178061B067A6B006DEF7A /* imgFourthGrader.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177F41B067A6B006DEF7A /* imgFourthGrader.png */; };
+		0A7178071B067A6B006DEF7A /* imgFourthGrader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177F51B067A6B006DEF7A /* imgFourthGrader@2x.png */; };
+		0A7178081B067A6B006DEF7A /* imgFourthGrader@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177F61B067A6B006DEF7A /* imgFourthGrader@3x.png */; };
+		0A7178091B067A6B006DEF7A /* imgKindergartner.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177F71B067A6B006DEF7A /* imgKindergartner.png */; };
+		0A71780A1B067A6B006DEF7A /* imgKindergartner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177F81B067A6B006DEF7A /* imgKindergartner@2x.png */; };
+		0A71780B1B067A6B006DEF7A /* imgKindergartner@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177F91B067A6B006DEF7A /* imgKindergartner@3x.png */; };
+		0A71780C1B067A6B006DEF7A /* imgLordVoldermonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177FA1B067A6B006DEF7A /* imgLordVoldermonkey.png */; };
+		0A71780D1B067A6B006DEF7A /* imgLordVoldermonkey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177FB1B067A6B006DEF7A /* imgLordVoldermonkey@2x.png */; };
+		0A71780E1B067A6B006DEF7A /* imgLordVoldermonkey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177FC1B067A6B006DEF7A /* imgLordVoldermonkey@3x.png */; };
+		0A7178111B06B10B006DEF7A /* IncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7178101B06B10B006DEF7A /* IncomeViewController.swift */; };
 		0A9B687D1AFD3DE7006628D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B687C1AFD3DE7006628D1 /* AppDelegate.swift */; };
 		0A9B68801AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B687E1AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld */; };
 		0A9B68821AFD3DE7006628D1 /* TapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B68811AFD3DE7006628D1 /* TapViewController.swift */; };
@@ -176,6 +196,26 @@
 		0A552A4A1B03E22C00CD8E78 /* imgWords.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imgWords.png; path = Images/imgWords.png; sourceTree = "<group>"; };
 		0A552A4B1B03E22C00CD8E78 /* imgWords@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgWords@2x.png"; path = "Images/imgWords@2x.png"; sourceTree = "<group>"; };
 		0A552A4C1B03E22C00CD8E78 /* imgWords@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgWords@3x.png"; path = "Images/imgWords@3x.png"; sourceTree = "<group>"; };
+		0A7177E91B067A35006DEF7A /* income.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = income.dat; path = Data/income.dat; sourceTree = "<group>"; };
+		0A7177EB1B067A6B006DEF7A /* imgBaby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imgBaby.png; path = Images/imgBaby.png; sourceTree = "<group>"; };
+		0A7177EC1B067A6B006DEF7A /* imgBaby@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgBaby@2x.png"; path = "Images/imgBaby@2x.png"; sourceTree = "<group>"; };
+		0A7177ED1B067A6B006DEF7A /* imgBaby@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgBaby@3x.png"; path = "Images/imgBaby@3x.png"; sourceTree = "<group>"; };
+		0A7177EE1B067A6B006DEF7A /* imgElementarySchool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imgElementarySchool.png; path = Images/imgElementarySchool.png; sourceTree = "<group>"; };
+		0A7177EF1B067A6B006DEF7A /* imgElementarySchool@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgElementarySchool@2x.png"; path = "Images/imgElementarySchool@2x.png"; sourceTree = "<group>"; };
+		0A7177F01B067A6B006DEF7A /* imgElementarySchool@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgElementarySchool@3x.png"; path = "Images/imgElementarySchool@3x.png"; sourceTree = "<group>"; };
+		0A7177F11B067A6B006DEF7A /* imgElementaryTeacher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imgElementaryTeacher.png; path = Images/imgElementaryTeacher.png; sourceTree = "<group>"; };
+		0A7177F21B067A6B006DEF7A /* imgElementaryTeacher@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgElementaryTeacher@2x.png"; path = "Images/imgElementaryTeacher@2x.png"; sourceTree = "<group>"; };
+		0A7177F31B067A6B006DEF7A /* imgElementaryTeacher@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgElementaryTeacher@3x.png"; path = "Images/imgElementaryTeacher@3x.png"; sourceTree = "<group>"; };
+		0A7177F41B067A6B006DEF7A /* imgFourthGrader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imgFourthGrader.png; path = Images/imgFourthGrader.png; sourceTree = "<group>"; };
+		0A7177F51B067A6B006DEF7A /* imgFourthGrader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgFourthGrader@2x.png"; path = "Images/imgFourthGrader@2x.png"; sourceTree = "<group>"; };
+		0A7177F61B067A6B006DEF7A /* imgFourthGrader@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgFourthGrader@3x.png"; path = "Images/imgFourthGrader@3x.png"; sourceTree = "<group>"; };
+		0A7177F71B067A6B006DEF7A /* imgKindergartner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imgKindergartner.png; path = Images/imgKindergartner.png; sourceTree = "<group>"; };
+		0A7177F81B067A6B006DEF7A /* imgKindergartner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgKindergartner@2x.png"; path = "Images/imgKindergartner@2x.png"; sourceTree = "<group>"; };
+		0A7177F91B067A6B006DEF7A /* imgKindergartner@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgKindergartner@3x.png"; path = "Images/imgKindergartner@3x.png"; sourceTree = "<group>"; };
+		0A7177FA1B067A6B006DEF7A /* imgLordVoldermonkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imgLordVoldermonkey.png; path = Images/imgLordVoldermonkey.png; sourceTree = "<group>"; };
+		0A7177FB1B067A6B006DEF7A /* imgLordVoldermonkey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgLordVoldermonkey@2x.png"; path = "Images/imgLordVoldermonkey@2x.png"; sourceTree = "<group>"; };
+		0A7177FC1B067A6B006DEF7A /* imgLordVoldermonkey@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgLordVoldermonkey@3x.png"; path = "Images/imgLordVoldermonkey@3x.png"; sourceTree = "<group>"; };
+		0A7178101B06B10B006DEF7A /* IncomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeViewController.swift; sourceTree = "<group>"; };
 		0A9B68771AFD3DE7006628D1 /* TapMonkeys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapMonkeys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A9B687B1AFD3DE7006628D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A9B687C1AFD3DE7006628D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -292,6 +332,28 @@
 			name = Writing;
 			sourceTree = "<group>";
 		};
+		0A71780F1B067A78006DEF7A /* Income */ = {
+			isa = PBXGroup;
+			children = (
+				0A7177EB1B067A6B006DEF7A /* imgBaby.png */,
+				0A7177EC1B067A6B006DEF7A /* imgBaby@2x.png */,
+				0A7177ED1B067A6B006DEF7A /* imgBaby@3x.png */,
+				0A7177EE1B067A6B006DEF7A /* imgElementarySchool.png */,
+				0A7177EF1B067A6B006DEF7A /* imgElementarySchool@2x.png */,
+				0A7177F01B067A6B006DEF7A /* imgElementarySchool@3x.png */,
+				0A7177F11B067A6B006DEF7A /* imgElementaryTeacher.png */,
+				0A7177F21B067A6B006DEF7A /* imgElementaryTeacher@2x.png */,
+				0A7177F31B067A6B006DEF7A /* imgElementaryTeacher@3x.png */,
+				0A7177F41B067A6B006DEF7A /* imgFourthGrader.png */,
+				0A7177F51B067A6B006DEF7A /* imgFourthGrader@2x.png */,
+				0A7177F61B067A6B006DEF7A /* imgFourthGrader@3x.png */,
+				0A7177F71B067A6B006DEF7A /* imgKindergartner.png */,
+				0A7177F81B067A6B006DEF7A /* imgKindergartner@2x.png */,
+				0A7177F91B067A6B006DEF7A /* imgKindergartner@3x.png */,
+			);
+			name = Income;
+			sourceTree = "<group>";
+		};
 		0A9B686E1AFD3DE7006628D1 = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +381,7 @@
 				0A9B68811AFD3DE7006628D1 /* TapViewController.swift */,
 				0A9B68E91AFE58A5006628D1 /* MonkeyViewController.swift */,
 				0A5529F81B03BF4D00CD8E78 /* WritingViewController.swift */,
+				0A7178101B06B10B006DEF7A /* IncomeViewController.swift */,
 				0A9B687A1AFD3DE7006628D1 /* Supporting Files */,
 			);
 			path = TapMonkeys;
@@ -372,6 +435,7 @@
 				0A9B69121B0000C3006628D1 /* Animations */,
 				0A9B68E81AFDCD51006628D1 /* Monkeys */,
 				0A552A501B03E23100CD8E78 /* Writing */,
+				0A71780F1B067A78006DEF7A /* Income */,
 				0A9B68AD1AFD8DCF006628D1 /* Tab Bar */,
 			);
 			name = Images;
@@ -414,6 +478,9 @@
 		0A9B68E81AFDCD51006628D1 /* Monkeys */ = {
 			isa = PBXGroup;
 			children = (
+				0A7177FA1B067A6B006DEF7A /* imgLordVoldermonkey.png */,
+				0A7177FB1B067A6B006DEF7A /* imgLordVoldermonkey@2x.png */,
+				0A7177FC1B067A6B006DEF7A /* imgLordVoldermonkey@3x.png */,
 				0ABEECAB1B054D00004AC5B6 /* imgJabbaTheMonkey.png */,
 				0ABEECAC1B054D00004AC5B6 /* imgJabbaTheMonkey@2x.png */,
 				0ABEECAD1B054D00004AC5B6 /* imgJabbaTheMonkey@3x.png */,
@@ -436,6 +503,7 @@
 		0A9B68ED1AFF9184006628D1 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0A7177E91B067A35006DEF7A /* income.dat */,
 				0ABEEC971B04007F004AC5B6 /* writing.dat */,
 				0A9B68EB1AFF917F006628D1 /* monkeys.dat */,
 			);
@@ -598,13 +666,18 @@
 				0A552A3B1B03D51700CD8E78 /* animatedLock10@3x.png in Resources */,
 				0A9B68F61AFFBAE6006628D1 /* DataHeader.xib in Resources */,
 				0A9B68B31AFD9AC7006628D1 /* monkeyTab.png in Resources */,
+				0A7178011B067A6B006DEF7A /* imgElementarySchool@2x.png in Resources */,
 				0A9B68851AFD3DE7006628D1 /* Main.storyboard in Resources */,
 				0A552A491B03E21C00CD8E78 /* imgFingerMonkey@3x.jpg in Resources */,
+				0A7177EA1B067A35006DEF7A /* income.dat in Resources */,
 				0A9B68EC1AFF917F006628D1 /* monkeys.dat in Resources */,
 				0A9B68F21AFF952B006628D1 /* marketTab@2x.png in Resources */,
+				0A7177FD1B067A6B006DEF7A /* imgBaby.png in Resources */,
 				0ABEECAA1B05440C004AC5B6 /* imgSentence@3x.jpg in Resources */,
 				0ABEECB41B054D00004AC5B6 /* imgSeaMonkey.png in Resources */,
+				0A7178001B067A6B006DEF7A /* imgElementarySchool.png in Resources */,
 				0A9B68C71AFDA0E5006628D1 /* achievementsTab@3x.png in Resources */,
+				0A71780E1B067A6B006DEF7A /* imgLordVoldermonkey@3x.png in Resources */,
 				0A552A3C1B03D51700CD8E78 /* animatedLock11.png in Resources */,
 				0A9B688A1AFD3DE7006628D1 /* LaunchScreen.xib in Resources */,
 				0ABEEC961B03F9C4004AC5B6 /* imgGoofkey@3x.jpg in Resources */,
@@ -623,10 +696,12 @@
 				0A552A341B03D51700CD8E78 /* animatedLock08@2x.png in Resources */,
 				0A9B68BB1AFD9E21006628D1 /* writingTab@3x.png in Resources */,
 				0A9B68D11AFDA4E0006628D1 /* statsTab.png in Resources */,
+				0A7178061B067A6B006DEF7A /* imgFourthGrader.png in Resources */,
 				0A552A4F1B03E22C00CD8E78 /* imgWords@3x.png in Resources */,
 				0A552A3A1B03D51700CD8E78 /* animatedLock10@2x.png in Resources */,
 				0A9B68D31AFDA4E0006628D1 /* statsTab@3x.png in Resources */,
 				0A552A201B03D51700CD8E78 /* animatedLock01@3x.png in Resources */,
+				0A7178041B067A6B006DEF7A /* imgElementaryTeacher@2x.png in Resources */,
 				0A9B68CC1AFDA301006628D1 /* upgradesTab@2x.png in Resources */,
 				0A552A411B03D51700CD8E78 /* animatedLock12@3x.png in Resources */,
 				0A552A4E1B03E22C00CD8E78 /* imgWords@2x.png in Resources */,
@@ -638,27 +713,36 @@
 				0A9B68D81AFDA5A5006628D1 /* settingsTab@2x.png in Resources */,
 				0A9B68F31AFF952B006628D1 /* marketTab@3x.png in Resources */,
 				0A552A2C1B03D51700CD8E78 /* animatedLock05@3x.png in Resources */,
+				0A71780B1B067A6B006DEF7A /* imgKindergartner@3x.png in Resources */,
 				0ABEECA81B05440C004AC5B6 /* imgSentence.jpg in Resources */,
 				0A9B68C51AFDA0E5006628D1 /* achievementsTab.png in Resources */,
 				0A9B68B51AFD9AC7006628D1 /* monkeyTab@3x.png in Resources */,
+				0A71780D1B067A6B006DEF7A /* imgLordVoldermonkey@2x.png in Resources */,
+				0A7178071B067A6B006DEF7A /* imgFourthGrader@2x.png in Resources */,
 				0ABEECBD1B0559ED004AC5B6 /* imgTextMessage.png in Resources */,
 				0A9B68C01AFD9F7F006628D1 /* incomeTab@2x.png in Resources */,
+				0A7178091B067A6B006DEF7A /* imgKindergartner.png in Resources */,
 				0A552A321B03D51700CD8E78 /* animatedLock07@3x.png in Resources */,
+				0A7178031B067A6B006DEF7A /* imgElementaryTeacher.png in Resources */,
 				0A552A2E1B03D51700CD8E78 /* animatedLock06@2x.png in Resources */,
 				0A552A3F1B03D51700CD8E78 /* animatedLock12.png in Resources */,
 				0ABEECA91B05440C004AC5B6 /* imgSentence@2x.jpg in Resources */,
 				0ABEECB61B054D00004AC5B6 /* imgSeaMonkey@3x.png in Resources */,
 				0ABEECB21B054D00004AC5B6 /* imgJabbaTheMonkey@2x.png in Resources */,
 				0A9B68F81AFFF3E7006628D1 /* AnimatedLockView.xib in Resources */,
+				0A7178051B067A6B006DEF7A /* imgElementaryTeacher@3x.png in Resources */,
 				0ABEECC01B0559ED004AC5B6 /* imgTwitter.png in Resources */,
 				0A9B68AB1AFD8DBB006628D1 /* alphaTab@2x.png in Resources */,
 				0A9B68CB1AFDA301006628D1 /* upgradesTab.png in Resources */,
 				0A552A2A1B03D51700CD8E78 /* animatedLock05.png in Resources */,
+				0A7177FE1B067A6B006DEF7A /* imgBaby@2x.png in Resources */,
+				0A7177FF1B067A6B006DEF7A /* imgBaby@3x.png in Resources */,
 				0A9B68BF1AFD9F7F006628D1 /* incomeTab.png in Resources */,
 				0ABEEC941B03F9C4004AC5B6 /* imgGoofkey.jpg in Resources */,
 				0ABEEC9D1B0401C4004AC5B6 /* imgDigitDestroyer@2x.jpg in Resources */,
 				0ABEECBF1B0559ED004AC5B6 /* imgTextMessage@3x.png in Resources */,
 				0ABEECC11B0559ED004AC5B6 /* imgTwitter@2x.png in Resources */,
+				0A71780C1B067A6B006DEF7A /* imgLordVoldermonkey.png in Resources */,
 				0A552A471B03E21C00CD8E78 /* imgFingerMonkey.jpg in Resources */,
 				0A9B68C61AFDA0E5006628D1 /* achievementsTab@2x.png in Resources */,
 				0A552A3D1B03D51700CD8E78 /* animatedLock11@2x.png in Resources */,
@@ -671,7 +755,9 @@
 				0ABEEC981B04007F004AC5B6 /* writing.dat in Resources */,
 				0A552A241B03D51700CD8E78 /* animatedLock03.png in Resources */,
 				0A9B68B91AFD9E21006628D1 /* writingTab.png in Resources */,
+				0A7178081B067A6B006DEF7A /* imgFourthGrader@3x.png in Resources */,
 				0A552A481B03E21C00CD8E78 /* imgFingerMonkey@2x.jpg in Resources */,
+				0A7178021B067A6B006DEF7A /* imgElementarySchool@3x.png in Resources */,
 				0ABEECA41B0401CD004AC5B6 /* imgFragmentedSentence@3x.jpg in Resources */,
 				0A552A4D1B03E22C00CD8E78 /* imgWords.png in Resources */,
 				0A552A221B03D51700CD8E78 /* animatedLock02@2x.png in Resources */,
@@ -680,6 +766,7 @@
 				0A552A361B03D51700CD8E78 /* animatedLock09.png in Resources */,
 				0A9B68CD1AFDA301006628D1 /* upgradesTab@3x.png in Resources */,
 				0ABEEC9E1B0401C4004AC5B6 /* imgDigitDestroyer@3x.jpg in Resources */,
+				0A71780A1B067A6B006DEF7A /* imgKindergartner@2x.png in Resources */,
 				0A9B68B41AFD9AC7006628D1 /* monkeyTab@2x.png in Resources */,
 				0ABEECB51B054D00004AC5B6 /* imgSeaMonkey@2x.png in Resources */,
 				0A552A401B03D51700CD8E78 /* animatedLock12@2x.png in Resources */,
@@ -703,6 +790,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A7178111B06B10B006DEF7A /* IncomeViewController.swift in Sources */,
 				0A9B68821AFD3DE7006628D1 /* TapViewController.swift in Sources */,
 				0A5529F91B03BF4D00CD8E78 /* WritingViewController.swift in Sources */,
 				0A9B68EA1AFE58A5006628D1 /* MonkeyViewController.swift in Sources */,

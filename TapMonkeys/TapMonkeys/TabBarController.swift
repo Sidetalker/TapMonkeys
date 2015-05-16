@@ -13,8 +13,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var defaults: NSUserDefaults!
     
     var monkeyTimer = NSTimer()
+    var incomeTimer = NSTimer()
     var lettersPerBuffer = 0
     var individualLettersBuffer = [Int]()
+    var incomePerBuffer: Float = 0
+    var individualIncomeBuffer = [Float]()
     
     var saveData = SaveData()
     
@@ -24,11 +27,13 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         loadSave()
         loadMonkeys(saveData)
         loadWritings(saveData)
+        loadIncome(saveData)
         
         registerForUpdates()
         updateMonkeyProduction()
         
         configureView()
+        revealTab(3)
     }
     
     override func viewDidLayoutSubviews() {
@@ -45,14 +50,22 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     func updateMonkeyProduction() {
         monkeyTimer.invalidate()
+        incomeTimer.invalidate()
         
-        let interval = monkeyProductionTimer()
+        let monkeyInterval = monkeyProductionTimer()
+        let incomeInterval = incomeProductionTimer()
         
-        lettersPerBuffer = fullLettersPer(interval)
-        individualLettersBuffer = individualLettersPer(interval)
+        lettersPerBuffer = fullLettersPer(monkeyInterval)
+        individualLettersBuffer = individualLettersPer(monkeyInterval)
         
-        monkeyTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(interval), target: self, selector: Selector("getMonkeyLetters"), userInfo: nil, repeats: true)
+        incomePerBuffer = fullIncomePer(incomeInterval)
+        individualIncomeBuffer = individualIncomePer(incomeInterval)
+        
+        monkeyTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(monkeyInterval), target: self, selector: Selector("getMonkeyLetters"), userInfo: nil, repeats: true)
         NSRunLoop.currentRunLoop().addTimer(monkeyTimer, forMode: NSRunLoopCommonModes)
+        
+        incomeTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(incomeInterval), target: self, selector: Selector("getIncome"), userInfo: nil, repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(incomeTimer, forMode: NSRunLoopCommonModes)
     }
     
     func getMonkeyLetters() {
@@ -64,6 +77,19 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("updateHeaders", object: self, userInfo: [
             "letters" : lettersPerBuffer,
+            "animated" : false
+            ])
+    }
+    
+    func getIncome() {
+        for i in 0...count(incomes) - 1 {
+            incomes[i].totalProduced += individualIncomeBuffer[i]
+            saveData.incomeTotals![i] += individualIncomeBuffer[i]
+        }
+        
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName("updateHeaders", object: self, userInfo: [
+            "money" : incomePerBuffer,
             "animated" : false
             ])
     }
@@ -84,6 +110,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateSave:", name: "updateSave", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHeaders:", name: "updateHeaders", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMonkeyProduction", name: "updateMonkeyProduction", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateIncomeProduction", name: "updateIncomeProduction", object: nil)
     }
     
     func initializeHeaders() {
@@ -171,6 +198,12 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 if let
                     writingView = view as? WritingViewController,
                     header = writingView.dataHeader
+                {
+                    header.update(saveData, animated: animated)
+                }
+                if let
+                    incomeView = view as? IncomeViewController,
+                    header = incomeView.dataHeader
                 {
                     header.update(saveData, animated: animated)
                 }

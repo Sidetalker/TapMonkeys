@@ -1,17 +1,17 @@
 //
-//  WritingViewController.swift
+//  IncomeViewController.swift
 //  TapMonkeys
 //
-//  Created by Kevin Sullivan on 5/13/15.
+//  Created by Kevin Sullivan on 5/15/15.
 //  Copyright (c) 2015 Kevin Sullivan. All rights reserved.
 //
 
 import UIKit
 
-class WritingViewController: UIViewController {
+class IncomeViewController: UIViewController {
     @IBOutlet weak var dataHeader: DataHeader!
     
-    var writingTable: WritingTableViewController?
+    var incomeTable: IncomeTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +30,13 @@ class WritingViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "segueWritingTable" {
-            writingTable = segue.destinationViewController as? WritingTableViewController
+        if segue.identifier == "segueIncomeTable" {
+            incomeTable = segue.destinationViewController as? IncomeTableViewController
         }
     }
 }
 
-class WritingTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, AnimatedLockDelegate, WritingBuyButtonDelegate {
+class IncomeTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, AnimatedLockDelegate, IncomeBuyButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +46,11 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return count(writings) == 0 ? 0 : 1
+        return count(incomes) == 0 ? 0 : 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return count(writings)
+        return count(incomes)
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -73,25 +73,25 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if let
-            cell = tableView.dequeueReusableCellWithIdentifier("cellWriting") as? UITableViewCell,
-            pic = cell.viewWithTag(1) as? WritingPicture,
+            cell = tableView.dequeueReusableCellWithIdentifier("cellIncome") as? UITableViewCell,
+            pic = cell.viewWithTag(1) as? IncomePicture,
             title = cell.viewWithTag(2) as? UILabel,
             owned = cell.viewWithTag(3) as? UILabel,
-            value = cell.viewWithTag(4) as? UILabel,
-            level = cell.viewWithTag(5) as? UILabel,
-            button = cell.viewWithTag(6) as? WritingBuyButton,
+            moneyPerSec = cell.viewWithTag(4) as? UILabel,
+            totalMoney = cell.viewWithTag(5) as? UILabel,
+            button = cell.viewWithTag(6) as? IncomeBuyButton,
             description = cell.viewWithTag(7) as? UILabel
         {
             let index = indexPath.row
-            let moneyText = NSString(format: "%.2f", writings[index].getValue()) as String
+            let moneyText = NSString(format: "%.2f", incomes[index].moneyPerSecond()) as String
             
-            pic.writingIndex = index
-            title.text = writings[index].name
-            description.text = writings[index].description
-            owned.text = "Owned: \(writings[index].count)"
-            value.text = "Value: $\(moneyText)"
-            level.text = "Level: \(writings[index].level)"
-            button.writingIndex = index
+            pic.incomeIndex = index
+            title.text = incomes[index].name
+            description.text = incomes[index].description
+            owned.text = "Owned: \(incomes[index].count)"
+            moneyPerSec.text = "$/sec: $\(moneyText)"
+            totalMoney.text = "Total: $\(incomes[index].totalProduced)"
+            button.incomeIndex = index
             
             button.delegate = self
             
@@ -104,16 +104,16 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
         return UITableViewCell()
     }
     
-    func buyTapped(writingIndex: Int) {
+    func buyTapped(incomeIndex: Int) {
         var saveData = load(self.tabBarController)
-        var writing = writings[writingIndex]
+        var income = incomes[incomeIndex]
         
-        var price = writing.getPrice(1).2
+        var price = Int(income.getPrice(1).0)
         
-        if let newSave = writing.purchase(1, data: saveData) {
+        if let newSave = income.purchase(1, data: saveData) {
             save(self.tabBarController, newSave)
             
-            writings[writingIndex] = writing
+            incomes[incomeIndex] = income
             
             delay(0.2, {
                 self.tableView.reloadData()
@@ -123,6 +123,7 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
                     "letters" : -price,
                     "animated" : false
                     ])
+                nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
             })
         }
     }
@@ -132,55 +133,51 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
     }
 }
 
-class WritingPicture: UIView {
-    var writingIndex = 0
+class IncomePicture: UIView {
+    var incomeIndex = 0
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         self.backgroundColor = UIColor.clearColor()
-        
-//        self.setNeedsDisplay()
     }
     
     init(frame: CGRect, strokeWidth: CGFloat) {
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.clearColor()
-        
-//        self.setNeedsDisplay()
     }
     
     override func drawRect(rect: CGRect) {
-        if writingIndex == 0 {
-            TapStyle.drawWords()
+        if incomeIndex == 0 {
+            TapStyle.drawBaby()
         }
-        else if writingIndex == 1 {
-            TapStyle.drawFragmentedSentence()
+        else if incomeIndex == 1 {
+            TapStyle.drawKindergartner()
         }
-        else if writingIndex == 2 {
-            TapStyle.drawSentence()
+        else if incomeIndex == 2 {
+            TapStyle.drawFourthGrader()
         }
-        else if writingIndex == 3 {
-            TapStyle.drawTextMessage()
+        else if incomeIndex == 3 {
+            TapStyle.drawElementaryTeacher()
         }
-        else if writingIndex == 4 {
-            TapStyle.drawTweet()
+        else if incomeIndex == 4 {
+            TapStyle.drawElementarySchool()
         }
     }
 }
 
-protocol WritingBuyButtonDelegate {
-    func buyTapped(writingIndex: Int)
+protocol IncomeBuyButtonDelegate {
+    func buyTapped(incomeIndex: Int)
 }
 
-class WritingBuyButton: UIView {
+class IncomeBuyButton: UIView {
     // 0 is 1 only, 1 is 1 | 10, 2 is 1 | 10 | 100
     // Like, maybe
     var state = 0
-    var writingIndex = -1
+    var incomeIndex = -1
     
-    var delegate: WritingBuyButtonDelegate?
+    var delegate: IncomeBuyButtonDelegate?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -195,9 +192,7 @@ class WritingBuyButton: UIView {
     
     override func drawRect(rect: CGRect) {
         if state == 0 {
-            let priceLow = writings[writingIndex].getPrice(1).0
-            let priceHigh = writings[writingIndex].getPrice(1).1
-            var text = "\(priceLow) - \(priceHigh) Letters"
+            var text = incomes[incomeIndex].getPurchaseString(1)
             
             TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
         }
@@ -211,7 +206,7 @@ class WritingBuyButton: UIView {
             })
         }
         else if sender.state == UIGestureRecognizerState.Ended {
-            self.delegate?.buyTapped(self.writingIndex)
+            self.delegate?.buyTapped(self.incomeIndex)
             
             UIView.animateWithDuration(0.35, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
                 self.transform = CGAffineTransformIdentity
