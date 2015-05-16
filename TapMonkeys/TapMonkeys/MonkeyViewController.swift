@@ -172,11 +172,6 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
                 
                 monkeys[monkeyIndex] = monkey
                 
-                saveData.monkeyCounts![monkeyIndex] = monkey.count
-                saveData.monkeyTotals![monkeyIndex] = monkey.lettersTotal()
-                saveData.monkeyLastMod![monkeyIndex] = monkey.previousMod
-                saveData.monkeyLastCost![monkeyIndex] = monkey.previousCost
-                
                 save(self.tabBarController, saveData)
                 
                 delay(0.2, {
