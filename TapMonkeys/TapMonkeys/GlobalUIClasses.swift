@@ -117,7 +117,7 @@ class AutoUpdateLabel: UILabel {
         let saveData = load(controller!)
         
         if type == .Monkey {
-            self.text = "Total Letters: \(saveData.monkeyTotals![index])"
+            self.text = "Total Letters: \(Int(saveData.monkeyTotals![index]))"
         }
         else if type == .Income {
             let amount = NSString(format: "%.2f", saveData.incomeTotals![index]) as String
