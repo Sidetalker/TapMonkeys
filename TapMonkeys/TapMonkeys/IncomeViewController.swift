@@ -141,7 +141,7 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             
             let nc = NSNotificationCenter.defaultCenter()
             nc.postNotificationName("updateHeaders", object: self, userInfo: [
-                "letters" : -price,
+                "letters" : 0,
                 "animated" : false
                 ])
             nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)

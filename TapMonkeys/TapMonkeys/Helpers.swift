@@ -317,10 +317,10 @@ func fullLettersPer(timeInterval: Float) -> Int {
 }
 
 func monkeyProductionTimer() -> Float {
-    var lowestLettersPerSecond = 0
+    var lowestLettersPerSecond = 50
     
     for monkey in monkeys {
-        if monkey.lettersPerSecondCumulative() > lowestLettersPerSecond {
+        if monkey.lettersPerSecondCumulative() < lowestLettersPerSecond {
             lowestLettersPerSecond = monkey.lettersPerSecondCumulative()
         }
         
@@ -357,10 +357,10 @@ func fullIncomePer(timeInterval: Float) -> Float {
 }
 
 func incomeProductionTimer() -> Float {
-    var lowestIncomePerSecond: Float = 0
+    var lowestIncomePerSecond: Float = 50
     
     for income in incomes {
-        if income.moneyPerSecond() > lowestIncomePerSecond {
+        if income.moneyPerSecond() < lowestIncomePerSecond {
             lowestIncomePerSecond = income.moneyPerSecond()
         }
         

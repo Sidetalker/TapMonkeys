@@ -71,6 +71,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         for i in 0...count(monkeys) - 1 {
             monkeys[i].totalProduced += individualLettersBuffer[i]
             saveData.monkeyTotals![i] += individualLettersBuffer[i]
+            println("indivbuf \(i): \(individualLettersBuffer[i])")
         }
         
         let nc = NSNotificationCenter.defaultCenter()
@@ -179,21 +180,30 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 }
                 if let
                     monkeyView = view as? MonkeyViewController,
-                    header = monkeyView.dataHeader
+                    header = monkeyView.dataHeader,
+                    table = monkeyView.monkeyTable
                 {
                     header.update(saveData, animated: animated)
+                    
+                    if self.selectedIndex != 1 { table.tableView.reloadData() }
                 }
                 if let
                     writingView = view as? WritingViewController,
-                    header = writingView.dataHeader
+                    header = writingView.dataHeader,
+                    table = writingView.writingTable
                 {
                     header.update(saveData, animated: animated)
+                    
+                    if self.selectedIndex != 2 { table.tableView.reloadData() }
                 }
                 if let
                     incomeView = view as? IncomeViewController,
-                    header = incomeView.dataHeader
+                    header = incomeView.dataHeader,
+                    table = incomeView.incomeTable
                 {
                     header.update(saveData, animated: animated)
+                    
+                    if self.selectedIndex != 3 { table.tableView.reloadData() }
                 }
             }
         }
