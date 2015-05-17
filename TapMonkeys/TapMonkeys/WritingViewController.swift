@@ -156,9 +156,9 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
         var saveData = load(self.tabBarController)
         let index = view.index
         
-        if saveData.letters! < writings[index].unlockCost { return }
+        if Int(saveData.letters!) < writings[index].unlockCost { return }
         
-        saveData.letters! -= writings[index].unlockCost
+        saveData.letters! -= Float(writings[index].unlockCost)
         
         view.unlock()
         

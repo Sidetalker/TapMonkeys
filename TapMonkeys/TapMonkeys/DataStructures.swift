@@ -29,13 +29,13 @@ var incomes = [IncomeData]()
 
 struct SaveData {
     var stage: Int?
-    var letters: Int?
+    var letters: Float?
     var money: Float?
-    var letterCounts: [Int]?
+    var letterCounts: [Float]?
     
     var monkeyUnlocks: [Bool]?
     var monkeyCounts: [Int]?
-    var monkeyTotals: [Int]?
+    var monkeyTotals: [Float]?
     var monkeyLastCost: [Float]?
     var monkeyLastMod: [Float]?
     
@@ -262,7 +262,7 @@ struct WritingData {
         var curData = data
         let price = getPrice(count)
         
-        if curData.letters! >= count * price.1 {
+        if Int(curData.letters!) >= count * price.1 {
             var curPrice = 0
             
             for i in 0...count - 1 {
@@ -342,7 +342,7 @@ struct MonkeyData {
     var index: Int = -1
     var name: String = "ERROR MONKEY"
     var description: String = "This abomination should have never been birthed"
-    var lettersPerSecond: Int = 0
+    var lettersPerSecond: Float = 0
     var modifiers: [(Float, Float)] = [(-1, -1)]
     var costs: [(Float, Float)] = [(-1, -1)]
     var unlockCost: [(Float, Float)] = [(-1, -1)]
@@ -352,22 +352,20 @@ struct MonkeyData {
     var unlocked: Bool = false
     var count: Int = 0
     var modifier: Float = 0
-    var totalProduced: Int = 0
+    var totalProduced: Float = 0
     
-    func lettersPerSecondCumulative() -> Int {
-        return count * lettersPerSecond
+    func lettersPerSecondCumulative() -> Float {
+        return Float(count) * lettersPerSecond
     }
     
     func lettersTotal() -> Int {
-        return totalProduced
+        return Int(totalProduced)
     }
     
-    func lettersPer(timeInterval: Float) -> Int {
-        var preciseInterval = Float(self.count * self.lettersPerSecond) * timeInterval
+    func lettersPer(timeInterval: Float) -> Float {
+        var preciseInterval = Float(self.count) * self.lettersPerSecond * timeInterval
         
-        if preciseInterval < 1 { return 0 }
-        
-        return Int(preciseInterval)
+        return preciseInterval
     }
     
     func canPurchase(count: Int, data: SaveData) -> Bool {
@@ -475,7 +473,7 @@ func loadMonkeys(data: SaveData) {
             }
                 // Letters/sec
             else if x == 2 {
-                newMonkey.lettersPerSecond = data.toInt()!
+                newMonkey.lettersPerSecond = Float(data.toInt()!)
             }
                 // Unlock requirements
             else if x == 3 {

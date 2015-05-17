@@ -14,8 +14,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     var monkeyTimer = NSTimer()
     var incomeTimer = NSTimer()
-    var lettersPerBuffer = 0
-    var individualLettersBuffer = [Int]()
+    var lettersPerBuffer: Float = 0
+    var individualLettersBuffer = [Float]()
     var incomePerBuffer: Float = 0
     var individualIncomeBuffer = [Float]()
     
@@ -71,7 +71,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         for i in 0...count(monkeys) - 1 {
             monkeys[i].totalProduced += individualLettersBuffer[i]
             saveData.monkeyTotals![i] += individualLettersBuffer[i]
-            println("indivbuf \(i): \(individualLettersBuffer[i])")
         }
         
         let nc = NSNotificationCenter.defaultCenter()
@@ -163,7 +162,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         let userInfo = notification.userInfo as! [String : AnyObject]
         
-        if let letters = userInfo["letters"] as? Int {
+        if let letters = userInfo["letters"] as? Float {
             saveData.letters! += letters
         }
         if let money = userInfo["money"] as? Float {

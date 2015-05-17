@@ -321,7 +321,7 @@ class DataHeader: UIView {
     @IBOutlet weak var lettersLabel: UILabel!
     @IBOutlet weak var moneyLabel: UILabel!
     
-    var letters = 0
+    var letters: Float = 0
     var money: Float = 0
     
     required init(coder aDecoder: NSCoder) {
@@ -389,7 +389,7 @@ class DataHeader: UIView {
         
         let moneyText = NSString(format: "%.2f", data.money!) as String
         
-        lettersLabel?.text = "\(self.letters)"
+        lettersLabel?.text = "\(Int(self.letters))"
         moneyLabel?.text = "$\(moneyText)"
         
         align()

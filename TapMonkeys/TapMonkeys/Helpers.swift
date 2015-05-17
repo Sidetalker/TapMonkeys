@@ -95,14 +95,14 @@ func readDefaults() -> SaveData {
     let defaults = NSUserDefaults.standardUserDefaults()
     var save = SaveData()
     
-    save.letters = defaults.integerForKey("letters")
+    save.letters = defaults.floatForKey("letters")
     save.money = defaults.floatForKey("money")
-    save.letterCounts = defaults.arrayForKey("letterCounts") as? [Int]
+    save.letterCounts = defaults.arrayForKey("letterCounts") as? [Float]
     save.stage = defaults.integerForKey("stage")
     
     save.monkeyUnlocks = defaults.arrayForKey("monkeyUnlocks") as? [Bool]
     save.monkeyCounts = defaults.arrayForKey("monkeyCounts") as? [Int]
-    save.monkeyTotals = defaults.arrayForKey("monkeyTotals") as? [Int]
+    save.monkeyTotals = defaults.arrayForKey("monkeyTotals") as? [Float]
     save.monkeyLastCost = defaults.arrayForKey("monkeyLastCost") as? [Float]
     save.monkeyLastMod = defaults.arrayForKey("monkeyLastMod") as? [Float]
     
@@ -141,7 +141,7 @@ func validate(save: SaveData) -> SaveData {
     var newSave = save
     
     if newSave.letterCounts == nil {
-        newSave.letterCounts = [Int](count: numLetterCounts, repeatedValue: 0)
+        newSave.letterCounts = [Float](count: numLetterCounts, repeatedValue: 0)
     }
     else if count(newSave.letterCounts!) < numLetterCounts {
         for i in count(newSave.letterCounts!)...numLetterCounts - 1 {
@@ -168,7 +168,7 @@ func validate(save: SaveData) -> SaveData {
     }
     
     if newSave.monkeyTotals == nil {
-        newSave.monkeyTotals = [Int](count: numMonkeys, repeatedValue: 0)
+        newSave.monkeyTotals = [Float](count: numMonkeys, repeatedValue: 0)
     }
     else if count(newSave.monkeyTotals!) < numMonkeys {
         for i in count(newSave.monkeyTotals!)...numMonkeys - 1 {
@@ -296,8 +296,8 @@ func validate(save: SaveData) -> SaveData {
     return newSave
 }
 
-func individualLettersPer(timeInterval: Float) -> [Int] {
-    var lettersPer = [Int]()
+func individualLettersPer(timeInterval: Float) -> [Float] {
+    var lettersPer = [Float]()
     
     for monkey in monkeys {
         lettersPer.append(monkey.lettersPer(timeInterval))
@@ -306,8 +306,8 @@ func individualLettersPer(timeInterval: Float) -> [Int] {
     return lettersPer
 }
 
-func fullLettersPer(timeInterval: Float) -> Int {
-    var lettersPer = 0
+func fullLettersPer(timeInterval: Float) -> Float {
+    var lettersPer: Float = 0
     
     for monkey in monkeys {
         lettersPer += monkey.lettersPer(timeInterval)
@@ -317,23 +317,21 @@ func fullLettersPer(timeInterval: Float) -> Int {
 }
 
 func monkeyProductionTimer() -> Float {
-    var lowestLettersPerSecond = 50
+    var highestLPS: Float = 0
     
     for monkey in monkeys {
-        if monkey.lettersPerSecondCumulative() < lowestLettersPerSecond {
-            lowestLettersPerSecond = monkey.lettersPerSecondCumulative()
-        }
+        let LPS = monkey.lettersPerSecondCumulative()
         
-        if lowestLettersPerSecond >= 50 {
-            return 1 / 50
+        if LPS > highestLPS && LPS > 0 {
+            highestLPS = monkey.lettersPerSecondCumulative()
         }
     }
     
-    if lowestLettersPerSecond == 0 {
-        return 1
+    if highestLPS == 0 {
+        return 1.0
     }
     
-    return 1.0 / Float(lowestLettersPerSecond)
+    return 1.0 / highestLPS
 }
 
 func individualIncomePer(timeInterval: Float) -> [Float] {
@@ -357,23 +355,21 @@ func fullIncomePer(timeInterval: Float) -> Float {
 }
 
 func incomeProductionTimer() -> Float {
-    var lowestIncomePerSecond: Float = 50
+    var highestIPS: Float = 0
     
     for income in incomes {
-        if income.moneyPerSecond() < lowestIncomePerSecond {
-            lowestIncomePerSecond = income.moneyPerSecond()
-        }
+        let IPS = income.moneyPerSecond()
         
-        if lowestIncomePerSecond >= 50 {
-            return 1 / 50
+        if IPS > highestIPS && IPS > 0 {
+            highestIPS = income.moneyPerSecond()
         }
     }
     
-    if lowestIncomePerSecond == 0 {
-        return 1
+    if highestIPS == 0 {
+        return 1.0
     }
     
-    return 1.0 / (lowestIncomePerSecond * 100)
+    return 1.0 / (highestIPS * 100)
 }
 
 
