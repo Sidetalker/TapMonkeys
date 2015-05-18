@@ -51,8 +51,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         monkeyTimer.invalidate()
         incomeTimer.invalidate()
         
-        let monkeyInterval = monkeyProductionTimer()
-        let incomeInterval = incomeProductionTimer()
+        let monkeyInterval: Float = 0.1
+        let incomeInterval: Float = 0.1
         
         lettersPerBuffer = fullLettersPer(monkeyInterval)
         individualLettersBuffer = individualLettersPer(monkeyInterval)
