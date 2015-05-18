@@ -84,7 +84,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if let
             cell = self.tableView.dequeueReusableCellWithIdentifier("cellMonkey") as? UITableViewCell,
-            monkeyPic = cell.viewWithTag(1) as? DrawnPicture,
+            monkeyPic = cell.viewWithTag(1) as? UIImageView,
             name = cell.viewWithTag(2) as? UILabel,
             owned = cell.viewWithTag(3) as? UILabel,
             frequency = cell.viewWithTag(4) as? UILabel,
@@ -96,9 +96,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             let curMonkey = monkeys[index]
             let curPrice = curMonkey.getPrice(1).0
             
-            monkeyPic.index = index
-            monkeyPic.type = .Monkey
-            monkeyPic.setNeedsDisplay()
+            monkeyPic.image = UIImage(named: curMonkey.imageName)
             
             buyButton.monkeyIndex = index
             buyButton.delegate = self

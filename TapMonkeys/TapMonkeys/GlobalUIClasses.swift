@@ -22,83 +22,6 @@ class ConstraintView: UIView {
     }
 }
 
-class DrawnPicture: UIView {
-    var index = 0
-    var type: ObjectType = .Monkey
-    var unknown = false
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        self.backgroundColor = UIColor.clearColor()
-    }
-    
-    init(frame: CGRect, strokeWidth: CGFloat) {
-        super.init(frame: frame)
-        
-        self.backgroundColor = UIColor.clearColor()
-    }
-    
-    override func drawRect(rect: CGRect) {
-        if unknown {
-            TapStyle.drawUnknownUnlock()
-            return
-        }
-        
-        if type == .Income {
-            if index == 0 {
-                TapStyle.drawBaby()
-            }
-            else if index == 1 {
-                TapStyle.drawKindergartner()
-            }
-            else if index == 2 {
-                TapStyle.drawFourthGrader()
-            }
-            else if index == 3 {
-                TapStyle.drawElementaryTeacher()
-            }
-            else if index == 4 {
-                TapStyle.drawElementarySchool()
-            }
-        }
-        else if type == .Monkey {
-            if index == 0 {
-                TapStyle.drawFingerMonkey()
-            }
-            else if index == 1 {
-                TapStyle.drawGoofkey()
-            }
-            else if index == 2 {
-                TapStyle.drawDigitDestroyer()
-            }
-            else if index == 3 {
-                TapStyle.drawSeaMonkey()
-            }
-            else if index == 4 {
-                TapStyle.drawJabbaTheMonkey()
-            }
-        }
-        else if type == .Writing {
-            if index == 0 {
-                TapStyle.drawWords()
-            }
-            else if index == 1 {
-                TapStyle.drawFragmentedSentence()
-            }
-            else if index == 2 {
-                TapStyle.drawSentence()
-            }
-            else if index == 3 {
-                TapStyle.drawTextMessage()
-            }
-            else if index == 4 {
-                TapStyle.drawTweet()
-            }
-        }
-    }
-}
-
 class AutoUpdateLabel: UILabel {
     var index = -1
     var controller: TabBarController?
@@ -136,7 +59,7 @@ class AnimatedLockView: UIView {
     @IBOutlet weak var lockImage: UIImageView!
     @IBOutlet weak var requirementsText: UILabel!
     @IBOutlet weak var staticText: UILabel!
-    @IBOutlet weak var pic: DrawnPicture!
+    @IBOutlet weak var pic: UIImageView!
     
     var locked = true
     var type: ObjectType = .Monkey
@@ -206,8 +129,7 @@ class AnimatedLockView: UIView {
                 if !saveData.monkeyUnlocks![index - 1] && !saveData.monkeyUnlocks![index - 2] {
                     requirementsText.text = "?????"
                     
-                    pic.unknown = true
-                    pic.setNeedsDisplay()
+                    pic.image = UIImage(named: "unknownUnlock")
                     
                     return
                 }
@@ -223,14 +145,15 @@ class AnimatedLockView: UIView {
                 staticText.text = "Unlock For"
                 requirementsText.text = "FREE"
             }
+            
+            pic.image = UIImage(named:monkeys[index].imageName)
         }
         else if type == .Writing {
             if index > 1 {
                 if !saveData.writingUnlocked![index - 1] && !saveData.writingUnlocked![index - 2] {
                     requirementsText.text = "?????"
                     
-                    pic.unknown = true
-                    pic.setNeedsDisplay()
+                    pic.image = UIImage(named: "unknownUnlock")
                     
                     return
                 }
@@ -242,14 +165,15 @@ class AnimatedLockView: UIView {
                 staticText.text = "Unlock For"
                 requirementsText.text = "FREE"
             }
+            
+            pic.image = UIImage(named:writings[index].imageName)
         }
         else if type == .Income {
             if index > 1 {
                 if !saveData.incomeUnlocks![index - 1] && !saveData.incomeUnlocks![index - 2] {
                     requirementsText.text = "?????"
                     
-                    pic.unknown = true
-                    pic.setNeedsDisplay()
+                    pic.image = UIImage(named: "unknownUnlock")
                     
                     return
                 }
@@ -265,12 +189,9 @@ class AnimatedLockView: UIView {
                 staticText.text = "Unlock For"
                 requirementsText.text = "FREE"
             }
+            
+            pic.image = UIImage(named:incomes[index].imageName)
         }
-        
-        pic.unknown = false
-        pic.type = type
-        pic.index = index
-        pic.setNeedsDisplay()
     }
     
     func lockTap(sender: UITapGestureRecognizer) {

@@ -84,7 +84,7 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if let
             cell = tableView.dequeueReusableCellWithIdentifier("cellIncome") as? UITableViewCell,
-            pic = cell.viewWithTag(1) as? DrawnPicture,
+            pic = cell.viewWithTag(1) as? UIImageView,
             title = cell.viewWithTag(2) as? UILabel,
             owned = cell.viewWithTag(3) as? UILabel,
             moneyPerSec = cell.viewWithTag(4) as? UILabel,
@@ -95,8 +95,7 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             let index = indexPath.row
             let moneyText = NSString(format: "%.2f", incomes[index].moneyPerSecond()) as String
             
-            pic.index = index
-            pic.type = .Income
+            pic.image = UIImage(named: incomes[index].imageName)
             
             title.text = incomes[index].name
             description.text = incomes[index].description

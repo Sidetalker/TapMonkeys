@@ -84,7 +84,7 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if let
             cell = tableView.dequeueReusableCellWithIdentifier("cellWriting") as? UITableViewCell,
-            pic = cell.viewWithTag(1) as? DrawnPicture,
+            pic = cell.viewWithTag(1) as? UIImageView,
             title = cell.viewWithTag(2) as? UILabel,
             owned = cell.viewWithTag(3) as? UILabel,
             value = cell.viewWithTag(4) as? UILabel,
@@ -95,8 +95,7 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
             let index = indexPath.row
             let moneyText = NSString(format: "%.2f", writings[index].getValue()) as String
             
-            pic.index = index
-            pic.type = .Writing
+            pic.image = UIImage(named: writings[index].imageName)
             
             title.text = writings[index].name
             description.text = writings[index].description

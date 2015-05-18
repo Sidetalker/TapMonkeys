@@ -57,6 +57,7 @@ struct IncomeData {
     var index: Int = -1
     var name: String = "ERROR WRITETHING"
     var description: String = "kill.....me"
+    var imageName: String = "unknownUnlock"
     var unlockCost = [(Float, Float)]()
     var costs = [(Float, Float)]()
     var modifiers = [(Float, Float)]()
@@ -185,11 +186,11 @@ func loadIncome(data: SaveData) {
     
     incomes = [IncomeData]()
     
-    for i in 0...splitContent.count / 6 - 1 {
+    for i in 0...splitContent.count / 7 - 1 {
         var newIncome = IncomeData()
         
-        for x in 0...5 {
-            let data = splitContent[i * 6 + x]
+        for x in 0...6 {
+            let data = splitContent[i * 7 + x]
             
             // Name
             if x == 0 {
@@ -215,6 +216,10 @@ func loadIncome(data: SaveData) {
             else if x == 5 {
                 newIncome.moneyProduced = parseFloatTuples(data)
             }
+                // Image Name
+            else if x == 6 {
+                newIncome.imageName = data
+            }
         }
         
         incomes.append(newIncome)
@@ -234,6 +239,7 @@ struct WritingData {
     var index: Int = -1
     var name: String = "ERROR WRITETHING"
     var description: String = "kill.....me"
+    var imageName: String = "unknownUnlock"
     var unlockCost: Int = -1
     var costLow: Int = -1
     var costHigh: Int = -1
@@ -289,11 +295,11 @@ func loadWritings(data: SaveData) {
     
     writings = [WritingData]()
     
-    for i in 0...splitContent.count / 6 - 1 {
+    for i in 0...splitContent.count / 7 - 1 {
         var entry = WritingData()
         
-        for x in 0...5 {
-            let data = splitContent[i * 6 + x]
+        for x in 0...6 {
+            let data = splitContent[i * 7 + x]
             
                 // Name
             if x == 0 {
@@ -323,6 +329,10 @@ func loadWritings(data: SaveData) {
             else if x == 5 {
                 entry.costHigh = data.toInt()!
             }
+                // Image Name
+            else if x == 6 {
+                entry.imageName = data
+            }
         }
         
         writings.append(entry)
@@ -342,6 +352,7 @@ struct MonkeyData {
     var index: Int = -1
     var name: String = "ERROR MONKEY"
     var description: String = "This abomination should have never been birthed"
+    var imageName: String = "unknownUnlock.png"
     var lettersPerSecond: Float = 0
     var modifiers: [(Float, Float)] = [(-1, -1)]
     var costs: [(Float, Float)] = [(-1, -1)]
@@ -457,11 +468,11 @@ func loadMonkeys(data: SaveData) {
     
     monkeys = [MonkeyData]()
     
-    for i in 0...splitContent.count / 6 - 1 {
+    for i in 0...splitContent.count / 7 - 1 {
         var newMonkey = MonkeyData()
         
-        for x in 0...5 {
-            let data = splitContent[i * 6 + x]
+        for x in 0...6 {
+            let data = splitContent[i * 7 + x]
             
             // Name
             if x == 0 {
@@ -486,6 +497,10 @@ func loadMonkeys(data: SaveData) {
                 // Unlock cost overrides
             else if x == 5 {
                 newMonkey.costs = parseFloatTuples(data)
+            }
+                // Image name
+            else if x == 6 {
+                newMonkey.imageName = data
             }
         }
         

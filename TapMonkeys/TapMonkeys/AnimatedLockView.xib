@@ -2,13 +2,14 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnimatedLockView" customModule="TapMonkeys" customModuleProvider="target">
             <connections>
                 <outlet property="lockImage" destination="Fe3-uz-y1r" id="Wnw-A4-d9t"/>
                 <outlet property="nibView" destination="iN0-l3-epB" id="ue2-Zx-5F7"/>
-                <outlet property="pic" destination="xAD-A2-rIu" id="zWh-sV-xNT"/>
+                <outlet property="pic" destination="TPj-36-p2o" id="gdd-Us-561"/>
                 <outlet property="requirementsText" destination="mBP-sz-7Qx" id="xrI-Jz-qEk"/>
                 <outlet property="staticText" destination="mMT-WT-U2R" id="iid-KC-Gqn"/>
             </connections>
@@ -50,21 +51,20 @@
                         <constraint firstAttribute="centerX" secondItem="mMT-WT-U2R" secondAttribute="centerX" id="ibi-Xz-nOs"/>
                     </constraints>
                 </view>
-                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xAD-A2-rIu" customClass="DrawnPicture" customModule="TapMonkeys" customModuleProvider="target">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TPj-36-p2o">
                     <rect key="frame" x="16" y="8" width="100" height="100"/>
-                    <color key="backgroundColor" red="0.98594826459999996" green="0.0" blue="0.026950567960000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="100" id="41q-Ud-1I7"/>
-                        <constraint firstAttribute="height" constant="100" id="p4M-et-ve0"/>
+                        <constraint firstAttribute="width" constant="100" id="PeR-io-hX1"/>
+                        <constraint firstAttribute="width" secondItem="TPj-36-p2o" secondAttribute="height" multiplier="1:1" id="d8m-GX-Izr"/>
                     </constraints>
-                </view>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="gur-fH-dk5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1VO-Lc-fxU"/>
-                <constraint firstItem="xAD-A2-rIu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Agd-58-1Js"/>
+                <constraint firstItem="TPj-36-p2o" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="A7e-5H-kIe"/>
                 <constraint firstItem="Fe3-uz-y1r" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="35" id="JMy-5I-AWC"/>
-                <constraint firstItem="xAD-A2-rIu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="McJ-da-Ljh"/>
+                <constraint firstItem="TPj-36-p2o" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="PwY-xi-TKk"/>
                 <constraint firstItem="gur-fH-dk5" firstAttribute="leading" secondItem="Fe3-uz-y1r" secondAttribute="trailing" id="Zwd-b1-dYR"/>
                 <constraint firstAttribute="bottom" secondItem="gur-fH-dk5" secondAttribute="bottom" id="a4J-W1-sJ0"/>
                 <constraint firstAttribute="centerY" secondItem="Fe3-uz-y1r" secondAttribute="centerY" constant="-30" id="jz6-YD-v2d"/>
