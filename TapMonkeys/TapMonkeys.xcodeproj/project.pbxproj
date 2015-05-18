@@ -142,6 +142,7 @@
 		0A9B68F81AFFF3E7006628D1 /* AnimatedLockView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9B68F71AFFF3E7006628D1 /* AnimatedLockView.xib */; };
 		0A9B69451B010BBB006628D1 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B69441B010BBB006628D1 /* DataStructures.swift */; };
 		0ABEEC981B04007F004AC5B6 /* writing.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEEC971B04007F004AC5B6 /* writing.dat */; };
+		743675220F34FC35FBE7734F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C17BAEC4C847204022B48504 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -242,6 +243,7 @@
 		0A44C8651B0A7EA100FA18E2 /* unknownUnlock@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "unknownUnlock@3x.png"; path = "Images/unknownUnlock@3x.png"; sourceTree = "<group>"; };
 		0A44C8661B0A7EA100FA18E2 /* unknownUnlock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "unknownUnlock@2x.png"; path = "Images/unknownUnlock@2x.png"; sourceTree = "<group>"; };
 		0A44C8671B0A7EA100FA18E2 /* unknownUnlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unknownUnlock.png; path = Images/unknownUnlock.png; sourceTree = "<group>"; };
+		0A44C8701B0A850300FA18E2 /* TapMonkeys-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TapMonkeys-Bridging-Header.h"; sourceTree = "<group>"; };
 		0A5529F81B03BF4D00CD8E78 /* WritingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WritingViewController.swift; sourceTree = "<group>"; };
 		0A552A421B03D75600CD8E78 /* GlobalUIClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalUIClasses.swift; sourceTree = "<group>"; };
 		0A7177E91B067A35006DEF7A /* income.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = income.dat; path = Data/income.dat; sourceTree = "<group>"; };
@@ -295,6 +297,9 @@
 		0A9B68F71AFFF3E7006628D1 /* AnimatedLockView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimatedLockView.xib; sourceTree = "<group>"; };
 		0A9B69441B010BBB006628D1 /* DataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
 		0ABEEC971B04007F004AC5B6 /* writing.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = writing.dat; path = Data/writing.dat; sourceTree = "<group>"; };
+		1D72FF5ED6884E49CA2F0EC2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		39AF8EEE4298B42A20360A6E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C17BAEC4C847204022B48504 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A9B68A21AFD4945006628D1 /* QuartzCore.framework in Frameworks */,
+				743675220F34FC35FBE7734F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +383,7 @@
 				0A9B68791AFD3DE7006628D1 /* TapMonkeys */,
 				0A9B68921AFD3DE7006628D1 /* TapMonkeysTests */,
 				0A9B68781AFD3DE7006628D1 /* Products */,
+				7CCC8B282F6264FF365CB3FA /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -413,6 +420,7 @@
 				0A9B68F91AFFF3F1006628D1 /* UI */,
 				0A9B68ED1AFF9184006628D1 /* Data */,
 				0A9B68AC1AFD8DC6006628D1 /* Images */,
+				0A44C8701B0A850300FA18E2 /* TapMonkeys-Bridging-Header.h */,
 				0A9B687E1AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld */,
 				0A9B687B1AFD3DE7006628D1 /* Info.plist */,
 			);
@@ -440,6 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				0A9B68A11AFD4945006628D1 /* QuartzCore.framework */,
+				C17BAEC4C847204022B48504 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -590,6 +599,15 @@
 			name = "Animated Lock";
 			sourceTree = "<group>";
 		};
+		7CCC8B282F6264FF365CB3FA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1D72FF5ED6884E49CA2F0EC2 /* Pods.debug.xcconfig */,
+				39AF8EEE4298B42A20360A6E /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -597,9 +615,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A9B68991AFD3DE7006628D1 /* Build configuration list for PBXNativeTarget "TapMonkeys" */;
 			buildPhases = (
+				90FDAA6482963D467FD0A7DA /* Check Pods Manifest.lock */,
 				0A9B68731AFD3DE7006628D1 /* Sources */,
 				0A9B68741AFD3DE7006628D1 /* Frameworks */,
 				0A9B68751AFD3DE7006628D1 /* Resources */,
+				50E2637449F8585E75E855F3 /* Upload Instabug dSYM */,
+				EED4E33C06BA400B37170874 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -805,6 +826,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		50E2637449F8585E75E855F3 /* Upload Instabug dSYM */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Upload Instabug dSYM";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "  # SKIP_SIMULATOR_BUILDS=1\n  SCRIPT_SRC=$(find \"$PROJECT_DIR\" -name 'Instabug_dsym_upload.sh' | head -1)\n  if [ ! \"${SCRIPT_SRC}\" ]; then\n    echo \"Instabug: err: script not found. Make sure that you're including Instabug.bundle in your project directory\"\n    exit 1\n  fi\n  source \"${SCRIPT_SRC}\"\n";
+		};
+		90FDAA6482963D467FD0A7DA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EED4E33C06BA400B37170874 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0A9B68731AFD3DE7006628D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -947,26 +1015,41 @@
 		};
 		0A9B689A1AFD3DE7006628D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D72FF5ED6884E49CA2F0EC2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TapMonkeys/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TapMonkeys/TapMonkeys-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		0A9B689B1AFD3DE7006628D1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39AF8EEE4298B42A20360A6E /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TapMonkeys/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TapMonkeys/TapMonkeys-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

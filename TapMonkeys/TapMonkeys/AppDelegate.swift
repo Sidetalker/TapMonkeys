@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        Instabug.startWithToken("893dc20ceb57c8436c1b649e4bd3a77f", captureSource: IBGCaptureSourceUIKit, invocationEvent: IBGInvocationEventShake)
+        
         return true
     }
 
