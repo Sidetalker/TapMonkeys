@@ -69,19 +69,17 @@ struct IncomeData {
     var moneyProduced = [(Float, Float)]()
     var totalProduced: Float = 0
     var level: Int = 0
+    var letterCostBuffer: Int = 0
     
     mutating func purchase(count: Int, data: SaveData) -> SaveData? {
         var curData = data
         let price = getPrice(count)
         
-        if writings[self.index].count >= Int(price.0) {
+        if curData.letters >= Float(letterCostBuffer) {
             self.previousCost = price.1
             self.previousMod = price.2
             self.count += count
             
-            writings[self.index].count -= Int(price.0)
-            
-            curData.writingCount![self.index] -= Int(price.0)
             curData.incomeCounts![self.index] += count
             curData.incomeLastCost![self.index] = price.1
             curData.incomeLastMod![self.index] = price.2
@@ -164,6 +162,19 @@ struct IncomeData {
         }
         
         return (totalCost, costBuffer, modBuffer)
+    }
+    
+    // Returns purchase letter count and sets letter cost variable
+    mutating func getLettersFor(count: Int) -> Int {
+        var totalLetters = 0
+        
+        for i in 0...Int(getPrice(count).0) - 1 {
+            totalLetters += writings[self.index].getPrice(count).2
+        }
+        
+        letterCostBuffer = totalLetters
+        
+        return totalLetters
     }
     
     func costOverride() -> Float {
