@@ -34,7 +34,7 @@ public class TapStyle : NSObject {
         CGContextRestoreGState(context)
     }
 
-    public class func drawBuy(#frame: CGRect, monkeyBuyText: String) {
+    public class func drawBuy(#frame: CGRect, buyText: String) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()
 
@@ -49,10 +49,49 @@ public class TapStyle : NSObject {
 
         let rectangleFontAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 14)!, NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: rectangleStyle]
 
-        let rectangleTextHeight: CGFloat = NSString(string: monkeyBuyText).boundingRectWithSize(CGSizeMake(rectangleRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: rectangleFontAttributes, context: nil).size.height
+        let rectangleTextHeight: CGFloat = NSString(string: buyText).boundingRectWithSize(CGSizeMake(rectangleRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: rectangleFontAttributes, context: nil).size.height
         CGContextSaveGState(context)
         CGContextClipToRect(context, rectangleRect);
-        NSString(string: monkeyBuyText).drawInRect(CGRectMake(rectangleRect.minX, rectangleRect.minY + (rectangleRect.height - rectangleTextHeight) / 2, rectangleRect.width, rectangleTextHeight), withAttributes: rectangleFontAttributes)
+        NSString(string: buyText).drawInRect(CGRectMake(rectangleRect.minX, rectangleRect.minY + (rectangleRect.height - rectangleTextHeight) / 2, rectangleRect.width, rectangleTextHeight), withAttributes: rectangleFontAttributes)
+        CGContextRestoreGState(context)
+    }
+
+    public class func drawBuyIncome(#frame: CGRect, buyText: String, buySubtext: String) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
+
+        //// Rectangle Drawing
+        let rectanglePath = UIBezierPath(roundedRect: CGRectMake(frame.minX + 5, frame.minY + 0.5, floor((frame.width - 5) * 0.97959 + 0.5), floor((frame.height - 0.5) * 0.98990 + 0.5)), cornerRadius: 10)
+        UIColor.blackColor().setStroke()
+        rectanglePath.lineWidth = 1
+        rectanglePath.stroke()
+
+
+        //// Text 2 Drawing
+        let text2Rect = CGRectMake(frame.minX + 5, frame.minY + 7, frame.width - 10, floor((frame.height - 7) * 0.48837 + 0.5))
+        let text2Style = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+        text2Style.alignment = NSTextAlignment.Center
+
+        let text2FontAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 14)!, NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text2Style]
+
+        let text2TextHeight: CGFloat = NSString(string: buyText).boundingRectWithSize(CGSizeMake(text2Rect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).size.height
+        CGContextSaveGState(context)
+        CGContextClipToRect(context, text2Rect);
+        NSString(string: buyText).drawInRect(CGRectMake(text2Rect.minX, text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, text2Rect.width, text2TextHeight), withAttributes: text2FontAttributes)
+        CGContextRestoreGState(context)
+
+
+        //// Text 3 Drawing
+        let text3Rect = CGRectMake(frame.minX + 5, frame.minY + 28, floor((frame.width - 5) * 0.97959 + 0.5), floor((frame.height - 28) * 0.95455 + 0.5))
+        let text3Style = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+        text3Style.alignment = NSTextAlignment.Center
+
+        let text3FontAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 13)!, NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text3Style]
+
+        let text3TextHeight: CGFloat = NSString(string: buySubtext).boundingRectWithSize(CGSizeMake(text3Rect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: text3FontAttributes, context: nil).size.height
+        CGContextSaveGState(context)
+        CGContextClipToRect(context, text3Rect);
+        NSString(string: buySubtext).drawInRect(CGRectMake(text3Rect.minX, text3Rect.minY + (text3Rect.height - text3TextHeight) / 2, text3Rect.width, text3TextHeight), withAttributes: text3FontAttributes)
         CGContextRestoreGState(context)
     }
 

@@ -217,8 +217,9 @@ class IncomeBuyButton: UIView {
     override func drawRect(rect: CGRect) {
         if state == 0 {
             var text = incomes[incomeIndex].getPurchaseString(1)
+            var subtext = incomes[incomeIndex].getLetterPurchaseString(1)
             
-            TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
+            TapStyle.drawBuyIncome(frame: rect, buyText: text, buySubtext: subtext)
         }
     }
     

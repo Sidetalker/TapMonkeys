@@ -120,6 +120,14 @@ struct IncomeData {
         return "\(price) \(itemName)s"
     }
     
+    func getLetterPurchaseString(count: Int) -> String {
+        let price = Int(getPrice(count).0)
+        let itemCostLow = writings[Int(unlockCost[0].0)].costLow
+        let itemCostHigh = writings[Int(unlockCost[0].0)].costHigh
+        
+        return "\(itemCostLow * price) - \(itemCostHigh * price) Letters"
+    }
+    
     // Return (total cost, last cost, last mod)
     func getPrice(count: Int) -> (Float, Float, Float) {
         var costBuffer = previousCost
