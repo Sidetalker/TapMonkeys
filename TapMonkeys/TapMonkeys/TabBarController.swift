@@ -210,7 +210,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                     if self.selectedIndex != 3 { table.tableView.reloadData() }
                 }
                 if let
-                    incomeView = view as? IncomeViewController,
+                    incomeView = view as? UpgradesViewController,
                     header = incomeView.dataHeader
 //                    table = incomeView.incomeTable
                 {
