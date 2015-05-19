@@ -224,6 +224,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         else if saveData.stage == 4 {
             revealTab(3)
         }
+        else if saveData.stage == 4 {
+            revealTab(4)
+        }
     }
     
     func setTabBarVisible(visible: Bool, animated: Bool) {

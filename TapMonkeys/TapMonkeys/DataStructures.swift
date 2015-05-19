@@ -20,7 +20,8 @@ let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
 let gens = [
     ["M", "O", "N", "K", "E", "Y", "S"],
     ["W", "R", "I", "T", "I", "N", "G"],
-    ["I", "N", "C", "O", "M", "E"]
+    ["I", "N", "C", "O", "M", "E"],
+    ["U", "P", "G", "R", "A", "D", "E", "S"]
 ]
 
 var monkeys = [MonkeyData]()
