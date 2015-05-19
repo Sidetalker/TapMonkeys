@@ -131,7 +131,7 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
         var saveData = load(self.tabBarController)
         var income = incomes[incomeIndex]
         
-        var price = Int(income.getPrice(1).0)
+        var price = income.getLettersFor(1)
         
         if let newSave = income.purchase(1, data: saveData) {
             save(self.tabBarController, newSave)
@@ -140,7 +140,7 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             
             let nc = NSNotificationCenter.defaultCenter()
             nc.postNotificationName("updateHeaders", object: self, userInfo: [
-                "letters" : 0,
+                "letters" : -price,
                 "animated" : false
                 ])
             nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
@@ -217,8 +217,9 @@ class IncomeBuyButton: UIView {
     override func drawRect(rect: CGRect) {
         if state == 0 {
             var text = incomes[incomeIndex].getPurchaseString(1)
+            var subtext = incomes[incomeIndex].getLetterPurchaseString(1)
             
-            TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
+            TapStyle.drawBuyIncome(frame: rect, buyText: text, buySubtext: subtext)
         }
     }
     

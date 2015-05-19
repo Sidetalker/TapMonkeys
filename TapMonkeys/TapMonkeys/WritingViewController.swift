@@ -211,7 +211,7 @@ class WritingBuyButton: UIView {
             let priceHigh = writings[writingIndex].getPrice(1).1
             var text = "\(priceLow) - \(priceHigh) Letters"
             
-            TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
+            TapStyle.drawBuy(frame: rect, buyText: text)
         }
     }
     

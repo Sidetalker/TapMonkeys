@@ -224,7 +224,7 @@ class MonkeyBuyButton: UIView {
         
         let text = NSString(format: "$%.2f", price) as String
         
-        TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
+        TapStyle.drawBuy(frame: rect, buyText: text)
     }
     
     
