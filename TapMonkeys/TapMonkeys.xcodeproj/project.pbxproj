@@ -420,6 +420,7 @@
 				0A9B68F91AFFF3F1006628D1 /* UI */,
 				0A9B68ED1AFF9184006628D1 /* Data */,
 				0A9B68AC1AFD8DC6006628D1 /* Images */,
+				0A9B68861AFD3DE7006628D1 /* Images.xcassets */,
 				0A44C8701B0A850300FA18E2 /* TapMonkeys-Bridging-Header.h */,
 				0A9B687E1AFD3DE7006628D1 /* TapMonkeys.xcdatamodeld */,
 				0A9B687B1AFD3DE7006628D1 /* Info.plist */,
@@ -457,7 +458,6 @@
 			isa = PBXGroup;
 			children = (
 				0A44C86B1B0A7EA500FA18E2 /* General */,
-				0A9B68861AFD3DE7006628D1 /* Images.xcassets */,
 				0A9B69121B0000C3006628D1 /* Animations */,
 				0A9B68E81AFDCD51006628D1 /* Monkeys */,
 				0A552A501B03E23100CD8E78 /* Writing */,
