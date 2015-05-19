@@ -59,7 +59,7 @@
         <!--Upgrades-->
         <scene sceneID="LiU-vN-0OH">
             <objects>
-                <viewController id="lZR-JJ-Wk6" customClass="UpgradesViewController" sceneMemberID="viewController">
+                <viewController id="lZR-JJ-Wk6" customClass="UpgradesViewController" customModule="TapMonkeys" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Elx-H6-8OY"/>
                         <viewControllerLayoutGuide type="bottom" id="Ty9-zB-Ib0"/>
@@ -96,6 +96,9 @@
                     <tabBarItem key="tabBarItem" title="Upgrades" image="upgradesTab.png" id="Fxy-Dp-rwa"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="500"/>
+                    <connections>
+                        <outlet property="dataHeader" destination="3VY-jz-3nU" id="IXX-aL-CaP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JVA-2I-Dxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

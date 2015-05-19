@@ -9,5 +9,6 @@
 import UIKit
 
 class UpgradesViewController: UIViewController {
+    @IBOutlet weak var dataHeader: DataHeader!
     
 }

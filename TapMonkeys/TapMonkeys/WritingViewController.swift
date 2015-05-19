@@ -142,11 +142,13 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
                 ])
             
             delay(0.2, {
-                self.tableView.beginUpdates()
+                self.tableView.reloadData()
                 
-                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: writingIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
-                
-                self.tableView.endUpdates()
+//                self.tableView.beginUpdates()
+//                
+//                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: writingIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+//                
+//                self.tableView.endUpdates()
             })
         }
     }

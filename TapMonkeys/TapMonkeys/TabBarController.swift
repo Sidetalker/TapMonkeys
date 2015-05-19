@@ -142,6 +142,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 
                 incomeView.dataHeader.update(saveData, animated: false)
             }
+            if let incomeView = view as? UpgradesViewController {
+                if incomeView.dataHeader == nil { return }
+                
+                incomeView.dataHeader.update(saveData, animated: false)
+            }
         }
     }
     
@@ -203,6 +208,15 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                     header.update(saveData, animated: animated)
                     
                     if self.selectedIndex != 3 { table.tableView.reloadData() }
+                }
+                if let
+                    incomeView = view as? IncomeViewController,
+                    header = incomeView.dataHeader
+//                    table = incomeView.incomeTable
+                {
+                    header.update(saveData, animated: animated)
+                    
+//                    if self.selectedIndex != 3 { table.tableView.reloadData() }
                 }
             }
         }
