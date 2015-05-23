@@ -308,6 +308,7 @@ protocol PopLabelDelegate {
 class PopLabel: UIView {
     var delegate: PopLabelDelegate?
     var animator: UIDynamicAnimator?
+    var letterColor = UIColor.blackColor()
     
     var index = 0
     
@@ -342,7 +343,7 @@ class PopLabel: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-        TapStyle.drawMainLetter(character: alphabet[index])
+        TapStyle.drawMainLetter(letterColor: letterColor, character: alphabet[index])
     }
     
     func move(location: CGPoint, scale: CGFloat, alpha: CGFloat, duration: NSTimeInterval, delay: NSTimeInterval, remove: Bool) {

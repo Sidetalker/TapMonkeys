@@ -239,11 +239,14 @@ class AnimatedLockView: UIView {
 class DataHeader: UIView {
     @IBOutlet var nibView: UIView!
     
+    @IBOutlet weak var lightbulbButton: UIButton!
     @IBOutlet weak var lettersLabel: UILabel!
     @IBOutlet weak var moneyLabel: UILabel!
+    @IBOutlet weak var wrapperView: UIView!
     
     var letters: Float = 0
     var money: Float = 0
+    var lightbulbColor = UIColor.blackColor()
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -261,13 +264,19 @@ class DataHeader: UIView {
         NSBundle.mainBundle().loadNibNamed("DataHeader", owner: self, options: nil)
         
         self.addSubview(nibView)
-        self.frame = nibView.frame
+        
+        nibView.frame = self.bounds
+//        wrapperView.frame = self.bounds
         
         lettersLabel.text = "0"
         moneyLabel.text = "$0.00"
         
         lettersLabel.alpha = 0.0
         moneyLabel.alpha = 0.0
+        
+        lightbulbButton.alpha = 1.0
+        lightbulbButton.setBackgroundImage(TapStyle.imageOfLightbulb(frame: lightbulbButton.frame, lightbulbColor: lightbulbColor), forState: UIControlState.Normal)
+//        lightbulbButton.frame = CGRect(x: nibView.frame.width - 68, y: 0, width: 60, height: 60)
         
         align()
         
@@ -277,6 +286,8 @@ class DataHeader: UIView {
     func align() {
         lettersLabel.sizeToFit()
         moneyLabel.sizeToFit()
+        
+        nibView.setNeedsDisplay()
     }
     
     func getCenterLetters() -> CGPoint {
@@ -287,7 +298,7 @@ class DataHeader: UIView {
         return getCenter(moneyLabel)
     }
     
-    func getCenter(view: UIView) ->CGPoint {
+    func getCenter(view: UIView) -> CGPoint {
         var newX = view.frame.origin.x
         var newY = view.frame.origin.y
         
@@ -313,7 +324,7 @@ class DataHeader: UIView {
         lettersLabel?.text = "\(Int(self.letters))"
         moneyLabel?.text = "$\(moneyText)"
         
-        align()
+//        align()
         
         if letters > 0 && animated { pulseLetters() }
         if money > 0 && animated { pulseMoney() }
@@ -349,5 +360,9 @@ class DataHeader: UIView {
                     view.transform = CGAffineTransformIdentity
                     }, completion: nil)
         })
+    }
+    
+    override func translatesAutoresizingMaskIntoConstraints() -> Bool {
+        return false
     }
 }

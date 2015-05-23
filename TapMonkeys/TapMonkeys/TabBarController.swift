@@ -235,11 +235,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         if saveData.stage == 3 {
             revealTab(2)
         }
-        else if saveData.stage == 4 {
+        else if saveData.stage == 4 || saveData.stage == 5 {
             revealTab(3)
-        }
-        else if saveData.stage == 5 {
-            revealTab(4)
         }
     }
     
