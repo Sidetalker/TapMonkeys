@@ -14,6 +14,13 @@ import UIKit
 
 public class TapStyle : NSObject {
 
+    //// Cache
+
+    private struct Cache {
+        static var imageOfUnknownUnlock: UIImage?
+        static var unknownUnlockTargets: [AnyObject]?
+    }
+
     //// Drawing Methods
 
     public class func drawMainLetter(#letterColor: UIColor, character: String) {
@@ -53,6 +60,41 @@ public class TapStyle : NSObject {
         CGContextSaveGState(context)
         CGContextClipToRect(context, rectangleRect);
         NSString(string: buyText).drawInRect(CGRectMake(rectangleRect.minX, rectangleRect.minY + (rectangleRect.height - rectangleTextHeight) / 2, rectangleRect.width, rectangleTextHeight), withAttributes: rectangleFontAttributes)
+        CGContextRestoreGState(context)
+    }
+
+    public class func drawUnknownUnlock() {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
+
+
+        //// Shadow Declarations
+        let picShadow = NSShadow()
+        picShadow.shadowColor = UIColor.blackColor().colorWithAlphaComponent(0.8)
+        picShadow.shadowOffset = CGSizeMake(0.1, -0.1)
+        picShadow.shadowBlurRadius = 3
+
+        //// Oval Drawing
+        let ovalRect = CGRectMake(5, 5, 90, 90)
+        var ovalPath = UIBezierPath(ovalInRect: ovalRect)
+        UIColor.whiteColor().setFill()
+        ovalPath.fill()
+        CGContextSaveGState(context)
+        CGContextSetShadowWithColor(context, picShadow.shadowOffset, picShadow.shadowBlurRadius, (picShadow.shadowColor as! UIColor).CGColor)
+        UIColor.blackColor().setStroke()
+        ovalPath.lineWidth = 0.5
+        ovalPath.stroke()
+        CGContextRestoreGState(context)
+        var ovalTextContent = NSString(string: "???")
+        let ovalStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+        ovalStyle.alignment = NSTextAlignment.Center
+
+        let ovalFontAttributes = [NSFontAttributeName: UIFont(name: "Noteworthy-Light", size: 35)!, NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: ovalStyle]
+
+        let ovalTextHeight: CGFloat = ovalTextContent.boundingRectWithSize(CGSizeMake(ovalRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: ovalFontAttributes, context: nil).size.height
+        CGContextSaveGState(context)
+        CGContextClipToRect(context, ovalRect);
+        ovalTextContent.drawInRect(CGRectMake(ovalRect.minX, ovalRect.minY + (ovalRect.height - ovalTextHeight) / 2, ovalRect.width, ovalTextHeight), withAttributes: ovalFontAttributes)
         CGContextRestoreGState(context)
     }
 
@@ -232,6 +274,20 @@ public class TapStyle : NSObject {
 
     //// Generated Images
 
+    public class var imageOfUnknownUnlock: UIImage {
+        if Cache.imageOfUnknownUnlock != nil {
+            return Cache.imageOfUnknownUnlock!
+        }
+
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(100, 100), false, 0)
+            TapStyle.drawUnknownUnlock()
+
+        Cache.imageOfUnknownUnlock = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        return Cache.imageOfUnknownUnlock!
+    }
+
     public class func imageOfLightbulb(#frame: CGRect, lightbulbColor: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(frame.size, false, 0)
             TapStyle.drawLightbulb(frame: frame, lightbulbColor: lightbulbColor)
@@ -240,6 +296,18 @@ public class TapStyle : NSObject {
         UIGraphicsEndImageContext()
 
         return imageOfLightbulb
+    }
+
+    //// Customization Infrastructure
+
+    @IBOutlet var unknownUnlockTargets: [AnyObject]! {
+        get { return Cache.unknownUnlockTargets }
+        set {
+            Cache.unknownUnlockTargets = newValue
+            for target: AnyObject in newValue {
+                target.setImage(TapStyle.imageOfUnknownUnlock)
+            }
+        }
     }
 
 }

@@ -854,7 +854,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "  # SKIP_SIMULATOR_BUILDS=1\n  SCRIPT_SRC=$(find \"$PROJECT_DIR\" -name 'Instabug_dsym_upload.sh' | head -1)\n  if [ ! \"${SCRIPT_SRC}\" ]; then\n    echo \"Instabug: err: script not found. Make sure that you're including Instabug.bundle in your project directory\"\n    exit 1\n  fi\n  source \"${SCRIPT_SRC}\"\n";
+			shellScript = "  # SKIP_SIMULATOR_BUILDS=1\n#SCRIPT_SRC=$(find \"$PROJECT_DIR\" -name 'Instabug_dsym_upload.sh' | head -1)\n# if [ ! \"${SCRIPT_SRC}\" ]; then\n#   echo \"Instabug: err: script not found. Make sure that you're including Instabug.bundle in your project directory\"\n#   exit 1\n# fi\n# source \"${SCRIPT_SRC}\"\n";
 		};
 		90FDAA6482963D467FD0A7DA /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
