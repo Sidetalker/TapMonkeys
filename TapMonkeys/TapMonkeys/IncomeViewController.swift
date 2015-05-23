@@ -146,11 +146,13 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
             
             delay(0.2, {
-                self.tableView.beginUpdates()
+                self.tableView.reloadData()
                 
-                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: incomeIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
-                
-                self.tableView.endUpdates()
+//                self.tableView.beginUpdates()
+//                
+//                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: incomeIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+//                
+//                self.tableView.endUpdates()
             })
         }
     }

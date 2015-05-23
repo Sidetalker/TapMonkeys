@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A41D8841B0AD78D002BE7F3 /* UpgradesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A41D8831B0AD78D002BE7F3 /* UpgradesViewController.swift */; };
+		0A41D8861B0AE027002BE7F3 /* FingerUpgrades.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A41D8851B0AE027002BE7F3 /* FingerUpgrades.png */; };
 		0A44C7E11B0A7E6A00FA18E2 /* animatedLock01.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44C7BD1B0A7E6A00FA18E2 /* animatedLock01.png */; };
 		0A44C7E21B0A7E6A00FA18E2 /* animatedLock01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44C7BE1B0A7E6A00FA18E2 /* animatedLock01@2x.png */; };
 		0A44C7E31B0A7E6A00FA18E2 /* animatedLock01@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A44C7BF1B0A7E6A00FA18E2 /* animatedLock01@3x.png */; };
@@ -156,6 +158,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A41D8831B0AD78D002BE7F3 /* UpgradesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpgradesViewController.swift; sourceTree = "<group>"; };
+		0A41D8851B0AE027002BE7F3 /* FingerUpgrades.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FingerUpgrades.png; sourceTree = "<group>"; };
 		0A44C7BD1B0A7E6A00FA18E2 /* animatedLock01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animatedLock01.png; path = Images/animatedLock01.png; sourceTree = "<group>"; };
 		0A44C7BE1B0A7E6A00FA18E2 /* animatedLock01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "animatedLock01@2x.png"; path = "Images/animatedLock01@2x.png"; sourceTree = "<group>"; };
 		0A44C7BF1B0A7E6A00FA18E2 /* animatedLock01@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "animatedLock01@3x.png"; path = "Images/animatedLock01@3x.png"; sourceTree = "<group>"; };
@@ -322,6 +326,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A41D8871B0AE02E002BE7F3 /* Banners */ = {
+			isa = PBXGroup;
+			children = (
+				0A41D8851B0AE027002BE7F3 /* FingerUpgrades.png */,
+			);
+			name = Banners;
+			sourceTree = "<group>";
+		};
 		0A44C86B1B0A7EA500FA18E2 /* General */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,6 +417,7 @@
 				0A9B68E91AFE58A5006628D1 /* MonkeyViewController.swift */,
 				0A5529F81B03BF4D00CD8E78 /* WritingViewController.swift */,
 				0A7178101B06B10B006DEF7A /* IncomeViewController.swift */,
+				0A41D8831B0AD78D002BE7F3 /* UpgradesViewController.swift */,
 				0A9B687A1AFD3DE7006628D1 /* Supporting Files */,
 			);
 			path = TapMonkeys;
@@ -457,6 +470,7 @@
 		0A9B68AC1AFD8DC6006628D1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0A41D8871B0AE02E002BE7F3 /* Banners */,
 				0A44C86B1B0A7EA500FA18E2 /* General */,
 				0A9B69121B0000C3006628D1 /* Animations */,
 				0A9B68E81AFDCD51006628D1 /* Monkeys */,
@@ -759,6 +773,7 @@
 				0A44C7FA1B0A7E6A00FA18E2 /* animatedLock09@2x.png in Resources */,
 				0A44C8211B0A7E8000FA18E2 /* mGoofkey@2x.png in Resources */,
 				0A44C85E1B0A7E9500FA18E2 /* iElementaryTeacher.png in Resources */,
+				0A41D8861B0AE027002BE7F3 /* FingerUpgrades.png in Resources */,
 				0A44C7F61B0A7E6A00FA18E2 /* animatedLock08.png in Resources */,
 				0A9B68D71AFDA5A5006628D1 /* settingsTab.png in Resources */,
 				0A44C7E91B0A7E6A00FA18E2 /* animatedLock03@3x.png in Resources */,
@@ -887,6 +902,7 @@
 				0A552A431B03D75600CD8E78 /* GlobalUIClasses.swift in Sources */,
 				0A9B68AF1AFD90C3006628D1 /* TabBarController.swift in Sources */,
 				0A9B69451B010BBB006628D1 /* DataStructures.swift in Sources */,
+				0A41D8841B0AD78D002BE7F3 /* UpgradesViewController.swift in Sources */,
 				0A9B687D1AFD3DE7006628D1 /* AppDelegate.swift in Sources */,
 				0A9B68A01AFD3FE6006628D1 /* Helpers.swift in Sources */,
 			);
