@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TabBarController: UITabBarController, UITabBarControllerDelegate {
+class TabBarController: UITabBarController, UITabBarControllerDelegate, DataHeaderDelegate {
     var allViews: [AnyObject]?
     var defaults: NSUserDefaults!
     
@@ -37,6 +37,115 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLayoutSubviews() {
         initializeHeaders()
+    }
+    
+    func toggleLight(sender: DataHeader) {
+        saveData.nightMode! = !saveData.nightMode!
+        
+        self.tabBar.barStyle = saveData.nightMode! ? UIBarStyle.Black : UIBarStyle.Default
+        self.tabBar.tintColor = saveData.nightMode! ? UIColor.darkGrayColor() : UIColor.blackColor()
+        
+        if allViews == nil { return }
+        
+        for view in allViews! {
+            if let tapView = view as? TapViewController {
+                tapView.toggleNightMode(saveData.nightMode!)
+                
+                if tapView.dataHeader == nil { return }
+                
+                tapView.dataHeader.update(saveData, animated: false)
+            }
+            if let monkeyView = view as? MonkeyViewController {
+                monkeyView.toggleNightMode(saveData.nightMode!)
+                
+                if monkeyView.dataHeader == nil { return }
+                
+                monkeyView.dataHeader.update(saveData, animated: false)
+                monkeyView.dataHeader.delegate = self
+            }
+            if let writingView = view as? WritingViewController {
+                writingView.toggleNightMode(saveData.nightMode!)
+                
+                if writingView.dataHeader == nil { return }
+                
+                writingView.dataHeader.update(saveData, animated: false)
+                writingView.dataHeader.delegate = self
+            }
+            if let incomeView = view as? IncomeViewController {
+                incomeView.toggleNightMode(saveData.nightMode!)
+                
+                if incomeView.dataHeader == nil { return }
+                
+                incomeView.dataHeader.update(saveData, animated: false)
+                incomeView.dataHeader.delegate = self
+            }
+            if let upgradesView = view as? UpgradesViewController {
+                if upgradesView.dataHeader == nil { return }
+                
+                upgradesView.dataHeader.update(saveData, animated: false)
+                upgradesView.dataHeader.delegate = self
+            }
+        }
+    }
+    
+    func initializeHeaders() {
+        if allViews == nil { return }
+        
+        let letters = defaults.integerForKey("letters")
+        let money = defaults.floatForKey("money")
+        let stage = defaults.integerForKey("stage")
+        
+        if stage >= 2 { self.setTabBarVisible(true, animated: true) }
+        
+        self.tabBar.barStyle = saveData.nightMode! ? UIBarStyle.Black : UIBarStyle.Default
+        self.tabBar.tintColor = saveData.nightMode! ? UIColor.darkGrayColor() : UIColor.blackColor()
+        self.tabBar.translucent = false
+        
+        for view in allViews! {
+            if let tapView = view as? TapViewController {
+                tapView.toggleNightMode(saveData.nightMode!)
+                
+                if tapView.dataHeader == nil { return }
+                
+                tapView.dataHeader.delegate = self
+                tapView.dataHeader.nightMode = saveData.nightMode!
+                tapView.dataHeader.update(saveData, animated: false)
+            }
+            if let monkeyView = view as? MonkeyViewController {
+                monkeyView.toggleNightMode(saveData.nightMode!)
+                
+                if monkeyView.dataHeader == nil { return }
+                
+                monkeyView.dataHeader.update(saveData, animated: false)
+                monkeyView.dataHeader.delegate = self
+                monkeyView.dataHeader.nightMode = saveData.nightMode!
+            }
+            if let writingView = view as? WritingViewController {
+                writingView.toggleNightMode(saveData.nightMode!)
+                
+                if writingView.dataHeader == nil { return }
+                
+                writingView.dataHeader.update(saveData, animated: false)
+                writingView.dataHeader.delegate = self
+                writingView.dataHeader.nightMode = saveData.nightMode!
+            }
+            if let incomeView = view as? IncomeViewController {
+                incomeView.toggleNightMode(saveData.nightMode!)
+                
+                if incomeView.dataHeader == nil { return }
+                
+                incomeView.dataHeader.update(saveData, animated: false)
+                incomeView.dataHeader.delegate = self
+                incomeView.dataHeader.nightMode = saveData.nightMode!
+            }
+            if let upgradesView = view as? UpgradesViewController {
+                if upgradesView.dataHeader == nil { return }
+                
+                upgradesView.dataHeader.update(saveData, animated: false)
+                upgradesView.dataHeader.delegate = self
+                upgradesView.dataHeader.nightMode = saveData.nightMode!
+            }
+        }
     }
     
     func revealTab(index: Int) {
@@ -110,44 +219,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHeaders:", name: "updateHeaders", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMonkeyProduction", name: "updateMonkeyProduction", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateIncomeProduction", name: "updateIncomeProduction", object: nil)
-    }
-    
-    func initializeHeaders() {
-        if allViews == nil { return }
-        
-        let letters = defaults.integerForKey("letters")
-        let money = defaults.floatForKey("money")
-        let stage = defaults.integerForKey("stage")
-        
-        if stage >= 2 { self.setTabBarVisible(true, animated: true) }
-        
-        for view in allViews! {
-            if let tapView = view as? TapViewController {
-                if tapView.dataHeader == nil { return }
-                
-                tapView.dataHeader.update(saveData, animated: false)
-            }
-            if let monkeyView = view as? MonkeyViewController {
-                if monkeyView.dataHeader == nil { return }
-                
-                monkeyView.dataHeader.update(saveData, animated: false)
-            }
-            if let writingView = view as? WritingViewController {
-                if writingView.dataHeader == nil { return }
-                
-                writingView.dataHeader.update(saveData, animated: false)
-            }
-            if let incomeView = view as? IncomeViewController {
-                if incomeView.dataHeader == nil { return }
-                
-                incomeView.dataHeader.update(saveData, animated: false)
-            }
-            if let incomeView = view as? UpgradesViewController {
-                if incomeView.dataHeader == nil { return }
-                
-                incomeView.dataHeader.update(saveData, animated: false)
-            }
-        }
     }
     
     func updateSave(notification: NSNotification) {
@@ -230,16 +301,18 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         self.setViewControllers([allViews![0], allViews![1]], animated: false)
         self.setTabBarVisible(false, animated: false)
         
-        if saveData.stage <= 2 { return }
+        if saveData.stage <= 2 {
+            self.setTabBarVisible(false, animated: false)
+        }
+        else {
+            self.setTabBarVisible(true, animated: false)
+        }
         
         if saveData.stage == 3 {
             revealTab(2)
         }
-        else if saveData.stage == 4 {
+        else if saveData.stage == 4 || saveData.stage == 5 {
             revealTab(3)
-        }
-        else if saveData.stage == 5 {
-            revealTab(4)
         }
     }
     

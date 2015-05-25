@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnimatedLockView" customModule="TapMonkeys" customModuleProvider="target">
             <connections>
+                <outlet property="bgView" destination="ptI-M1-y2u" id="5ER-c2-TaL"/>
                 <outlet property="lockImage" destination="Fe3-uz-y1r" id="Wnw-A4-d9t"/>
                 <outlet property="nibView" destination="iN0-l3-epB" id="ue2-Zx-5F7"/>
                 <outlet property="pic" destination="TPj-36-p2o" id="gdd-Us-561"/>
@@ -19,6 +20,10 @@
             <rect key="frame" x="0.0" y="0.0" width="337" height="227"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ptI-M1-y2u">
+                    <rect key="frame" x="0.0" y="0.0" width="337" height="227"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="animatedLock01.png" translatesAutoresizingMaskIntoConstraints="NO" id="Fe3-uz-y1r">
                     <rect key="frame" x="35" y="103" width="54" height="82"/>
                     <constraints>
@@ -62,13 +67,17 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="gur-fH-dk5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1VO-Lc-fxU"/>
+                <constraint firstItem="ptI-M1-y2u" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="9c8-Se-AVB"/>
                 <constraint firstItem="TPj-36-p2o" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="A7e-5H-kIe"/>
                 <constraint firstItem="Fe3-uz-y1r" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="35" id="JMy-5I-AWC"/>
+                <constraint firstItem="ptI-M1-y2u" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="MnY-Cf-gEw"/>
                 <constraint firstItem="TPj-36-p2o" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="PwY-xi-TKk"/>
+                <constraint firstAttribute="trailing" secondItem="ptI-M1-y2u" secondAttribute="trailing" id="Rhg-X1-uNT"/>
                 <constraint firstItem="gur-fH-dk5" firstAttribute="leading" secondItem="Fe3-uz-y1r" secondAttribute="trailing" id="Zwd-b1-dYR"/>
                 <constraint firstAttribute="bottom" secondItem="gur-fH-dk5" secondAttribute="bottom" id="a4J-W1-sJ0"/>
                 <constraint firstAttribute="centerY" secondItem="Fe3-uz-y1r" secondAttribute="centerY" constant="-30" id="jz6-YD-v2d"/>
                 <constraint firstAttribute="trailing" secondItem="gur-fH-dk5" secondAttribute="trailing" id="nEh-ja-Atp"/>
+                <constraint firstAttribute="bottom" secondItem="ptI-M1-y2u" secondAttribute="bottom" id="v0K-OJ-xVs"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="138.5" y="391.5"/>

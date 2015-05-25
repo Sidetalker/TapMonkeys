@@ -81,7 +81,7 @@ class UpgradesTableViewController: UITableViewController, UITableViewDataSource,
                 cell = tableView.dequeueReusableCellWithIdentifier("cellUpgrade") as? UITableViewCell,
                 title = cell.viewWithTag(1) as? UILabel
             {
-                title =
+                
             }
             
         }
