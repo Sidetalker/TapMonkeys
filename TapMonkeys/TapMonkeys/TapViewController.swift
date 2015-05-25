@@ -18,6 +18,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
     var gen = [String]()
     var letterCount = 0
     var popping = false
+    var nightMode = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,10 @@ class TapViewController: UIViewController, PopLabelDelegate {
         if saveData.stage > 0 {
             tapLabel.alpha = 0.0
         }
+        
+        if saveData.nightMode! != nightMode {
+            toggleNightMode(saveData.nightMode!)
+        }
     }
     
     func configureGestureRecognizers() {
@@ -84,6 +89,11 @@ class TapViewController: UIViewController, PopLabelDelegate {
         }
     }
     
+    func toggleNightMode(nightMode: Bool) {
+        self.nightMode = nightMode
+        self.view.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
+    }
+    
     func updateStage(newStage: Int) {
         var saveData = load(self.tabBarController)
         saveData.stage = newStage
@@ -97,6 +107,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
         
         if popping {
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
+            popLabel.letterColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
             
             popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
             
@@ -115,6 +126,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
             if count(gen) == 0 { prepGen(0) }
             
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
+            popLabel.letterColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
             
             if contains(gen, letter) {
                 let index = find(gen, letter)!
@@ -152,6 +164,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
             if count(gen) == 0 { prepGen(1) }
             
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
+            popLabel.letterColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
             
             if contains(gen, letter) {
                 let index = find(gen, letter)!
@@ -191,6 +204,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
             if count(gen) == 0 { prepGen(2) }
             
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
+            popLabel.letterColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
             
             if contains(gen, letter) {
                 let index = find(gen, letter)!
@@ -230,6 +244,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
             if count(gen) == 0 { prepGen(3) }
             
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
+            popLabel.letterColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
             
             if contains(gen, letter) {
                 let index = find(gen, letter)!
@@ -267,6 +282,7 @@ class TapViewController: UIViewController, PopLabelDelegate {
         }
         else {
             let popLabel = popOne(sender.locationOfTouch(0, inView: self.view), letter: letter)
+            popLabel.letterColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
             
             popLabel.pop(remove: true, customPoint: self.dataHeader.getCenterLetters())
         }
@@ -275,6 +291,8 @@ class TapViewController: UIViewController, PopLabelDelegate {
     func popOne(tapLoc: CGPoint, letter: String) -> PopLabel {
         let frame = CGRect(origin: CGPoint(x: tapLoc.x - 14, y: tapLoc.y - 14), size: CGSize(width: 28, height: 28))
         let popLabel = PopLabel(frame: frame, character: letter)
+        
+        popLabel.letterColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
         
         popLabel.backgroundColor = UIColor.clearColor()
         popLabel.delegate = self
@@ -343,7 +361,7 @@ class PopLabel: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-        TapStyle.drawMainLetter(letterColor: letterColor, character: alphabet[index])
+        TapStyle.drawMainLetter(colorPopLetter: letterColor, character: alphabet[index])
     }
     
     func move(location: CGPoint, scale: CGFloat, alpha: CGFloat, duration: NSTimeInterval, delay: NSTimeInterval, remove: Bool) {

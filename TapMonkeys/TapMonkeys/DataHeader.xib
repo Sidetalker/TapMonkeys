@@ -52,20 +52,12 @@
                     <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="PbD-IP-ljE" firstAttribute="top" secondItem="epp-IE-w4B" secondAttribute="top" constant="18" id="B79-dg-JpS"/>
-                        <constraint firstItem="PbD-IP-ljE" firstAttribute="bottom" secondItem="Cvn-NC-doe" secondAttribute="bottom" constant="-11" id="RFC-c4-j0N"/>
                         <constraint firstItem="Cvn-NC-doe" firstAttribute="top" secondItem="epp-IE-w4B" secondAttribute="bottom" constant="-6" id="hPR-63-ci0"/>
                         <constraint firstAttribute="trailing" secondItem="PbD-IP-ljE" secondAttribute="trailing" constant="12" id="hi3-m6-VcK"/>
                         <constraint firstItem="epp-IE-w4B" firstAttribute="leading" secondItem="6aw-7b-hEw" secondAttribute="leading" constant="17" id="j0A-sj-9NY"/>
                         <constraint firstItem="Cvn-NC-doe" firstAttribute="leading" secondItem="6aw-7b-hEw" secondAttribute="leading" constant="12" id="lKE-0x-Adf"/>
-                        <constraint firstAttribute="trailing" secondItem="PbD-IP-ljE" secondAttribute="trailing" constant="8" id="mmw-Yg-e9M"/>
                         <constraint firstItem="epp-IE-w4B" firstAttribute="top" secondItem="6aw-7b-hEw" secondAttribute="top" id="tfi-TB-VY7"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="RFC-c4-j0N"/>
-                            <exclude reference="mmw-Yg-e9M"/>
-                        </mask>
-                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
