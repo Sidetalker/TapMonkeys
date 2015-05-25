@@ -33,6 +33,7 @@ struct SaveData {
     var letters: Float?
     var money: Float?
     var letterCounts: [Float]?
+    var nightMode: Bool?
     
     var monkeyUnlocks: [Bool]?
     var monkeyCounts: [Int]?

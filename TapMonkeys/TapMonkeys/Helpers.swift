@@ -66,6 +66,7 @@ func writeDefaults(data: SaveData) -> Bool {
     defaults.setObject(data.money, forKey: "money")
     defaults.setObject(data.letterCounts, forKey: "letterCounts")
     defaults.setObject(data.stage, forKey: "stage")
+    defaults.setObject(data.nightMode, forKey: "nightMode")
     
     defaults.setObject(data.monkeyUnlocks, forKey: "monkeyUnlocks")
     defaults.setObject(data.monkeyCounts, forKey: "monkeyCounts")
@@ -99,6 +100,7 @@ func readDefaults() -> SaveData {
     save.money = defaults.floatForKey("money")
     save.letterCounts = defaults.arrayForKey("letterCounts") as? [Float]
     save.stage = defaults.integerForKey("stage")
+    save.nightMode = defaults.boolForKey("nightMode")
     
     save.monkeyUnlocks = defaults.arrayForKey("monkeyUnlocks") as? [Bool]
     save.monkeyCounts = defaults.arrayForKey("monkeyCounts") as? [Int]

@@ -235,6 +235,10 @@ class AnimatedLockView: UIView {
     }
 }
 
+protocol DataHeaderDelegate {
+    func toggleLight(sender: DataHeader)
+}
+
 //@IBDesignable class DataHeader: UIView {
 class DataHeader: UIView {
     @IBOutlet var nibView: UIView!
@@ -246,7 +250,9 @@ class DataHeader: UIView {
     
     var letters: Float = 0
     var money: Float = 0
-    var lightbulbColor = UIColor.blackColor()
+    var nightMode = false
+    
+    var delegate: DataHeaderDelegate?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -258,6 +264,10 @@ class DataHeader: UIView {
         super.init(frame: frame)
         
         configure()
+    }
+    
+    @IBAction func tapLightbulb(sender: AnyObject) {
+        delegate?.toggleLight(self)
     }
     
     func configure() {
@@ -273,10 +283,7 @@ class DataHeader: UIView {
         lettersLabel.alpha = 0.0
         moneyLabel.alpha = 0.0
         
-        let imageFrame = CGRect(x: 20, y: 20, width: lightbulbButton.frame.width - 40, height: lightbulbButton.frame.height - 40)
-        
-        lightbulbButton.alpha = 1.0
-        lightbulbButton.setBackgroundImage(TapStyle.imageOfLightbulb(frame: CGRect(origin: CGPointZero, size: lightbulbButton.frame.size), lightbulbColor: lightbulbColor), forState: UIControlState.Normal)
+        lightbulbButton.setBackgroundImage(TapStyle.imageOfLightbulb(frame: CGRect(origin: CGPointZero, size: lightbulbButton.frame.size), lightbulbColor: nightMode ? UIColor.lightTextColor() : UIColor.blackColor()), forState: UIControlState.Normal)
         
         align()
         
@@ -309,6 +316,19 @@ class DataHeader: UIView {
     }
     
     func update(data: SaveData, animated: Bool = true) {
+        nibView.frame = self.bounds
+        
+        // Night mode
+        if nightMode != data.nightMode! {
+            nightMode = !nightMode
+            
+            nibView.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
+            lettersLabel?.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            moneyLabel?.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            
+            lightbulbButton.setBackgroundImage(TapStyle.imageOfLightbulb(frame: CGRect(origin: CGPointZero, size: lightbulbButton.frame.size), lightbulbColor: nightMode ? UIColor.lightTextColor() : UIColor.blackColor()), forState: UIControlState.Normal)
+        }
+        
         if self.letters == 0 && data.letters! > 0 {
             revealLetters(animated)
         }

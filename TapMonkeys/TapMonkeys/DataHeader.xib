@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6aw-7b-hEw">
-                    <rect key="frame" x="0.0" y="0.0" width="620" height="600"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epp-IE-w4B">
                             <rect key="frame" x="17" y="0.0" width="66" height="38.5"/>
@@ -35,7 +35,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PbD-IP-ljE">
-                            <rect key="frame" x="572" y="18" width="40" height="40"/>
+                            <rect key="frame" x="548" y="18" width="40" height="40"/>
                             <color key="backgroundColor" red="0.98594826459999996" green="0.0" blue="0.026950567960000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="AzB-kd-Y05"/>
@@ -44,6 +44,9 @@
                             <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="tapLightbulb:" destination="-1" eventType="touchUpInside" id="7ls-CN-I11"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -51,6 +54,7 @@
                         <constraint firstItem="PbD-IP-ljE" firstAttribute="top" secondItem="epp-IE-w4B" secondAttribute="top" constant="18" id="B79-dg-JpS"/>
                         <constraint firstItem="PbD-IP-ljE" firstAttribute="bottom" secondItem="Cvn-NC-doe" secondAttribute="bottom" constant="-11" id="RFC-c4-j0N"/>
                         <constraint firstItem="Cvn-NC-doe" firstAttribute="top" secondItem="epp-IE-w4B" secondAttribute="bottom" constant="-6" id="hPR-63-ci0"/>
+                        <constraint firstAttribute="trailing" secondItem="PbD-IP-ljE" secondAttribute="trailing" constant="12" id="hi3-m6-VcK"/>
                         <constraint firstItem="epp-IE-w4B" firstAttribute="leading" secondItem="6aw-7b-hEw" secondAttribute="leading" constant="17" id="j0A-sj-9NY"/>
                         <constraint firstItem="Cvn-NC-doe" firstAttribute="leading" secondItem="6aw-7b-hEw" secondAttribute="leading" constant="12" id="lKE-0x-Adf"/>
                         <constraint firstAttribute="trailing" secondItem="PbD-IP-ljE" secondAttribute="trailing" constant="8" id="mmw-Yg-e9M"/>
@@ -59,6 +63,7 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="RFC-c4-j0N"/>
+                            <exclude reference="mmw-Yg-e9M"/>
                         </mask>
                     </variation>
                 </view>
@@ -67,7 +72,7 @@
             <constraints>
                 <constraint firstItem="6aw-7b-hEw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ci7-ma-YgW"/>
                 <constraint firstAttribute="bottom" secondItem="6aw-7b-hEw" secondAttribute="bottom" id="d4e-YW-7UM"/>
-                <constraint firstAttribute="trailing" secondItem="6aw-7b-hEw" secondAttribute="trailing" constant="-20" id="nDi-NI-9lT"/>
+                <constraint firstAttribute="trailing" secondItem="6aw-7b-hEw" secondAttribute="trailing" id="nDi-NI-9lT"/>
                 <constraint firstItem="6aw-7b-hEw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tCi-wt-xqZ"/>
             </constraints>
             <point key="canvasLocation" x="365" y="206"/>

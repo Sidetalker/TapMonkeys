@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TabBarController: UITabBarController, UITabBarControllerDelegate {
+class TabBarController: UITabBarController, UITabBarControllerDelegate, DataHeaderDelegate {
     var allViews: [AnyObject]?
     var defaults: NSUserDefaults!
     
@@ -37,6 +37,51 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLayoutSubviews() {
         initializeHeaders()
+    }
+    
+    func toggleLight(sender: DataHeader) {
+        saveData.nightMode! = !saveData.nightMode!
+        
+        if allViews == nil { return }
+        
+        let letters = defaults.integerForKey("letters")
+        let money = defaults.floatForKey("money")
+        let stage = defaults.integerForKey("stage")
+        
+        if stage >= 2 { self.setTabBarVisible(true, animated: true) }
+        
+        for view in allViews! {
+            if let tapView = view as? TapViewController {
+                if tapView.dataHeader == nil { return }
+                
+                tapView.dataHeader.update(saveData, animated: false)
+                tapView.dataHeader.delegate = self
+            }
+            if let monkeyView = view as? MonkeyViewController {
+                if monkeyView.dataHeader == nil { return }
+                
+                monkeyView.dataHeader.update(saveData, animated: false)
+                monkeyView.dataHeader.delegate = self
+            }
+            if let writingView = view as? WritingViewController {
+                if writingView.dataHeader == nil { return }
+                
+                writingView.dataHeader.update(saveData, animated: false)
+                writingView.dataHeader.delegate = self
+            }
+            if let incomeView = view as? IncomeViewController {
+                if incomeView.dataHeader == nil { return }
+                
+                incomeView.dataHeader.update(saveData, animated: false)
+                incomeView.dataHeader.delegate = self
+            }
+            if let upgradesView = view as? UpgradesViewController {
+                if upgradesView.dataHeader == nil { return }
+                
+                upgradesView.dataHeader.update(saveData, animated: false)
+                upgradesView.dataHeader.delegate = self
+            }
+        }
     }
     
     func revealTab(index: Int) {
@@ -126,26 +171,36 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                 if tapView.dataHeader == nil { return }
                 
                 tapView.dataHeader.update(saveData, animated: false)
+                tapView.dataHeader.delegate = self
+                tapView.dataHeader.nightMode = saveData.nightMode!
             }
             if let monkeyView = view as? MonkeyViewController {
                 if monkeyView.dataHeader == nil { return }
                 
                 monkeyView.dataHeader.update(saveData, animated: false)
+                monkeyView.dataHeader.delegate = self
+                monkeyView.dataHeader.nightMode = saveData.nightMode!
             }
             if let writingView = view as? WritingViewController {
                 if writingView.dataHeader == nil { return }
                 
                 writingView.dataHeader.update(saveData, animated: false)
+                writingView.dataHeader.delegate = self
+                writingView.dataHeader.nightMode = saveData.nightMode!
             }
             if let incomeView = view as? IncomeViewController {
                 if incomeView.dataHeader == nil { return }
                 
                 incomeView.dataHeader.update(saveData, animated: false)
+                incomeView.dataHeader.delegate = self
+                incomeView.dataHeader.nightMode = saveData.nightMode!
             }
-            if let incomeView = view as? UpgradesViewController {
-                if incomeView.dataHeader == nil { return }
+            if let upgradesView = view as? UpgradesViewController {
+                if upgradesView.dataHeader == nil { return }
                 
-                incomeView.dataHeader.update(saveData, animated: false)
+                upgradesView.dataHeader.update(saveData, animated: false)
+                upgradesView.dataHeader.delegate = self
+                upgradesView.dataHeader.nightMode = saveData.nightMode!
             }
         }
     }
