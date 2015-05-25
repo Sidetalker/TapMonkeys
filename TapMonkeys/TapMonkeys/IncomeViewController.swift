@@ -12,6 +12,7 @@ class IncomeViewController: UIViewController {
     @IBOutlet weak var dataHeader: DataHeader!
     
     var incomeTable: IncomeTableViewController?
+    var nightMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,15 +37,31 @@ class IncomeViewController: UIViewController {
             incomeTable = segue.destinationViewController as? IncomeTableViewController
         }
     }
+    
+    func toggleNightMode(nightMode: Bool) {
+        self.nightMode = nightMode
+        self.view.backgroundColor = self.nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+        self.tabBarController?.tabBar.setNeedsDisplay()
+        
+        incomeTable?.toggleNightMode(nightMode)
+    }
 }
 
 class IncomeTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, AnimatedLockDelegate, IncomeBuyButtonDelegate {
+    
+    var nightMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 232
+    }
+    
+    func toggleNightMode(nightMode: Bool) {
+        self.nightMode = nightMode
+        self.view.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
+        self.tableView.reloadData()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -104,7 +121,17 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             totalMoney.text = "Total: $\(incomes[index].totalProduced)"
             button.incomeIndex = index
             
+            title.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            description.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            owned.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            moneyPerSec.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            totalMoney.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            
+            cell.contentView.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
+            
             button.delegate = self
+            button.nightMode = nightMode
+            button.setNeedsDisplay()
             
             totalMoney.index = index
             totalMoney.controller = self.tabBarController as? TabBarController
@@ -131,7 +158,7 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
         var saveData = load(self.tabBarController)
         var income = incomes[incomeIndex]
         
-        var price = Int(income.getPrice(1).0)
+        var price = income.getLettersFor(1)
         
         if let newSave = income.purchase(1, data: saveData) {
             save(self.tabBarController, newSave)
@@ -140,17 +167,19 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             
             let nc = NSNotificationCenter.defaultCenter()
             nc.postNotificationName("updateHeaders", object: self, userInfo: [
-                "letters" : 0,
+                "letters" : -price,
                 "animated" : false
                 ])
             nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
             
             delay(0.2, {
-                self.tableView.beginUpdates()
+                self.tableView.reloadData()
                 
-                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: incomeIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
-                
-                self.tableView.endUpdates()
+//                self.tableView.beginUpdates()
+//                
+//                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: incomeIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+//                
+//                self.tableView.endUpdates()
             })
         }
     }
@@ -200,6 +229,7 @@ class IncomeBuyButton: UIView {
     // Like, maybe
     var state = 0
     var incomeIndex = -1
+    var nightMode = false
     
     var delegate: IncomeBuyButtonDelegate?
     
@@ -217,8 +247,10 @@ class IncomeBuyButton: UIView {
     override func drawRect(rect: CGRect) {
         if state == 0 {
             var text = incomes[incomeIndex].getPurchaseString(1)
+            var subtext = incomes[incomeIndex].getLetterPurchaseString(1)
+            let color = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
             
-            TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
+            TapStyle.drawBuyIncome(frame: rect, colorBuyBorder: color, colorBuyText: color, buyText: text, buySubtext: subtext)
         }
     }
     

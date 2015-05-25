@@ -12,6 +12,7 @@ class MonkeyViewController: UIViewController {
     @IBOutlet weak var dataHeader: DataHeader!
     
     var monkeyTable: MonkeyTableViewController?
+    var nightMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,15 +37,31 @@ class MonkeyViewController: UIViewController {
             monkeyTable = segue.destinationViewController as? MonkeyTableViewController
         }
     }
+    
+    func toggleNightMode(nightMode: Bool) {
+        self.nightMode = nightMode
+        self.view.backgroundColor = self.nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+        self.tabBarController?.tabBar.setNeedsDisplay()
+        
+        monkeyTable?.toggleNightMode(nightMode)
+    }
 }
 
 class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, AnimatedLockDelegate, MonkeyBuyButtonDelegate {
+    
+    var nightMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 232
+    }
+    
+    func toggleNightMode(nightMode: Bool) {
+        self.nightMode = nightMode
+        self.view.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
+        self.tableView.reloadData()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -73,6 +90,7 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
                 lockView.index = indexPath.row
                 lockView.delegate = self
                 lockView.type = .Monkey
+                lockView.nightMode = nightMode
                 
                 lockView.customize(load(self.tabBarController))
                 
@@ -97,9 +115,11 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             let curPrice = curMonkey.getPrice(1).0
             
             monkeyPic.image = UIImage(named: curMonkey.imageName)
+            monkeyPic.alpha = nightMode ? 0.5 : 1.0
             
             buyButton.monkeyIndex = index
             buyButton.delegate = self
+            buyButton.nightMode = nightMode
             buyButton.setNeedsDisplay()
             
             total.index = index
@@ -111,6 +131,14 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             owned.text = "Owned: \(curMonkey.count)"
             frequency.text = "Letters/sec: \(curMonkey.lettersPerSecondCumulative())"
             total.text = "Total Letters: \(curMonkey.totalProduced)"
+            
+            name.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            description.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            owned.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            frequency.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            total.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            
+            cell.contentView.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
             
             if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
                 lockView.index = index
@@ -186,11 +214,13 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
             nc.postNotificationName("updateMonkeyProduction", object: self, userInfo: nil)
             
             delay(0.2, {
-                self.tableView.beginUpdates()
+                self.tableView.reloadData()
                 
-                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: monkeyIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
-                
-                self.tableView.endUpdates()
+//                self.tableView.beginUpdates()
+//                
+//                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: monkeyIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+//                
+//                self.tableView.endUpdates()
             })
         }
     }
@@ -205,6 +235,7 @@ class MonkeyBuyButton: UIView {
     // Like, maybe
     var state = 0
     var monkeyIndex = -1
+    var nightMode = false
     
     var delegate: MonkeyBuyButtonDelegate?
     
@@ -223,8 +254,9 @@ class MonkeyBuyButton: UIView {
         let price = monkeys[monkeyIndex].getPrice(1).0
         
         let text = NSString(format: "$%.2f", price) as String
+        let color = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
         
-        TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
+        TapStyle.drawBuy(frame: rect, colorBuyBorder: color, colorBuyText: color, buyText: text)
     }
     
     

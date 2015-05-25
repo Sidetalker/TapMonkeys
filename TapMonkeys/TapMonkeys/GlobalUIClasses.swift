@@ -56,6 +56,7 @@ protocol AnimatedLockDelegate {
 
 class AnimatedLockView: UIView {
     @IBOutlet var nibView: UIView!
+    @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var lockImage: UIImageView!
     @IBOutlet weak var requirementsText: UILabel!
     @IBOutlet weak var staticText: UILabel!
@@ -67,6 +68,10 @@ class AnimatedLockView: UIView {
     var animator: UIDynamicAnimator?
     var delegate: AnimatedLockDelegate?
     var transitionView: UIView?
+    var nightMode = false
+    
+    var lockImages = [UIImage]()
+    var lockImagesNight = [UIImage]()
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -94,21 +99,19 @@ class AnimatedLockView: UIView {
         self.nibView.sendSubviewToBack(transitionView!)
         self.nibView.bringSubviewToFront(lockImage)
         
-        var animationImages = [UIImage]()
-        
         for i in 1...12 {
             let imageName = "animatedLock" + (NSString(format: "%02d", i) as String)
+            let imageNameNight = "animatedLockNight" + (NSString(format: "%02d", i) as String)
             
             if let image = UIImage(named: imageName) {
-                animationImages.append(image)
+                lockImages.append(image)
             }
-            else {
-                println("Error: Unable to load all images for animated lock sequence")
-                break
+            if let imageNight = UIImage(named: imageNameNight) {
+                lockImagesNight.append(imageNight)
             }
         }
         
-        lockImage.animationImages = animationImages
+        lockImage.animationImages = nightMode ? lockImagesNight : lockImages
         lockImage.animationDuration = 0.35
         lockImage.animationRepeatCount = 1
         
@@ -118,6 +121,15 @@ class AnimatedLockView: UIView {
     }
     
     func customize(saveData: SaveData) {
+        nightMode = saveData.nightMode!
+        
+        staticText.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+        requirementsText.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+        pic.alpha = nightMode ? 0.5 : 1.0
+        lockImage.image = nightMode ? lockImagesNight[0] : lockImages[0]
+        lockImage.animationImages = nightMode ? lockImagesNight : lockImages
+        bgView.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
+        
         if self.superview != nil {
             self.frame = self.superview!.frame
         }
@@ -199,7 +211,7 @@ class AnimatedLockView: UIView {
     }
     
     func unlock() {
-        lockImage.image = UIImage(named: "animatedLock12")
+        lockImage.image = nightMode ? UIImage(named: "animatedNightLock12") : UIImage(named: "animatedLock12")
         
         lockImage.startAnimating()
         
@@ -220,9 +232,11 @@ class AnimatedLockView: UIView {
         animator?.addBehavior(gravity)
         
         UIView.animateWithDuration(0.66, delay: 0.0, options: nil, animations: { () -> Void in
+            self.bgView.alpha = 0.0
             self.transitionView!.alpha = 0.0
             self.requirementsText.alpha = 0.0
             self.staticText.alpha = 0.0
+            self.pic.alpha = 0.0
             }, completion: { (Bool) -> Void in
                 
         })
@@ -235,15 +249,25 @@ class AnimatedLockView: UIView {
     }
 }
 
+protocol DataHeaderDelegate {
+    func toggleLight(sender: DataHeader)
+}
+
 //@IBDesignable class DataHeader: UIView {
 class DataHeader: UIView {
     @IBOutlet var nibView: UIView!
     
+    @IBOutlet weak var lightbulbButton: UIButton!
     @IBOutlet weak var lettersLabel: UILabel!
     @IBOutlet weak var moneyLabel: UILabel!
+    @IBOutlet weak var wrapperView: UIView!
     
     var letters: Float = 0
     var money: Float = 0
+    var nightMode = false
+    var gonnaDisplayBulb = true
+    
+    var delegate: DataHeaderDelegate?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -257,21 +281,31 @@ class DataHeader: UIView {
         configure()
     }
     
+    @IBAction func tapLightbulb(sender: AnyObject) {
+        delegate?.toggleLight(self)
+    }
+    
     func configure() {
         NSBundle.mainBundle().loadNibNamed("DataHeader", owner: self, options: nil)
         
         self.addSubview(nibView)
-        self.frame = nibView.frame
+        
+        nibView.frame = self.frame
         
         lettersLabel.text = "0"
         moneyLabel.text = "$0.00"
         
         lettersLabel.alpha = 0.0
         moneyLabel.alpha = 0.0
+        lightbulbButton.alpha = 0.0
+        
+        lightbulbButton.setBackgroundImage(TapStyle.imageOfLightbulb(frame: CGRect(origin: CGPointZero, size: lightbulbButton.frame.size), colorLightbulb: nightMode ? UIColor.lightTextColor() : UIColor.blackColor()), forState: UIControlState.Normal)
         
         align()
         
-        self.backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.whiteColor()
+        wrapperView.backgroundColor = UIColor.clearColor()
+        lightbulbButton.backgroundColor = UIColor.clearColor()
     }
     
     func align() {
@@ -287,7 +321,7 @@ class DataHeader: UIView {
         return getCenter(moneyLabel)
     }
     
-    func getCenter(view: UIView) ->CGPoint {
+    func getCenter(view: UIView) -> CGPoint {
         var newX = view.frame.origin.x
         var newY = view.frame.origin.y
         
@@ -298,6 +332,26 @@ class DataHeader: UIView {
     }
     
     func update(data: SaveData, animated: Bool = true) {
+        // Stupid hack for a stupid nib
+        if self.gonnaDisplayBulb && nibView.frame == self.bounds {
+            self.gonnaDisplayBulb = false
+            reveal(lightbulbButton, animated: false)
+        }
+        else {
+            nibView.frame = self.frame
+        }
+        
+        // Night mode
+        if nightMode != data.nightMode! {
+            nightMode = !nightMode
+            
+            nibView.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
+            lettersLabel?.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            moneyLabel?.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            
+            lightbulbButton.setBackgroundImage(TapStyle.imageOfLightbulb(frame: CGRect(origin: CGPointZero, size: lightbulbButton.frame.size), colorLightbulb: nightMode ? UIColor.lightTextColor() : UIColor.blackColor()), forState: UIControlState.Normal)
+        }
+        
         if self.letters == 0 && data.letters! > 0 {
             revealLetters(animated)
         }
@@ -312,8 +366,6 @@ class DataHeader: UIView {
         
         lettersLabel?.text = "\(Int(self.letters))"
         moneyLabel?.text = "$\(moneyText)"
-        
-        align()
         
         if letters > 0 && animated { pulseLetters() }
         if money > 0 && animated { pulseMoney() }
@@ -349,5 +401,9 @@ class DataHeader: UIView {
                     view.transform = CGAffineTransformIdentity
                     }, completion: nil)
         })
+    }
+    
+    override func translatesAutoresizingMaskIntoConstraints() -> Bool {
+        return false
     }
 }

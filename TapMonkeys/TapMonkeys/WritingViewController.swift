@@ -12,6 +12,7 @@ class WritingViewController: UIViewController {
     @IBOutlet weak var dataHeader: DataHeader!
     
     var writingTable: WritingTableViewController?
+    var nightMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,15 +37,31 @@ class WritingViewController: UIViewController {
             writingTable = segue.destinationViewController as? WritingTableViewController
         }
     }
+    
+    func toggleNightMode(nightMode: Bool) {
+        self.nightMode = nightMode
+        self.view.backgroundColor = self.nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+        self.tabBarController?.tabBar.setNeedsDisplay()
+        
+        writingTable?.toggleNightMode(nightMode)
+    }
 }
 
 class WritingTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, AnimatedLockDelegate, WritingBuyButtonDelegate {
+    
+    var nightMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 232
+    }
+    
+    func toggleNightMode(nightMode: Bool) {
+        self.nightMode = nightMode
+        self.view.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
+        self.tableView.reloadData()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -96,6 +113,7 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
             let moneyText = NSString(format: "%.2f", writings[index].getValue()) as String
             
             pic.image = UIImage(named: writings[index].imageName)
+            pic.alpha = nightMode ? 0.5 : 1.0
             
             title.text = writings[index].name
             description.text = writings[index].description
@@ -104,7 +122,17 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
             level.text = "Level: \(writings[index].level)"
             button.writingIndex = index
             
+            title.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            description.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            owned.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            value.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            level.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+            
             button.delegate = self
+            button.nightMode = nightMode
+            button.setNeedsDisplay()
+            
+            cell.contentView.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
             
             if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
                 lockView.index = index
@@ -142,11 +170,13 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
                 ])
             
             delay(0.2, {
-                self.tableView.beginUpdates()
+                self.tableView.reloadData()
                 
-                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: writingIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
-                
-                self.tableView.endUpdates()
+//                self.tableView.beginUpdates()
+//                
+//                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: writingIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+//                
+//                self.tableView.endUpdates()
             })
         }
     }
@@ -191,6 +221,7 @@ class WritingBuyButton: UIView {
     // Like, maybe
     var state = 0
     var writingIndex = -1
+    var nightMode = false
     
     var delegate: WritingBuyButtonDelegate?
     
@@ -210,8 +241,9 @@ class WritingBuyButton: UIView {
             let priceLow = writings[writingIndex].getPrice(1).0
             let priceHigh = writings[writingIndex].getPrice(1).1
             var text = "\(priceLow) - \(priceHigh) Letters"
+            let color = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
             
-            TapStyle.drawBuy(frame: rect, monkeyBuyText: text)
+            TapStyle.drawBuy(frame: rect, colorBuyBorder: color, colorBuyText: color, buyText: text)
         }
     }
     
