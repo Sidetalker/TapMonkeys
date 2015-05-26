@@ -151,9 +151,9 @@ func updateGlobalSave(save: SaveData) {
 
 func validate(save: SaveData) -> SaveData {
     let numLetterCounts = 26
-    let numMonkeys = 5
-    let numWriting = 5
-    let numIncome = 5
+    let numMonkeys = 7
+    let numWriting = 7
+    let numIncome = 7
     
     var newSave = save
     
