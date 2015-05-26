@@ -113,6 +113,7 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
             let moneyText = NSString(format: "%.2f", incomes[index].moneyPerSecond()) as String
             
             pic.image = UIImage(named: incomes[index].imageName)
+            pic.alpha = nightMode ? 0.5 : 1.0
             
             title.text = incomes[index].name
             description.text = incomes[index].description
