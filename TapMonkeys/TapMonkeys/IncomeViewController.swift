@@ -73,7 +73,14 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return incomes[indexPath.row].unlocked ? UITableViewAutomaticDimension : 232
+        let saveData = load(self.tabBarController)
+        
+        if !saveData.incomeCollapsed![indexPath.row] {
+            return incomes[indexPath.row].unlocked ? UITableViewAutomaticDimension : 232
+        }
+        else {
+            return incomes[indexPath.row].unlocked ? 60 : 232
+        }
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -99,60 +106,114 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let
-            cell = tableView.dequeueReusableCellWithIdentifier("cellIncome") as? UITableViewCell,
-            pic = cell.viewWithTag(1) as? UIImageView,
-            title = cell.viewWithTag(2) as? UILabel,
-            owned = cell.viewWithTag(3) as? UILabel,
-            moneyPerSec = cell.viewWithTag(4) as? UILabel,
-            totalMoney = cell.viewWithTag(5) as? AutoUpdateLabel,
-            button = cell.viewWithTag(6) as? IncomeBuyButton,
-            description = cell.viewWithTag(7) as? UILabel
-        {
-            let index = indexPath.row
-            let moneyText = NSString(format: "%.2f", incomes[index].moneyPerSecond()) as String
-            
-            pic.image = UIImage(named: incomes[index].imageName)
-            pic.alpha = nightMode ? 0.5 : 1.0
-            
-            title.text = incomes[index].name
-            description.text = incomes[index].description
-            owned.text = "Owned: \(incomes[index].count)"
-            moneyPerSec.text = "$/sec: $\(moneyText)"
-            totalMoney.text = "Total: $\(incomes[index].totalProduced)"
-            button.incomeIndex = index
-            
-            title.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
-            description.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
-            owned.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
-            moneyPerSec.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
-            totalMoney.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
-            
-            cell.contentView.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
-            
-            button.delegate = self
-            button.nightMode = nightMode
-            button.setNeedsDisplay()
-            
-            totalMoney.index = index
-            totalMoney.controller = self.tabBarController as? TabBarController
-            totalMoney.type = .Income
-            
-            pic.setNeedsDisplay()
-            button.setNeedsDisplay()
-            
-            if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
-                lockView.index = index
-                lockView.type = .Income
-                lockView.customize(load(self.tabBarController))
+        let saveData = load(self.tabBarController)
+        let index = indexPath.row
+        let curIncome = incomes[index]
+        
+        if !saveData.incomeCollapsed![index] {
+            if let
+                cell = tableView.dequeueReusableCellWithIdentifier("cellIncome") as? UITableViewCell,
+                pic = cell.viewWithTag(1) as? UIImageView,
+                title = cell.viewWithTag(2) as? UILabel,
+                owned = cell.viewWithTag(3) as? UILabel,
+                moneyPerSec = cell.viewWithTag(4) as? UILabel,
+                totalMoney = cell.viewWithTag(5) as? AutoUpdateLabel,
+                button = cell.viewWithTag(6) as? IncomeBuyButton,
+                description = cell.viewWithTag(7) as? UILabel
+            {
+                let index = indexPath.row
+                let moneyText = NSString(format: "%.2f", curIncome.moneyPerSecond()) as String
                 
-                if incomes[index].unlocked { lockView.removeFromSuperview() }
+                pic.image = UIImage(named: curIncome.imageName)
+                pic.alpha = nightMode ? 0.5 : 1.0
+                
+                title.text = curIncome.name
+                description.text = curIncome.description
+                owned.text = "Owned: \(curIncome.count)"
+                moneyPerSec.text = "$/sec: $\(moneyText)"
+                totalMoney.text = "Total: $\(curIncome.totalProduced)"
+                button.incomeIndex = index
+                
+                title.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+                description.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+                owned.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+                moneyPerSec.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+                totalMoney.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+                
+                cell.contentView.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
+                
+                button.delegate = self
+                button.nightMode = nightMode
+                button.setNeedsDisplay()
+                
+                totalMoney.index = index
+                totalMoney.controller = self.tabBarController as? TabBarController
+                totalMoney.type = .Income
+                
+                pic.setNeedsDisplay()
+                button.setNeedsDisplay()
+                
+                if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
+                    lockView.index = index
+                    lockView.type = .Income
+                    lockView.customize(load(self.tabBarController))
+                    
+                    if incomes[index].unlocked { lockView.removeFromSuperview() }
+                }
+                else {
+                    if pic.gestureRecognizers == nil {
+                        let briefHold = UILongPressGestureRecognizer(target: self, action: "heldPic:")
+                        
+                        pic.addGestureRecognizer(briefHold)
+                    }
+                }
+                
+                return cell
             }
-            
-            return cell
+        }
+        else {
+            if let
+                cell = self.tableView.dequeueReusableCellWithIdentifier("cellIncomeMini") as? UITableViewCell,
+                pic = cell.viewWithTag(1) as? UIImageView,
+                name = cell.viewWithTag(2) as? UILabel
+            {
+                pic.image = UIImage(named: curIncome.imageName)
+                pic.alpha = nightMode ? 0.5 : 1.0
+                
+                name.text = curIncome.name
+                name.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+                
+                cell.contentView.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
+                
+                if pic.gestureRecognizers == nil {
+                    let briefHold = UILongPressGestureRecognizer(target: self, action: "heldPic:")
+                    
+                    pic.addGestureRecognizer(briefHold)
+                }
+                
+                return cell
+            }
         }
         
         return UITableViewCell()
+    }
+    
+    func heldPic(sender: UILongPressGestureRecognizer) {
+        if sender.state != UIGestureRecognizerState.Began { return }
+        
+        var saveData = load(self.tabBarController)
+        let location = sender.locationInView(self.tableView)
+        let indexPath = tableView.indexPathForRowAtPoint(location)
+        let index = indexPath!.row
+        
+        self.tableView.beginUpdates()
+        
+        saveData.incomeCollapsed![index] = !saveData.incomeCollapsed![index]
+        save(self.tabBarController, saveData)
+        
+        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+        
+        self.tableView.endUpdates()
     }
     
     func buyTapped(incomeIndex: Int) {
