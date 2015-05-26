@@ -73,7 +73,14 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return writings[indexPath.row].unlocked ? UITableViewAutomaticDimension : 232
+        let saveData = load(self.tabBarController)
+        
+        if !saveData.writingCollapsed![indexPath.row] {
+            return writings[indexPath.row].unlocked ? UITableViewAutomaticDimension : 232
+        }
+        else {
+            return writings[indexPath.row].unlocked ? 60 : 232
+        }
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -99,57 +106,111 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let
-            cell = tableView.dequeueReusableCellWithIdentifier("cellWriting") as? UITableViewCell,
-            pic = cell.viewWithTag(1) as? UIImageView,
-            title = cell.viewWithTag(2) as? UILabel,
-            owned = cell.viewWithTag(3) as? UILabel,
-            value = cell.viewWithTag(4) as? UILabel,
-            level = cell.viewWithTag(5) as? UILabel,
-            button = cell.viewWithTag(6) as? WritingBuyButton,
-            description = cell.viewWithTag(7) as? UILabel
-        {
-            let index = indexPath.row
-            let moneyText = NSString(format: "%.2f", writings[index].getValue()) as String
-            
-            pic.image = UIImage(named: writings[index].imageName)
-            pic.alpha = nightMode ? 0.5 : 1.0
-            
-            title.text = writings[index].name
-            description.text = writings[index].description
-            owned.text = "Owned: \(writings[index].count)"
-            value.text = "Value: $\(moneyText)"
-            level.text = "Level: \(writings[index].level)"
-            button.writingIndex = index
-            
-            title.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
-            description.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
-            owned.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
-            value.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
-            level.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
-            
-            button.delegate = self
-            button.nightMode = nightMode
-            button.setNeedsDisplay()
-            
-            cell.contentView.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
-            
-            if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
-                lockView.index = index
-                lockView.frame = cell.contentView.frame
-                lockView.type = .Writing
-                lockView.customize(load(self.tabBarController))
+        let saveData = load(self.tabBarController)
+        let index = indexPath.row
+        let curWriting = writings[index]
+        
+        if !saveData.writingCollapsed![index] {
+            if let
+                cell = tableView.dequeueReusableCellWithIdentifier("cellWriting") as? UITableViewCell,
+                pic = cell.viewWithTag(1) as? UIImageView,
+                title = cell.viewWithTag(2) as? UILabel,
+                owned = cell.viewWithTag(3) as? UILabel,
+                value = cell.viewWithTag(4) as? UILabel,
+                level = cell.viewWithTag(5) as? UILabel,
+                button = cell.viewWithTag(6) as? WritingBuyButton,
+                description = cell.viewWithTag(7) as? UILabel
+            {
+                let index = indexPath.row
+                let moneyText = NSString(format: "%.2f", curWriting.getValue()) as String
                 
-                if writings[index].unlocked { lockView.removeFromSuperview() }
+                pic.image = UIImage(named: writings[index].imageName)
+                pic.alpha = nightMode ? 0.5 : 1.0
+                
+                title.text = curWriting.name
+                description.text = curWriting.description
+                owned.text = "Owned: \(curWriting.count)"
+                value.text = "Value: $\(moneyText)"
+                level.text = "Level: \(curWriting.level)"
+                button.writingIndex = index
+                
+                title.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+                description.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+                owned.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+                value.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+                level.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+                
+                button.delegate = self
+                button.nightMode = nightMode
+                button.setNeedsDisplay()
+                
+                cell.contentView.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
+                
+                if let lockView = cell.contentView.viewWithTag(8) as? AnimatedLockView {
+                    lockView.index = index
+                    lockView.frame = cell.contentView.frame
+                    lockView.type = .Writing
+                    lockView.customize(load(self.tabBarController))
+                    
+                    if curWriting.unlocked { lockView.removeFromSuperview() }
+                }
+                else {
+                    if pic.gestureRecognizers == nil {
+                        let briefHold = UILongPressGestureRecognizer(target: self, action: "heldPic:")
+                        
+                        pic.addGestureRecognizer(briefHold)
+                    }
+                }
+                
+                pic.setNeedsDisplay()
+                button.setNeedsDisplay()
+                
+                return cell
             }
-            
-            pic.setNeedsDisplay()
-            button.setNeedsDisplay()
-            
-            return cell
+        }
+        else {
+            if let
+                cell = self.tableView.dequeueReusableCellWithIdentifier("cellWritingMini") as? UITableViewCell,
+                pic = cell.viewWithTag(1) as? UIImageView,
+                name = cell.viewWithTag(2) as? UILabel
+            {
+                pic.image = UIImage(named: curWriting.imageName)
+                pic.alpha = nightMode ? 0.5 : 1.0
+                
+                name.text = curWriting.name
+                name.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
+                
+                cell.contentView.backgroundColor = nightMode ? UIColor.blackColor() : UIColor.whiteColor()
+                
+                if pic.gestureRecognizers == nil {
+                    let briefHold = UILongPressGestureRecognizer(target: self, action: "heldPic:")
+                    
+                    pic.addGestureRecognizer(briefHold)
+                }
+                
+                return cell
+            }
         }
         
         return UITableViewCell()
+    }
+    
+    func heldPic(sender: UILongPressGestureRecognizer) {
+        if sender.state != UIGestureRecognizerState.Began { return }
+        
+        var saveData = load(self.tabBarController)
+        let location = sender.locationInView(self.tableView)
+        let indexPath = tableView.indexPathForRowAtPoint(location)
+        let index = indexPath!.row
+        
+        self.tableView.beginUpdates()
+        
+        saveData.writingCollapsed![index] = !saveData.writingCollapsed![index]
+        save(self.tabBarController, saveData)
+        
+        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+        
+        self.tableView.endUpdates()
     }
     
     func buyTapped(writingIndex: Int) {

@@ -448,10 +448,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finger Monkey" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="hjE-si-vw9">
-                                            <rect key="frame" x="74" y="14" width="166" height="32"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="32" id="kK5-vR-NKk"/>
-                                            </constraints>
+                                            <rect key="frame" x="74" y="15" width="198" height="32"/>
                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="26"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -461,6 +458,7 @@
                                         <constraint firstAttribute="centerY" secondItem="kjE-oH-ZxE" secondAttribute="centerY" constant="-0.25" id="09s-lu-3E3"/>
                                         <constraint firstItem="kjE-oH-ZxE" firstAttribute="leading" secondItem="bGD-gX-IWs" secondAttribute="leadingMargin" constant="8" id="OaM-8h-2cC"/>
                                         <constraint firstAttribute="centerY" secondItem="hjE-si-vw9" secondAttribute="centerY" constant="-0.25" id="Qhf-fQ-z75"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="hjE-si-vw9" secondAttribute="trailing" constant="20" id="flb-Ln-5bp"/>
                                         <constraint firstItem="hjE-si-vw9" firstAttribute="leading" secondItem="kjE-oH-ZxE" secondAttribute="trailing" constant="8" id="xgb-mU-QEo"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -544,7 +542,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wWords.png" translatesAutoresizingMaskIntoConstraints="NO" id="hGf-No-oll">
+                                        <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wWords.png" translatesAutoresizingMaskIntoConstraints="NO" id="hGf-No-oll">
                                             <rect key="frame" x="8" y="8" width="100" height="100"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="2O5-IA-q1n"/>
@@ -602,10 +600,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="i9T-aa-aJV">
-                                            <rect key="frame" x="74" y="14" width="61" height="32"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="32" id="2CH-AB-kAA"/>
-                                            </constraints>
+                                            <rect key="frame" x="74" y="15" width="198" height="32"/>
                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="26"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -616,6 +611,7 @@
                                         <constraint firstItem="g7h-xX-aFk" firstAttribute="leading" secondItem="2YB-Ri-n8t" secondAttribute="leadingMargin" constant="8" id="SKi-Fy-hIE"/>
                                         <constraint firstAttribute="centerY" secondItem="i9T-aa-aJV" secondAttribute="centerY" constant="-0.25" id="ULr-J6-L0U"/>
                                         <constraint firstAttribute="centerY" secondItem="g7h-xX-aFk" secondAttribute="centerY" constant="-0.25" id="paG-Vd-EPA"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="i9T-aa-aJV" secondAttribute="trailing" constant="20" id="x4a-Pe-WVK"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -690,7 +686,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iBaby.png" translatesAutoresizingMaskIntoConstraints="NO" id="HlZ-At-BF4">
+                                        <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iBaby.png" translatesAutoresizingMaskIntoConstraints="NO" id="HlZ-At-BF4">
                                             <rect key="frame" x="8" y="8" width="100" height="100"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="HlZ-At-BF4" secondAttribute="height" multiplier="1:1" id="9VB-tr-9dN"/>
