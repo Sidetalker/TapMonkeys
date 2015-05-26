@@ -122,16 +122,16 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
                 description = cell.viewWithTag(7) as? UILabel
             {
                 let index = indexPath.row
-                let moneyText = NSString(format: "%.2f", curWriting.getValue()) as String
+                let moneyText = currencyFormatter.stringFromNumber(curWriting.getValue())!
                 
                 pic.image = UIImage(named: writings[index].imageName)
                 pic.alpha = nightMode ? 0.5 : 1.0
                 
                 title.text = curWriting.name
                 description.text = curWriting.description
-                owned.text = "Owned: \(curWriting.count)"
-                value.text = "Value: $\(moneyText)"
-                level.text = "Level: \(curWriting.level)"
+                owned.text = "Owned: \(generalFormatter.stringFromNumber(curWriting.count)!)"
+                value.text = "Value: \(moneyText)"
+                level.text = "Level: \(generalFormatter.stringFromNumber(curWriting.level)!)"
                 button.writingIndex = index
                 
                 title.textColor = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()

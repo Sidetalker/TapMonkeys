@@ -122,7 +122,7 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
                 description = cell.viewWithTag(7) as? UILabel
             {
                 let index = indexPath.row
-                let moneyText = NSString(format: "%.2f", curIncome.moneyPerSecond()) as String
+                let moneyText = currencyFormatter.stringFromNumber(curIncome.moneyPerSecond())!
                 
                 pic.image = UIImage(named: curIncome.imageName)
                 pic.alpha = nightMode ? 0.5 : 1.0

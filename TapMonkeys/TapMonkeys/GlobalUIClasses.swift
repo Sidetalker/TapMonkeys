@@ -40,12 +40,14 @@ class AutoUpdateLabel: UILabel {
         let saveData = load(controller!)
         
         if type == .Monkey {
-            self.text = "Total Letters: \(Int(saveData.monkeyTotals![index]))"
+            let total = generalFormatter.stringFromNumber(saveData.monkeyTotals![index])!
+            
+            self.text = "Total Letters: \(total)"
         }
         else if type == .Income {
-            let amount = NSString(format: "%.2f", saveData.incomeTotals![index]) as String
+            let amount = currencyFormatter.stringFromNumber(saveData.incomeTotals![index])!
             
-            self.text = "Total: $\(amount)"
+            self.text = "Total: \(amount)"
         }
     }
 }
@@ -362,10 +364,10 @@ class DataHeader: UIView {
         self.letters = data.letters!
         self.money = data.money!
         
-        let moneyText = NSString(format: "%.2f", data.money!) as String
+        let moneyText = currencyFormatter.stringFromNumber(data.money!)!
         
-        lettersLabel?.text = "\(Int(self.letters))"
-        moneyLabel?.text = "$\(moneyText)"
+        lettersLabel?.text = "\(generalFormatter.stringFromNumber(self.letters)!)"
+        moneyLabel?.text = "\(moneyText)"
         
         if letters > 0 && animated { pulseLetters() }
         if money > 0 && animated { pulseMoney() }

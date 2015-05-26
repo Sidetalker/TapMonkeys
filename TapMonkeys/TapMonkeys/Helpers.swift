@@ -9,6 +9,15 @@
 import UIKit
 import QuartzCore
 
+var currencyFormatter = NSNumberFormatter()
+var generalFormatter = NSNumberFormatter()
+
+func initializeFormatters() {
+    currencyFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+    generalFormatter.numberStyle = NSNumberFormatterStyle.NoStyle
+    generalFormatter.usesGroupingSeparator = true
+}
+
 extension String {
     var floatValue: Float {
         return (self as NSString).floatValue

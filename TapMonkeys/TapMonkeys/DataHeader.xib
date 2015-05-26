@@ -22,14 +22,14 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6aw-7b-hEw">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epp-IE-w4B">
-                            <rect key="frame" x="17" y="0.0" width="66" height="38.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="epp-IE-w4B">
+                            <rect key="frame" x="17" y="0.0" width="523" height="38.5"/>
                             <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="24"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.21" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cvn-NC-doe">
-                            <rect key="frame" x="12" y="32" width="55" height="38.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.21" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Cvn-NC-doe">
+                            <rect key="frame" x="12" y="32" width="528" height="38.5"/>
                             <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="24"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -57,6 +57,8 @@
                         <constraint firstItem="epp-IE-w4B" firstAttribute="leading" secondItem="6aw-7b-hEw" secondAttribute="leading" constant="17" id="j0A-sj-9NY"/>
                         <constraint firstItem="Cvn-NC-doe" firstAttribute="leading" secondItem="6aw-7b-hEw" secondAttribute="leading" constant="12" id="lKE-0x-Adf"/>
                         <constraint firstItem="epp-IE-w4B" firstAttribute="top" secondItem="6aw-7b-hEw" secondAttribute="top" id="tfi-TB-VY7"/>
+                        <constraint firstItem="PbD-IP-ljE" firstAttribute="leading" secondItem="epp-IE-w4B" secondAttribute="trailing" constant="8" id="uB5-aW-0rs"/>
+                        <constraint firstItem="PbD-IP-ljE" firstAttribute="leading" secondItem="Cvn-NC-doe" secondAttribute="trailing" constant="8" id="wk5-Ea-VSC"/>
                     </constraints>
                 </view>
             </subviews>

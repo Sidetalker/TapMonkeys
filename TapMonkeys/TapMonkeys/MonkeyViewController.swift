@@ -309,7 +309,7 @@ class MonkeyBuyButton: UIView {
     override func drawRect(rect: CGRect) {
         let price = monkeys[monkeyIndex].getPrice(1).0
         
-        let text = NSString(format: "$%.2f", price) as String
+        let text = currencyFormatter.stringFromNumber(price)!
         let color = nightMode ? UIColor.lightTextColor() : UIColor.blackColor()
         
         TapStyle.drawBuy(frame: rect, colorBuyBorder: color, colorBuyText: color, buyText: text)

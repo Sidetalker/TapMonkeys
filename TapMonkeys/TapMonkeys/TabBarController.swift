@@ -24,6 +24,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, DataHead
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initializeFormatters()
         loadSave()
         loadMonkeys(saveData)
         loadWritings(saveData)
