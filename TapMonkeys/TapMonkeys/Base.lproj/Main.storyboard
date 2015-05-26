@@ -631,7 +631,7 @@
             <objects>
                 <tableViewController id="olK-4s-zCg" customClass="IncomeTableViewController" customModule="TapMonkeys" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="290" sectionHeaderHeight="22" sectionFooterHeight="22" id="ChI-my-1Xo">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="355"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -742,12 +742,42 @@
                                     </variation>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellIncomeMini" rowHeight="60" id="DTV-Lb-G1R">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DTV-Lb-G1R" id="ihr-ez-GWt">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iBaby.png" translatesAutoresizingMaskIntoConstraints="NO" id="ScN-Rq-UKZ">
+                                            <rect key="frame" x="16" y="5" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="ScN-Rq-UKZ" secondAttribute="height" multiplier="1:1" id="4UL-td-GVP"/>
+                                                <constraint firstAttribute="width" constant="50" id="u09-i3-K2S"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Baby" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="cMK-Ub-XJT">
+                                            <rect key="frame" x="74" y="15" width="198" height="32"/>
+                                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="26"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="cMK-Ub-XJT" secondAttribute="trailing" constant="20" id="0o8-jA-bhy"/>
+                                        <constraint firstAttribute="centerY" secondItem="cMK-Ub-XJT" secondAttribute="centerY" constant="-0.25" id="20r-2z-XUq"/>
+                                        <constraint firstItem="cMK-Ub-XJT" firstAttribute="leading" secondItem="ScN-Rq-UKZ" secondAttribute="trailing" constant="8" id="ayQ-BF-UT9"/>
+                                        <constraint firstAttribute="centerY" secondItem="ScN-Rq-UKZ" secondAttribute="centerY" constant="-0.25" id="hbq-Jb-7n7"/>
+                                        <constraint firstItem="ScN-Rq-UKZ" firstAttribute="leading" secondItem="ihr-ez-GWt" secondAttribute="leadingMargin" constant="8" id="nGw-Oe-7XA"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="olK-4s-zCg" id="Qt4-Vu-ttw"/>
                             <outlet property="delegate" destination="olK-4s-zCg" id="pwq-GS-57L"/>
                         </connections>
                     </tableView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="300" height="400"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cqp-mb-Ffk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
