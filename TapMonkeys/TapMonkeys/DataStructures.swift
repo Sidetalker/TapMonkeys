@@ -40,12 +40,14 @@ struct SaveData {
     var monkeyTotals: [Float]?
     var monkeyLastCost: [Float]?
     var monkeyLastMod: [Float]?
+    var monkeyCollapsed: [Bool]?
     
     var writingCount: [Int]?
     var writingUnlocked: [Bool]?
     var writingLevel: [Int]?
     var writingCostLow: [Int]?
     var writingCostHigh: [Int]?
+    var writingCollapsed: [Bool]?
     
     var incomeUnlocks: [Bool]?
     var incomeCounts: [Int]?
@@ -53,6 +55,7 @@ struct SaveData {
     var incomeLevel: [Int]?
     var incomeLastCost: [Float]?
     var incomeLastMod: [Float]?
+    var incomeCollapsed: [Bool]?
 }
 
 struct IncomeData {

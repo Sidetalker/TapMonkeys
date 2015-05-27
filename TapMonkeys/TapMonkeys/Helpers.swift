@@ -9,6 +9,15 @@
 import UIKit
 import QuartzCore
 
+var currencyFormatter = NSNumberFormatter()
+var generalFormatter = NSNumberFormatter()
+
+func initializeFormatters() {
+    currencyFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+    generalFormatter.numberStyle = NSNumberFormatterStyle.NoStyle
+    generalFormatter.usesGroupingSeparator = true
+}
+
 extension String {
     var floatValue: Float {
         return (self as NSString).floatValue
@@ -73,12 +82,14 @@ func writeDefaults(data: SaveData) -> Bool {
     defaults.setObject(data.monkeyTotals, forKey: "monkeyTotals")
     defaults.setObject(data.monkeyLastCost, forKey: "monkeyLastCost")
     defaults.setObject(data.monkeyLastMod, forKey: "monkeyLastMod")
+    defaults.setObject(data.monkeyCollapsed, forKey: "monkeyCollapsed")
     
     defaults.setObject(data.writingCount, forKey: "writingCount")
     defaults.setObject(data.writingUnlocked, forKey: "writingUnlocked")
     defaults.setObject(data.writingLevel, forKey: "writingLevel")
     defaults.setObject(data.writingCostLow, forKey: "writingCostLow")
     defaults.setObject(data.writingCostHigh, forKey: "writingCostHigh")
+    defaults.setObject(data.writingCollapsed, forKey: "writingCollapsed")
     
     defaults.setObject(data.incomeUnlocks, forKey: "incomeUnlocks")
     defaults.setObject(data.incomeCounts, forKey: "incomeCounts")
@@ -86,6 +97,7 @@ func writeDefaults(data: SaveData) -> Bool {
     defaults.setObject(data.incomeLastCost, forKey: "incomeLastCost")
     defaults.setObject(data.incomeLastMod, forKey: "incomeLastMod")
     defaults.setObject(data.incomeLevel, forKey: "incomeLevel")
+    defaults.setObject(data.incomeCollapsed, forKey: "incomeCollapsed")
     
     defaults.synchronize()
     
@@ -107,12 +119,14 @@ func readDefaults() -> SaveData {
     save.monkeyTotals = defaults.arrayForKey("monkeyTotals") as? [Float]
     save.monkeyLastCost = defaults.arrayForKey("monkeyLastCost") as? [Float]
     save.monkeyLastMod = defaults.arrayForKey("monkeyLastMod") as? [Float]
+    save.monkeyCollapsed = defaults.arrayForKey("monkeyCollapsed") as? [Bool]
     
     save.writingCount = defaults.arrayForKey("writingCount") as? [Int]
     save.writingUnlocked = defaults.arrayForKey("writingUnlocked") as? [Bool]
     save.writingLevel = defaults.arrayForKey("writingLevel") as? [Int]
     save.writingCostLow = defaults.arrayForKey("writingCostLow") as? [Int]
     save.writingCostHigh = defaults.arrayForKey("writingCostHigh") as? [Int]
+    save.writingCollapsed = defaults.arrayForKey("writingCollapsed") as? [Bool]
     
     save.incomeUnlocks = defaults.arrayForKey("incomeUnlocks") as? [Bool]
     save.incomeCounts = defaults.arrayForKey("incomeCounts") as? [Int]
@@ -120,6 +134,7 @@ func readDefaults() -> SaveData {
     save.incomeLastCost = defaults.arrayForKey("incomeLastCost") as? [Float]
     save.incomeLastMod = defaults.arrayForKey("incomeLastMod") as? [Float]
     save.incomeLevel = defaults.arrayForKey("incomeLevel") as? [Int]
+    save.incomeCollapsed = defaults.arrayForKey("incomeCollapsed") as? [Bool]
     
     return save
 }
@@ -136,9 +151,9 @@ func updateGlobalSave(save: SaveData) {
 
 func validate(save: SaveData) -> SaveData {
     let numLetterCounts = 26
-    let numMonkeys = 5
-    let numWriting = 5
-    let numIncome = 5
+    let numMonkeys = 7
+    let numWriting = 7
+    let numIncome = 7
     
     var newSave = save
     
@@ -184,6 +199,15 @@ func validate(save: SaveData) -> SaveData {
     else if count(newSave.monkeyLastCost!) < numMonkeys {
         for i in count(newSave.monkeyLastCost!)...numMonkeys - 1 {
             newSave.monkeyLastCost?.append(0)
+        }
+    }
+    
+    if newSave.monkeyCollapsed == nil {
+        newSave.monkeyCollapsed = [Bool](count: numMonkeys, repeatedValue: false)
+    }
+    else if count(newSave.monkeyCollapsed!) < numMonkeys {
+        for i in count(newSave.monkeyCollapsed!)...numMonkeys - 1 {
+            newSave.monkeyCollapsed?.append(false)
         }
     }
     
@@ -241,6 +265,15 @@ func validate(save: SaveData) -> SaveData {
         }
     }
     
+    if newSave.writingCollapsed == nil {
+        newSave.writingCollapsed = [Bool](count: numWriting, repeatedValue: false)
+    }
+    else if count(newSave.writingCollapsed!) < numWriting {
+        for i in count(newSave.writingCollapsed!)...numWriting - 1 {
+            newSave.writingCollapsed?.append(false)
+        }
+    }
+    
     if newSave.incomeUnlocks == nil {
         newSave.incomeUnlocks = [Bool](count: numIncome, repeatedValue: false)
     }
@@ -292,6 +325,15 @@ func validate(save: SaveData) -> SaveData {
     else if count(newSave.incomeLevel!) < numIncome {
         for i in count(newSave.incomeLevel!)...numIncome - 1 {
             newSave.incomeLevel?.append(0)
+        }
+    }
+    
+    if newSave.incomeCollapsed == nil {
+        newSave.incomeCollapsed = [Bool](count: numIncome, repeatedValue: false)
+    }
+    else if count(newSave.incomeCollapsed!) < numIncome {
+        for i in count(newSave.incomeCollapsed!)...numIncome - 1 {
+            newSave.incomeCollapsed?.append(false)
         }
     }
     
