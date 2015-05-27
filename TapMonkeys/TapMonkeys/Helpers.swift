@@ -203,11 +203,11 @@ func validate(save: SaveData) -> SaveData {
     }
     
     if newSave.monkeyCollapsed == nil {
-        newSave.monkeyCollapsed = [Bool](count: numMonkeys, repeatedValue: true)
+        newSave.monkeyCollapsed = [Bool](count: numMonkeys, repeatedValue: false)
     }
     else if count(newSave.monkeyCollapsed!) < numMonkeys {
         for i in count(newSave.monkeyCollapsed!)...numMonkeys - 1 {
-            newSave.monkeyCollapsed?.append(true)
+            newSave.monkeyCollapsed?.append(false)
         }
     }
     
