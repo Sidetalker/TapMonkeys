@@ -14,21 +14,21 @@ Sentence fragmentation should be addressed as soon as possible. A fragmented sen
 85
 wFragmentedSentence
 
-Sentence
-A well formed sentence must contain at least seven nouns, three of which must have adjectives associated with them. Whenever possible, use verbs in place of nouns.
-1 - 0.05
-500
-70
-100
-wSentence
-
 Text Message
 omg i just saw MIKE at Target... wtf he dnt evn use this Target. i no that ducking asshole is folowing me. <3333 ~~!~~!~~
-1 - 0.06
-1000
+1 - 0.03
+500
 3
 120
 wTextMessage
+
+Sentence
+A well formed sentence must contain at least seven nouns, three of which must have adjectives associated with them. Whenever possible, use verbs in place of nouns.
+1 - 0.05
+1000
+70
+100
+wSentence
 
 Tweet
 Feeling FABULOUS @jtimberlake #ontopoftheworld #catchmeifyoucan #feelgood #bestdayever #winning #unstoppable
@@ -37,3 +37,19 @@ Feeling FABULOUS @jtimberlake #ontopoftheworld #catchmeifyoucan #feelgood #bestd
 10
 140
 wTweet
+
+Paragraph
+Comprised mainly of words, paragraphs have also been known to contain punctuation. 
+1 - 0.11
+2500
+250
+500
+wParagraph
+
+Article
+Newspaper articles consistently provide the most accurate and up to date news available, be sure to subscribe to many of them. Sponsored by the NYT.
+1 - 0.25
+5000
+850
+2600
+wArticle
