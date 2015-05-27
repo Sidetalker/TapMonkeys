@@ -84,7 +84,11 @@ class MonkeyTableViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let saveData = load(self.tabBarController)
         let index = indexPath.row
+        
+        if saveData.monkeyCollapsed![index] { return }
+        
         let curMonkey = monkeys[index]
         
         if !curMonkey.unlocked {

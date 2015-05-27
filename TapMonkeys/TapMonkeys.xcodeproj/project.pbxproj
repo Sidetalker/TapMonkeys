@@ -131,6 +131,48 @@
 		0A6478B21B13AB8B00AC20B6 /* animatedLockNight12.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A64788E1B13AB8B00AC20B6 /* animatedLockNight12.png */; };
 		0A6478B31B13AB8B00AC20B6 /* animatedLockNight12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A64788F1B13AB8B00AC20B6 /* animatedLockNight12@2x.png */; };
 		0A6478B41B13AB8B00AC20B6 /* animatedLockNight12@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478901B13AB8B00AC20B6 /* animatedLockNight12@3x.png */; };
+		0A6478C11B15421C00AC20B6 /* mChompinMonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478B51B15421C00AC20B6 /* mChompinMonkey.png */; };
+		0A6478C21B15421C00AC20B6 /* mChompinMonkey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478B61B15421C00AC20B6 /* mChompinMonkey@2x.png */; };
+		0A6478C31B15421C00AC20B6 /* mChompinMonkey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478B71B15421C00AC20B6 /* mChompinMonkey@3x.png */; };
+		0A6478C41B15421C00AC20B6 /* mFangRider.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478B81B15421C00AC20B6 /* mFangRider.png */; };
+		0A6478C51B15421C00AC20B6 /* mFangRider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478B91B15421C00AC20B6 /* mFangRider@2x.png */; };
+		0A6478C61B15421C00AC20B6 /* mFangRider@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478BA1B15421C00AC20B6 /* mFangRider@3x.png */; };
+		0A6478C71B15421C00AC20B6 /* mNathaniel.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478BB1B15421C00AC20B6 /* mNathaniel.png */; };
+		0A6478C81B15421C00AC20B6 /* mNathaniel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478BC1B15421C00AC20B6 /* mNathaniel@2x.png */; };
+		0A6478C91B15421C00AC20B6 /* mNathaniel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478BD1B15421C00AC20B6 /* mNathaniel@3x.png */; };
+		0A6478CA1B15421C00AC20B6 /* mPageantMonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478BE1B15421C00AC20B6 /* mPageantMonkey.png */; };
+		0A6478CB1B15421C00AC20B6 /* mPageantMonkey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478BF1B15421C00AC20B6 /* mPageantMonkey@2x.png */; };
+		0A6478CC1B15421C00AC20B6 /* mPageantMonkey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478C01B15421C00AC20B6 /* mPageantMonkey@3x.png */; };
+		0A6478DC1B15423F00AC20B6 /* wArticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478CD1B15423F00AC20B6 /* wArticle.png */; };
+		0A6478DD1B15423F00AC20B6 /* wArticle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478CE1B15423F00AC20B6 /* wArticle@2x.png */; };
+		0A6478DE1B15423F00AC20B6 /* wArticle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478CF1B15423F00AC20B6 /* wArticle@3x.png */; };
+		0A6478DF1B15423F00AC20B6 /* wEssay.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478D01B15423F00AC20B6 /* wEssay.png */; };
+		0A6478E01B15423F00AC20B6 /* wEssay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478D11B15423F00AC20B6 /* wEssay@2x.png */; };
+		0A6478E11B15423F00AC20B6 /* wEssay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478D21B15423F00AC20B6 /* wEssay@3x.png */; };
+		0A6478E21B15423F00AC20B6 /* wLabReport.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478D31B15423F00AC20B6 /* wLabReport.png */; };
+		0A6478E31B15423F00AC20B6 /* wLabReport@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478D41B15423F00AC20B6 /* wLabReport@2x.png */; };
+		0A6478E41B15423F00AC20B6 /* wLabReport@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478D51B15423F00AC20B6 /* wLabReport@3x.png */; };
+		0A6478E51B15423F00AC20B6 /* wParagraph.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478D61B15423F00AC20B6 /* wParagraph.png */; };
+		0A6478E61B15423F00AC20B6 /* wParagraph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478D71B15423F00AC20B6 /* wParagraph@2x.png */; };
+		0A6478E71B15423F00AC20B6 /* wParagraph@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478D81B15423F00AC20B6 /* wParagraph@3x.png */; };
+		0A6478E81B15423F00AC20B6 /* wThesis.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478D91B15423F00AC20B6 /* wThesis.png */; };
+		0A6478E91B15423F00AC20B6 /* wThesis@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478DA1B15423F00AC20B6 /* wThesis@2x.png */; };
+		0A6478EA1B15423F00AC20B6 /* wThesis@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478DB1B15423F00AC20B6 /* wThesis@3x.png */; };
+		0A6478FA1B15424C00AC20B6 /* iEnglishTeacher.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478EB1B15424C00AC20B6 /* iEnglishTeacher.png */; };
+		0A6478FB1B15424C00AC20B6 /* iEnglishTeacher@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478EC1B15424C00AC20B6 /* iEnglishTeacher@2x.png */; };
+		0A6478FC1B15424C00AC20B6 /* iEnglishTeacher@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478ED1B15424C00AC20B6 /* iEnglishTeacher@3x.png */; };
+		0A6478FD1B15424C00AC20B6 /* iHighSchool.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478EE1B15424C00AC20B6 /* iHighSchool.png */; };
+		0A6478FE1B15424C00AC20B6 /* iHighSchool@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478EF1B15424C00AC20B6 /* iHighSchool@2x.png */; };
+		0A6478FF1B15424C00AC20B6 /* iHighSchool@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478F01B15424C00AC20B6 /* iHighSchool@3x.png */; };
+		0A6479001B15424C00AC20B6 /* iHistoryDepartment.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478F11B15424C00AC20B6 /* iHistoryDepartment.png */; };
+		0A6479011B15424C00AC20B6 /* iHistoryDepartment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478F21B15424C00AC20B6 /* iHistoryDepartment@2x.png */; };
+		0A6479021B15424C00AC20B6 /* iHistoryDepartment@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478F31B15424C00AC20B6 /* iHistoryDepartment@3x.png */; };
+		0A6479031B15424C00AC20B6 /* iNinthGrader.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478F41B15424C00AC20B6 /* iNinthGrader.png */; };
+		0A6479041B15424C00AC20B6 /* iNinthGrader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478F51B15424C00AC20B6 /* iNinthGrader@2x.png */; };
+		0A6479051B15424C00AC20B6 /* iNinthGrader@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478F61B15424C00AC20B6 /* iNinthGrader@3x.png */; };
+		0A6479061B15424C00AC20B6 /* iProfessor.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478F71B15424C00AC20B6 /* iProfessor.png */; };
+		0A6479071B15424C00AC20B6 /* iProfessor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478F81B15424C00AC20B6 /* iProfessor@2x.png */; };
+		0A6479081B15424C00AC20B6 /* iProfessor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6478F91B15424C00AC20B6 /* iProfessor@3x.png */; };
 		0A7177EA1B067A35006DEF7A /* income.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0A7177E91B067A35006DEF7A /* income.dat */; };
 		0A7178111B06B10B006DEF7A /* IncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7178101B06B10B006DEF7A /* IncomeViewController.swift */; };
 		0A9B687D1AFD3DE7006628D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B687C1AFD3DE7006628D1 /* AppDelegate.swift */; };
@@ -319,6 +361,48 @@
 		0A64788E1B13AB8B00AC20B6 /* animatedLockNight12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animatedLockNight12.png; path = Images/animatedLockNight12.png; sourceTree = "<group>"; };
 		0A64788F1B13AB8B00AC20B6 /* animatedLockNight12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "animatedLockNight12@2x.png"; path = "Images/animatedLockNight12@2x.png"; sourceTree = "<group>"; };
 		0A6478901B13AB8B00AC20B6 /* animatedLockNight12@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "animatedLockNight12@3x.png"; path = "Images/animatedLockNight12@3x.png"; sourceTree = "<group>"; };
+		0A6478B51B15421C00AC20B6 /* mChompinMonkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mChompinMonkey.png; path = Images/mChompinMonkey.png; sourceTree = "<group>"; };
+		0A6478B61B15421C00AC20B6 /* mChompinMonkey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mChompinMonkey@2x.png"; path = "Images/mChompinMonkey@2x.png"; sourceTree = "<group>"; };
+		0A6478B71B15421C00AC20B6 /* mChompinMonkey@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mChompinMonkey@3x.png"; path = "Images/mChompinMonkey@3x.png"; sourceTree = "<group>"; };
+		0A6478B81B15421C00AC20B6 /* mFangRider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mFangRider.png; path = Images/mFangRider.png; sourceTree = "<group>"; };
+		0A6478B91B15421C00AC20B6 /* mFangRider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mFangRider@2x.png"; path = "Images/mFangRider@2x.png"; sourceTree = "<group>"; };
+		0A6478BA1B15421C00AC20B6 /* mFangRider@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mFangRider@3x.png"; path = "Images/mFangRider@3x.png"; sourceTree = "<group>"; };
+		0A6478BB1B15421C00AC20B6 /* mNathaniel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mNathaniel.png; path = Images/mNathaniel.png; sourceTree = "<group>"; };
+		0A6478BC1B15421C00AC20B6 /* mNathaniel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mNathaniel@2x.png"; path = "Images/mNathaniel@2x.png"; sourceTree = "<group>"; };
+		0A6478BD1B15421C00AC20B6 /* mNathaniel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mNathaniel@3x.png"; path = "Images/mNathaniel@3x.png"; sourceTree = "<group>"; };
+		0A6478BE1B15421C00AC20B6 /* mPageantMonkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mPageantMonkey.png; path = Images/mPageantMonkey.png; sourceTree = "<group>"; };
+		0A6478BF1B15421C00AC20B6 /* mPageantMonkey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mPageantMonkey@2x.png"; path = "Images/mPageantMonkey@2x.png"; sourceTree = "<group>"; };
+		0A6478C01B15421C00AC20B6 /* mPageantMonkey@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mPageantMonkey@3x.png"; path = "Images/mPageantMonkey@3x.png"; sourceTree = "<group>"; };
+		0A6478CD1B15423F00AC20B6 /* wArticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wArticle.png; path = Images/wArticle.png; sourceTree = "<group>"; };
+		0A6478CE1B15423F00AC20B6 /* wArticle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wArticle@2x.png"; path = "Images/wArticle@2x.png"; sourceTree = "<group>"; };
+		0A6478CF1B15423F00AC20B6 /* wArticle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wArticle@3x.png"; path = "Images/wArticle@3x.png"; sourceTree = "<group>"; };
+		0A6478D01B15423F00AC20B6 /* wEssay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wEssay.png; path = Images/wEssay.png; sourceTree = "<group>"; };
+		0A6478D11B15423F00AC20B6 /* wEssay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wEssay@2x.png"; path = "Images/wEssay@2x.png"; sourceTree = "<group>"; };
+		0A6478D21B15423F00AC20B6 /* wEssay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wEssay@3x.png"; path = "Images/wEssay@3x.png"; sourceTree = "<group>"; };
+		0A6478D31B15423F00AC20B6 /* wLabReport.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wLabReport.png; path = Images/wLabReport.png; sourceTree = "<group>"; };
+		0A6478D41B15423F00AC20B6 /* wLabReport@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wLabReport@2x.png"; path = "Images/wLabReport@2x.png"; sourceTree = "<group>"; };
+		0A6478D51B15423F00AC20B6 /* wLabReport@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wLabReport@3x.png"; path = "Images/wLabReport@3x.png"; sourceTree = "<group>"; };
+		0A6478D61B15423F00AC20B6 /* wParagraph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wParagraph.png; path = Images/wParagraph.png; sourceTree = "<group>"; };
+		0A6478D71B15423F00AC20B6 /* wParagraph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wParagraph@2x.png"; path = "Images/wParagraph@2x.png"; sourceTree = "<group>"; };
+		0A6478D81B15423F00AC20B6 /* wParagraph@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wParagraph@3x.png"; path = "Images/wParagraph@3x.png"; sourceTree = "<group>"; };
+		0A6478D91B15423F00AC20B6 /* wThesis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wThesis.png; path = Images/wThesis.png; sourceTree = "<group>"; };
+		0A6478DA1B15423F00AC20B6 /* wThesis@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wThesis@2x.png"; path = "Images/wThesis@2x.png"; sourceTree = "<group>"; };
+		0A6478DB1B15423F00AC20B6 /* wThesis@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wThesis@3x.png"; path = "Images/wThesis@3x.png"; sourceTree = "<group>"; };
+		0A6478EB1B15424C00AC20B6 /* iEnglishTeacher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iEnglishTeacher.png; path = Images/iEnglishTeacher.png; sourceTree = "<group>"; };
+		0A6478EC1B15424C00AC20B6 /* iEnglishTeacher@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iEnglishTeacher@2x.png"; path = "Images/iEnglishTeacher@2x.png"; sourceTree = "<group>"; };
+		0A6478ED1B15424C00AC20B6 /* iEnglishTeacher@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iEnglishTeacher@3x.png"; path = "Images/iEnglishTeacher@3x.png"; sourceTree = "<group>"; };
+		0A6478EE1B15424C00AC20B6 /* iHighSchool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iHighSchool.png; path = Images/iHighSchool.png; sourceTree = "<group>"; };
+		0A6478EF1B15424C00AC20B6 /* iHighSchool@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iHighSchool@2x.png"; path = "Images/iHighSchool@2x.png"; sourceTree = "<group>"; };
+		0A6478F01B15424C00AC20B6 /* iHighSchool@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iHighSchool@3x.png"; path = "Images/iHighSchool@3x.png"; sourceTree = "<group>"; };
+		0A6478F11B15424C00AC20B6 /* iHistoryDepartment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iHistoryDepartment.png; path = Images/iHistoryDepartment.png; sourceTree = "<group>"; };
+		0A6478F21B15424C00AC20B6 /* iHistoryDepartment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iHistoryDepartment@2x.png"; path = "Images/iHistoryDepartment@2x.png"; sourceTree = "<group>"; };
+		0A6478F31B15424C00AC20B6 /* iHistoryDepartment@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iHistoryDepartment@3x.png"; path = "Images/iHistoryDepartment@3x.png"; sourceTree = "<group>"; };
+		0A6478F41B15424C00AC20B6 /* iNinthGrader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iNinthGrader.png; path = Images/iNinthGrader.png; sourceTree = "<group>"; };
+		0A6478F51B15424C00AC20B6 /* iNinthGrader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iNinthGrader@2x.png"; path = "Images/iNinthGrader@2x.png"; sourceTree = "<group>"; };
+		0A6478F61B15424C00AC20B6 /* iNinthGrader@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iNinthGrader@3x.png"; path = "Images/iNinthGrader@3x.png"; sourceTree = "<group>"; };
+		0A6478F71B15424C00AC20B6 /* iProfessor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iProfessor.png; path = Images/iProfessor.png; sourceTree = "<group>"; };
+		0A6478F81B15424C00AC20B6 /* iProfessor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iProfessor@2x.png"; path = "Images/iProfessor@2x.png"; sourceTree = "<group>"; };
+		0A6478F91B15424C00AC20B6 /* iProfessor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iProfessor@3x.png"; path = "Images/iProfessor@3x.png"; sourceTree = "<group>"; };
 		0A7177E91B067A35006DEF7A /* income.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = income.dat; path = Data/income.dat; sourceTree = "<group>"; };
 		0A7178101B06B10B006DEF7A /* IncomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeViewController.swift; sourceTree = "<group>"; };
 		0A9B68771AFD3DE7006628D1 /* TapMonkeys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapMonkeys.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -419,6 +503,21 @@
 		0A552A501B03E23100CD8E78 /* Writing */ = {
 			isa = PBXGroup;
 			children = (
+				0A6478CD1B15423F00AC20B6 /* wArticle.png */,
+				0A6478CE1B15423F00AC20B6 /* wArticle@2x.png */,
+				0A6478CF1B15423F00AC20B6 /* wArticle@3x.png */,
+				0A6478D01B15423F00AC20B6 /* wEssay.png */,
+				0A6478D11B15423F00AC20B6 /* wEssay@2x.png */,
+				0A6478D21B15423F00AC20B6 /* wEssay@3x.png */,
+				0A6478D31B15423F00AC20B6 /* wLabReport.png */,
+				0A6478D41B15423F00AC20B6 /* wLabReport@2x.png */,
+				0A6478D51B15423F00AC20B6 /* wLabReport@3x.png */,
+				0A6478D61B15423F00AC20B6 /* wParagraph.png */,
+				0A6478D71B15423F00AC20B6 /* wParagraph@2x.png */,
+				0A6478D81B15423F00AC20B6 /* wParagraph@3x.png */,
+				0A6478D91B15423F00AC20B6 /* wThesis.png */,
+				0A6478DA1B15423F00AC20B6 /* wThesis@2x.png */,
+				0A6478DB1B15423F00AC20B6 /* wThesis@3x.png */,
 				0A44C8291B0A7E8900FA18E2 /* wWords@3x.png */,
 				0A44C82A1B0A7E8900FA18E2 /* wWords@2x.png */,
 				0A44C82B1B0A7E8900FA18E2 /* wWords.png */,
@@ -484,6 +583,21 @@
 		0A71780F1B067A78006DEF7A /* Income */ = {
 			isa = PBXGroup;
 			children = (
+				0A6478EB1B15424C00AC20B6 /* iEnglishTeacher.png */,
+				0A6478EC1B15424C00AC20B6 /* iEnglishTeacher@2x.png */,
+				0A6478ED1B15424C00AC20B6 /* iEnglishTeacher@3x.png */,
+				0A6478EE1B15424C00AC20B6 /* iHighSchool.png */,
+				0A6478EF1B15424C00AC20B6 /* iHighSchool@2x.png */,
+				0A6478F01B15424C00AC20B6 /* iHighSchool@3x.png */,
+				0A6478F11B15424C00AC20B6 /* iHistoryDepartment.png */,
+				0A6478F21B15424C00AC20B6 /* iHistoryDepartment@2x.png */,
+				0A6478F31B15424C00AC20B6 /* iHistoryDepartment@3x.png */,
+				0A6478F41B15424C00AC20B6 /* iNinthGrader.png */,
+				0A6478F51B15424C00AC20B6 /* iNinthGrader@2x.png */,
+				0A6478F61B15424C00AC20B6 /* iNinthGrader@3x.png */,
+				0A6478F71B15424C00AC20B6 /* iProfessor.png */,
+				0A6478F81B15424C00AC20B6 /* iProfessor@2x.png */,
+				0A6478F91B15424C00AC20B6 /* iProfessor@3x.png */,
 				0A44C8471B0A7E9500FA18E2 /* iKindergartner@3x.png */,
 				0A44C8481B0A7E9500FA18E2 /* iKindergartner@2x.png */,
 				0A44C8491B0A7E9500FA18E2 /* iKindergartner.png */,
@@ -633,6 +747,18 @@
 		0A9B68E81AFDCD51006628D1 /* Monkeys */ = {
 			isa = PBXGroup;
 			children = (
+				0A6478B51B15421C00AC20B6 /* mChompinMonkey.png */,
+				0A6478B61B15421C00AC20B6 /* mChompinMonkey@2x.png */,
+				0A6478B71B15421C00AC20B6 /* mChompinMonkey@3x.png */,
+				0A6478B81B15421C00AC20B6 /* mFangRider.png */,
+				0A6478B91B15421C00AC20B6 /* mFangRider@2x.png */,
+				0A6478BA1B15421C00AC20B6 /* mFangRider@3x.png */,
+				0A6478BB1B15421C00AC20B6 /* mNathaniel.png */,
+				0A6478BC1B15421C00AC20B6 /* mNathaniel@2x.png */,
+				0A6478BD1B15421C00AC20B6 /* mNathaniel@3x.png */,
+				0A6478BE1B15421C00AC20B6 /* mPageantMonkey.png */,
+				0A6478BF1B15421C00AC20B6 /* mPageantMonkey@2x.png */,
+				0A6478C01B15421C00AC20B6 /* mPageantMonkey@3x.png */,
 				0AF552AC1B0A8EE0008E6DDB /* mDigitDestroyer.png */,
 				0AF552AD1B0A8EE0008E6DDB /* mDigitDestroyer@2x.png */,
 				0AF552AE1B0A8EE0008E6DDB /* mDigitDestroyer@3x.png */,
@@ -822,20 +948,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A6478FE1B15424C00AC20B6 /* iHighSchool@2x.png in Resources */,
+				0A6478C91B15421C00AC20B6 /* mNathaniel@3x.png in Resources */,
 				0A44C8641B0A7E9500FA18E2 /* iBaby.png in Resources */,
 				0A6478991B13AB8B00AC20B6 /* animatedLockNight03@3x.png in Resources */,
+				0A6478EA1B15423F00AC20B6 /* wThesis@3x.png in Resources */,
 				0A9B68A91AFD8DBB006628D1 /* alphaTab.png in Resources */,
 				0A9B68F61AFFBAE6006628D1 /* DataHeader.xib in Resources */,
 				0A44C7E71B0A7E6A00FA18E2 /* animatedLock03.png in Resources */,
 				0A44C7FC1B0A7E6A00FA18E2 /* animatedLock10.png in Resources */,
 				0A6478971B13AB8B00AC20B6 /* animatedLockNight03.png in Resources */,
 				0A9B68B31AFD9AC7006628D1 /* monkeyTab.png in Resources */,
+				0A6479021B15424C00AC20B6 /* iHistoryDepartment@3x.png in Resources */,
 				0A44C8011B0A7E6A00FA18E2 /* animatedLock11@3x.png in Resources */,
 				0A64789B1B13AB8B00AC20B6 /* animatedLockNight04@2x.png in Resources */,
 				0A9B68851AFD3DE7006628D1 /* Main.storyboard in Resources */,
 				0A44C8691B0A7EA100FA18E2 /* unknownUnlock@2x.png in Resources */,
 				0A64789A1B13AB8B00AC20B6 /* animatedLockNight04.png in Resources */,
 				0A6478B41B13AB8B00AC20B6 /* animatedLockNight12@3x.png in Resources */,
+				0A6478E31B15423F00AC20B6 /* wLabReport@2x.png in Resources */,
 				0A44C7F41B0A7E6A00FA18E2 /* animatedLock07@2x.png in Resources */,
 				0A44C8591B0A7E9500FA18E2 /* iFourthGrader@3x.png in Resources */,
 				0A44C7F51B0A7E6A00FA18E2 /* animatedLock07@3x.png in Resources */,
@@ -843,9 +974,12 @@
 				0A6478A81B13AB8B00AC20B6 /* animatedLockNight08@3x.png in Resources */,
 				0A44C8441B0A7E8900FA18E2 /* wFragmentedSentence@3x.png in Resources */,
 				0A7177EA1B067A35006DEF7A /* income.dat in Resources */,
+				0A6479051B15424C00AC20B6 /* iNinthGrader@3x.png in Resources */,
 				0A44C7ED1B0A7E6A00FA18E2 /* animatedLock05.png in Resources */,
 				0A44C7EB1B0A7E6A00FA18E2 /* animatedLock04@2x.png in Resources */,
 				0A44C8601B0A7E9500FA18E2 /* iElementarySchool@2x.png in Resources */,
+				0A6478FD1B15424C00AC20B6 /* iHighSchool.png in Resources */,
+				0A6479011B15424C00AC20B6 /* iHistoryDepartment@2x.png in Resources */,
 				0A44C8221B0A7E8000FA18E2 /* mGoofkey.png in Resources */,
 				0A44C7EE1B0A7E6A00FA18E2 /* animatedLock05@2x.png in Resources */,
 				0A9B68EC1AFF917F006628D1 /* monkeys.dat in Resources */,
@@ -859,20 +993,25 @@
 				0A9B688A1AFD3DE7006628D1 /* LaunchScreen.xib in Resources */,
 				0A6478911B13AB8B00AC20B6 /* animatedLockNight01.png in Resources */,
 				0A44C8401B0A7E8900FA18E2 /* wTextMessage.png in Resources */,
+				0A6478C51B15421C00AC20B6 /* mFangRider@2x.png in Resources */,
 				0A6478B11B13AB8B00AC20B6 /* animatedLockNight11@3x.png in Resources */,
 				0A6478951B13AB8B00AC20B6 /* animatedLockNight02@2x.png in Resources */,
 				0A44C8181B0A7E8000FA18E2 /* mSeaMonkey@2x.png in Resources */,
 				0A6478A51B13AB8B00AC20B6 /* animatedLockNight07@3x.png in Resources */,
+				0A6479071B15424C00AC20B6 /* iProfessor@2x.png in Resources */,
 				0A64789D1B13AB8B00AC20B6 /* animatedLockNight05.png in Resources */,
 				0A9B68D21AFDA4E0006628D1 /* statsTab@2x.png in Resources */,
+				0A6478C41B15421C00AC20B6 /* mFangRider.png in Resources */,
 				0A44C8251B0A7E8000FA18E2 /* mFingerMonkey.png in Resources */,
 				0A9B68C11AFD9F7F006628D1 /* incomeTab@3x.png in Resources */,
 				0A9B68871AFD3DE7006628D1 /* Images.xcassets in Resources */,
 				0A44C7E41B0A7E6A00FA18E2 /* animatedLock02.png in Resources */,
+				0A6478E71B15423F00AC20B6 /* wParagraph@3x.png in Resources */,
 				0A44C7F01B0A7E6A00FA18E2 /* animatedLock06.png in Resources */,
 				0A9B68AA1AFD8DBB006628D1 /* alphaTab@3x.png in Resources */,
 				0A44C7E61B0A7E6A00FA18E2 /* animatedLock02@3x.png in Resources */,
 				0A44C7F71B0A7E6A00FA18E2 /* animatedLock08@2x.png in Resources */,
+				0A6478CA1B15421C00AC20B6 /* mPageantMonkey.png in Resources */,
 				0A44C7F21B0A7E6A00FA18E2 /* animatedLock06@3x.png in Resources */,
 				0A44C7F11B0A7E6A00FA18E2 /* animatedLock06@2x.png in Resources */,
 				0A6478B31B13AB8B00AC20B6 /* animatedLockNight12@2x.png in Resources */,
@@ -881,6 +1020,7 @@
 				0A44C83A1B0A7E8900FA18E2 /* wWords.png in Resources */,
 				0A44C8631B0A7E9500FA18E2 /* iBaby@2x.png in Resources */,
 				0A44C8381B0A7E8900FA18E2 /* wWords@3x.png in Resources */,
+				0A6479031B15424C00AC20B6 /* iNinthGrader.png in Resources */,
 				0A44C8561B0A7E9500FA18E2 /* iKindergartner@3x.png in Resources */,
 				0A9B68BB1AFD9E21006628D1 /* writingTab@3x.png in Resources */,
 				0A44C83D1B0A7E8900FA18E2 /* wTweet.png in Resources */,
@@ -889,21 +1029,32 @@
 				0A44C7F91B0A7E6A00FA18E2 /* animatedLock09.png in Resources */,
 				0A44C7EC1B0A7E6A00FA18E2 /* animatedLock04@3x.png in Resources */,
 				0AF552B01B0A8EE0008E6DDB /* mDigitDestroyer@2x.png in Resources */,
+				0A6478DF1B15423F00AC20B6 /* wEssay.png in Resources */,
+				0A6478C31B15421C00AC20B6 /* mChompinMonkey@3x.png in Resources */,
 				0A6478AF1B13AB8B00AC20B6 /* animatedLockNight11.png in Resources */,
 				0A6478A21B13AB8B00AC20B6 /* animatedLockNight06@3x.png in Resources */,
+				0A6479001B15424C00AC20B6 /* iHistoryDepartment.png in Resources */,
+				0A6478E81B15423F00AC20B6 /* wThesis.png in Resources */,
 				0A9B68D11AFDA4E0006628D1 /* statsTab.png in Resources */,
 				0A44C8201B0A7E8000FA18E2 /* mGoofkey@3x.png in Resources */,
 				0A6478921B13AB8B00AC20B6 /* animatedLockNight01@2x.png in Resources */,
 				0A44C8171B0A7E8000FA18E2 /* mSeaMonkey@3x.png in Resources */,
 				0A44C7E51B0A7E6A00FA18E2 /* animatedLock02@2x.png in Resources */,
 				0A6478A41B13AB8B00AC20B6 /* animatedLockNight07@2x.png in Resources */,
+				0A6478DD1B15423F00AC20B6 /* wArticle@2x.png in Resources */,
 				0A44C85D1B0A7E9500FA18E2 /* iElementaryTeacher@2x.png in Resources */,
+				0A6478FC1B15424C00AC20B6 /* iEnglishTeacher@3x.png in Resources */,
 				0A44C8581B0A7E9500FA18E2 /* iKindergartner.png in Resources */,
 				0A44C7FD1B0A7E6A00FA18E2 /* animatedLock10@2x.png in Resources */,
 				0A6478AC1B13AB8B00AC20B6 /* animatedLockNight10.png in Resources */,
+				0A6478C21B15421C00AC20B6 /* mChompinMonkey@2x.png in Resources */,
+				0A6478C61B15421C00AC20B6 /* mFangRider@3x.png in Resources */,
+				0A6478C71B15421C00AC20B6 /* mNathaniel.png in Resources */,
 				0A44C8001B0A7E6A00FA18E2 /* animatedLock11@2x.png in Resources */,
 				0A9B68D31AFDA4E0006628D1 /* statsTab@3x.png in Resources */,
+				0A6478E11B15423F00AC20B6 /* wEssay@3x.png in Resources */,
 				0A6478B01B13AB8B00AC20B6 /* animatedLockNight11@2x.png in Resources */,
+				0A6479081B15424C00AC20B6 /* iProfessor@3x.png in Resources */,
 				0A6478A71B13AB8B00AC20B6 /* animatedLockNight08@2x.png in Resources */,
 				0A44C8451B0A7E8900FA18E2 /* wFragmentedSentence@2x.png in Resources */,
 				0A9B68CC1AFDA301006628D1 /* upgradesTab@2x.png in Resources */,
@@ -916,18 +1067,27 @@
 				0A44C7F61B0A7E6A00FA18E2 /* animatedLock08.png in Resources */,
 				0A9B68D71AFDA5A5006628D1 /* settingsTab.png in Resources */,
 				0A6478A91B13AB8B00AC20B6 /* animatedLockNight09.png in Resources */,
+				0A6479041B15424C00AC20B6 /* iNinthGrader@2x.png in Resources */,
 				0A44C7E91B0A7E6A00FA18E2 /* animatedLock03@3x.png in Resources */,
 				0A44C85C1B0A7E9500FA18E2 /* iElementaryTeacher@3x.png in Resources */,
 				0AF552AF1B0A8EE0008E6DDB /* mDigitDestroyer.png in Resources */,
 				0A9B68D91AFDA5A5006628D1 /* settingsTab@3x.png in Resources */,
+				0A6478C81B15421C00AC20B6 /* mNathaniel@2x.png in Resources */,
 				0A44C81C1B0A7E8000FA18E2 /* mLordVoldermonkey.png in Resources */,
 				0A44C8461B0A7E8900FA18E2 /* wFragmentedSentence.png in Resources */,
+				0A6478FA1B15424C00AC20B6 /* iEnglishTeacher.png in Resources */,
 				0A6478AD1B13AB8B00AC20B6 /* animatedLockNight10@2x.png in Resources */,
 				0A9B68BA1AFD9E21006628D1 /* writingTab@2x.png in Resources */,
 				0A44C7F81B0A7E6A00FA18E2 /* animatedLock08@3x.png in Resources */,
 				0A44C7FF1B0A7E6A00FA18E2 /* animatedLock11.png in Resources */,
+				0A6478E41B15423F00AC20B6 /* wLabReport@3x.png in Resources */,
+				0A6478FB1B15424C00AC20B6 /* iEnglishTeacher@2x.png in Resources */,
+				0A6478CC1B15421C00AC20B6 /* mPageantMonkey@3x.png in Resources */,
+				0A6478E51B15423F00AC20B6 /* wParagraph.png in Resources */,
 				0A44C8041B0A7E6A00FA18E2 /* animatedLock12@3x.png in Resources */,
+				0A6478FF1B15424C00AC20B6 /* iHighSchool@3x.png in Resources */,
 				0A6478961B13AB8B00AC20B6 /* animatedLockNight02@3x.png in Resources */,
+				0A6478E01B15423F00AC20B6 /* wEssay@2x.png in Resources */,
 				0A9B68D81AFDA5A5006628D1 /* settingsTab@2x.png in Resources */,
 				0A9B68F31AFF952B006628D1 /* marketTab@3x.png in Resources */,
 				0A44C7E81B0A7E6A00FA18E2 /* animatedLock03@2x.png in Resources */,
@@ -938,6 +1098,8 @@
 				0A44C85A1B0A7E9500FA18E2 /* iFourthGrader@2x.png in Resources */,
 				0A44C7FB1B0A7E6A00FA18E2 /* animatedLock09@3x.png in Resources */,
 				0A9B68B51AFD9AC7006628D1 /* monkeyTab@3x.png in Resources */,
+				0A6478DC1B15423F00AC20B6 /* wArticle.png in Resources */,
+				0A6478E21B15423F00AC20B6 /* wLabReport.png in Resources */,
 				0A64789E1B13AB8B00AC20B6 /* animatedLockNight05@2x.png in Resources */,
 				0A44C85F1B0A7E9500FA18E2 /* iElementarySchool@3x.png in Resources */,
 				0A6478981B13AB8B00AC20B6 /* animatedLockNight03@2x.png in Resources */,
@@ -945,6 +1107,7 @@
 				0A44C81A1B0A7E8000FA18E2 /* mLordVoldermonkey@3x.png in Resources */,
 				0A44C7EA1B0A7E6A00FA18E2 /* animatedLock04.png in Resources */,
 				0A6478A61B13AB8B00AC20B6 /* animatedLockNight08.png in Resources */,
+				0A6478CB1B15421C00AC20B6 /* mPageantMonkey@2x.png in Resources */,
 				0A44C8031B0A7E6A00FA18E2 /* animatedLock12@2x.png in Resources */,
 				0A9B68C01AFD9F7F006628D1 /* incomeTab@2x.png in Resources */,
 				0A9B68F81AFFF3E7006628D1 /* AnimatedLockView.xib in Resources */,
@@ -954,6 +1117,7 @@
 				0A44C81D1B0A7E8000FA18E2 /* mJabbaTheMonkey@3x.png in Resources */,
 				0A9B68BF1AFD9F7F006628D1 /* incomeTab.png in Resources */,
 				0A9B68C61AFDA0E5006628D1 /* achievementsTab@2x.png in Resources */,
+				0A6478E91B15423F00AC20B6 /* wThesis@2x.png in Resources */,
 				0A9B68F11AFF952B006628D1 /* marketTab.png in Resources */,
 				0A6478A01B13AB8B00AC20B6 /* animatedLockNight06.png in Resources */,
 				0A44C8391B0A7E8900FA18E2 /* wWords@2x.png in Resources */,
@@ -963,12 +1127,15 @@
 				0A6478931B13AB8B00AC20B6 /* animatedLockNight01@3x.png in Resources */,
 				0A6478AA1B13AB8B00AC20B6 /* animatedLockNight09@2x.png in Resources */,
 				0A44C81B1B0A7E8000FA18E2 /* mLordVoldermonkey@2x.png in Resources */,
+				0A6478E61B15423F00AC20B6 /* wParagraph@2x.png in Resources */,
 				0A6478A11B13AB8B00AC20B6 /* animatedLockNight06@2x.png in Resources */,
 				0A44C7E31B0A7E6A00FA18E2 /* animatedLock01@3x.png in Resources */,
 				0A44C81F1B0A7E8000FA18E2 /* mJabbaTheMonkey.png in Resources */,
 				0A44C7FE1B0A7E6A00FA18E2 /* animatedLock10@3x.png in Resources */,
 				0ABEEC981B04007F004AC5B6 /* writing.dat in Resources */,
 				0A44C83C1B0A7E8900FA18E2 /* wTweet@2x.png in Resources */,
+				0A6478DE1B15423F00AC20B6 /* wArticle@3x.png in Resources */,
+				0A6478C11B15421C00AC20B6 /* mChompinMonkey.png in Resources */,
 				0A9B68B91AFD9E21006628D1 /* writingTab.png in Resources */,
 				0A6478941B13AB8B00AC20B6 /* animatedLockNight02.png in Resources */,
 				0A6478B21B13AB8B00AC20B6 /* animatedLockNight12.png in Resources */,
@@ -981,6 +1148,7 @@
 				0A44C8231B0A7E8000FA18E2 /* mFingerMonkey@3x.png in Resources */,
 				0A44C7E11B0A7E6A00FA18E2 /* animatedLock01.png in Resources */,
 				0A9B68B41AFD9AC7006628D1 /* monkeyTab@2x.png in Resources */,
+				0A6479061B15424C00AC20B6 /* iProfessor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1006,7 +1174,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "   SKIP_SIMULATOR_BUILDS=1\nSCRIPT_SRC=$(find \"$PROJECT_DIR\" -name 'Instabug_dsym_upload.sh' | head -1)\n if [ ! \"${SCRIPT_SRC}\" ]; then\n   echo \"Instabug: err: script not found. Make sure that you're including Instabug.bundle in your project directory\"\n   exit 1\n fi\n source \"${SCRIPT_SRC}\"\n";
+			shellScript = "#   SKIP_SIMULATOR_BUILDS=1\n#SCRIPT_SRC=$(find \"$PROJECT_DIR\" -name 'Instabug_dsym_upload.sh' | head -1)\n# if [ ! \"${SCRIPT_SRC}\" ]; then\n#   echo \"Instabug: err: script not found. Make sure that you're including Instabug.bundle in your project directory\"\n#   exit 1\n# fi\n# source \"${SCRIPT_SRC}\"\n";
 		};
 		90FDAA6482963D467FD0A7DA /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

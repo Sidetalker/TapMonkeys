@@ -84,7 +84,11 @@ class IncomeTableViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let saveData = load(self.tabBarController)
         let index = indexPath.row
+        
+        if saveData.incomeCollapsed![index] { return }
+        
         let curIncome = incomes[index]
         
         if !curIncome.unlocked {

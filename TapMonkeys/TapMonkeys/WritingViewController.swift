@@ -84,7 +84,11 @@ class WritingTableViewController: UITableViewController, UITableViewDelegate, UI
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let saveData = load(self.tabBarController)
         let index = indexPath.row
+        
+        if saveData.writingCollapsed![index] { return }
+        
         let curWriting = writings[index]
         
         if !curWriting.unlocked {
